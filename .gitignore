@@ -9,6 +9,8 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/[Rr]ecordings/
+/[Cc]ache/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -21,6 +23,9 @@
 
 # Visual Studio cache directory
 .vs/
+.vsconfig
+.vscode/
+.idea/
 
 # Gradle cache directory
 .gradle/
@@ -58,3 +63,16 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+*.DS_Store
+*/*.DS_Store
+
+_TerrainAutoUpgrade
+_TerrainAutoUpgrade.meta
+
+# Lighting
+*/Scenes/**/LightingData.asset
+*/Scenes/**/LightingData.asset.meta
+*/Scenes/**/Lightmap*.*
+*/Scenes/**/Lightmap*.*.meta
+*/Scenes/**/ReflectionProbe*.exr
+*/Scenes/**/ReflectionProbe*.exr.meta
