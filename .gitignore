@@ -63,6 +63,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+/UserSettings/Search.settings
+
 *.DS_Store
 */*.DS_Store
 
