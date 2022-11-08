@@ -5,11 +5,14 @@ namespace Pamisu.Common.FSM
 {
     public interface IStateMachine
     {
-        float TickInterval { get; set; }
         
-        Dictionary<Type, IState> States { get; set; }
+        string MachineName { get; set; }
         
-        IState CurrentState { get; set; }
+        Dictionary<Type, IState> States { get; }
+        
+        IState CurrentState { get; }
+        
+        IState PreviousState { get; }
 
         void AddState(IState state);
         
@@ -17,6 +20,10 @@ namespace Pamisu.Common.FSM
 
         void RemoveState<T>() where T : IState;
 
+        bool HasState<T>() where T : IState;
+
+        void ChangeState(Type type);
+        
         void ChangeState<T>() where T : IState;
 
         void SetCurrentState<T>() where T : IState;
@@ -25,7 +32,5 @@ namespace Pamisu.Common.FSM
 
         void OnPhysicsProcess();
 
-        
-        
     }
 }

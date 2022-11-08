@@ -10,7 +10,7 @@ namespace Pamisu.Common
         public static T Instance { get; private set; }
 
         [SerializeField]
-        private bool dontDestroyOnLoad = true;
+        private bool _dontDestroyOnLoad = true;
 
         protected virtual void Awake()
         {
@@ -19,8 +19,8 @@ namespace Pamisu.Common
                 Destroy(gameObject);
                 return;
             }
-            Instance = this.GetComponent<T>();
-            if (dontDestroyOnLoad)
+            Instance = GetComponent<T>();
+            if (_dontDestroyOnLoad)
                 gameObject.DontDestroyOnLoad();
         }
 

@@ -4,7 +4,7 @@ namespace Pamisu.Common
 {
     public abstract class SingletonAutoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
-        protected static T s_instance;
+        private static T s_instance;
         
         public static T Instance
         {

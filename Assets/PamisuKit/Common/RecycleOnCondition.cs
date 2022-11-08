@@ -1,6 +1,7 @@
 using System.Collections;
 // using Pamisu.Common.Pool;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Pamisu.Common
 {
@@ -8,13 +9,13 @@ namespace Pamisu.Common
     public class RecycleOnCondition : MonoBehaviour
     {
         [SerializeField]
-        private float delay = -1;
+        private float _delay = -1;
         [SerializeField]
-        private bool destroyOnRecycle;
+        private bool _destroyOnRecycle;
 
         void OnEnable()
         {
-            if (delay != -1)
+            if (_delay != -1)
             {
                 StartCoroutine(DelayDeactivate());
             }
@@ -22,13 +23,13 @@ namespace Pamisu.Common
 
         IEnumerator DelayDeactivate()
         {
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(_delay);
             OnAnimFinished();
         }
 
         public void OnAnimFinished()
         {
-            if (!destroyOnRecycle)
+            if (!_destroyOnRecycle)
             {
                 // PoolManager.ReleaseObject(gameObject);
             }
