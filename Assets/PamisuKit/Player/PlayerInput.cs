@@ -1,15 +1,14 @@
-﻿using Pamisu.Common;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Pamisu
 {
-    public class PlayerInput : SingletonBehaviour<PlayerInput>
+    public class PlayerInput : MonoBehaviour
     {
-        public float lookSensitivity = 1f;
-        public bool invertMouseY = true;
+        public float LookSensitivity = 1f;
+        public bool InvertMouseY = true;
         
-        private Vector3 movement;
-        public Vector3 Movement => movement;
+        private Vector3 _movement;
+        public Vector3 Movement => _movement;
         
         public bool Sprint { get; private set; }
         public bool Jump { get; set; }
@@ -20,20 +19,12 @@ namespace Pamisu
         public bool Fire2Down { get; set; }
         public bool Fire3Down { get; set; }
 
-        public bool Slot1Down { get; set; }
-        public bool Slot2Down { get; set; }
-        public bool Slot3Down { get; set; }
-        public bool Slot4Down { get; set; }
-
         public float LookHorizontal
         {
             get { return GetLookAxis("Mouse X"); }
         }
 
-        public float LookVertical
-        {
-            get { return invertMouseY? -GetLookAxis("Mouse Y") : GetLookAxis("Mouse Y"); }
-        }
+        public float LookVertical => InvertMouseY? -GetLookAxis("Mouse Y") : GetLookAxis("Mouse Y");
 
         public bool Enabled { get; set; }
         
@@ -46,8 +37,8 @@ namespace Pamisu
         {
             if (!Enabled) return;
             
-            movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-            movement = Vector3.ClampMagnitude(movement, 1);
+            _movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+            _movement = Vector3.ClampMagnitude(_movement, 1);
             
             if (Input.GetButtonDown("Jump"))
                 Jump = true;
@@ -64,27 +55,19 @@ namespace Pamisu
             if (Input.GetButtonDown("Fire3"))
                 Fire3Down = true;
 
-            if (Input.GetButtonDown("Slot1"))
-                Slot1Down = true;
-            if (Input.GetButtonDown("Slot2"))
-                Slot2Down = true;
-            if (Input.GetButtonDown("Slot3"))
-                Slot3Down = true;
-            if (Input.GetButtonDown("Slot4"))
-                Slot4Down = true;
         }
         
         protected float GetLookAxis(string axisName)
         {
             float value = Input.GetAxis(axisName);
-            value *= lookSensitivity;
+            value *= LookSensitivity;
             value *= 0.01f;
             return value;
         }
 
         public void Invalidate()
         {
-            movement = Vector2.zero;
+            _movement = Vector2.zero;
             Sprint = false;
             Jump = false;
             Fire1Down = false;

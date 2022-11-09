@@ -83,11 +83,12 @@ namespace Pamisu.Common.FSM
             _machine.OnPhysicsProcess();
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             if (CurrentState == null) return;
             Handles.Label(transform.position, $"{MachineName} \n {CurrentState.StateName}");
         }
-        
+#endif
     }
 }

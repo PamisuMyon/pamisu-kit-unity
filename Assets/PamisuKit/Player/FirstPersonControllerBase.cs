@@ -4,8 +4,8 @@ using UnityEngine;
 namespace Pamisu
 {
     [SelectionBase]
-    [RequireComponent(typeof(CharacterController))]
-    public class FPControllerBase : MonoBehaviour
+    [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
+    public class FirstPersonControllerBase : MonoBehaviour
     {
         [Header("Base")]
         [SerializeField]
@@ -58,7 +58,7 @@ namespace Pamisu
         protected virtual void Start()
         {
             cc = GetComponent<CharacterController>();
-            input = PlayerInput.Instance;
+            input = GetComponent<PlayerInput>();
 
             if (armsTransform == null)
                 armsTransform = transform.Find("Arms");
