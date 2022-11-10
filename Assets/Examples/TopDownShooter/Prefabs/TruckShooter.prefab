@@ -132,8 +132,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1806496078497529802}
   - component: {fileID: 7164880663547926042}
-  - component: {fileID: 1703689731937140747}
   - component: {fileID: 5353539971498373480}
+  - component: {fileID: 3989722726517755074}
   m_Layer: 0
   m_Name: TruckShooter
   m_TagString: Untagged
@@ -177,20 +177,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1703689731937140747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806496078497529801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44aa7eb5542e4fd6aff48abbb09ceb6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LookSensitivity: 1
-  InvertMouseY: 1
 --- !u!114 &5353539971498373480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,8 +189,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618ae98d1557841cab18d89953ff7163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 15
+  acc: 80
   turnSpeed: 360
+  basisReferer: {fileID: 0}
+  moveMode: 0
+  analogMovement: 1
+--- !u!114 &3989722726517755074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806496078497529801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44aa7eb5542e4fd6aff48abbb09ceb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CursorLocked: 0
+  CursorInputForLook: 0
+  LookSensitivity: 1
+  InvertMouseY: 1
+  Move: {x: 0, y: 0}
+  Look: {x: 0, y: 0}
+  Sprint: 0
+  Jump: 0
+  JumpHeld: 0
+  Fire1: 0
+  Fire2: 0
+  Fire3: 0
+  Interact: 0
 --- !u!1 &2598396086641623132
 GameObject:
   m_ObjectHideFlags: 0

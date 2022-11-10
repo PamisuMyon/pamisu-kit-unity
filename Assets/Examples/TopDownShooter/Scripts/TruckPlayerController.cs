@@ -1,4 +1,4 @@
-using Pamisu.Player;
+using Pamisu.Game;
 using UnityEngine;
 
 namespace Pamisu.TuckShooter
