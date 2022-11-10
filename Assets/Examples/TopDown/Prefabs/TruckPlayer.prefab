@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 5353539971498373480}
   - component: {fileID: 3989722726517755074}
   m_Layer: 0
-  m_Name: TruckShooter
+  m_Name: TruckPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

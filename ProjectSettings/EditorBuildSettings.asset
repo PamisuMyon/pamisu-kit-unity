@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Examples/TopDownShooter/Scenes/TopDownShooterScene.unity
+    path: Assets/Examples/TopDown/Scenes/TruckScene.unity
     guid: 8d9d1ad40bd6b4142af854a332b71b6f
   m_configObjects: {}

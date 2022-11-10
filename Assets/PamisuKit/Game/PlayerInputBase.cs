@@ -1,6 +1,7 @@
 ﻿using Pamisu.Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 namespace Pamisu.Game
 {
@@ -88,6 +89,7 @@ namespace Pamisu.Game
 
         public void OnFire1(InputAction.CallbackContext context)
         {
+            Debug.Log(context.control.parent);
             Fire1 = context.performed;
         }
 
@@ -105,6 +107,10 @@ namespace Pamisu.Game
         {
             Interact = context.performed;
         }
-        
+
+        public void OnAnyKey(InputAction.CallbackContext context)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

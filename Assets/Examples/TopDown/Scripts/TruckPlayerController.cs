@@ -1,5 +1,4 @@
 using Pamisu.Game;
-using UnityEngine;
 
 namespace Pamisu.TuckShooter
 {

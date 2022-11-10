@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SpacesuitUpperMask
+  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: CharacterArmature
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Neck
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Neck/Head
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Neck/Head/Head_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Index2.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Index2.L/Index3.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Index2.L/Index3.L/Index4.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Index2.L/Index3.L/Index4.L/Index4.L_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Middle2.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Middle2.L/Middle3.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Middle2.L/Middle3.L/Middle4.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Middle2.L/Middle3.L/Middle4.L/Middle4.L_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Pinky2.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Pinky2.L/Pinky3.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Pinky2.L/Pinky3.L/Pinky4.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Pinky2.L/Pinky3.L/Pinky4.L/Pinky4.L_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Ring2.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Ring2.L/Ring3.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Ring2.L/Ring3.L/Ring4.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Ring2.L/Ring3.L/Ring4.L/Ring4.L_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Thumb2.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Thumb2.L/Thumb3.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Thumb2.L/Thumb3.L/Thumb3.L_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Index2.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Index2.R/Index3.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Index2.R/Index3.R/Index4.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Index2.R/Index3.R/Index4.R/Index4.R_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Middle2.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Middle2.R/Middle3.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Middle2.R/Middle3.R/Middle4.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Middle2.R/Middle3.R/Middle4.R/Middle4.R_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Pinky2.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Pinky2.R/Pinky3.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Pinky2.R/Pinky3.R/Pinky4.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Pinky2.R/Pinky3.R/Pinky4.R/Pinky4.R_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Ring2.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Ring2.R/Ring3.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Ring2.R/Ring3.R/Ring4.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Ring2.R/Ring3.R/Ring4.R/Ring4.R_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Thumb2.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Thumb2.R/Thumb3.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/Abdomen/Torso/Chest/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Thumb2.R/Thumb3.R/Thumb3.R_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/UpperLeg.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/UpperLeg.L/LowerLeg.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/UpperLeg.L/LowerLeg.L/Foot.L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/UpperLeg.L/LowerLeg.L/Foot.L/Foot.L_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/UpperLeg.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/UpperLeg.R/LowerLeg.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/UpperLeg.R/LowerLeg.R/Foot.R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Root/Hips/UpperLeg.R/LowerLeg.R/Foot.R/Foot.R_end
+    m_Weight: 1
+  - m_Path: SpaceSuit_Body
+    m_Weight: 1
+  - m_Path: SpaceSuit_Feet
+    m_Weight: 1
+  - m_Path: SpaceSuit_Head
+    m_Weight: 1
+  - m_Path: SpaceSuit_Legs
+    m_Weight: 1
