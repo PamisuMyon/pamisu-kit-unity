@@ -1,10 +1,10 @@
 using Pamisu.Common;
 using UnityEngine;
 
-namespace Pamisu
+namespace Pamisu.Player
 {
     [SelectionBase]
-    [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
+    [RequireComponent(typeof(CharacterController), typeof(PlayerInputBase))]
     public class FirstPersonControllerBase : MonoBehaviour
     {
         [Header("Base")]
@@ -48,7 +48,7 @@ namespace Pamisu
         protected float maxVerticalAngle = 89f;
 
         protected CharacterController cc;
-        protected PlayerInput input;
+        protected PlayerInputBase input;
         protected bool isGrounded;
         protected Vector3 groundNormal;
         protected float armsVerticalAngle = 0f;
@@ -58,7 +58,7 @@ namespace Pamisu
         protected virtual void Start()
         {
             cc = GetComponent<CharacterController>();
-            input = GetComponent<PlayerInput>();
+            input = GetComponent<PlayerInputBase>();
 
             if (armsTransform == null)
                 armsTransform = transform.Find("Arms");
