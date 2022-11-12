@@ -46,9 +46,9 @@ namespace Pamisu.Commons.Pool
     public class GameObjectPooler : SingletonAutoBehaviour<GameObjectPooler>
     {
 
-        private static GameObjectPool s_pool = new();
+        private GameObjectPool s_pool = new();
         
-        public static GameObject Spawn(GameObject prefab, Vector3 position = default, Quaternion rotation = default)
+        private GameObject SpawnInterval(GameObject prefab, Vector3 position = default, Quaternion rotation = default)
         {
             var go = s_pool.GetItem();
             if (go == null)
@@ -64,10 +64,17 @@ namespace Pamisu.Commons.Pool
             return go;
         }
 
-        public static void Return(GameObject go)
+        private void ReturnInterval(GameObject go)
         {
             s_pool.ReturnItem(go);
         }
-        
+
+        public static GameObject Spawn(GameObject prefab, Vector3 position = default, Quaternion rotation = default)
+        {
+            return Instance.SpawnInterval(prefab, position, rotation);
+        }
+
+        public static void Return(GameObject go) => Instance.ReturnInterval(go);
+
     }
 }

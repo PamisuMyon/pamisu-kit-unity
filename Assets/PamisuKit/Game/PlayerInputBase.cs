@@ -1,7 +1,8 @@
-﻿using Pamisu.Inputs;
+﻿using System;
+using Pamisu.Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Users;
+using UnityEngine.InputSystem.Utilities;
 
 namespace Pamisu.Game
 {
@@ -9,10 +10,7 @@ namespace Pamisu.Game
     {
         
         [Header("Mouse Cursor Settings")]
-        public bool CursorLocked = true;
-
-        public bool CursorInputForLook = true;
-        public float LookSensitivity = 1f;
+        public bool CursorLocked;
         public bool InvertMouseY = true;
 
         [Header("Input Values")]
@@ -26,22 +24,27 @@ namespace Pamisu.Game
         public bool Fire3;
         public bool Interact;
 
-        protected BasicInputAsset _input;
+        public InputDevice CurrentDevice { get; protected set; }
+        public Vector2 MousePosition => Mouse.current.position.ReadValue();
+        
+        protected BasicInputAsset input;
+        private IDisposable _anyButtonEventListener;
 
-
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
-            if (_input == null)
+            if (input == null)
             {
-                _input = new BasicInputAsset();
-                _input.Player.SetCallbacks(this);
+                input = new BasicInputAsset();
+                input.Player.SetCallbacks(this);
             }
-            _input.Player.Enable();
+            input.Player.Enable();
+            _anyButtonEventListener = InputSystem.onAnyButtonPress.Call(OnAnyButtonPressed);
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
-            _input.Player.Disable();
+            input.Player.Disable();
+            _anyButtonEventListener.Dispose();
         }
 
         public void Invalidate()
@@ -55,14 +58,19 @@ namespace Pamisu.Game
             Fire3 = false;
         }
 
-        private void OnApplicationFocus(bool hasFocus)
+        protected virtual void OnApplicationFocus(bool hasFocus)
         {
             SetCursorState(CursorLocked);
         }
-
+        
         private void SetCursorState(bool newState)
         {
             Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+        }
+
+        public void OnAnyButtonPressed(InputControl button)
+        {
+            CurrentDevice = button.device;
         }
         
         public void OnMove(InputAction.CallbackContext context)
@@ -89,7 +97,6 @@ namespace Pamisu.Game
 
         public void OnFire1(InputAction.CallbackContext context)
         {
-            Debug.Log(context.control.parent);
             Fire1 = context.performed;
         }
 
@@ -108,9 +115,5 @@ namespace Pamisu.Game
             Interact = context.performed;
         }
 
-        public void OnAnyKey(InputAction.CallbackContext context)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

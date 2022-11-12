@@ -6,6 +6,6 @@ namespace Pamisu.Game
     {
         public Transform Target;
         public bool IgnoreY = true;
-                
+        
     }
 }

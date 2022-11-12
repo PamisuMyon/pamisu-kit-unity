@@ -35,6 +35,8 @@ namespace Pamisu.Game
         protected CharacterController cc;
         protected PlayerInputBase input;
 
+        public Vector3 Velocity => velocity;
+
         protected virtual void Start()
         {
             cc = GetComponent<CharacterController>();

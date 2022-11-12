@@ -76,15 +76,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "AnyKey",
-                    "type": "Button",
-                    "id": "8ce9b902-1e72-4ed1-9cfb-a37e638915ba",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -201,7 +192,7 @@
                 {
                     "name": "",
                     "id": "a1ce0e27-2e9f-4e7e-82b0-4d56ab78442e",
-                    "path": "<Mouse>/delta",
+                    "path": "<Mouse>/radius",
                     "interactions": "",
                     "processors": "InvertVector2(invertX=false),ScaleVector2(x=0.05,y=0.05)",
                     "groups": "KeyboardMouse",
@@ -371,17 +362,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fdf46766-0ba3-49fa-94e6-cf561d29819d",
-                    "path": "<Keyboard>/anyKey",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

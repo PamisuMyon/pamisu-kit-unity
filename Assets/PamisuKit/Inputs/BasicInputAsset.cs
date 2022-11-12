@@ -100,15 +100,6 @@ namespace Pamisu.Inputs
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""AnyKey"",
-                    ""type"": ""Button"",
-                    ""id"": ""8ce9b902-1e72-4ed1-9cfb-a37e638915ba"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -225,7 +216,7 @@ namespace Pamisu.Inputs
                 {
                     ""name"": """",
                     ""id"": ""a1ce0e27-2e9f-4e7e-82b0-4d56ab78442e"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""path"": ""<Mouse>/radius"",
                     ""interactions"": """",
                     ""processors"": ""InvertVector2(invertX=false),ScaleVector2(x=0.05,y=0.05)"",
                     ""groups"": ""KeyboardMouse"",
@@ -397,17 +388,6 @@ namespace Pamisu.Inputs
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fdf46766-0ba3-49fa-94e6-cf561d29819d"",
-                    ""path"": ""<Keyboard>/anyKey"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AnyKey"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -474,7 +454,6 @@ namespace Pamisu.Inputs
             m_Player_Fire2 = m_Player.FindAction("Fire2", throwIfNotFound: true);
             m_Player_Fire3 = m_Player.FindAction("Fire3", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-            m_Player_AnyKey = m_Player.FindAction("AnyKey", throwIfNotFound: true);
             // Menu
             m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
             // Rebind
@@ -546,7 +525,6 @@ namespace Pamisu.Inputs
         private readonly InputAction m_Player_Fire2;
         private readonly InputAction m_Player_Fire3;
         private readonly InputAction m_Player_Interact;
-        private readonly InputAction m_Player_AnyKey;
         public struct PlayerActions
         {
             private @BasicInputAsset m_Wrapper;
@@ -559,7 +537,6 @@ namespace Pamisu.Inputs
             public InputAction @Fire2 => m_Wrapper.m_Player_Fire2;
             public InputAction @Fire3 => m_Wrapper.m_Player_Fire3;
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
-            public InputAction @AnyKey => m_Wrapper.m_Player_AnyKey;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -593,9 +570,6 @@ namespace Pamisu.Inputs
                     @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                     @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                     @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                    @AnyKey.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAnyKey;
-                    @AnyKey.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAnyKey;
-                    @AnyKey.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAnyKey;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -624,9 +598,6 @@ namespace Pamisu.Inputs
                     @Interact.started += instance.OnInteract;
                     @Interact.performed += instance.OnInteract;
                     @Interact.canceled += instance.OnInteract;
-                    @AnyKey.started += instance.OnAnyKey;
-                    @AnyKey.performed += instance.OnAnyKey;
-                    @AnyKey.canceled += instance.OnAnyKey;
                 }
             }
         }
@@ -709,7 +680,6 @@ namespace Pamisu.Inputs
             void OnFire2(InputAction.CallbackContext context);
             void OnFire3(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
-            void OnAnyKey(InputAction.CallbackContext context);
         }
         public interface IMenuActions
         {

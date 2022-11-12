@@ -4,49 +4,79 @@ namespace Pamisu.Game
 {
     public class TwinStickShooterPlayerControllerBase : TopDownPlayerControllerBase
     {
-        [Header("Shooter")]
+        [Space]
+        [Header("Twin Stick Shooter")]
         [Header("Movement")]
+        [SerializeField]
         protected float aimSpeed = 5f;
         [SerializeField]
         protected float aimAcc = 50f;
         [SerializeField]
         protected float aimTurnSpeed = 180f;
 
-        protected new MoveMode moveMode = MoveMode.Character;
-        
-        public bool IsAiming { get; set; }
+        public bool IsAiming; // { get; set; }
 
         protected override void Update()
         {
             HandleMovement();
-            HandleRotation();
         }
 
         protected override void HandleMovement()
         {
+            var movement = Vector3.zero;
             var targetVelocity = Vector3.zero;
+            Quaternion targetRotation = default;
+            var shouldApplyRotation = false;
+                
             if (input.Move != Vector2.zero)
             {
-                var movement = input.Move.x * basisRight + input.Move.y * basisForward;
+                movement = input.Move.x * basisRight + input.Move.y * basisForward;
                 if (!analogMovement)
                     movement = movement.normalized;
-
-                var targetRotation = Quaternion.LookRotation(movement);
-                transform.rotation =
-                    Quaternion.RotateTowards(transform.rotation, targetRotation, 
-                        (IsAiming? aimTurnSpeed : turnSpeed) * Time.deltaTime);
-
-                targetVelocity = (IsAiming? aimSpeed : speed) * movement;
             }
+            
+            if (IsAiming)
+            {
+                targetVelocity = aimSpeed * movement;
 
-            velocity = Vector3.MoveTowards(velocity, targetVelocity, (IsAiming? aimAcc : acc) * Time.deltaTime);
+                if (input.CurrentDevice == null || input.CurrentDevice.path.Contains("Mouse") 
+                                                || input.CurrentDevice.path.Contains("Keyboard"))
+                {
+                    var ray = Camera.main.ScreenPointToRay(input.MousePosition);
+                    var isHit = Physics.Raycast(ray, out var hit, float.PositiveInfinity);
+                    if (isHit)
+                    {
+                        Debug.DrawRay(hit.point, Vector3.up, Color.cyan);
+                        var lookDir = hit.point - transform.position;
+                        targetRotation = Quaternion.LookRotation(lookDir);
+                        targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, aimTurnSpeed * Time.deltaTime);
+                        shouldApplyRotation = true;
+                    }
+                }
+                else
+                {
+                    var lookDir = input.Move.x * basisRight + input.Move.y * basisForward;
+                    Debug.DrawRay(transform.position, lookDir, Color.cyan);
+                    targetRotation = Quaternion.LookRotation(lookDir);
+                    targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, aimTurnSpeed * Time.deltaTime);
+                    shouldApplyRotation = true;
+                }
+            }
+            else if (movement != Vector3.zero)
+            {
+                targetVelocity = speed * movement;
+                
+                targetRotation = Quaternion.LookRotation(movement);
+                targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+                shouldApplyRotation = true;
+            }
+            
+            if (shouldApplyRotation)
+                transform.rotation = targetRotation;
+
+            velocity = Vector3.MoveTowards(velocity, targetVelocity, (IsAiming ? aimAcc : acc) * Time.deltaTime);
             cc.Move(velocity * Time.deltaTime);
         }
 
-        protected virtual void HandleRotation()
-        {
-            
-        }
-        
     }
 }
