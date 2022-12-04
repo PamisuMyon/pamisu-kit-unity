@@ -5,31 +5,31 @@ namespace Pamisu.Commons.Pool
 {
     public class GameObjectPool
     {
-        private List<GameObject> _list;
-        private int _lastIndex;
+        private List<GameObject> list;
+        private int lastIndex;
 
         public GameObjectPool()
         {
-            _list = new List<GameObject>();
-            _lastIndex = 0;
+            list = new List<GameObject>();
+            lastIndex = 0;
         }
 
         public void AddItem(GameObject gameObject)
         {
-            _list.Add(gameObject);
+            list.Add(gameObject);
         }
 
         public GameObject GetItem()
         {
-            for (var i = 0; i < _list.Count; i++)
+            for (var i = 0; i < list.Count; i++)
             {
-                _lastIndex++;
-                if (_lastIndex > _list.Count - 1)
-                    _lastIndex = 0;
+                lastIndex++;
+                if (lastIndex > list.Count - 1)
+                    lastIndex = 0;
 
-                if (!_list[_lastIndex].activeInHierarchy)
+                if (!list[lastIndex].activeInHierarchy)
                 {
-                    return _list[_lastIndex];
+                    return list[lastIndex];
                 }
             }
 
@@ -46,16 +46,34 @@ namespace Pamisu.Commons.Pool
     public class GameObjectPooler : SingletonAutoBehaviour<GameObjectPooler>
     {
 
-        private GameObjectPool s_pool = new();
+        private readonly Dictionary<GameObject, GameObjectPool> pools = new();
+
+        private void PrewarmInterval(GameObject prefab, int size = 1)
+        {
+            if (pools.ContainsKey(prefab)) return;
+            var pool = new GameObjectPool();
+            for (var i = 0; i < size; i++)
+            {
+                var go = Instantiate(prefab);
+                go.SetActive(false);
+                pool.AddItem(go);
+            }
+            pools.Add(prefab, pool);
+        }
         
         private GameObject SpawnInterval(GameObject prefab, Vector3 position = default, Quaternion rotation = default)
         {
-            var go = s_pool.GetItem();
+            if (!pools.ContainsKey(prefab))
+                PrewarmInterval(prefab);
+
+            var pool = pools[prefab];
+            var go = pool.GetItem();
             if (go == null)
             {
                 go = Instantiate(prefab);
-                s_pool.AddItem(go);
+                pool.AddItem(go);
             }
+            go.SetActive(true);
             if (position != default)
                 go.transform.position = position;
             if (rotation != default)
@@ -64,17 +82,19 @@ namespace Pamisu.Commons.Pool
             return go;
         }
 
-        private void ReturnInterval(GameObject go)
+        private void ReleaseInterval(GameObject go)
         {
-            s_pool.ReturnItem(go);
+            go.SetActive(false);
         }
+
+        public static void Prewarm(GameObject prefab, int size = 1) => Instance.PrewarmInterval(prefab, size);
 
         public static GameObject Spawn(GameObject prefab, Vector3 position = default, Quaternion rotation = default)
         {
             return Instance.SpawnInterval(prefab, position, rotation);
         }
 
-        public static void Return(GameObject go) => Instance.ReturnInterval(go);
+        public static void Release(GameObject go) => Instance.ReleaseInterval(go);
 
     }
 }

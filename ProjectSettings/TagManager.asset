@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -11,6 +12,19 @@ TagManager:
   - 
   - Water
   - UI
+  - MouseCast
+  - Ground
+  - 
+  - 
+  - Player
+  - 
+  - 
+  - 
+  - Enemy
+  - 
+  - 
+  - 
+  - Neutral
   - 
   - 
   - 
@@ -18,20 +32,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Void
   - 
   - 
   - 

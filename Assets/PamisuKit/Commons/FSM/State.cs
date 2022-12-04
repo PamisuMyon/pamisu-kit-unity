@@ -4,7 +4,7 @@
     {
         public string StateName { get; set; }
         
-        public IStateMachine StateMachine { get; set; }
+        public IStateMachine Machine { get; set; }
 
         public State()
         {
@@ -19,7 +19,7 @@
         {
         }
 
-        public virtual void OnLeave()
+        public virtual void OnExit()
         {
         }
 

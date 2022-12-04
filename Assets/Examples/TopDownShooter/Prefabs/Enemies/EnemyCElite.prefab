@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2324703765559616555
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 204194277961655904, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: _actions.Array.data[1]
+      value: 
+      objectReference: {fileID: 369712645162874262}
+    - target: {fileID: 204194277961655906, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_Name
+      value: EnemyCElite
+      objectReference: {fileID: 0}
+    - target: {fileID: 693168627467304152, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 693168627467304152, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 693168627467304152, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 693168627467304152, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 693168627467304152, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 693168627467304152, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 693168627467304152, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 693168627467304152, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 693168627467304152, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 693168627467304152, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 693168627467304152, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2111277100019920929, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_Name
+      value: RotateScatterShootAction
+      objectReference: {fileID: 0}
+    - target: {fileID: 6311794466532102356, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: b1717be681f179044ab4493a39bfe5c1, type: 2}
+    - target: {fileID: 6990818462352325911, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b1717be681f179044ab4493a39bfe5c1, type: 2}
+    m_RemovedComponents:
+    - {fileID: 2111277100019920932, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+--- !u!1 &4399949302599455754 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2111277100019920929, guid: 84155d65f30cbd848bc0c0b9d9ba7086, type: 3}
+  m_PrefabInstance: {fileID: 2324703765559616555}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &369712645162874262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4399949302599455754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b242cc48d80d45be83574bb8689a3a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanBeBlocked: 0
+  BlockTime: 1
+  Cooldown: 5
+  MaxTargetDistance: 12
+  rotateSpeed: 180
+  cycles: 3
+  shootPreDelay: 0.2
+  shootPostDelay: 0.06
+  shootInterval: 0
+  projectilePrefab: {fileID: 1366800498651028619, guid: a6ae72e31ff3641109faa48576a03eb3, type: 3}
+  _branches: 3
+  _deltaAngle: 15

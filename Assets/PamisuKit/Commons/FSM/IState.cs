@@ -4,13 +4,13 @@ namespace Pamisu.Commons.FSM
     {
         string StateName { get; set; }
         
-        IStateMachine StateMachine { get; set; }
+        IStateMachine Machine { get; set; }
 
         void OnAddToMachine();
 
         void OnEnter();
 
-        void OnLeave();
+        void OnExit();
 
         void OnProcess();
 

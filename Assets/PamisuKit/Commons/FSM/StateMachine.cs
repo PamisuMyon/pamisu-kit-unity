@@ -9,25 +9,25 @@ namespace Pamisu.Commons.FSM
         
         public string MachineName { get; set; }
 
-        private Dictionary<Type, IState> _states = new();
+        private Dictionary<Type, IState> states = new();
 
-        public Dictionary<Type, IState> States => _states;
+        public Dictionary<Type, IState> States => states;
         
         public IState CurrentState { get; protected set; }
         
         public IState PreviousState { get; protected set; }
         
-        public bool LogEnabled { get; set; }
+        public bool EnableLog { get; set; }
 
-        public StateMachine()
+        public StateMachine(bool enableLog = false)
         {
             MachineName = GetType().ToString();
-            LogEnabled = false;
+            EnableLog = enableLog;
         }
         
         public void AddState(IState state)
         {
-            state.StateMachine = this;
+            state.Machine = this;
             state.OnAddToMachine();
             States.Add(state.GetType(), state);
         }
@@ -41,7 +41,7 @@ namespace Pamisu.Commons.FSM
             }
 
             var state = new T();
-            state.StateMachine = this;
+            state.Machine = this;
             state.OnAddToMachine();
             States.Add(typeof(T), state);
         }
@@ -67,11 +67,14 @@ namespace Pamisu.Commons.FSM
             }
 
             PreviousState = CurrentState;
-            if (LogEnabled)
-                Debug.Log($"{MachineName} {CurrentState.StateName} OnLeave");
-            CurrentState.OnLeave();
+            if (CurrentState != null)
+            {
+                if (EnableLog)
+                    Debug.Log($"{MachineName} {CurrentState.StateName} OnLeave");
+                CurrentState.OnExit();
+            }
             CurrentState = States[type];
-            if (LogEnabled)
+            if (EnableLog)
                 Debug.Log($"{MachineName} {CurrentState.StateName} OnEnter");
             CurrentState.OnEnter();
         }
@@ -79,11 +82,6 @@ namespace Pamisu.Commons.FSM
         public void ChangeState<T>() where T : IState
         {
             ChangeState(typeof(T));
-        }
-
-        public void SetCurrentState<T>() where T : IState
-        {
-            CurrentState = States[typeof(T)];
         }
 
         public void OnProcess()

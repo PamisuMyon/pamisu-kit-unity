@@ -26,8 +26,6 @@ namespace Pamisu.Commons.FSM
         
         void ChangeState<T>() where T : IState;
 
-        void SetCurrentState<T>() where T : IState;
-
         void OnProcess();
 
         void OnPhysicsProcess();

@@ -98,7 +98,16 @@ namespace Pamisu.Inputs
                     ""id"": ""38dc7d61-b4ff-450a-9aea-2571b49ad2f8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""c74be93f-7eb5-47ec-94c3-38b9df9747d7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -370,7 +379,7 @@ namespace Pamisu.Inputs
                 {
                     ""name"": """",
                     ""id"": ""20a3caeb-b673-4436-bbba-7bc1f7a6af2b"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
@@ -388,14 +397,69 @@ namespace Pamisu.Inputs
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6561720f-a390-4682-acc5-df9d112ca619"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b68884d7-c06c-4320-b61d-ae4672d6afb9"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
             ""name"": ""Menu"",
             ""id"": ""f2bf06e0-04ae-4423-bfca-9d3507a05a87"",
-            ""actions"": [],
-            ""bindings"": []
+            ""actions"": [
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""a7c9292d-1710-423d-a076-479de72865b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2d50e561-f8f2-4bb7-bf53-749b30d3ac8c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b585165e-9460-40d6-b03a-a94d27de3295"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         },
         {
             ""name"": ""Rebind"",
@@ -454,8 +518,10 @@ namespace Pamisu.Inputs
             m_Player_Fire2 = m_Player.FindAction("Fire2", throwIfNotFound: true);
             m_Player_Fire3 = m_Player.FindAction("Fire3", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+            m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
             // Menu
             m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+            m_Menu_Menu = m_Menu.FindAction("Menu", throwIfNotFound: true);
             // Rebind
             m_Rebind = asset.FindActionMap("Rebind", throwIfNotFound: true);
         }
@@ -525,6 +591,7 @@ namespace Pamisu.Inputs
         private readonly InputAction m_Player_Fire2;
         private readonly InputAction m_Player_Fire3;
         private readonly InputAction m_Player_Interact;
+        private readonly InputAction m_Player_Menu;
         public struct PlayerActions
         {
             private @BasicInputAsset m_Wrapper;
@@ -537,6 +604,7 @@ namespace Pamisu.Inputs
             public InputAction @Fire2 => m_Wrapper.m_Player_Fire2;
             public InputAction @Fire3 => m_Wrapper.m_Player_Fire3;
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
+            public InputAction @Menu => m_Wrapper.m_Player_Menu;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -570,6 +638,9 @@ namespace Pamisu.Inputs
                     @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                     @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                     @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                    @Menu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
+                    @Menu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
+                    @Menu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -598,6 +669,9 @@ namespace Pamisu.Inputs
                     @Interact.started += instance.OnInteract;
                     @Interact.performed += instance.OnInteract;
                     @Interact.canceled += instance.OnInteract;
+                    @Menu.started += instance.OnMenu;
+                    @Menu.performed += instance.OnMenu;
+                    @Menu.canceled += instance.OnMenu;
                 }
             }
         }
@@ -606,10 +680,12 @@ namespace Pamisu.Inputs
         // Menu
         private readonly InputActionMap m_Menu;
         private IMenuActions m_MenuActionsCallbackInterface;
+        private readonly InputAction m_Menu_Menu;
         public struct MenuActions
         {
             private @BasicInputAsset m_Wrapper;
             public MenuActions(@BasicInputAsset wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Menu => m_Wrapper.m_Menu_Menu;
             public InputActionMap Get() { return m_Wrapper.m_Menu; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -619,10 +695,16 @@ namespace Pamisu.Inputs
             {
                 if (m_Wrapper.m_MenuActionsCallbackInterface != null)
                 {
+                    @Menu.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnMenu;
+                    @Menu.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnMenu;
+                    @Menu.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnMenu;
                 }
                 m_Wrapper.m_MenuActionsCallbackInterface = instance;
                 if (instance != null)
                 {
+                    @Menu.started += instance.OnMenu;
+                    @Menu.performed += instance.OnMenu;
+                    @Menu.canceled += instance.OnMenu;
                 }
             }
         }
@@ -680,9 +762,11 @@ namespace Pamisu.Inputs
             void OnFire2(InputAction.CallbackContext context);
             void OnFire3(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
+            void OnMenu(InputAction.CallbackContext context);
         }
         public interface IMenuActions
         {
+            void OnMenu(InputAction.CallbackContext context);
         }
         public interface IRebindActions
         {

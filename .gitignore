@@ -63,7 +63,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-/UserSettings/Search.settings
+
 
 *.DS_Store
 */*.DS_Store
@@ -78,3 +78,8 @@ _TerrainAutoUpgrade.meta
 */Scenes/**/Lightmap*.*.meta
 */Scenes/**/ReflectionProbe*.exr
 */Scenes/**/ReflectionProbe*.exr.meta
+
+# UserSettings
+/UserSettings/Search.index
+/UserSettings/Search.settings
+/UserSettings/Layouts/

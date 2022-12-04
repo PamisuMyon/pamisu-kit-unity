@@ -64,5 +64,15 @@ namespace Pamisu.Commons
             var angle = Random.Range(0, 360f);
             return Quaternion.Euler(0, angle, 0);
         }
+
+        public static Vector2 InsideAnnulus(float minRadius, float maxRadius)
+        {
+            var dir = Random.insideUnitCircle.normalized;
+            var minR2 = minRadius * minRadius;
+            var maxR2 = maxRadius * maxRadius;
+            // ICDF(x) = √(x*(rmax^2 - rmin^2)+rmin^2)
+            return dir * Mathf.Sqrt(Random.value * (maxR2 - minR2) + minR2);
+        }
+        
     }
 }
