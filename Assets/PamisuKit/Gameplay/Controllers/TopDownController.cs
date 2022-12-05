@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Pamisu.Gameplay.Controllers
 {
-    [RequireComponent(typeof(CharacterController), typeof(PlayerInputBase))]
+    [RequireComponent(typeof(CharacterController))]
     public abstract class TopDownController : MonoBehaviour
     {
 

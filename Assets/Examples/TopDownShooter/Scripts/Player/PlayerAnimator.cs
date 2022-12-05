@@ -7,7 +7,7 @@ namespace Pamisu.TopDownShooter.Player
     {
 
         [SerializeField]
-        private PlayerController Controller;
+        private PlayerController controller;
         
         private Animator anim;
 
@@ -15,17 +15,17 @@ namespace Pamisu.TopDownShooter.Player
         private void Start()
         {
             anim = GetComponent<Animator>();
-            if (Controller == null)
-                Controller = GetComponent<PlayerController>();
-            Controller.Attributes.OnDied += OnDied;
+            if (controller == null)
+                controller = GetComponent<PlayerController>();
+            controller.Attributes.OnDied += OnDied;
         }
 
         private void Update()
         {
-            var localVelocity = Controller.transform.InverseTransformVector(Controller.Velocity);
+            var localVelocity = controller.transform.InverseTransformVector(controller.Velocity);
             anim.SetFloat(AnimID.GroundSpeedX, localVelocity.x);
             anim.SetFloat(AnimID.GroundSpeedZ, localVelocity.z);
-            anim.SetBool(AnimID.IsAiming, Controller.IsAiming);
+            anim.SetBool(AnimID.IsAiming, controller.IsAiming);
         }
         
         private void OnDied()

@@ -117,6 +117,15 @@ namespace Pamisu.Commons
             point.z = Mathf.Clamp(point.z, bounds.min.z, bounds.max.z);
             return point;
         }
+        
+        public static float MoveTowards(this float current, float target, float maxDistanceDelta)
+        {
+            if (maxDistanceDelta == 0) return current;
+            var value = current + maxDistanceDelta;
+            if (maxDistanceDelta < 0)
+                return Mathf.Max(value, target);
+            return Mathf.Min(value, target);
+        }
 
         public static void LockCursor(bool isLock)
         {
