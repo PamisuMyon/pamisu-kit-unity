@@ -1,9 +1,9 @@
 using Pamisu.Commons;
 using UnityEngine;
 
-namespace Pamisu.Gameplay.Controllers
+namespace Pamisu.Gameplay.FirstPerson
 {
-    [RequireComponent(typeof(CharacterController), typeof(PlayerInputBase))]
+    [RequireComponent(typeof(CharacterController), typeof(BasicPlayerInput))]
     public class FirstPersonController : Controller
     {
         [Header("Base")]
@@ -47,7 +47,7 @@ namespace Pamisu.Gameplay.Controllers
         protected float maxVerticalAngle = 89f;
 
         protected CharacterController cc;
-        protected PlayerInputBase input;
+        protected BasicPlayerInput input;
         protected bool isGrounded;
         protected Vector3 groundNormal;
         protected float armsVerticalAngle = 0f;
@@ -57,7 +57,7 @@ namespace Pamisu.Gameplay.Controllers
         protected virtual void Start()
         {
             cc = GetComponent<CharacterController>();
-            input = GetComponent<PlayerInputBase>();
+            input = GetComponent<BasicPlayerInput>();
 
             if (armsTransform == null)
                 armsTransform = transform.Find("Arms");

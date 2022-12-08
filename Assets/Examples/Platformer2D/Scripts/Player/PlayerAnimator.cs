@@ -22,7 +22,7 @@ namespace Pamisu.Platformer2D.Player
             var velocity = controller.Rigidbody.velocity;
             anim.SetFloat(AnimID.GroundSpeed, Mathf.Abs(velocity.x));
             anim.SetFloat(AnimID.AirborneSpeed, velocity.y);
-            anim.SetBool(AnimID.IsOnGround, controller.IsGrounded);
+            anim.SetBool(AnimID.IsOnGround, controller.Movement.IsGrounded);
         }
     }
 }

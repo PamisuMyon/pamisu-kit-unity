@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Pamisu.Gameplay.Controllers
+namespace Pamisu.Gameplay.TopDown
 {
     [RequireComponent(typeof(CharacterController))]
     public abstract class TopDownController : MonoBehaviour
@@ -35,14 +35,14 @@ namespace Pamisu.Gameplay.Controllers
         protected Vector3 velocity;
 
         protected CharacterController cc;
-        public PlayerInputBase Input { get; protected set; }
+        public BasicPlayerInput Input { get; protected set; }
 
         public Vector3 Velocity => velocity;
 
         protected virtual void Start()
         {
             cc = GetComponent<CharacterController>();
-            Input = GetComponent<PlayerInputBase>();
+            Input = GetComponent<BasicPlayerInput>();
             
             if (basisReferer != null)
                 InitBasis(basisReferer.rotation);

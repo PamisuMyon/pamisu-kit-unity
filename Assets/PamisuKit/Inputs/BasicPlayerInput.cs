@@ -6,7 +6,7 @@ using UnityEngine.InputSystem.Utilities;
 
 namespace Pamisu.Gameplay
 {
-    public class PlayerInputBase : 
+    public class BasicPlayerInput : 
         MonoBehaviour, 
         BasicInputAsset.IPlayerActions, 
         BasicInputAsset.IMenuActions

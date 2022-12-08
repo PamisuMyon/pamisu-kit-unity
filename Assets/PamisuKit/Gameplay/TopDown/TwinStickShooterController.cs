@@ -1,7 +1,7 @@
 using Pamisu.Commons;
 using UnityEngine;
 
-namespace Pamisu.Gameplay.Controllers
+namespace Pamisu.Gameplay.TopDown
 {
     public abstract class TwinStickShooterController : TopDownController
     {

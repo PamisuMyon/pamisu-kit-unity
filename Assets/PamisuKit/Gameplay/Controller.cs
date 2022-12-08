@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Pamisu.Gameplay.Controllers
+namespace Pamisu.Gameplay
 {
     public abstract class Controller : MonoBehaviour
     {

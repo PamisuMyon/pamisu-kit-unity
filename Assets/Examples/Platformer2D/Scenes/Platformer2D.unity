@@ -134,8 +134,9 @@ GameObject:
   - component: {fileID: 13522264}
   - component: {fileID: 13522266}
   - component: {fileID: 13522265}
-  - component: {fileID: 13522267}
   - component: {fileID: 13522268}
+  - component: {fileID: 13522267}
+  - component: {fileID: 13522269}
   m_Layer: 10
   m_Name: PlayerAvatar
   m_TagString: Player
@@ -151,7 +152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13522263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.69, y: 2.81, z: 0}
+  m_LocalPosition: {x: 7.495, y: 2.699, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -205,28 +206,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 13522263}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b561363a8a94fe6ae32f0dd089be297, type: 3}
+  m_Script: {fileID: 11500000, guid: 2312cb55d4394b0583e04dd89427baa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
-  runSpeed: 8
-  accelerationGround: 10
-  accelerationAir: 5
+  speed: 8
+  accelerationGround: 12
+  accelerationAir: 8
   jumpForce: 12
   jumpHeldForce: 0.5
   jumpHeldDuration: 0.2
   verticalSpeedClamps: {x: 0, y: 0}
   useGravityOnGround: 1
   velocitySnapToGround: 1
-  IsGrounded: 0
-  groundedRadius: -1
-  groundedOffset: -1
-  groundedDistance: -1
+  slopeAngleLimit: 75
   groundLayers:
     serializedVersion: 2
     m_Bits: 128
-  mainSpriteRenderer: {fileID: 0}
+  groundedRadius: -1
+  groundedYOffset: -1
+  groundedDistance: -1
+  slopeCheckRadius: -1
+  slopeCheckYOffset: -1
+  slopeCheckXOffset: -1
+  slopeCheckDistance: -1
+  Controller: {fileID: 0}
+  IsGrounded: 0
+  SurfaceNormal: {x: 0, y: 1}
+  SlopeAngle: 0
 --- !u!114 &13522268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13522263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b561363a8a94fe6ae32f0dd089be297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainSpriteRenderer: {fileID: 572644026}
+  Movement: {fileID: 0}
+--- !u!114 &13522269
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -362,7 +383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 85186756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.69, y: 2.81, z: -10}
+  m_LocalPosition: {x: 7.495, y: 2.699, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -697,7 +718,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011832396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.69, y: 2.81, z: -10}
+  m_LocalPosition: {x: 7.495, y: 2.699, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -720,6 +741,51 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 1548248702}
   m_Damping: 0.5
   m_MaxWindowSize: -1
+--- !u!1 &1315190607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1315190608}
+  - component: {fileID: 1315190609}
+  m_Layer: 0
+  m_Name: GameDebugger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1315190608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315190607}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1315190609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315190607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ed70e14c5a948d0b5796745855c9ca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScale: 0.246
 --- !u!1 &1393985080
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,10 +1,7 @@
-using System;
 using Pamisu.Commons.FSM;
-using Pamisu.Gameplay;
-using Pamisu.Gameplay.Controllers;
+using Pamisu.Gameplay.TopDown;
 using Pamisu.TopDownShooter.Player.States;
 using UnityEngine;
-using Blackboard = Pamisu.TopDownShooter.Player.States.Blackboard;
 
 namespace Pamisu.TopDownShooter.Player
 {
