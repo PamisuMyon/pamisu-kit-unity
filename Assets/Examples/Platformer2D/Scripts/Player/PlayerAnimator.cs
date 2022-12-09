@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Pamisu.Gameplay.Platformer;
+using UnityEngine;
 
 namespace Pamisu.Platformer2D.Player
 {
@@ -6,23 +7,23 @@ namespace Pamisu.Platformer2D.Player
     public class PlayerAnimator : MonoBehaviour
     {
         [SerializeField]
-        private PlayerController controller;
+        private PlatformerMovement2D movement;
         
         private Animator anim;
 
         private void Awake()
         {
             anim = GetComponent<Animator>();
-            if (controller == null)
-                controller = GetComponentInParent<PlayerController>();
+            if (movement == null)
+                movement = GetComponentInParent<PlatformerMovement2D>();
         }
 
         private void Update()
         {
-            var velocity = controller.Rigidbody.velocity;
+            var velocity = movement.Rigidbody.velocity;
             anim.SetFloat(AnimID.GroundSpeed, Mathf.Abs(velocity.x));
             anim.SetFloat(AnimID.AirborneSpeed, velocity.y);
-            anim.SetBool(AnimID.IsOnGround, controller.Movement.IsGrounded);
+            anim.SetBool(AnimID.IsOnGround, movement.IsGrounded);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿// ReSharper disable CompareOfFloatsByEqualityOperator
 
+using System;
 using Pamisu.Commons;
 using UnityEngine;
 
@@ -53,21 +54,18 @@ namespace Pamisu.Gameplay.Platformer
         protected float slopeCheckDistance = -1f;
 
 
-        [Header("Components")]
-        public PlatformerController2D Controller;
-
         [Header("Read Only")]
         public bool IsGrounded;
         public Vector2 SurfaceNormal = Vector2.up;
         public float SlopeAngle;
+        public Vector2 TargetVelocity;
 
         public Rigidbody2D Rigidbody { get; protected set; }
         public CapsuleCollider2D Collider { get; protected set; }
-        public BasicPlayerInput Input { get; protected set; }
-
-        protected float originGravityScale;
-        protected bool canJumpHeld;
-        protected float jumpCounter;
+        public bool CanJumpHeld { get; protected set; }
+        public float OriginalGravityScale { get; set; }
+        
+        protected float jumpHeldCounter;
         protected ContactFilter2D groundedCheckFilter;
         protected readonly Collider2D[] groundedCheckCols = new Collider2D[16];
         protected readonly RaycastHit2D[] groundedCheckHits = new RaycastHit2D[1];
@@ -76,14 +74,11 @@ namespace Pamisu.Gameplay.Platformer
         {
             Rigidbody = GetComponent<Rigidbody2D>();
             Collider = GetComponent<CapsuleCollider2D>();
-            Input = GetComponent<BasicPlayerInput>();
-            if (Controller == null)
-                Controller = GetComponent<PlatformerController2D>();
         }
 
         protected virtual void Start()
         {
-            originGravityScale = Rigidbody.gravityScale;
+            OriginalGravityScale = Rigidbody.gravityScale;
 
             if (groundedRadius == -1)
                 groundedRadius = Collider.size.x / 2f;
@@ -108,6 +103,16 @@ namespace Pamisu.Gameplay.Platformer
             groundedCheckFilter.SetDepth(float.NegativeInfinity, float.PositiveInfinity);
         }
 
+        protected virtual void Update()
+        {
+            if (jumpHeldCounter > 0)
+            {
+                jumpHeldCounter -= Time.deltaTime;
+                if (jumpHeldCounter <= 0)
+                    CanJumpHeld = false;
+            }
+        }
+
         public virtual void GroundedCheck()
         {
             var contactNum = Rigidbody.GetContacts(groundedCheckFilter, groundedCheckCols);
@@ -129,9 +134,9 @@ namespace Pamisu.Gameplay.Platformer
             if (IsGrounded)
             {
                 var xOffset = 0f;
-                if (Input.Move.x > 0)
+                if (Rigidbody.velocity.x > 0.05f)
                     xOffset = slopeCheckXOffset;
-                else if (Input.Move.x < 0)
+                else if (Rigidbody.velocity.x < -0.05f)
                     xOffset = -slopeCheckXOffset;
                 if (xOffset != 0)
                 {
@@ -150,68 +155,73 @@ namespace Pamisu.Gameplay.Platformer
             {
                 IsGrounded = false;
             }
+
+            ApplyGravity();
         }
 
-        public virtual void HandleMovement()
+        protected virtual void ApplyGravity()
         {
             if (IsGrounded &&
                 (!useGravityOnGround
                  || (SlopeAngle > 5f && SlopeAngle <= slopeAngleLimit)))
                 Rigidbody.gravityScale = 0;
             else
-                Rigidbody.gravityScale = originGravityScale;
+                Rigidbody.gravityScale = OriginalGravityScale;
+        }
 
-            var targetVelocity = new Vector2(Input.Move.x * speed, Rigidbody.velocity.y);
-
-            // Jump
-            if (Input.Jump)
-            {
-                if (IsGrounded && !canJumpHeld)
-                {
-                    jumpCounter = Time.time + jumpHeldDuration;
-                    targetVelocity.y = 0; // TODO if not on moving platformer
-                    targetVelocity.y += jumpForce;
-                    canJumpHeld = true;
-                    IsGrounded = false;
-                }
-
-                Input.Jump = false;
-            }
-
-            if (canJumpHeld)
-            {
-                if (Input.JumpHeld)
-                    targetVelocity.y += jumpHeldForce;
-
-                if (jumpCounter < Time.time)
-                    canJumpHeld = false;
-            }
+        public virtual void Move(float inputX)
+        {
+            TargetVelocity.x = inputX * speed;
+            TargetVelocity.y = Rigidbody.velocity.y;
 
             // Ground snap
             if (IsGrounded
                 && velocitySnapToGround
-                && !canJumpHeld)
+                && !CanJumpHeld)
             {
                 // Parallel to the right direction of the current surface
                 var dir = Vector3.Cross(SurfaceNormal, Vector3.forward).normalized;
-                targetVelocity = Input.Move.x * speed * dir;
+                TargetVelocity = inputX * speed * dir;
+            }
+        }
+        
+        public virtual bool Jump()
+        {
+            if (IsGrounded && !CanJumpHeld)
+            {
+                // TargetVelocity.y = 0; // TODO if not on moving platformer
+                // TargetVelocity.y += jumpForce;
+                Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0f);
+                Rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                
+                jumpHeldCounter = jumpHeldDuration;
+                CanJumpHeld = true;
+                IsGrounded = false;
+                return true;
             }
 
-            // Apply velocity
+            return false;
+        }
+
+        public virtual void JumpHeld()
+        {
+            if (!CanJumpHeld) return;
+            // TargetVelocity.y = Rigidbody.velocity.y + jumpHeldForce;
+            Rigidbody.AddForce(Vector2.up * jumpHeldForce, ForceMode2D.Impulse);
+        }
+
+        public virtual void ApplyVelocity()
+        {
             var acc = IsGrounded ? accelerationGround : accelerationAir;
             var velocity = new Vector2
             {
-                x = Rigidbody.velocity.x.MoveTowards(targetVelocity.x, acc),
-                y = targetVelocity.y
+                x = Rigidbody.velocity.x.MoveTowards(TargetVelocity.x, acc),
+                y = TargetVelocity.y
             };
             if (verticalSpeedClamps != Vector2.zero)
                 velocity.y = Mathf.Clamp(velocity.y, verticalSpeedClamps.x, verticalSpeedClamps.y);
             Rigidbody.velocity = velocity;
-
-            if (Input.Move.x > 0)
-                Controller.SetOrientation(false);
-            else if (Input.Move.x < 0)
-                Controller.SetOrientation(true);
         }
+
     }
 }

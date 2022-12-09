@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Pamisu.TopDownShooter.Player
 {
     [RequireComponent(typeof(MonoStateMachine))]
-    public class PlayerController : TwinStickShooterController
+    public class PlayerController : TwinStickShooterPlayerController
     {
 
         [Header("Spacesuit Player")]

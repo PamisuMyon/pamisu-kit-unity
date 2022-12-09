@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1cb0b229cb74c3492613766f85d19ae, type: 3}
+  m_Name: DashAbility
+  m_EditorClassIdentifier: 
+  AbilityName: Dash
+  AbilityTags:
+    AssetTag: {fileID: 11400000, guid: b5e816bad90a3b543a1ac4ba9232d25b, type: 2}
+    CancelAbilitiesWithTags: []
+    BlockAbilitiesWithTags: []
+    ActivationOwnedTags: []
+    OwnerTags:
+      RequireTags: []
+      IgnoreTags: []
+    SourceTags:
+      RequireTags: []
+      IgnoreTags: []
+    TargetTags:
+      RequireTags: []
+      IgnoreTags: []
+  Cost: {fileID: 0}
+  Cooldown: {fileID: 0}
+  CustomMovementTag: {fileID: 11400000, guid: c4c261f5c05c6424eb4e977c14cd811a, type: 2}
+  DashSpeed: 20
+  DashDuration: 0.2
