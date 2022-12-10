@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GameplayTag.Authoring;
 using Pamisu.Commons;
 
 namespace Pamisu.GASExtension
 {
+    [Serializable]
     public class GameplayTagContainer
     {
-        public List<GameplayTagScriptableObject> Tags { get; protected set; }
+        public List<GameplayTagScriptableObject> Tags; // { get; protected set; }
 
         public GameplayTagContainer()
         {

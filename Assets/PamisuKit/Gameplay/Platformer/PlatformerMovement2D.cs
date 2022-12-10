@@ -210,16 +210,20 @@ namespace Pamisu.Gameplay.Platformer
             Rigidbody.AddForce(Vector2.up * jumpHeldForce, ForceMode2D.Impulse);
         }
 
-        public virtual void ApplyVelocity()
+        public virtual void ApplyVelocity(bool useAcceleration = true)
         {
-            var acc = IsGrounded ? accelerationGround : accelerationAir;
-            var velocity = new Vector2
+            Vector2 velocity; 
+            if (useAcceleration)
             {
-                x = Rigidbody.velocity.x.MoveTowards(TargetVelocity.x, acc),
-                y = TargetVelocity.y
-            };
+                var acc = IsGrounded ? accelerationGround : accelerationAir;
+                velocity.x = Rigidbody.velocity.x.MoveTowards(TargetVelocity.x, acc);
+                velocity.y = TargetVelocity.y;
+            }
+            else
+                velocity = TargetVelocity;
             if (verticalSpeedClamps != Vector2.zero)
                 velocity.y = Mathf.Clamp(velocity.y, verticalSpeedClamps.x, verticalSpeedClamps.y);
+            
             Rigidbody.velocity = velocity;
         }
 

@@ -8,7 +8,7 @@ namespace Pamisu.GASExtension
     public class AbilitySystemCharacterEx : AbilitySystemCharacter
     {
         // Tags granted directly to character
-        public GameplayTagContainer TagContainer { get; private set; }
+        public GameplayTagContainer TagContainer; // { get; private set; }
 
         private void Start()
         {
@@ -17,34 +17,48 @@ namespace Pamisu.GASExtension
                 _attributeSystem = GetComponentInChildren<AttributeSystemComponent>();
         }
 
-        public bool TryActivateAbility<T>() where T : AbstractAbilityScriptableObject
+        public AbstractAbilitySpec GetAbilitySpec<T>()
         {
             var type = typeof(T);
             foreach (var it in GrantedAbilities)
             {
                 if (it.Ability.GetType() == type)
                 {
-                    ActivateAbility(it);
-                    return true;
+                    return it;
                 }
             }
-            return false;
+            return null;
         }
         
-        public bool TryActivateAbility(GameplayTagScriptableObject tag)
+        public AbstractAbilitySpec GetAbilitySpec(GameplayTagScriptableObject tag)
         {
             foreach (var it in GrantedAbilities)
             {
                 if (it.Ability.AbilityTags.AssetTag == tag)
                 {
-                    ActivateAbility(it);
-                    return true;
+                    return it;
                 }
             }
-            return false;
+            return null;
         }
 
-        protected void ActivateAbility(AbstractAbilitySpec spec)
+        public bool TryActivateAbility<T>() where T : AbstractAbilityScriptableObject
+        {
+            var spec = GetAbilitySpec<T>();
+            if (spec == null) return false;
+            TryActivateAbility(spec);
+            return true;
+        }
+        
+        public bool TryActivateAbility(GameplayTagScriptableObject tag)
+        {
+            var spec = GetAbilitySpec(tag);
+            if (spec == null) return false;
+            TryActivateAbility(spec);
+            return true;
+        }
+
+        public void TryActivateAbility(AbstractAbilitySpec spec)
         {
             StartCoroutine(spec.TryActivateAbility());
         }

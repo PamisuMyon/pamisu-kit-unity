@@ -23,9 +23,13 @@ namespace Pamisu.GASExtension
 
             isActive = true;
             OwnerEx.TagContainer.AppendTags(Ability.AbilityTags.ActivationOwnedTags);
-            // yield return PreActivate(); TODO DELETE THIS METHOD
             yield return ActivateAbility();
             EndAbility();
+        }
+
+        protected override IEnumerator PreActivate()
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>

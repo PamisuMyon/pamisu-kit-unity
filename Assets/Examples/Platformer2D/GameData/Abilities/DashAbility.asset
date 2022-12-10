@@ -17,7 +17,8 @@ MonoBehaviour:
     AssetTag: {fileID: 11400000, guid: b5e816bad90a3b543a1ac4ba9232d25b, type: 2}
     CancelAbilitiesWithTags: []
     BlockAbilitiesWithTags: []
-    ActivationOwnedTags: []
+    ActivationOwnedTags:
+    - {fileID: 11400000, guid: c4c261f5c05c6424eb4e977c14cd811a, type: 2}
     OwnerTags:
       RequireTags: []
       IgnoreTags: []
@@ -29,6 +30,9 @@ MonoBehaviour:
       IgnoreTags: []
   Cost: {fileID: 0}
   Cooldown: {fileID: 0}
-  CustomMovementTag: {fileID: 11400000, guid: c4c261f5c05c6424eb4e977c14cd811a, type: 2}
-  DashSpeed: 20
+  DashSpeed: 22
   DashDuration: 0.2
+  IsDashingAnimParam: IsDashing
+  DashFlashEffectPrefab: {fileID: 3553439978854214147, guid: 60afc3fe3984ed845a3af94567b2647a, type: 3}
+  DashWaveEffectPrefab: {fileID: 8117622888467127681, guid: 20d65f5fdd04a2949818d4ad0d038e8f, type: 3}
+  DashSparkEffectPrefab: {fileID: 402477242061127356, guid: 7579e998360bfa84b896231d1abfd83e, type: 3}

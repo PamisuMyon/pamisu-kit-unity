@@ -9,7 +9,7 @@ namespace Pamisu.Platformer2D.Player
     public class PlayerController : PlatformerPlayerController2D
     {
 
-        public Character Character;
+        public PlatformerCharacter Character;
         
         [Header("Ability")]
         public AbstractAbilityScriptableObject[] Abilities;
@@ -22,7 +22,7 @@ namespace Pamisu.Platformer2D.Player
         private void Start()
         {
             if (Character == null)
-                Character = GetComponent<Character>();
+                Character = GetComponent<PlatformerCharacter>();
             
             ActivateInitialisationAbilities();
             GrantAbilities();
@@ -35,12 +35,12 @@ namespace Pamisu.Platformer2D.Player
             if (Character.TagContainer.HasTag(customMovementTag))
                 return;
             
-            Movement.GroundedCheck();
+            Movement.GroundedCheck(); 
 
             if (Input.Move.x > 0)
-                Character.SetOrientation(CharacterOrientation.Right);
+                Character.Orientation = CharacterOrientation.Right;
             else if (Input.Move.x < 0)
-                Character.SetOrientation(CharacterOrientation.Left);
+                Character.Orientation = CharacterOrientation.Left;
         }
 
         protected override void FixedUpdate()
@@ -86,11 +86,15 @@ namespace Pamisu.Platformer2D.Player
 
         private void HandleAbilityInputs()
         {
-            if (Input.Interact)
+            if (Input.Fire2)
             {
-                Character.TryActivateAbility<DashAbility>();
-                Input.Interact = false;
+                var spec = Character.GetAbilitySpec<DashAbility>() as DashAbilitySpec;
+                Debug.Assert(spec != null);
+                spec.SetDirection(Input.Move.normalized);
+                Character.TryActivateAbility(spec);
+                Input.Fire2 = false;
             }
         }
+        
     }
 }
