@@ -18,6 +18,8 @@ namespace Pamisu.Platformer2D.Abilities
         public GameObject DashFlashEffectPrefab;
         public GameObject DashWaveEffectPrefab;
         public GameObject DashSparkEffectPrefab;
+        public GameObject DashShadowEffectPrefabLeft;
+        public GameObject DashShadowEffectPrefabRight;
         
         public override AbstractAbilitySpec CreateSpec(AbilitySystemCharacter owner)
         {
@@ -59,14 +61,17 @@ namespace Pamisu.Platformer2D.Abilities
             // Visual effects
             var position = character.Cosmetic.transform.position;
             var rotation = character.transform.rotation;
+            // Flash
             var flashGo = GameObjectPooler.Spawn(ability.DashFlashEffectPrefab, position, rotation);
             var flash = flashGo.GetComponent<DashFlash>();
             flash.Play(direction);
 
+            // Impact Wave
             var waveGo = GameObjectPooler.Spawn(ability.DashWaveEffectPrefab, position, rotation);
             var wave = waveGo.GetComponent<ImpactWave>();
             wave.Play();
             
+            // Spark
             var sparkGo = GameObjectPooler.Spawn(ability.DashSparkEffectPrefab, position, rotation);
             sparkGo.transform.parent = character.Cosmetic.transform;
             sparkGo.transform.forward = direction;
@@ -74,9 +79,16 @@ namespace Pamisu.Platformer2D.Abilities
             var main = sparkParticle.main;
             main.duration = ability.DashDuration;
             sparkParticle.Play();
+            
+            // Shadow
+            var shadowPrefab = character.Orientation == CharacterOrientation.Left ? ability.DashShadowEffectPrefabLeft : ability.DashShadowEffectPrefabRight;
+            var shadowGo = GameObjectPooler.Spawn(shadowPrefab, position, rotation);
+            shadowGo.transform.parent = character.Cosmetic.transform;
 
+            // Camera shake
             CameraShaker.Instance.Shake(-direction * .3f);
 
+            
             // Movement
             movement.Rigidbody.velocity = Vector2.zero;
             
@@ -96,6 +108,7 @@ namespace Pamisu.Platformer2D.Abilities
             
             
             sparkGo.transform.parent = null;
+            shadowGo.transform.parent = null;
         }
 
         public void SetDirection(Vector2 dir)

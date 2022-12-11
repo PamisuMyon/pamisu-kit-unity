@@ -36,3 +36,5 @@ MonoBehaviour:
   DashFlashEffectPrefab: {fileID: 3553439978854214147, guid: 60afc3fe3984ed845a3af94567b2647a, type: 3}
   DashWaveEffectPrefab: {fileID: 8117622888467127681, guid: 20d65f5fdd04a2949818d4ad0d038e8f, type: 3}
   DashSparkEffectPrefab: {fileID: 402477242061127356, guid: 7579e998360bfa84b896231d1abfd83e, type: 3}
+  DashShadowEffectPrefabLeft: {fileID: 8346647252955794949, guid: b73678aad321c4f42aa4ffaa27fed37d, type: 3}
+  DashShadowEffectPrefabRight: {fileID: 3868713457557817299, guid: 175dffc3b26aec3469750dc9c703b198, type: 3}
