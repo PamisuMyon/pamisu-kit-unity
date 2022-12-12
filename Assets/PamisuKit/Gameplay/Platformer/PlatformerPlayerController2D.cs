@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using Pamisu.Inputs;
+using UnityEngine;
 
 namespace Pamisu.Gameplay.Platformer
 {
+    /**
+     * Basic 2D-Platformer player controller
+     */
     public class PlatformerPlayerController2D : Controller
     {
 

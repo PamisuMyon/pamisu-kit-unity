@@ -2,10 +2,15 @@
 using GameplayTag.Authoring;
 using Pamisu.Gameplay.Platformer;
 using Pamisu.Platformer2D.Abilities;
+using Pamisu.Platformer2D.Inputs;
 using UnityEngine;
 
 namespace Pamisu.Platformer2D.Player
 {
+    
+    /**
+     * 2D-Platformer player controller implemented with ability system
+     */
     public class PlayerController : PlatformerPlayerController2D
     {
 
@@ -18,6 +23,15 @@ namespace Pamisu.Platformer2D.Player
         private GameplayTagScriptableObject customMovementTag;
 
         private AbstractAbilitySpec[] abilitySpecs;
+
+        public PlatformerPlayerInput input;
+        public new PlatformerPlayerInput Input => input;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            input = base.Input as PlatformerPlayerInput;
+        }
 
         private void Start()
         {
@@ -86,13 +100,13 @@ namespace Pamisu.Platformer2D.Player
 
         private void HandleAbilityInputs()
         {
-            if (Input.Fire2)
+            if (Input.Dash)
             {
                 var spec = Character.GetAbilitySpec<DashAbility>() as DashAbilitySpec;
                 Debug.Assert(spec != null);
                 spec.SetDirection(Input.Move.normalized);
                 Character.TryActivateAbility(spec);
-                Input.Fire2 = false;
+                Input.Dash = false;
             }
         }
         

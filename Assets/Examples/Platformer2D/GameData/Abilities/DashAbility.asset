@@ -28,8 +28,9 @@ MonoBehaviour:
     TargetTags:
       RequireTags: []
       IgnoreTags: []
-  Cost: {fileID: 0}
+  Cost: {fileID: 11400000, guid: 13354b54518242b40ae24518a7577ad5, type: 2}
   Cooldown: {fileID: 0}
+  DashNumRestoreEffect: {fileID: 11400000, guid: 3803716ed523ff140bee97346e7dfeff, type: 2}
   DashSpeed: 22
   DashDuration: 0.2
   IsDashingAnimParam: IsDashing

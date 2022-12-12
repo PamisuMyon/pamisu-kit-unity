@@ -20,10 +20,10 @@ namespace Pamisu.Platformer2D.Player
 
         private void Update()
         {
-            var velocity = movement.Rigidbody.velocity;
+            var velocity = movement.TargetVelocity;
             anim.SetFloat(AnimID.GroundSpeed, Mathf.Abs(velocity.x));
             anim.SetFloat(AnimID.AirborneSpeed, velocity.y);
-            anim.SetBool(AnimID.IsOnGround, movement.IsGrounded);
+            anim.SetBool(AnimID.IsGrounded, movement.IsGrounded);
         }
     }
 }

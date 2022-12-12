@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36fd283322353ff42b30cd679073251e, type: 3}
-  m_Name: PlayerInitialStats
+  m_Name: DashNumCost
   m_EditorClassIdentifier: 
   gameplayEffect:
     DurationPolicy: 0
     DurationModifier: {fileID: 0}
     DurationMultiplier: 0
     Modifiers:
-    - Attribute: {fileID: 11400000, guid: 0896d178f5e7d324183d7d58d230b912, type: 2}
+    - Attribute: {fileID: 11400000, guid: 014493f981fbda546ac0d40c2552b891, type: 2}
       ModifierOperator: 0
       ModifierMagnitude: {fileID: 11400000, guid: 18ecc0eda765ad243b1c7c36b3022d2f, type: 2}
-      Multiplier: 2
+      Multiplier: -1
     ConditionalGameplayEffects: []
   gameplayEffectTags:
     AssetTag: {fileID: 0}

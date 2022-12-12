@@ -1,4 +1,5 @@
 using Pamisu.Commons;
+using Pamisu.Inputs;
 using UnityEngine;
 
 namespace Pamisu.Gameplay.FirstPerson

@@ -12,6 +12,8 @@ namespace Pamisu.Platformer2D.Abilities
     public class DashAbility : AbstractAbilityScriptableObject
     {
 
+        [Tooltip("Restore max dash num when character is grounded")]
+        public GameplayEffectScriptableObject DashNumRestoreEffect;
         public float DashSpeed = 20f;
         public float DashDuration = .2f;
         public string IsDashingAnimParam = "IsDashing";
@@ -20,7 +22,7 @@ namespace Pamisu.Platformer2D.Abilities
         public GameObject DashSparkEffectPrefab;
         public GameObject DashShadowEffectPrefabLeft;
         public GameObject DashShadowEffectPrefabRight;
-        
+
         public override AbstractAbilitySpec CreateSpec(AbilitySystemCharacter owner)
         {
             var spec = new DashAbilitySpec(this, owner);
@@ -34,6 +36,7 @@ namespace Pamisu.Platformer2D.Abilities
         private DashAbility ability;
         private PlatformerCharacter character;
         private PlatformerMovement2D movement;
+        private Animator animator;
 
         private int animIdIsDashing;
         private Vector2 direction;
@@ -45,6 +48,9 @@ namespace Pamisu.Platformer2D.Abilities
             animIdIsDashing = Animator.StringToHash(this.ability.IsDashingAnimParam);
             character = owner as PlatformerCharacter;
             movement = owner.GetComponent<PlatformerMovement2D>();
+            animator = owner.GetComponentInChildren<Animator>();
+
+            movement.OnGrounedChange += OnMovementGroundedChange;
         }
 
         public override void CancelAbility()
@@ -88,10 +94,14 @@ namespace Pamisu.Platformer2D.Abilities
             // Camera shake
             CameraShaker.Instance.Shake(-direction * .3f);
 
+            // Cost
+            var costSpec = Owner.MakeOutgoingSpec(ability.Cost);
+            Owner.ApplyGameplayEffectSpecToSelf(costSpec);
             
             // Movement
             movement.Rigidbody.velocity = Vector2.zero;
-            
+
+            animator.SetBool(animIdIsDashing, true);
             var duration = ability.DashDuration;
             while (duration > 0)
             {
@@ -105,10 +115,17 @@ namespace Pamisu.Platformer2D.Abilities
 
             movement.TargetVelocity.y *= .6f;
             movement.Rigidbody.velocity = movement.TargetVelocity;
-            
+            animator.SetBool(animIdIsDashing, false);
             
             sparkGo.transform.parent = null;
             shadowGo.transform.parent = null;
+        }
+
+        public override void EndAbility()
+        {
+            base.EndAbility();
+            if (movement.IsGrounded)
+                RestoreDashNum();
         }
 
         public void SetDirection(Vector2 dir)
@@ -118,6 +135,17 @@ namespace Pamisu.Platformer2D.Abilities
             if (direction == Vector2.zero)
                 direction = character.Orientation == CharacterOrientation.Left ? Vector2.left : Vector2.right;
         }
-        
+
+        public void RestoreDashNum()
+        {
+            var spec = Owner.MakeOutgoingSpec(ability.DashNumRestoreEffect);
+            Owner.ApplyGameplayEffectSpecToSelf(spec);
+        }
+
+        private void OnMovementGroundedChange(bool isGrounded)
+        {
+            if (isGrounded)
+                RestoreDashNum();
+        }
     }
 }

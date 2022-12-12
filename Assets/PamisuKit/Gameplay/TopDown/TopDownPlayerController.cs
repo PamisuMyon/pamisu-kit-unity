@@ -1,3 +1,4 @@
+using Pamisu.Inputs;
 using UnityEngine;
 
 namespace Pamisu.Gameplay.TopDown

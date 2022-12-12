@@ -1,42 +1,23 @@
-﻿using System;
+﻿using Pamisu.Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace Pamisu.Inputs
+namespace Pamisu.Platformer2D.Inputs
 {
-    public class BasicPlayerInput : MonoBehaviour
+    public class PlatformerPlayerInput : BasicPlayerInput
     {
+        public bool Dash;
         
-        [Header("Mouse Cursor Settings")]
-        public bool CursorLocked;
-
-        [Header("Input Values")]
-        public Vector2 Move;
-        public Vector2 Look;
-        public bool Sprint;
-        public bool Jump;
-        public bool JumpHeld;
-        public bool Fire1;
-        public bool Fire2;
-        public bool Fire3;
-        public bool Interact;
-        public bool Menu;
-
-        public InputDevice CurrentDevice { get; set; }
-        public Vector2 MousePosition => Mouse.current.position.ReadValue();
+        public new PlatformerInputAsset Asset { get; protected set; }
+        private PlatformerActionsImpl actionsImpl;
         
-        public BasicInputAsset Asset { get; protected set; }
-        private BasicActionsImpl actionsImpl;
-        
-        protected IDisposable _anyButtonEventListener;
-
-        protected virtual void OnEnable()
+        protected override void OnEnable()
         {
             if (Asset == null)
             {
-                Asset = new BasicInputAsset();
-                actionsImpl = new BasicActionsImpl(this);
+                Asset = new PlatformerInputAsset();
+                actionsImpl = new PlatformerActionsImpl(this);
                 Asset.Player.SetCallbacks(actionsImpl);
                 Asset.Menu.SetCallbacks(actionsImpl);
             }
@@ -44,47 +25,27 @@ namespace Pamisu.Inputs
             _anyButtonEventListener = InputSystem.onAnyButtonPress.Call(OnAnyButtonPressed);
         }
 
-        protected virtual void OnDisable()
+        protected override void OnDisable()
         {
             Asset.Player.Disable();
             _anyButtonEventListener.Dispose();
         }
 
-        public virtual void Invalidate()
+        public override void Invalidate()
         {
-            Move = Vector2.zero;
-            Sprint = false;
-            Jump = false;
-            JumpHeld = false;
-            Fire1 = false;
-            Fire2 = false;
-            Fire3 = false;
-        }
-
-        protected virtual void OnApplicationFocus(bool hasFocus)
-        {
-            SetCursorState(CursorLocked);
-        }
-        
-        protected void SetCursorState(bool newState)
-        {
-            Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-        }
-
-        public void OnAnyButtonPressed(InputControl button)
-        {
-            CurrentDevice = button.device;
+            base.Invalidate();
+            Dash = false;
         }
         
     }
 
-    class BasicActionsImpl : 
-        BasicInputAsset.IPlayerActions,
-        BasicInputAsset.IMenuActions
+    class PlatformerActionsImpl :
+        PlatformerInputAsset.IPlayerActions,
+        PlatformerInputAsset.IMenuActions
     {
-        private readonly BasicPlayerInput p;
+        private readonly PlatformerPlayerInput p;
 
-        public BasicActionsImpl(BasicPlayerInput input)
+        public PlatformerActionsImpl(PlatformerPlayerInput input)
         {
             p = input;
         }
@@ -135,6 +96,10 @@ namespace Pamisu.Inputs
         {
             p.Menu = context.performed;
         }
-        
+
+        public void OnDash(InputAction.CallbackContext context)
+        {
+            p.Dash = context.performed;
+        }
     }
 }

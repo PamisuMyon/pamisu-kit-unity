@@ -60,6 +60,8 @@ namespace Pamisu.Gameplay.Platformer
         public float SlopeAngle;
         public Vector2 TargetVelocity;
 
+        public event Action<bool> OnGrounedChange;
+        
         public Rigidbody2D Rigidbody { get; protected set; }
         public CapsuleCollider2D Collider { get; protected set; }
         public bool CanJumpHeld { get; protected set; }
@@ -115,18 +117,20 @@ namespace Pamisu.Gameplay.Platformer
 
         public virtual void GroundedCheck()
         {
+            var formerIsGrounded = IsGrounded;
+            
             var contactNum = Rigidbody.GetContacts(groundedCheckFilter, groundedCheckCols);
 
             var pos = transform.position;
             var checkPos = new Vector2(pos.x, pos.y + groundedYOffset);
-            var castNum = Physics2D.CircleCast(checkPos, groundedRadius, Vector2.down, groundedCheckFilter, groundedCheckHits, groundedDistance);
+            var groundCastNum = Physics2D.CircleCast(checkPos, groundedRadius, Vector2.down, groundedCheckFilter, groundedCheckHits, groundedDistance);
 
-            Debug.DrawRay(checkPos, Vector3.down * (groundedRadius + groundedDistance), castNum != 0 ? Color.green : Color.red);
+            Debug.DrawRay(checkPos, Vector3.down * (groundedRadius + groundedDistance), groundCastNum != 0 ? Color.green : Color.red);
 
             if (!IsGrounded)
-                IsGrounded = contactNum != 0 && castNum != 0;
+                IsGrounded = contactNum != 0 && groundCastNum != 0;
             else
-                IsGrounded = castNum != 0;
+                IsGrounded = groundCastNum != 0;
 
             SurfaceNormal = IsGrounded ? groundedCheckHits[0].normal : Vector2.up;
 
@@ -146,17 +150,28 @@ namespace Pamisu.Gameplay.Platformer
                     Debug.DrawRay(checkPos, Vector2.down * (slopeCheckRadius + slopeCheckDistance), slopeCastNum != 0 ? Color.green : Color.red);
 
                     if (slopeCastNum != 0)
-                        SurfaceNormal = groundedCheckHits[0].normal;
+                    {
+                        if (groundedCheckHits[0].point.y.Approximately(checkPos.y))
+                        {
+                            // Against wall
+                        }
+                        else 
+                            SurfaceNormal = groundedCheckHits[0].normal;
+                    }
                 }
             }
 
             SlopeAngle = Vector2.Angle(Vector2.up, SurfaceNormal);
-            if (SlopeAngle > slopeAngleLimit)
+            if (SlopeAngle > slopeAngleLimit
+                && SlopeAngle < 89f)
             {
                 IsGrounded = false;
             }
 
             ApplyGravity();
+            
+            if (formerIsGrounded != IsGrounded)
+                OnGrounedChange?.Invoke(IsGrounded);
         }
 
         protected virtual void ApplyGravity()

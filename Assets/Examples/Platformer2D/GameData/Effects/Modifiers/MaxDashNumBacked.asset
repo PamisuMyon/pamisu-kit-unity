@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47bc69f4008e2a74497c76ff87b5f129, type: 3}
-  m_Name: SimpleLinearFloat
+  m_Script: {fileID: 11500000, guid: 797ea79c34956f84b8d5ed1d3ec8e4cf, type: 3}
+  m_Name: MaxDashNumBacked
   m_EditorClassIdentifier: 
   ScalingFunction:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -1000000
-      value: -1000000
+      time: -10000
+      value: -10000
       inSlope: 1
       outSlope: 1
       tangentMode: 34
@@ -25,14 +25,17 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1000000
-      value: 1000000
+      time: 10000
+      value: 10000
       inSlope: 1
-      outSlope: Infinity
-      tangentMode: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  CaptureAttributeWhich: {fileID: 11400000, guid: 0896d178f5e7d324183d7d58d230b912, type: 2}
+  CaptureAttributeFrom: 0
+  CaptureAttributeWhen: 0
