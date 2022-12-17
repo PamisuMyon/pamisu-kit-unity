@@ -4889,16 +4889,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99226fee1bc3b0c40bbf16594480a1c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 25
-  _initialDamage: 10
-  _muzzlePrefab: {fileID: 502302373492132368, guid: 4d12044f30c7de24da0996e0ceaa4511, type: 3}
-  _showMuzzle: 1
-  _explosionPrefab: {fileID: 6931672044760527560, guid: bb834d3cbbdd81e4aafe258db0b8beda, type: 3}
-  _body: {fileID: 4867721905279907823}
-  _otherParts:
+  speed: 20
+  initialDamage: 10
+  muzzlePrefab: {fileID: 502302373492132368, guid: 4d12044f30c7de24da0996e0ceaa4511, type: 3}
+  showMuzzle: 1
+  explosionPrefab: {fileID: 6931672044760527560, guid: bb834d3cbbdd81e4aafe258db0b8beda, type: 3}
+  body: {fileID: 4867721905279907823}
+  otherParts:
   - {fileID: 3681072678712679613}
-  _otherPartsRecycleDelay: 1
-  _isExploded: 0
+  otherPartsRecycleDelay: 1
+  isExploded: 0
 --- !u!1 &6882074309533148969
 GameObject:
   m_ObjectHideFlags: 0

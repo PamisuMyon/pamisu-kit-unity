@@ -19,7 +19,7 @@ namespace Pamisu.Gameplay.Platformer
         {
             if (Movement == null)
                 Movement = GetComponent<PlatformerMovement2D>();
-            Input = GetComponent<BasicPlayerInput>();
+            Input = FindObjectOfType<BasicPlayerInput>();
         }
         
         protected virtual void Update()

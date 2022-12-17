@@ -28,7 +28,7 @@ namespace Pamisu.TopDownShooter.Player
         public float CannonCooldownCounter { get; private set; }
         
         public MonoStateMachine Machine { get; private set; }
-        public States.Blackboard Blackboard { get; set; }
+        public Blackboard Blackboard { get; set; }
         public ActorAttributes Attributes { get; private set; }
 
         private void Awake()
@@ -40,13 +40,24 @@ namespace Pamisu.TopDownShooter.Player
         protected override void Start()
         {
             base.Start();
-            Blackboard = new States.Blackboard();
+            Blackboard = new Blackboard();
             Machine = GetComponent<MonoStateMachine>();
             Machine.AddState(new NormalState(this));
             Machine.AddState(new PreAimState(this));
             Machine.AddState(new ShootState(this));
             Machine.AddState(new DeathState(this));
             Machine.ChangeState<NormalState>();
+            
+            GameManager.Instance.OnPause += () =>
+            {
+                Input.Asset.Player.Disable();
+                Input.Asset.Menu.Enable();
+            };
+            GameManager.Instance.OnResume += () =>
+            {
+                Input.Asset.Player.Enable();
+                Input.Asset.Menu.Disable();
+            };
         }
 
         private void OnDied()

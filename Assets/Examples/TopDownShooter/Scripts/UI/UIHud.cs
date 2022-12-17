@@ -19,7 +19,16 @@ namespace Pamisu.TopDownShooter.UI
             pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
             pc.Attributes.OnHealthChanged += OnPlayerHealthChanged;
             StartCoroutine(UpdateSkill1());
-            ToggleMenu(false);
+            Menu.gameObject.SetActive(false);
+
+            GameManager.Instance.OnPause += () =>
+            {
+                ToggleMenu(true);
+            };
+            GameManager.Instance.OnResume += () =>
+            {
+                ToggleMenu(false);
+            };
         }
 
         private void OnPlayerHealthChanged(float delta, float health, float maxHealth)
@@ -29,7 +38,7 @@ namespace Pamisu.TopDownShooter.UI
         
         public void ToggleMenu(bool isShow)
         {
-            Menu.gameObject.SetActive(isShow);
+            Menu.Toggle(isShow);
         }
 
         private IEnumerator UpdateSkill1()

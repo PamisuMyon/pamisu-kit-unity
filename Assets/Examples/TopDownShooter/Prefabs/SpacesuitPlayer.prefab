@@ -1924,7 +1924,6 @@ GameObject:
   - component: {fileID: 6188303428616635342}
   - component: {fileID: 216570783520725428}
   - component: {fileID: 5869432228630170179}
-  - component: {fileID: 8555936838678199840}
   - component: {fileID: 4891634824950922027}
   - component: {fileID: 364099609026990321}
   - component: {fileID: 2576637177771191611}
@@ -1994,29 +1993,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &8555936838678199840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6821428975273154932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44aa7eb5542e4fd6aff48abbb09ceb6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CursorLocked: 0
-  InvertMouseY: 1
-  Move: {x: 0, y: 0}
-  Look: {x: 0, y: 0}
-  Sprint: 0
-  Jump: 0
-  JumpHeld: 0
-  Fire1: 0
-  Fire2: 0
-  Fire3: 0
-  Interact: 0
 --- !u!114 &4891634824950922027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2036,11 +2012,11 @@ MonoBehaviour:
   analogMovement: 1
   gravity: -15
   IsGrounded: 0
-  GroundedRadius: -1
-  GroundedOffset: -1
-  GroundLayers:
+  groundedRadius: -1
+  groundedOffset: -1
+  groundLayers:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 128
   aimSpeed: 2
   aimAcc: 20
   aimTurnSpeed: 180
@@ -2080,7 +2056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65173d8a037a4abeaa2d92397ab122fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerController: {fileID: 0}
+  controller: {fileID: 0}
 --- !u!114 &1731049392633307295
 MonoBehaviour:
   m_ObjectHideFlags: 0

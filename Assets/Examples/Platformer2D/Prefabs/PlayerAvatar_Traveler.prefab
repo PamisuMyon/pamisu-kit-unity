@@ -130,9 +130,9 @@ GameObject:
   - component: {fileID: 7091675907932343355}
   - component: {fileID: 7091675907932343353}
   - component: {fileID: 7091675907932343354}
-  - component: {fileID: 5008531861944602927}
-  - component: {fileID: 5362475390087557368}
   - component: {fileID: 7091675907932343352}
+  - component: {fileID: 3956072950657357868}
+  - component: {fileID: 8642508470119942097}
   m_Layer: 10
   m_Name: PlayerAvatar_Traveler
   m_TagString: Player
@@ -193,43 +193,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.8}
   m_Size: {x: 0.6, y: 1.6}
   m_Direction: 0
---- !u!114 &5008531861944602927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7091675907932343348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aee22638fda840c1800ae0c3c557ef97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CursorLocked: 0
-  Move: {x: 0, y: 0}
-  Look: {x: 0, y: 0}
-  Sprint: 0
-  Jump: 0
-  JumpHeld: 0
-  Fire1: 0
-  Fire2: 0
-  Fire3: 0
-  Interact: 0
-  Menu: 0
-  Dash: 0
---- !u!114 &5362475390087557368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7091675907932343348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1345a31cda412eada5dc3cf6b5c10b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Movement: {fileID: 0}
 --- !u!114 &7091675907932343352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,3 +229,29 @@ MonoBehaviour:
   SurfaceNormal: {x: 0, y: 1}
   SlopeAngle: 0
   TargetVelocity: {x: 0, y: 0}
+--- !u!114 &3956072950657357868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7091675907932343348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da1345a31cda412eada5dc3cf6b5c10b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Movement: {fileID: 0}
+--- !u!114 &8642508470119942097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7091675907932343348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdd4fa2147b461eb16ec22024766014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainSpriteRenderer: {fileID: 0}

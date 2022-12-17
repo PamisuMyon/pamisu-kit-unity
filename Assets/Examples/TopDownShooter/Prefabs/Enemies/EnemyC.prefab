@@ -152,7 +152,7 @@ MonoBehaviour:
   TrackInterval: 0.3
   HitAndRunDistance: 5
   DetectArea: {fileID: 2111277099573520223}
-  _actions:
+  actions:
   - {fileID: 2111277101571186954}
   - {fileID: 2111277100019920932}
   FirePoints:

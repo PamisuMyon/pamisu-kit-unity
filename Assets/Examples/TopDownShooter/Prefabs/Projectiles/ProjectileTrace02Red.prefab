@@ -4888,12 +4888,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99226fee1bc3b0c40bbf16594480a1c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 8
-  _initialDamage: 12
-  _muzzlePrefab: {fileID: 502302373492132368, guid: 4e3184a421d3bae4d921ea96bf6917b9, type: 3}
-  _showMuzzle: 1
-  _explosionPrefab: {fileID: 6931672044760527560, guid: d3d8561bf51a7474bbdeb276a9d3bc4b, type: 3}
-  _body: {fileID: 4867721905279907823}
-  _otherParts: []
-  _otherPartsRecycleDelay: 1
-  _isExploded: 0
+  speed: 10
+  initialDamage: 10
+  muzzlePrefab: {fileID: 4867721905631912308}
+  showMuzzle: 1
+  explosionPrefab: {fileID: 6931672044760527560, guid: d3d8561bf51a7474bbdeb276a9d3bc4b, type: 3}
+  body: {fileID: 4867721905279907823}
+  otherParts: []
+  otherPartsRecycleDelay: 1
+  isExploded: 0

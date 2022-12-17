@@ -245,7 +245,7 @@ MonoBehaviour:
   TrackInterval: 0.3
   HitAndRunDistance: 5
   DetectArea: {fileID: 3645198890952330920}
-  _actions:
+  actions:
   - {fileID: 4936948837687513428}
   FirePoints:
   - {fileID: 3645198890921619547}
@@ -716,8 +716,8 @@ MonoBehaviour:
   shootPostDelay: 0.1
   shootInterval: 0.5
   projectilePrefab: {fileID: 1366800498651028619, guid: a6ae72e31ff3641109faa48576a03eb3, type: 3}
-  _branches: 3
-  _deltaAngle: 15
+  branches: 3
+  deltaAngle: 15
 --- !u!1 &4104323721559906688
 GameObject:
   m_ObjectHideFlags: 0

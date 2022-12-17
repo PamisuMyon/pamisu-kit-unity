@@ -43,8 +43,8 @@ namespace Pamisu.Gameplay.TopDown
         protected virtual void Start()
         {
             cc = GetComponent<CharacterController>();
-            Input = GetComponent<BasicPlayerInput>();
-            
+            Input = FindObjectOfType<BasicPlayerInput>();
+
             if (basisReferer != null)
                 InitBasis(basisReferer.rotation);
             else

@@ -1,4 +1,5 @@
-﻿using Pamisu.Commons.FSM;
+﻿using System.Collections;
+using Pamisu.Commons.FSM;
 using Pamisu.Commons.Pool;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
@@ -152,7 +153,13 @@ namespace Pamisu.TopDownShooter.Player.States
         {
             base.OnEnter();
             p.gameObject.layer = LayerMask.NameToLayer("Void");
-            // TODO Game Over
+            p.StartCoroutine(DoNotify());
+        }
+
+        private IEnumerator DoNotify()
+        {
+            yield return new WaitForSeconds(3f);
+            GameManager.Instance.OnPlayerDied();
         }
         
     }

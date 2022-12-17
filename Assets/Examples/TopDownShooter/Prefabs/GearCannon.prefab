@@ -195,24 +195,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d12f13c579b49339d332f8e7e227d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnRadius: 3
-  _selfRadius: 1
-  _blockLayers:
+  spawnRadius: 3
+  selfRadius: 1
+  blockLayers:
     serializedVersion: 2
-    m_Bits: 129
-  _spawnHeight: 20
-  _head: {fileID: 5276225349418836120}
-  _shootInterval: 0.2
-  _turnSpeed: 720
-  _phaseOneDuration: 5
-  _phaseTwoDuration: 8
-  _firePoints:
+    m_Bits: 16385
+  spawnHeight: 20
+  head: {fileID: 5276225349418836120}
+  shootInterval: 0.2
+  turnSpeed: 1440
+  phaseOneDuration: 5
+  phaseTwoDuration: 6
+  firePoints:
   - {fileID: 6771848386892431486}
   - {fileID: 6771848387957217441}
-  _projectilePrefab: {fileID: 1366800498651028619, guid: 8f1930ea78617fa4fab3771177c5b554, type: 3}
-  _explosionRadius: 2
-  _explosionDamage: 20
-  _explosionPrefab: {fileID: 3707097680789216688, guid: 04c8a89e2e822174c98d1d9ac1f400f7, type: 3}
+  projectilePrefab: {fileID: 1366800498651028619, guid: 8f1930ea78617fa4fab3771177c5b554, type: 3}
+  explosionRadius: 2
+  explosionDamage: 20
+  explosionPrefab: {fileID: 3707097680789216688, guid: 04c8a89e2e822174c98d1d9ac1f400f7, type: 3}
 --- !u!1 &6771848386892431487
 GameObject:
   m_ObjectHideFlags: 0
