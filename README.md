@@ -19,12 +19,12 @@
 ### Examples
 #### 2D Platformer
 
-![](https://s2.loli.net/2022/12/12/3gERACcyGvB65kb.gif)
+![](https://raw.githubusercontent.com/PamisuMyon/gh-assets/main/images/pku/1.gif)
 
 #### Top-down Shooter
 
-![](https://s2.loli.net/2022/12/12/x7DQaTRBK1yuV6h.gif)
+![](https://raw.githubusercontent.com/PamisuMyon/gh-assets/main/images/pku/2.gif)
 
-![](https://s2.loli.net/2022/12/12/MaFIWVHxPvTk1XE.gif)
+![](https://raw.githubusercontent.com/PamisuMyon/gh-assets/main/images/pku/3.gif)
 
 ### [🔗Credits](https://github.com/PamisuMyon/pamisu-kit-unity/blob/main/CREDITS.txt)
