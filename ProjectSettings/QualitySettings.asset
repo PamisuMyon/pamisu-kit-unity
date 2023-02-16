@@ -112,7 +112,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 3baf73f9f34e1244aaec6749f506d1c3, type: 2}
+    customRenderPipeline: {fileID: 11400000, guid: f41752c72fa364344838f4fcc966cb32, type: 2}
     excludedTargetPlatforms: []
   - serializedVersion: 2
     name: Ultra

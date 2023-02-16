@@ -1,5 +1,4 @@
-﻿using System;
-using Pamisu.Gameplay.Platformer;
+﻿using Pamisu.Gameplay.Platformer;
 using UnityEngine;
 
 namespace Pamisu.Platformer2D

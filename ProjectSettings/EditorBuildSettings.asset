@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Examples/CustomPostProcessing/Scenes/CustomPP3D.unity
+    guid: 2da15163927171444aed5badb5d72c35
   m_configObjects: {}
