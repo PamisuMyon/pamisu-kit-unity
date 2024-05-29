@@ -1,0 +1,13 @@
+{
+    "name": "com.pamisu.unitykit",
+    "version": "2.0.1",
+    "displayName": "Pamisu Kit",
+    "description": "Simple kit for bootstrap Unity game development",
+    "author": {
+        "name": "Pamisu",
+        "url": "https://github.com/PamisuMyon"
+    },
+    "unity": "2019.1",
+    "license": "MIT",
+    "dependencies": {}
+  }
