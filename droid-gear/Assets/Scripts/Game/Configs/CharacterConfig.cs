@@ -11,20 +11,22 @@ namespace Game.Configs
         [Header("Character")]
         public string Id;
         public AssetReferenceGameObject PrefabRef;
+        public AbilityConfig AttackAbility;
+        [Header("Attributes")]
         public float MaxHealth;
         public float MoveSpeed;
         public float Damage;
         public float AttackSpeed;
 
-        public Dictionary<AttributeType, float> AttributeDic = new();
+        public Dictionary<AttributeType, float> AttributeDict = new();
 
         public virtual void Init()
         {
-            AttributeDic.Clear();
-            AttributeDic[AttributeType.MaxHealth] = MaxHealth;
-            AttributeDic[AttributeType.MoveSpeed] = MoveSpeed;
-            AttributeDic[AttributeType.Damage] = Damage;
-            AttributeDic[AttributeType.AttackSpeed] = AttackSpeed;
+            AttributeDict.Clear();
+            AttributeDict[AttributeType.MaxHealth] = MaxHealth;
+            AttributeDict[AttributeType.MoveSpeed] = MoveSpeed;
+            AttributeDict[AttributeType.Damage] = Damage;
+            AttributeDict[AttributeType.AttackSpeed] = AttackSpeed;
         }
     }
 }

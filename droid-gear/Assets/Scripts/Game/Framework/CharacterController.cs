@@ -22,7 +22,7 @@ namespace Game.Framework
             AutoInit().Forget();
         }
 
-        private async UniTaskVoid AutoInit()
+        private async @bool AutoInit()
         {
             if (!_autoInit || string.IsNullOrEmpty(_autoInitCharacterId))
                 return;
@@ -45,6 +45,7 @@ namespace Game.Framework
             Chara = GetComponent<Character>();
             Chara.SetupEntity(Region);
             Chara.Init(config);
+            Chara.Pooler = CombatSystem.Instance.Pooler;
         }
 
     }

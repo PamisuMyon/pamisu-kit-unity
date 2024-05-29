@@ -140,8 +140,13 @@ PrefabInstance:
     - target: {fileID: 3928882811483021411, guid: 55fd19121785b5a448e8f17a7f1160df,
         type: 3}
       propertyPath: _autoInitCharacterId
-      value: Spacesuit
+      value: spacesuit
       objectReference: {fileID: 0}
+    - target: {fileID: 6352784875735404185, guid: 55fd19121785b5a448e8f17a7f1160df,
+        type: 3}
+      propertyPath: Anim
+      value: 
+      objectReference: {fileID: 2067683726157117248}
     - target: {fileID: 6352784875735404185, guid: 55fd19121785b5a448e8f17a7f1160df,
         type: 3}
       propertyPath: FirePoints.Array.size
@@ -319,6 +324,12 @@ PrefabInstance:
       addedObject: {fileID: 1212804912643659388}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4ebc068686d6b44cb52cb0a67b7c88f, type: 3}
+--- !u!95 &2067683726157117248 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: a4ebc068686d6b44cb52cb0a67b7c88f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5610208384443992785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4235750596103247007 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -643136835881410994, guid: a4ebc068686d6b44cb52cb0a67b7c88f,

@@ -17,8 +17,8 @@ namespace Game.Configs
         [Header("Ability")]
         public string Id;
         public AbilityType Type;
+        public float Cooldown;
         public float ActPreDelay;
         public float ActPostDelay;
-        
     }
 }

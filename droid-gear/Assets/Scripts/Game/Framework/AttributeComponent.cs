@@ -10,7 +10,7 @@ namespace Game.Framework
         public event HealthChangeDelegate HealthChanged;
 
         public Character Owner { get; private set; }
-        private readonly Dictionary<AttributeType, Attribute> _attrDic = new Dictionary<AttributeType, Attribute>();
+        private readonly Dictionary<AttributeType, Attribute> _attrDict = new();
 
         public void Init(Character owner, Dictionary<AttributeType, float> valueDic = null)
         {
@@ -28,20 +28,20 @@ namespace Game.Framework
         {
             get
             {
-                if (_attrDic.TryGetValue(key, out var value))
+                if (_attrDict.TryGetValue(key, out var value))
                     return value;
-                return _attrDic[key] = new Attribute();
+                return _attrDict[key] = new Attribute();
             }
         }
 
         public void SetValue(AttributeType key, float value)
         {
-            if (!_attrDic.TryGetValue(key, out var attr))
+            if (!_attrDict.TryGetValue(key, out var attr))
             {
                 attr = new Attribute();
             }
             attr.Value = value;
-            _attrDic[key] = attr;
+            _attrDict[key] = attr;
         }
 
         public void SetMaxHealth(float maxHealthValue, bool updateHealth = false)
@@ -53,8 +53,8 @@ namespace Game.Framework
                 var ratio = health.Value / maxHealth.Value;
                 maxHealth.Value = maxHealthValue;
                 health.Value = maxHealth.Value * ratio;
-                _attrDic[AttributeType.MaxHealth] = maxHealth;
-                _attrDic[AttributeType.Health] = health;
+                _attrDict[AttributeType.MaxHealth] = maxHealth;
+                _attrDict[AttributeType.Health] = health;
             }
             else
             {
@@ -62,29 +62,29 @@ namespace Game.Framework
             }
         }
 
-        public void ChangeHealth(float delta)
+        public void ChangeHealth(Damage damage)
         {
             var health = this[AttributeType.Health];
-            var newHealthValue = health.Value + delta;
-            if (delta < 0)
+            var newHealthValue = health.Value + damage.Value;
+            if (damage.Value < 0)
             {
                 newHealthValue = Mathf.Max(0, newHealthValue);
             }
-            else if (delta > 0)
+            else if (damage.Value > 0)
             {
                 var maxHealth = this[AttributeType.MaxHealth];
                 newHealthValue = Mathf.Min(newHealthValue, maxHealth.Value);
             }
 
             health.Value = newHealthValue;
-            _attrDic[AttributeType.Health] = health;
+            _attrDict[AttributeType.Health] = health;
 
-            HealthChanged?.Invoke(this, delta, newHealthValue);
+            HealthChanged?.Invoke(this, damage.Value, newHealthValue);
         }
 
         public void Revive()
         {
-            var newHealthValue = _attrDic[AttributeType.MaxHealth].Value;
+            var newHealthValue = _attrDict[AttributeType.MaxHealth].Value;
             SetValue(AttributeType.Health, newHealthValue);
             HealthChanged?.Invoke(this, 0, newHealthValue);
         }

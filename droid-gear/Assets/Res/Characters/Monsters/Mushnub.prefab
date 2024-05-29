@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4965865716896587748, guid: 1723e625740c1f64fb149098a56b8db2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6325552498487948983, guid: 1723e625740c1f64fb149098a56b8db2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -58,10 +63,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6682114067706275148, guid: 1723e625740c1f64fb149098a56b8db2,
+        type: 3}
+      propertyPath: _autoInitCharacterId
+      value: mushnub
+      objectReference: {fileID: 0}
     - target: {fileID: 9022920229046388057, guid: 1723e625740c1f64fb149098a56b8db2,
         type: 3}
       propertyPath: m_Name
       value: Mushnub
+      objectReference: {fileID: 0}
+    - target: {fileID: 9022920229046388057, guid: 1723e625740c1f64fb149098a56b8db2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

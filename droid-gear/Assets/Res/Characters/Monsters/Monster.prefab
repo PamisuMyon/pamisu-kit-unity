@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 1250176693954558661, guid: bd49ca71ddacf9e4eb935da31cdcce84,
         type: 3}
       propertyPath: m_Name
-      value: Character
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 4298333225180743979, guid: bd49ca71ddacf9e4eb935da31cdcce84,
         type: 3}
@@ -66,5 +66,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1250176693954558661, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6682114067706275148}
   m_SourcePrefab: {fileID: 100100000, guid: bd49ca71ddacf9e4eb935da31cdcce84, type: 3}
+--- !u!1 &9022920229046388057 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1250176693954558661, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+    type: 3}
+  m_PrefabInstance: {fileID: 7813287066608680860}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6682114067706275148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9022920229046388057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c53abfa40ecad0d429d92a2b02e832fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _autoInit: 0
+  _autoInitCharacterId: 

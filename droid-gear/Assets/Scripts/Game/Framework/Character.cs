@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using Game.Configs;
 using Game.Events;
 using PamisuKit.Common;
+using PamisuKit.Common.Pool;
 using PamisuKit.Framework;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace Game.Framework
         public Rigidbody Rb { get; protected set; }
         public CharacterController Controller { get; protected set; }
         public CharacterConfig Config { get; protected set; }
+        public MonoPooler Pooler { get; internal set; }
         
         public bool IsAlive => AttrComp[AttributeType.Health].Value > 0;
 
@@ -26,7 +28,7 @@ namespace Game.Framework
             Rb = GetComponent<Rigidbody>();
 
             AttrComp = GetComponent<AttributeComponent>();
-            // AttrComp.Init(this, config.Attributes);
+            AttrComp.Init(this, config.AttributeDict);
             AttrComp.Revive();
             AttrComp.HealthChanged += OnHealthChanged;
 

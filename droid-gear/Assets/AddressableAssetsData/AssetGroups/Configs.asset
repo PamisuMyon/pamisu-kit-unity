@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Configs
+  m_EditorClassIdentifier: 
+  m_GroupName: Configs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 579a3efc0a052dd4689b32b0ec77ac97
+  m_SerializeEntries:
+  - m_GUID: 8a897a919f9b37f4e81c10fa95868d0d
+    m_Address: Assets/Res/Configs/Spacesuit.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Config
+    - Character
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f677e9322405bfe4f9503ec9585e804c
+    m_Address: Assets/Res/Configs/Mushnub.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Config
+    - Character
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: c22d07014cbbd544a9de5aea1c1203a0, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: fab9331b2ca376b49a5a90b6578aedb5, type: 2}
+    - {fileID: 11400000, guid: da698856c8c60a742b03cb190a12c04f, type: 2}

@@ -7,8 +7,7 @@ namespace Game.Configs
 {
     public class ConfigSystem : System<ConfigSystem>
     {
-        public Dictionary<string, CharacterConfig> Characters { get; private set;
-        }
+        public Dictionary<string, CharacterConfig> Characters { get; private set;} = new();
 
         public async UniTask Init()
         {

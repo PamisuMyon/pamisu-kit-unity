@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0f6f4108d646ac4aa73b4af72b950a2, type: 3}
-  m_Name: Spacesuit
+  m_Name: Ronin
   m_EditorClassIdentifier: 
+  Id: ronin
   PrefabRef:
     m_AssetGUID: 
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  MaxHealth: 0
+  MaxHealth: 20
   MoveSpeed: 0
   Damage: 0
   AttackSpeed: 0

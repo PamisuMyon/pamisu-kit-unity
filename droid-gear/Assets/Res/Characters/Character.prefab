@@ -61,8 +61,8 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
+  m_Interpolate: 1
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &716757864787504343
 MonoBehaviour:
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e69cc39f8e2b2d4ebb2db794c9010ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Anim: {fileID: 0}
-  FirePoints: []
   VisualRadius: 0.6
   VisualHeight: 3
+  Anim: {fileID: 0}
+  FirePoints: []
