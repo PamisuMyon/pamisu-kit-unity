@@ -61,11 +61,12 @@ namespace Game.Props
             Explode(explodePos).Forget();
         }
 
-        public void Activate(Damage damage, Vector3 position, Quaternion rotation, int layer)
+        public void Activate(Damage damage, Vector3 position, Vector3 direction, int layer)
         {
             _pooler = damage.Instigator.Pooler;
             Go.layer = layer;
-            Trans.SetPositionAndRotation(position, rotation);
+            Trans.position = position;
+            Trans.forward = direction;
             _body.SetActive(true);
             _isExploded = false;
 
@@ -79,7 +80,7 @@ namespace Game.Props
             }
         }
 
-        private async @bool Explode(Vector3 explodePosition)
+        private async UniTaskVoid Explode(Vector3 explodePosition)
         {
             _isExploded = true;
             if (_explosionPrefab != null)

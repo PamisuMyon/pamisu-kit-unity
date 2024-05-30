@@ -19,13 +19,12 @@ namespace Game.Framework
 
         private void Awake()
         {
-            AutoInit().Forget();
+            if (_autoInit && !string.IsNullOrEmpty(_autoInitCharacterId))
+                AutoInit().Forget();
         }
 
-        private async @bool AutoInit()
+        private async UniTaskVoid AutoInit()
         {
-            if (!_autoInit || string.IsNullOrEmpty(_autoInitCharacterId))
-                return;
             Debug.Log($"{GetType().Name} AutoInit Id {_autoInitCharacterId}");
             if (!CombatDirector.IsReady)
                 await UniTask.WaitUntil(() => CombatDirector.IsReady);

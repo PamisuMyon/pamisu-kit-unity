@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Game.Common;
 using Game.Configs;
 using Game.Framework;
+using Game.Props;
 using UnityEngine;
 
 namespace Game.Abilities
@@ -35,29 +36,36 @@ namespace Game.Abilities
                 return;
             }
 
-            Owner.Model.Anim.SetTrigger(AnimConst.RangeAttack1);
+            Owner.Model.Anim.SetTrigger(AnimConst.RangedAttack1);
 
             // pre-delay
-            await UniTask.Delay(TimeSpan.FromSeconds(Config.ActPreDelay), 
-                DelayType.DeltaTime, 
-                PlayerLoopTiming.Update, 
-                cancellationToken);
+            if (Config.ActPreDelay != 0)
+                await UniTask.Delay(TimeSpan.FromSeconds(Config.ActPreDelay), 
+                    DelayType.DeltaTime, 
+                    PlayerLoopTiming.Update, 
+                    cancellationToken);
 
             // act
-            Cooldown = Config.Cooldown;
-            // var proj = await CombatSystem.Instance.Pooler.Spawn<HomingProjectile>(Config.PrefabRes);
-            // proj.SetupEntity(Owner.Region);
-            // await proj.Perform(Owner, _target, Owner.Model.FirePoints[0].position, Owner.AttrComp[AttributeType.Damage].Value);
-            // CombatSystem.Instance.Pooler.Release(proj);
+            var damage = new Damage(Owner, -Owner.AttrComp[AttributeType.Damage].Value);
+            var firePoint = Owner.Model.FirePoints[0];
+            var direction = _target.Trans.position - firePoint.position;
+            var proj = await Owner.Pooler.Spawn<Projectile>(Config.PrefabRes.RuntimeKey.ToString());
+            proj.SetupEntity(Owner.Region);
+            proj.Activate(damage, firePoint.position, direction, Owner.Go.layer);
 
             // post-delay
-            await UniTask.Delay(TimeSpan.FromSeconds(Config.ActPostDelay), 
-                DelayType.DeltaTime, 
-                PlayerLoopTiming.Update, 
-                cancellationToken);
-
+            if (Config.ActPostDelay != 0)
+                await UniTask.Delay(TimeSpan.FromSeconds(Config.ActPostDelay), 
+                    DelayType.DeltaTime, 
+                    PlayerLoopTiming.Update, 
+                    cancellationToken);
+            
             // cooldown affected by attack speed
-            Cooldown = Config.Cooldown / Owner.AttrComp[AttributeType.AttackSpeed].Value;
+            var attackSpeed = Owner.AttrComp[AttributeType.AttackSpeed].Value;
+            if (attackSpeed != 0)
+                Cooldown = Config.Cooldown / attackSpeed;
+            else
+                Cooldown = Config.Cooldown;
         }
         
     }

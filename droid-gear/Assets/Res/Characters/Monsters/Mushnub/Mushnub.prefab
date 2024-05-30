@@ -68,6 +68,16 @@ PrefabInstance:
       propertyPath: _autoInitCharacterId
       value: mushnub
       objectReference: {fileID: 0}
+    - target: {fileID: 8769705705336737754, guid: 1723e625740c1f64fb149098a56b8db2,
+        type: 3}
+      propertyPath: Anim
+      value: 
+      objectReference: {fileID: 3155659850732762106}
+    - target: {fileID: 8769705705336737754, guid: 1723e625740c1f64fb149098a56b8db2,
+        type: 3}
+      propertyPath: VisualHeight
+      value: 1.8
+      objectReference: {fileID: 0}
     - target: {fileID: 9022920229046388057, guid: 1723e625740c1f64fb149098a56b8db2,
         type: 3}
       propertyPath: m_Name
@@ -179,7 +189,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 63b231f9739bf0740b89e09085d51063,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3155659850732762106}
   m_SourcePrefab: {fileID: 100100000, guid: 63b231f9739bf0740b89e09085d51063, type: 3}
 --- !u!4 &5178850063868850657 stripped
 Transform:
@@ -187,3 +201,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4635402264110175754}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5518361024964143963 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 63b231f9739bf0740b89e09085d51063,
+    type: 3}
+  m_PrefabInstance: {fileID: 4635402264110175754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3155659850732762106
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5518361024964143963}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f47a16d67cad7d4a8322263f89401b7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

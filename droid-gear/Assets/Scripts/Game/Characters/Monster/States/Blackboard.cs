@@ -7,6 +7,7 @@ namespace Game.Characters.Monster.States
         public class Blackboard
         {
             public Character Target { get; internal set; }
+            public Ability AttackAbility { get; internal set; }
         }
     }
 }

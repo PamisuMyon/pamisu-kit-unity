@@ -23,7 +23,7 @@ namespace Game
             Init().Forget();
         }
 
-        public async @bool Init()
+        public async UniTaskVoid Init()
         {
             CreateSystem<InputWrapper>();
             CreateSystem<ConfigSystem>();

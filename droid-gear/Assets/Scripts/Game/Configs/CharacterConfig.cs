@@ -13,10 +13,10 @@ namespace Game.Configs
         public AssetReferenceGameObject PrefabRef;
         public AbilityConfig AttackAbility;
         [Header("Attributes")]
-        public float MaxHealth;
-        public float MoveSpeed;
-        public float Damage;
-        public float AttackSpeed;
+        public float MaxHealth = 5f;
+        public float MoveSpeed = 3f;
+        public float Damage = 1f;
+        public float AttackSpeed = 1f;
 
         public Dictionary<AttributeType, float> AttributeDict = new();
 

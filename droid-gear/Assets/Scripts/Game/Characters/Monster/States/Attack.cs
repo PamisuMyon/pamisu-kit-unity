@@ -54,7 +54,7 @@ namespace Game.Characters.Monster.States
                 }
             }
 
-            private async @bool PerformAttack()
+            private async UniTaskVoid PerformAttack()
             {
                 _attackAbility.SetTarget(new AbilityTargetInfo
                 {

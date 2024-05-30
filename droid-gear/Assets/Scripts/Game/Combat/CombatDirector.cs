@@ -17,7 +17,7 @@ namespace Game.Combat
             Init().Forget();
         }
 
-        protected async @bool Init()
+        protected async UniTaskVoid Init()
         {
             if (!GlobalDirector.IsGlobalSystemsReady)
                 await UniTask.WaitUntil(() => GlobalDirector.IsGlobalSystemsReady);

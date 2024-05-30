@@ -13,8 +13,6 @@ namespace Game.Characters.Player
 {
     public class PlayerController : Framework.CharacterController, IUpdatable, IFixedUpdatable
     {
-        [SerializeField]
-        private float _moveSpeed = 5f;
 
         [SerializeField]
         private float _turnSpeed = 720f;
@@ -27,6 +25,7 @@ namespace Game.Characters.Player
 
         public PlayerDrone Drone;
 
+        internal float MoveSpeed;
         internal Vector3 Movement;
         public StateMachine Fsm { get; private set; }
         public PlayerStates.Blackboard Bb { get; private set; }
@@ -34,7 +33,10 @@ namespace Game.Characters.Player
         public override void Init(CharacterConfig config)
         {
             base.Init(config);
-            Drone.Owner = Chara;
+            MoveSpeed = Chara.AttrComp[AttributeType.MoveSpeed].Value;
+
+            Drone.SetupEntity(Region, false);
+            Drone.Init(Chara);
 
             _pickupArea.TriggerEnter += OnPickupAreaEnter;
             _senseArea.TriggerEnter += OnSenseAreaEnter;
@@ -64,7 +66,6 @@ namespace Game.Characters.Player
         public void OnUpdate(float deltaTime)
         {
             Fsm.OnUpdate(deltaTime);
-            Drone.OnUpdate(deltaTime);
         }
 
         public void OnFixedUpdate(float deltaTime)
@@ -119,7 +120,7 @@ namespace Game.Characters.Player
                 var rotation = Model.transform.rotation;
                 Model.transform.rotation = Quaternion.RotateTowards(rotation, targetRotation, _turnSpeed * deltaTime);
             }
-            Chara.Rb.velocity = _moveSpeed * Movement;
+            Chara.Rb.velocity = MoveSpeed * Movement;
         }
 
     }

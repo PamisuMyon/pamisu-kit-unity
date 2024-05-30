@@ -19,14 +19,14 @@ namespace PamisuKit.Framework
         
         protected List<IDisposable> EventSubscriptions; 
         
-        public void SetupEntity(Region region)
+        public void SetupEntity(Region region, bool reparent = true)
         {
             if (Region != null)
                 return;
             Go = gameObject;
             Trans = Go.transform;
             Region = region;
-            Region.AddEntity(this);
+            Region.AddEntity(this, reparent);
         }
 
         public void OnDestroy()

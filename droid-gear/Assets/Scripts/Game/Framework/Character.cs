@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Game.Abilities;
 using Game.Configs;
 using Game.Events;
 using PamisuKit.Common;
@@ -14,7 +15,7 @@ namespace Game.Framework
         public AbilityComponent AbilityComp { get; protected set; }
         public CharacterModel Model { get; protected set; }
         public Rigidbody Rb { get; protected set; }
-        public CharacterController Controller { get; protected set; }
+        // public CharacterController Controller { get; protected set; }
         public CharacterConfig Config { get; protected set; }
         public MonoPooler Pooler { get; internal set; }
         
@@ -34,8 +35,8 @@ namespace Game.Framework
 
             AbilityComp = GetComponent<AbilityComponent>();
             AbilityComp.Init(this);
-            // if (config.AttackAbility != null)
-            //     AbilityComp.GrantAbility(AbilityFactory.Create(config.AttackAbility));
+            if (config.AttackAbility != null)
+                AbilityComp.GrantAbility(AbilityFactory.Create(config.AttackAbility));
                 
             EventBus.Emit(new CharacterHealthChanged(this, AttrComp[AttributeType.Health].Value, AttrComp[AttributeType.MaxHealth].Value, 0f));
         }

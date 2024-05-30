@@ -18,7 +18,7 @@ namespace Game.Characters.Player.States
 
                 if ((Bb.Target == null || !Bb.Target.IsActive) && Bb.Targets.Count > 0)
                 {
-                    Bb.Target = Owner.Drone.SelectTarget(Bb.Targets); 
+                    Bb.Target = Owner.Drone.SelectTarget(Bb.Targets);
                 }
             }
 

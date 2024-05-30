@@ -31,10 +31,10 @@ namespace PamisuKit.Framework
             Trans.SetParent(parent);
         }
         
-        public void AddEntity(IEntity entity)
+        public void AddEntity(IEntity entity, bool reparent = true)
         {
             _entities.Add(entity);
-            if (entity.Trans != null)
+            if (reparent && entity.Trans != null)
                 entity.Trans.SetParent(Trans);
             Ticker?.Add(entity);
         }

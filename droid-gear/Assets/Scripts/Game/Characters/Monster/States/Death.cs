@@ -23,7 +23,7 @@ namespace Game.Characters.Monster.States
                 // DropItems().Forget();
             }
 
-            private async @bool Sink()
+            private async UniTaskVoid Sink()
             {
                 // hard-code
                 await UniTask.Delay(1500, false, PlayerLoopTiming.Update, Owner.destroyCancellationToken);

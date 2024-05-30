@@ -1,9 +1,9 @@
 
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Game.Configs
 {
-
     public enum AbilityType
     {
         None,
@@ -18,7 +18,9 @@ namespace Game.Configs
         public string Id;
         public AbilityType Type;
         public float Cooldown;
+        public float ActRange;
         public float ActPreDelay;
         public float ActPostDelay;
+        public AssetReferenceGameObject PrefabRes;
     }
 }

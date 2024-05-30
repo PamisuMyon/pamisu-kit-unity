@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using Game.Characters;
 using Game.Common;
 
 namespace Game.Characters.Monster.States
@@ -20,10 +19,12 @@ namespace Game.Characters.Monster.States
                 DelaySelectTarget().Forget();
             }
 
-            private async @bool DelaySelectTarget()
+            private async UniTaskVoid DelaySelectTarget()
             {
                 await UniTask.Yield();
                 Owner.SelectTarget();
+                if (Bb.Target != null)
+                    Machine.ChangeState<Track>();
             }
             
         }

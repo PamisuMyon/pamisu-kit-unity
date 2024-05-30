@@ -22,6 +22,26 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a6ae72e31ff3641109faa48576a03eb3
+    m_Address: Assets/Res/Props/Projectiles/ProjectileLight03Red.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f1930ea78617fa4fab3771177c5b554
+    m_Address: Assets/Res/Props/Projectiles/ProjectileStar09Light.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ee7dfda23c81e4b17b92ba4028d0d3f4
+    m_Address: Assets/Res/Props/Projectiles/ProjectileTrace02Red.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: edebfbbf5a6cd7c4c9b7649ffec902d4
+    m_Address: Assets/Res/Props/Projectiles/ProjectileTrace05Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c22d07014cbbd544a9de5aea1c1203a0, type: 2}
   m_SchemaSet:

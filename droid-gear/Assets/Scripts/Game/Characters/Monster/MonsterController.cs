@@ -1,17 +1,17 @@
 using Game.Configs;
 using Game.Framework;
 using PamisuKit.Common.FSM;
-using UnityEngine;
 using UnityEngine.AI;
 using Game.Characters.Monster.States;
+using Game.Combat;
+using Game.Characters.Player;
+using PamisuKit.Framework;
 
 namespace Game.Characters
 {
-    public class MonsterController : Framework.CharacterController
+    public class MonsterController : Framework.CharacterController, IUpdatable
     {
-        [SerializeField]
-        private float _moveSpeed = 5f;
-
+        public float TrackFrequency = .2f;
         public float TurnSpeed = 720f;
 
         public NavMeshAgent Agent { get; private set; }
@@ -26,6 +26,9 @@ namespace Game.Characters
             Agent = GetComponent<NavMeshAgent>();
 
             Bb = new MonsterStates.Blackboard();
+            if (Chara.AbilityComp.TryGetAbility(Config.AttackAbility.Id, out var attackAbility))
+                Bb.AttackAbility = attackAbility;
+
             Fsm = new StateMachine();
             Fsm.AddState(new MonsterStates.Idle(this));
             Fsm.AddState(new MonsterStates.Track(this));
@@ -48,7 +51,16 @@ namespace Game.Characters
 
         public void SelectTarget()
         {
-
+            if (CombatSystem.Instance.Player != null)
+            {
+                Bb.Target = CombatSystem.Instance.Player;
+            }
+            else 
+            {
+                var pc = FindFirstObjectByType<PlayerController>();
+                if (pc != null)
+                    Bb.Target = pc.Chara;
+            }
         }
 
         protected virtual void OnHealthChanged(AttributeComponent attrComp, float delta, float newHealth)

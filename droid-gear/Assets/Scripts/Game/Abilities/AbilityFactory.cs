@@ -1,6 +1,6 @@
+using Game.Combat.Abilities.Spec;
 using Game.Configs;
 using Game.Framework;
-using UnityEngine;
 
 namespace Game.Abilities
 {
@@ -12,7 +12,7 @@ namespace Game.Abilities
             return config.Type switch
             {
                 AbilityType.SimpleShoot => new SimpleShootAbility(config),
-                AbilityType.SimpleMelee => throw new System.NotImplementedException(),
+                AbilityType.SimpleMelee => new SimpleMeleeAbility(config),
                 _ => null
             };
         }
