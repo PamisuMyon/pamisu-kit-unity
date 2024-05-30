@@ -24,6 +24,8 @@ namespace Game.Characters
             Chara.AttrComp.HealthChanged += OnHealthChanged;
 
             Agent = GetComponent<NavMeshAgent>();
+            Agent.speed = Chara.AttrComp[AttributeType.MoveSpeed].Value;
+            Agent.angularSpeed = TurnSpeed;
 
             Bb = new MonsterStates.Blackboard();
             if (Chara.AbilityComp.TryGetAbility(Config.AttackAbility.Id, out var attackAbility))
@@ -35,8 +37,6 @@ namespace Game.Characters
             Fsm.AddState(new MonsterStates.Attack(this));
             Fsm.AddState(new MonsterStates.Death(this));
             Fsm.ChangeState<MonsterStates.Idle>();
-
-            // SelectTarget();
         }
 
         protected override void OnSelfDestroy()

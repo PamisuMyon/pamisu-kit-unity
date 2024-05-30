@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -23,4 +22,5 @@ namespace Game.Configs
         public float ActPostDelay;
         public AssetReferenceGameObject PrefabRes;
     }
+
 }

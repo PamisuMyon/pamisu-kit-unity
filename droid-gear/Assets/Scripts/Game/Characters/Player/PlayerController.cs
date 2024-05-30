@@ -54,6 +54,7 @@ namespace Game.Characters.Player
 
         protected override void OnSelfDestroy()
         {
+            Fsm?.OnDestroy();
             _pickupArea.TriggerEnter -= OnPickupAreaEnter;
             if (InputWrapper.Instance != null)
             {

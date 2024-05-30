@@ -31,6 +31,13 @@ MonoBehaviour:
     - Config
     - Character
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62d04d2f8a3bf6d41b444c467a32a825
+    m_Address: Assets/Res/Configs/GunDroid.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Config
+    - Character
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c22d07014cbbd544a9de5aea1c1203a0, type: 2}
   m_SchemaSet:

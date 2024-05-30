@@ -1,9 +1,9 @@
 ﻿using Game.Common;
 using UnityEngine;
 
-namespace Game.Characters.Monster.States
+namespace Game.Characters.Droid.States
 {
-    public static partial class MonsterStates
+    public static partial class DroidStates
     {
         public class Track : Base
         {
@@ -11,13 +11,16 @@ namespace Game.Characters.Monster.States
             private float _stoppingDistance;
             private float _stoppingDistanceSqr;
 
-            public Track(MonsterController owner) : base(owner)
+            public Track(DroidController owner) : base(owner)
             {
             }
 
             public override void OnEnter()
             {
                 base.OnEnter();
+                if (Bb.ShouldReturnToPlayer)
+                    Bb.Target = Bb.Player;
+
                 if (Bb.Target == null || !Bb.Target.IsAlive)
                 {
                     Machine.ChangeState<Idle>();
@@ -25,8 +28,14 @@ namespace Game.Characters.Monster.States
                 }
 
                 _stoppingDistance = Owner.Chara.Model.VisualRadius + Bb.Target.Model.VisualRadius;
-                if (Bb.AttackAbility != null)
+                if (Bb.ShouldReturnToPlayer)
+                {
+                    _stoppingDistance = Owner.DroidConfig.MinFollowRadius;
+                }
+                else if (Bb.AttackAbility != null)
+                {
                     _stoppingDistance += Bb.AttackAbility.Config.ActRange;
+                }
                 _stoppingDistanceSqr = _stoppingDistance * _stoppingDistance;
                 Owner.Agent.stoppingDistance = _stoppingDistance;
                 Owner.Agent.isStopped = false;
@@ -36,6 +45,7 @@ namespace Game.Characters.Monster.States
             public override void OnExit()
             {
                 base.OnExit();
+                Bb.ShouldReturnToPlayer = false;
                 if (!Owner.IsPendingDestroy && Owner.Agent.enabled)
                     Owner.Agent.isStopped = true;
             }
@@ -43,9 +53,12 @@ namespace Game.Characters.Monster.States
             public override void OnUpdate(float deltaTime)
             {
                 base.OnUpdate(deltaTime);
+                Owner.Model.Anim.SetBool(AnimConst.IsRunning, Owner.Agent.velocity != Vector3.zero);
+
                 if (Bb.Target == null || !Bb.Target.IsAlive)
                 {
                     Machine.ChangeState<Idle>();
+                    return;
                 }
 
                 var dir = Bb.Target.Trans.position - Owner.Trans.position;
@@ -54,7 +67,10 @@ namespace Game.Characters.Monster.States
                     && Owner.Agent.remainingDistance < Owner.Agent.stoppingDistance + 0.1f)
                     || dir.sqrMagnitude < _stoppingDistanceSqr)
                 {
-                    Machine.ChangeState<Attack>();
+                    if (Bb.ShouldReturnToPlayer || Bb.Target == Bb.Player)
+                        Machine.ChangeState<Idle>();
+                    else
+                        Machine.ChangeState<Attack>();
                     return;
                 }
 
@@ -68,7 +84,6 @@ namespace Game.Characters.Monster.States
                     _trackCounter -= deltaTime;
                 }
 
-                Owner.Model.Anim.SetBool(AnimConst.IsRunning, Owner.Agent.velocity != Vector3.zero);
             }
 
         }
