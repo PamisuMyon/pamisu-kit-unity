@@ -27,12 +27,16 @@ namespace Game.Characters.Player
 
         internal float MoveSpeed;
         internal Vector3 Movement;
+        // internal UnityEngine.CharacterController Cc { get; private set; }
+        internal Rigidbody Rb { get; private set; }
         public StateMachine Fsm { get; private set; }
         public PlayerStates.Blackboard Bb { get; private set; }
         
         public override void Init(CharacterConfig config)
         {
             base.Init(config);
+            // Cc = GetComponent<UnityEngine.CharacterController>();
+            Rb = GetComponent<Rigidbody>();
             MoveSpeed = Chara.AttrComp[AttributeType.MoveSpeed].Value;
 
             Drone.SetupEntity(Region, false);
@@ -121,7 +125,9 @@ namespace Game.Characters.Player
                 var rotation = Model.transform.rotation;
                 Model.transform.rotation = Quaternion.RotateTowards(rotation, targetRotation, _turnSpeed * deltaTime);
             }
-            Chara.Rb.velocity = MoveSpeed * Movement * Region.Ticker.TimeScale;
+
+            // Cc.Move(MoveSpeed * deltaTime * Movement);
+            Rb.velocity = MoveSpeed * Region.Ticker.TimeScale * Movement;
         }
 
     }

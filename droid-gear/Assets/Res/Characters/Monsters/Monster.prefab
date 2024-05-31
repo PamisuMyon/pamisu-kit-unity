@@ -74,12 +74,12 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1250176693954558661, guid: bd49ca71ddacf9e4eb935da31cdcce84,
         type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6682114067706275148}
+      insertIndex: 1
+      addedObject: {fileID: 838794346445030784}
     - targetCorrespondingSourceObject: {fileID: 1250176693954558661, guid: bd49ca71ddacf9e4eb935da31cdcce84,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 838794346445030784}
+      addedObject: {fileID: 6682114067706275148}
   m_SourcePrefab: {fileID: 100100000, guid: bd49ca71ddacf9e4eb935da31cdcce84, type: 3}
 --- !u!1 &9022920229046388057 stripped
 GameObject:
@@ -87,22 +87,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7813287066608680860}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6682114067706275148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9022920229046388057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c53abfa40ecad0d429d92a2b02e832fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _autoInit: 0
-  _autoInitCharacterId: 
-  TrackFrequency: 0.2
-  TurnSpeed: 1080
 --- !u!195 &838794346445030784
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -125,3 +109,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6682114067706275148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9022920229046388057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c53abfa40ecad0d429d92a2b02e832fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _autoInit: 0
+  _autoInitCharacterId: 
+  TrackFrequency: 0.2
+  TurnSpeed: 1080

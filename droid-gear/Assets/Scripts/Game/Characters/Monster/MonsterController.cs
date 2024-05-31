@@ -6,7 +6,6 @@ using Game.Characters.Monster.States;
 using Game.Combat;
 using Game.Characters.Player;
 using PamisuKit.Framework;
-using System;
 
 namespace Game.Characters
 {
@@ -15,8 +14,6 @@ namespace Game.Characters
         public float TrackFrequency = .2f;
         public float TurnSpeed = 720f;
 
-        public event Action<MonsterController> Die;
-
         public NavMeshAgent Agent { get; private set; }
         public StateMachine Fsm { get; private set; }
         public MonsterStates.Blackboard Bb { get; private set; }
@@ -24,7 +21,6 @@ namespace Game.Characters
         public override void Init(CharacterConfig config)
         {
             base.Init(config);
-            Chara.AttrComp.HealthChanged += OnHealthChanged;
 
             Agent = GetComponent<NavMeshAgent>();
 
@@ -64,12 +60,11 @@ namespace Game.Characters
             }
         }
 
-        protected virtual void OnHealthChanged(AttributeComponent attrComp, float delta, float newHealth)
+        protected override void OnDie(Character character)
         {
-            if (newHealth <= 0 && Fsm.CurrentState is not MonsterStates.Death) 
+            if (Fsm.CurrentState is not MonsterStates.Death) 
             {
                 Fsm.ChangeState<MonsterStates.Death>();
-                Die?.Invoke(this);
             }
         }
 

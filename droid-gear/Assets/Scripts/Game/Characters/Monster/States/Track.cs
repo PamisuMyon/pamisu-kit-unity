@@ -1,6 +1,5 @@
 ﻿using Game.Common;
 using Game.Framework;
-using PamisuKit.Framework;
 using UnityEngine;
 
 namespace Game.Characters.Monster.States
@@ -33,6 +32,8 @@ namespace Game.Characters.Monster.States
                 Owner.Agent.stoppingDistance = _stoppingDistance;
                 Owner.Agent.isStopped = false;
                 Owner.Agent.destination = Bb.Target.Trans.position;
+                // Owner.Agent.speed = Owner.Chara.AttrComp[AttributeType.MoveSpeed].Value;
+                // Owner.Agent.angularSpeed = Owner.TurnSpeed;
             }
 
             public override void OnExit()

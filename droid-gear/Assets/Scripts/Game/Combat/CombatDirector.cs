@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using Game.Characters;
 using Game.Characters.Player;
 using Game.Configs;
+using Game.Framework;
 using PamisuKit.Common.Assets;
 using PamisuKit.Common.Pool;
 using PamisuKit.Common.Util;
@@ -133,7 +134,7 @@ namespace Game.Combat
                 controller.transform.SetPositionAndRotation(resultPos, RandomUtil.RandomYRotation());
                 controller.SetupEntity(Region);
                 controller.Init(enemyConfig);
-                controller.Die += OnMonsterDie;
+                controller.Chara.Die += OnMonsterDie;
 
                 Bb.EnemiesOnStage.Add(controller);
                 enemyCount++;
@@ -147,11 +148,11 @@ namespace Game.Combat
             }
         }
 
-        private void OnMonsterDie(MonsterController monster)
+        private void OnMonsterDie(Character monster)
         {
             monster.Die -= OnMonsterDie;
-            Bb.EnemiesOnStage.Remove(monster);
-            Pooler.Release(monster);
+            Bb.EnemiesOnStage.Remove(monster.Controller);
+            Pooler.Release(monster.Controller);
         }
 
     }

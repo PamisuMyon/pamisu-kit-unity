@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using Game.Combat;
 using Game.Configs;
 using PamisuKit.Framework;
@@ -44,8 +45,14 @@ namespace Game.Framework
             Chara = GetComponent<Character>();
             Chara.SetupEntity(Region);
             Chara.Init(config);
+            Chara.Controller = this;
             Chara.Pooler = CombatDirector.Instance.Pooler;
+            Chara.Die += OnDie;
         }
 
+        protected virtual void OnDie(Character character)
+        {
+        }
+        
     }
 }

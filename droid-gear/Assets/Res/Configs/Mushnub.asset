@@ -19,8 +19,8 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   AttackAbility: {fileID: 11400000, guid: 9d1c0ee0f10c33c4f9b52d33b93376ea, type: 2}
-  MaxHealth: 10000
-  MoveSpeed: 3
+  MaxHealth: 5
+  MoveSpeed: 2
   Damage: 1
   AttackSpeed: 1
   HealthGrowth: 0.6
