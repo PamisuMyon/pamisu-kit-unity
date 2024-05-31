@@ -61,7 +61,7 @@ namespace Game.Framework
         
         public virtual async UniTask Revive()
         {
-            await UniTask.Delay(2000);
+            await Region.Ticker.Delay(2f, destroyCancellationToken);
             AttrComp.Revive();
         }
 

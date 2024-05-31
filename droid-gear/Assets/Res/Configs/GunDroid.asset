@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: gun_droid
   PrefabRef:
-    m_AssetGUID: 
+    m_AssetGUID: 671896e6c8cc95d4590fcb81251460c1
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

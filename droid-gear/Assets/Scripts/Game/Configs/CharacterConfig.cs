@@ -5,7 +5,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Game.Configs
 {
-    [CreateAssetMenu(fileName = "CharacterConfig", menuName = "Configs/CharacterConfig", order = 0)]
+    [CreateAssetMenu(fileName = "CharacterConfig", menuName = "Configs/CharacterConfig", order = 100)]
     public class CharacterConfig : ScriptableObject
     {
         [Header("Character")]

@@ -1,4 +1,6 @@
 ﻿using Game.Common;
+using Game.Framework;
+using PamisuKit.Framework;
 using UnityEngine;
 
 namespace Game.Characters.Monster.States
@@ -48,6 +50,9 @@ namespace Game.Characters.Monster.States
                     Machine.ChangeState<Idle>();
                 }
 
+                var timescale = Owner.Region.Ticker.TimeScale;
+                Owner.Agent.speed = Owner.Chara.AttrComp[AttributeType.MoveSpeed].Value * timescale;
+                Owner.Agent.angularSpeed = Owner.TurnSpeed * timescale;
                 var dir = Bb.Target.Trans.position - Owner.Trans.position;
                 if ((Owner.Agent.hasPath 
                     && !Owner.Agent.pathPending 

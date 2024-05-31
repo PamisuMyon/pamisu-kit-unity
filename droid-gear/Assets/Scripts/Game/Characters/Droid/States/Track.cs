@@ -1,4 +1,5 @@
 ﻿using Game.Common;
+using Game.Framework;
 using UnityEngine;
 
 namespace Game.Characters.Droid.States
@@ -60,6 +61,10 @@ namespace Game.Characters.Droid.States
                     Machine.ChangeState<Idle>();
                     return;
                 }
+
+                var timescale = Owner.Region.Ticker.TimeScale;
+                Owner.Agent.speed = Owner.Chara.AttrComp[AttributeType.MoveSpeed].Value * timescale;
+                Owner.Agent.angularSpeed = Owner.TurnSpeed * timescale;
 
                 var dir = Bb.Target.Trans.position - Owner.Trans.position;
                 if ((Owner.Agent.hasPath 

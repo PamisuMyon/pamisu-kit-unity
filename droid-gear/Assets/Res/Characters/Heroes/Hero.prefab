@@ -232,7 +232,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _autoInit: 0
   _autoInitCharacterId: 
-  _moveSpeed: 5
   _turnSpeed: 720
   _senseArea: {fileID: 5300463348190123187}
   _pickupArea: {fileID: 3960321313848937718}

@@ -40,10 +40,7 @@ namespace Game.Abilities
 
             // pre-delay
             if (Config.ActPreDelay != 0)
-                await UniTask.Delay(TimeSpan.FromSeconds(Config.ActPreDelay), 
-                    DelayType.DeltaTime, 
-                    PlayerLoopTiming.Update, 
-                    cancellationToken);
+                await Owner.Region.Ticker.Delay(Config.ActPreDelay, cancellationToken);
 
             // act
             var damage = new Damage(Owner, -Owner.AttrComp[AttributeType.Damage].Value);
@@ -55,10 +52,8 @@ namespace Game.Abilities
 
             // post-delay
             if (Config.ActPostDelay != 0)
-                await UniTask.Delay(TimeSpan.FromSeconds(Config.ActPostDelay), 
-                    DelayType.DeltaTime, 
-                    PlayerLoopTiming.Update, 
-                    cancellationToken);
+                await Owner.Region.Ticker.Delay(Config.ActPostDelay, cancellationToken);
+
             
             // cooldown affected by attack speed
             var attackSpeed = Owner.AttrComp[AttributeType.AttackSpeed].Value;

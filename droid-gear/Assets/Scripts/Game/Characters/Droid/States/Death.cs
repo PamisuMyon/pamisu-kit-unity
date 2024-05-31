@@ -26,13 +26,13 @@ namespace Game.Characters.Droid.States
             private async UniTaskVoid Sink()
             {
                 // hard-code
-                await UniTask.Delay(1500, false, PlayerLoopTiming.Update, Owner.destroyCancellationToken);
+                await Owner.Region.Ticker.Delay(1.5f, Owner.destroyCancellationToken);
 
                 var targetPos = Owner.Trans.position;
                 targetPos.y -= Owner.Model.VisualHeight - .5f;
                 // TODO
 
-                await UniTask.Delay(1000, false, PlayerLoopTiming.Update, Owner.destroyCancellationToken);
+                await Owner.Region.Ticker.Delay(1f, Owner.destroyCancellationToken);
                 // TODO Return to pool
                 Object.Destroy(Owner.gameObject);
             }

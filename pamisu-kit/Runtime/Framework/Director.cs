@@ -11,9 +11,9 @@ namespace PamisuKit.Framework
         [SerializeField]
         private bool _dontDestroyOnLoad = false;
         
-        protected Ticker Ticker;
-        protected Region Region;
         protected List<ISystem> Systems;
+        public Ticker Ticker { get; protected set; }
+        public Region Region { get; protected set; }
 
         protected void Awake()
         {

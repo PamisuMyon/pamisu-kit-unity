@@ -42,6 +42,31 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0af95b9ee44bf3c42a1f9cac0271f883
+    m_Address: Assets/Res/Characters/Heroes/Ronin/Ronin.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 671896e6c8cc95d4590fcb81251460c1
+    m_Address: Assets/Res/Characters/Droids/GunDroid/GunDroid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b584b79d15892794982cbef6f975ad59
+    m_Address: Assets/Res/Characters/Droids/CannonDroid/CannonDroid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64f17dcf20d6cca41a6bdc7ddebaf564
+    m_Address: Assets/Res/Characters/Monsters/Mushnub/Mushnub.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c57c0f66d5f70a47883d75b16872d24
+    m_Address: Assets/Res/Characters/Heroes/Ronin/Cube.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c22d07014cbbd544a9de5aea1c1203a0, type: 2}
   m_SchemaSet:

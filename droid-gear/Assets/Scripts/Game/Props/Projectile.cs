@@ -93,7 +93,7 @@ namespace Game.Props
             }
 
             _body.SetActive(false);
-            await UniTask.Delay(TimeSpan.FromMilliseconds(_otherPartsRecycleDelay), false, PlayerLoopTiming.Update, destroyCancellationToken);
+            await Region.Ticker.Delay(_otherPartsRecycleDelay, destroyCancellationToken);
             for (int i = 0; i < _otherParts.Length; i++)
             {
                 _otherParts[i].Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);

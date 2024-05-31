@@ -68,15 +68,15 @@ namespace Game.Common
         //     return nearest;
         // }
 
-        public static UniTask SimpleDelay(float delaySeconds, CancellationToken cancellationToken)
-        {
-            return UniTask.Delay(TimeSpan.FromSeconds(delaySeconds), DelayType.DeltaTime, PlayerLoopTiming.Update, cancellationToken);
-        }
+        // public static UniTask SimpleDelay(float delaySeconds, CancellationToken cancellationToken)
+        // {
+        //     return UniTask.Delay(TimeSpan.FromSeconds(delaySeconds), DelayType.DeltaTime, PlayerLoopTiming.Update, cancellationToken);
+        // }
         
-        public static UniTask SimpleDelay(int delayMilliseconds, CancellationToken cancellationToken)
-        {
-            return UniTask.Delay(delayMilliseconds, DelayType.DeltaTime, PlayerLoopTiming.Update, cancellationToken);
-        }
+        // public static UniTask SimpleDelay(int delayMilliseconds, CancellationToken cancellationToken)
+        // {
+        //     return UniTask.Delay(delayMilliseconds, DelayType.DeltaTime, PlayerLoopTiming.Update, cancellationToken);
+        // }
 
         public static bool IsAdjacent(this Character a, Character b, float tolerance = 0f)
         {

@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 
 namespace PamisuKit.Framework
 {
@@ -16,12 +19,12 @@ namespace PamisuKit.Framework
         void OnFixedUpdate(float deltaTime);
     }
     
+    [Serializable]
     public class Ticker
     {
-
-        public float TimeScale { get; private set; } = 1f;
+        public float TimeScale { get; set; } = 1f;
         public float DeltaTime { get; private set; }
-        public float GameTime { get; private set; }
+        public float TickerTime { get; private set; }
         
         protected readonly List<IUpdatable> _updateObjects = new List<IUpdatable>();
         protected readonly List<IFixedUpdatable> _fixedUpdateObjects = new List<IFixedUpdatable>();
@@ -45,7 +48,7 @@ namespace PamisuKit.Framework
         public void OnUpdate(float delta)
         {
             delta *= TimeScale;
-            GameTime += delta;
+            TickerTime += delta;
             DeltaTime = delta;
             if (_updateObjects.Count == 0) return;
             for (var i = 0; i < _updateObjects.Count; i++)
@@ -57,11 +60,25 @@ namespace PamisuKit.Framework
 
         public void OnFixedUpdate(float delta)
         {
+            if (TimeScale == 0)
+                return;
             if (_fixedUpdateObjects.Count == 0) return;
             for (var i = 0; i < _fixedUpdateObjects.Count; i++)
             {
                 if (_fixedUpdateObjects[i].IsActive)
                     _fixedUpdateObjects[i].OnFixedUpdate(delta);
+            }
+        }
+
+        public async UniTask Delay(float seconds, CancellationToken cancellationToken = default)
+        {
+            var time = seconds;
+            while (time > 0)
+            {
+                await UniTask.Yield();
+                if (cancellationToken.IsCancellationRequested)
+                    throw new OperationCanceledException();
+                time -= DeltaTime;
             }
         }
         

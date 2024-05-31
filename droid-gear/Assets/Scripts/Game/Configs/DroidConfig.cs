@@ -1,11 +1,8 @@
-using System.Collections.Generic;
-using Game.Framework;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Game.Configs
 {
-    [CreateAssetMenu(fileName = "DroidConfig", menuName = "Configs/DroidConfig", order = 0)]
+    [CreateAssetMenu(fileName = "DroidConfig", menuName = "Configs/DroidConfig", order = 102)]
     public class DroidConfig : CharacterConfig
     {
         [Header("Droid")]

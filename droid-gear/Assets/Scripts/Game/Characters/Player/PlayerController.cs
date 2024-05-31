@@ -46,7 +46,7 @@ namespace Game.Characters.Player
             InputWrapper.Actions.Combat.Move.canceled += OnMove;
 
             Bb = new PlayerStates.Blackboard();
-            Fsm = new StateMachine(this);
+            Fsm = new StateMachine();
             Fsm.AddState(new PlayerStates.Normal(this));
             Fsm.AddState(new PlayerStates.Death(this));
             Fsm.ChangeState<PlayerStates.Normal>();
@@ -66,12 +66,12 @@ namespace Game.Characters.Player
 
         public void OnUpdate(float deltaTime)
         {
-            Fsm.OnUpdate(deltaTime);
+            Fsm?.OnUpdate(deltaTime);
         }
 
         public void OnFixedUpdate(float deltaTime)
         {
-            Fsm.OnFixedUpdate(deltaTime);
+            Fsm?.OnFixedUpdate(deltaTime);
         }
         
         #region Input Actions
@@ -121,7 +121,7 @@ namespace Game.Characters.Player
                 var rotation = Model.transform.rotation;
                 Model.transform.rotation = Quaternion.RotateTowards(rotation, targetRotation, _turnSpeed * deltaTime);
             }
-            Chara.Rb.velocity = MoveSpeed * Movement;
+            Chara.Rb.velocity = MoveSpeed * Movement * Region.Ticker.TimeScale;
         }
 
     }

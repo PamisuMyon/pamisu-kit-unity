@@ -6,6 +6,7 @@ using Game.Characters.Monster.States;
 using Game.Combat;
 using Game.Characters.Player;
 using PamisuKit.Framework;
+using System;
 
 namespace Game.Characters
 {
@@ -13,6 +14,8 @@ namespace Game.Characters
     {
         public float TrackFrequency = .2f;
         public float TurnSpeed = 720f;
+
+        public event Action<MonsterController> Die;
 
         public NavMeshAgent Agent { get; private set; }
         public StateMachine Fsm { get; private set; }
@@ -24,8 +27,6 @@ namespace Game.Characters
             Chara.AttrComp.HealthChanged += OnHealthChanged;
 
             Agent = GetComponent<NavMeshAgent>();
-            Agent.speed = Chara.AttrComp[AttributeType.MoveSpeed].Value;
-            Agent.angularSpeed = TurnSpeed;
 
             Bb = new MonsterStates.Blackboard();
             if (Chara.AbilityComp.TryGetAbility(Config.AttackAbility.Id, out var attackAbility))
@@ -46,14 +47,14 @@ namespace Game.Characters
 
         public void OnUpdate(float deltaTime)
         {
-            Fsm.OnUpdate(deltaTime);
+            Fsm?.OnUpdate(deltaTime);
         }
 
         public void SelectTarget()
         {
-            if (CombatSystem.Instance.Player != null)
+            if (CombatDirector.Instance.Bb.Player != null)
             {
-                Bb.Target = CombatSystem.Instance.Player;
+                Bb.Target = CombatDirector.Instance.Bb.Player.Chara;
             }
             else 
             {
@@ -65,8 +66,11 @@ namespace Game.Characters
 
         protected virtual void OnHealthChanged(AttributeComponent attrComp, float delta, float newHealth)
         {
-            if (newHealth <= 0)
+            if (newHealth <= 0 && Fsm.CurrentState is not MonsterStates.Death) 
+            {
                 Fsm.ChangeState<MonsterStates.Death>();
+                Die?.Invoke(this);
+            }
         }
 
 #if UNITY_EDITOR

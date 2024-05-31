@@ -18,13 +18,13 @@ MonoBehaviour:
   m_GUID: 579a3efc0a052dd4689b32b0ec77ac97
   m_SerializeEntries:
   - m_GUID: 8a897a919f9b37f4e81c10fa95868d0d
-    m_Address: Assets/Res/Configs/Spacesuit.asset
+    m_Address: Assets/Res/Configs/Ronin.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Config
     - Character
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f677e9322405bfe4f9503ec9585e804c
+  - m_GUID: 46fe52437e4234841b94e404a0e868d4
     m_Address: Assets/Res/Configs/Mushnub.asset
     m_ReadOnly: 0
     m_SerializedLabels:

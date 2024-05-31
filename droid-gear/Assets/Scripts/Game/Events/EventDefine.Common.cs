@@ -3,7 +3,6 @@ using Game.Framework;
 namespace Game.Events
 {
 
-
     public struct CharacterHealthChanged
     {
         public Character Owner;

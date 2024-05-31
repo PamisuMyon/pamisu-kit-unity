@@ -1,4 +1,5 @@
 using Game.Common;
+using Game.Framework;
 using PamisuKit.Common.Util;
 using UnityEngine;
 
@@ -39,6 +40,10 @@ namespace Game.Characters.Droid.States
                     Machine.ChangeState<Track>();
                     return;
                 }
+
+                var timescale = Owner.Region.Ticker.TimeScale;
+                Owner.Agent.speed = Owner.Chara.AttrComp[AttributeType.MoveSpeed].Value * timescale;
+                Owner.Agent.angularSpeed = Owner.TurnSpeed * timescale;
 
                 if (Owner.Agent.hasPath 
                     && !Owner.Agent.pathPending 

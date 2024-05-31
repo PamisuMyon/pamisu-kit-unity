@@ -44,6 +44,11 @@ PrefabInstance:
       propertyPath: _autoInitCharacterId
       value: gun_droid
       objectReference: {fileID: 0}
+    - target: {fileID: 3880720634868564250, guid: 153a592639bff3848b1c0bcf889cf30b,
+        type: 3}
+      propertyPath: _autoInitCharacterConfigRef.m_AssetGUID
+      value: 62d04d2f8a3bf6d41b444c467a32a825
+      objectReference: {fileID: 0}
     - target: {fileID: 5321792511657674910, guid: 153a592639bff3848b1c0bcf889cf30b,
         type: 3}
       propertyPath: Anim

@@ -35,7 +35,7 @@ namespace Game.Framework
                 return;
             }
 
-            SetupEntity(CombatSystem.Instance.Region);
+            SetupEntity(CombatDirector.Instance.Region);
             Init(config);
         }
 
@@ -44,7 +44,7 @@ namespace Game.Framework
             Chara = GetComponent<Character>();
             Chara.SetupEntity(Region);
             Chara.Init(config);
-            Chara.Pooler = CombatSystem.Instance.Pooler;
+            Chara.Pooler = CombatDirector.Instance.Pooler;
         }
 
     }

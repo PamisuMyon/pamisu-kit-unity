@@ -33,8 +33,6 @@ namespace Game.Characters
             Chara.AttrComp.HealthChanged += OnHealthChanged;
 
             Agent = GetComponent<NavMeshAgent>();
-            Agent.speed = Chara.AttrComp[AttributeType.MoveSpeed].Value;
-            Agent.angularSpeed = TurnSpeed;
 
             Bb = new DroidStates.Blackboard();
             if (Chara.AbilityComp.TryGetAbility(Config.AttackAbility.Id, out var attackAbility))

@@ -356,6 +356,11 @@ PrefabInstance:
       propertyPath: _autoInitCharacterId
       value: ronin
       objectReference: {fileID: 0}
+    - target: {fileID: 3928882811483021411, guid: 55fd19121785b5a448e8f17a7f1160df,
+        type: 3}
+      propertyPath: _autoInitCharacterConfigRef.m_AssetGUID
+      value: 8a897a919f9b37f4e81c10fa95868d0d
+      objectReference: {fileID: 0}
     - target: {fileID: 6352784875735404185, guid: 55fd19121785b5a448e8f17a7f1160df,
         type: 3}
       propertyPath: Anim

@@ -68,6 +68,11 @@ PrefabInstance:
       propertyPath: _autoInitCharacterId
       value: mushnub
       objectReference: {fileID: 0}
+    - target: {fileID: 6682114067706275148, guid: 1723e625740c1f64fb149098a56b8db2,
+        type: 3}
+      propertyPath: _autoInitCharacterConfigRef.m_AssetGUID
+      value: 46fe52437e4234841b94e404a0e868d4
+      objectReference: {fileID: 0}
     - target: {fileID: 8769705705336737754, guid: 1723e625740c1f64fb149098a56b8db2,
         type: 3}
       propertyPath: Anim

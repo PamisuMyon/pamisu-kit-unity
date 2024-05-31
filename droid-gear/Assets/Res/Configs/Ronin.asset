@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: ronin
   PrefabRef:
-    m_AssetGUID: 
+    m_AssetGUID: 0af95b9ee44bf3c42a1f9cac0271f883
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   AttackAbility: {fileID: 11400000, guid: 013cf807df391d744b549507ffe97181, type: 2}
-  MaxHealth: 20
-  MoveSpeed: 5
+  MaxHealth: 1000000
+  MoveSpeed: 10
   Damage: 0
   AttackSpeed: 1
