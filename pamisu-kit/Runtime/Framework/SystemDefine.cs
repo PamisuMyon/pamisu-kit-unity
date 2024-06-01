@@ -68,8 +68,9 @@ namespace PamisuKit.Framework
     {
         public static T Instance { get; private set; }
 
-        protected virtual void Awake()
+        protected override void OnCreate()
         {
+            base.OnCreate();
             if (Instance != null)
             {
                 Debug.LogWarning($"{GetType().Name} OnCreate Instance already exists.");
@@ -78,7 +79,7 @@ namespace PamisuKit.Framework
             }
             Instance = this as T;
         }
-        
+
         public override void Destroy()
         {
             if (Instance == null)

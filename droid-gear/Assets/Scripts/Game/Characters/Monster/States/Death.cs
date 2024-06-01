@@ -1,5 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Game.Common;
+using LitMotion;
+using LitMotion.Extensions;
 
 namespace Game.Characters.Monster.States
 {
@@ -15,6 +17,7 @@ namespace Game.Characters.Monster.States
             {
                 base.OnEnter();
                 Owner.Agent.isStopped = true;
+                Owner.Agent.enabled = false;
                 
                 Owner.Chara.Model.Anim.SetTrigger(AnimConst.Death);
                 Sink().Forget();
@@ -25,10 +28,15 @@ namespace Game.Characters.Monster.States
             {
                 // hard-code
                 await Owner.Region.Ticker.Delay(1.5f, Owner.destroyCancellationToken);
-                var targetPos = Owner.Trans.position;
+                var originalPos = Owner.Trans.position;
+                var targetPos = originalPos;
                 targetPos.y -= Owner.Model.VisualHeight - .5f;
-                // TODO Anim
-                await Owner.Region.Ticker.Delay(1f, Owner.destroyCancellationToken);
+                
+                await LMotion.Create(originalPos, targetPos, 1f)
+                    .BindToPosition(Owner.Trans)
+                    .ToUniTask(Owner.destroyCancellationToken);
+                // if NavMeshAgent is enabled, it will back to the NavMesh when tween finished
+
                 Owner.Chara.Died?.Invoke(Owner.Chara);
             }
 

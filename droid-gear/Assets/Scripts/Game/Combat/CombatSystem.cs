@@ -49,7 +49,7 @@ namespace Game.Combat
             var prefab = await AssetManager.LoadAsset<GameObject>(config.PrefabRef.RuntimeKey.ToString());
             var go = Instantiate(prefab);
             var player = go.GetComponent<PlayerController>();
-            player.Setup(Region, false);
+            player.Setup(Region);
             player.Init(config);
             player.Trans.SetPositionAndRotation(playerStart.position, playerStart.rotation);
             Bb.Player = player;

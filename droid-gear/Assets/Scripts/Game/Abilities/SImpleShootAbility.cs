@@ -37,7 +37,8 @@ namespace Game.Abilities
                 return;
             }
 
-            Owner.Model.Anim.SetTrigger(AnimConst.RangedAttack1);
+            if (Owner.Model.Anim != null)
+                Owner.Model.Anim.SetTrigger(AnimConst.RangedAttack1);
 
             // pre-delay
             if (Config.ActPreDelay != 0)

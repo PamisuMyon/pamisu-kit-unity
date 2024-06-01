@@ -39,7 +39,7 @@ namespace Game.Characters.Monster.States
             public override void OnExit()
             {
                 base.OnExit();
-                if (!Owner.IsPendingDestroy && Owner.Agent.enabled)
+                if (Owner.IsActive && !Owner.IsPendingDestroy && Owner.Agent.enabled)
                     Owner.Agent.isStopped = true;
             }
 

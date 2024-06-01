@@ -17,8 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 579a3efc0a052dd4689b32b0ec77ac97
   m_SerializeEntries:
-  - m_GUID: 8a897a919f9b37f4e81c10fa95868d0d
-    m_Address: Assets/Res/Configs/Ronin.asset
+  - m_GUID: 9d049a62ca6e315449b15a073f2a7f26
+    m_Address: Assets/Res/Configs/Characters/Ronin.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Config
@@ -33,6 +33,13 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 62d04d2f8a3bf6d41b444c467a32a825
     m_Address: Assets/Res/Configs/GunDroid.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Config
+    - Character
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b10350ccb7290b4e8f5889846f93963
+    m_Address: Assets/Res/Configs/Characters/Drone.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Config

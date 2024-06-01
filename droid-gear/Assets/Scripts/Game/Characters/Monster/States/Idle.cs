@@ -14,6 +14,7 @@ namespace Game.Characters.Monster.States
             public override void OnEnter()
             {
                 base.OnEnter();
+                Owner.Agent.enabled = true;
                 Owner.Agent.isStopped = true;
                 Owner.Model.Anim.SetBool(AnimConst.IsRunning, false);
                 DelaySelectTarget().Forget();
@@ -21,7 +22,7 @@ namespace Game.Characters.Monster.States
 
             private async UniTaskVoid DelaySelectTarget()
             {
-                await UniTask.Yield();
+                await UniTask.Yield(Owner.destroyCancellationToken);
                 Owner.SelectTarget();
                 if (Bb.Target != null)
                     Machine.ChangeState<Track>();

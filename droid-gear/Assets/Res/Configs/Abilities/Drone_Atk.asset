@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2a4872600621214480979515e0bc79c, type: 3}
-  m_Name: Ronin_Atk
+  m_Name: Drone_Atk
   m_EditorClassIdentifier: 
-  Id: ronin_atk
+  Id: drone_atk
   Type: 1
   Cooldown: 0.3
+  ActRange: 7
   ActPreDelay: 0
   ActPostDelay: 0
   PrefabRes:

@@ -15,11 +15,6 @@ namespace Game.Characters.Player.States
             {
                 base.OnUpdate(deltaTime);
                 Owner.Model.Anim.SetBool(AnimConst.IsRunning, Owner.Movement != Vector3.zero);
-
-                if ((Bb.Target == null || !Bb.Target.IsActive) && Bb.Targets.Count > 0)
-                {
-                    Bb.Target = Owner.Drone.SelectTarget(Bb.Targets);
-                }
             }
 
             public override void OnFixedUpdate(float deltaTime)

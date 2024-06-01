@@ -9,8 +9,8 @@ namespace Game.Characters.Player.States
         [Serializable]
         public class Blackboard
         {
-            public List<Character> Targets { get; internal set; } = new();
-            public Character Target { get; internal set; }
+            // public List<Character> Targets { get; internal set; } = new();
+            // public Character Target { get; internal set; }
         }
     }
 }
