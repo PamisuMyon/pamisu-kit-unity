@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6679343111182798694}
   - component: {fileID: 7412184138501487699}
   - component: {fileID: 609908153222497862}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SenseArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,10 +79,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Droid
       objectReference: {fileID: 0}
+    - target: {fileID: 1250176693954558661, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 1574606001188712518, guid: bd49ca71ddacf9e4eb935da31cdcce84,
         type: 3}
       propertyPath: VisualRadius
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919480173473849464, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4298333225180743979, guid: bd49ca71ddacf9e4eb935da31cdcce84,
         type: 3}
@@ -200,6 +210,7 @@ MonoBehaviour:
   _autoInitCharacterId: 
   _senseArea: {fileID: 609908153222497862}
   TrackFrequency: 0.2
+  TargetingFrequency: 1
   TurnSpeed: 1080
   WanderRange: {x: 1, y: 5}
 --- !u!4 &7468778581067690483 stripped

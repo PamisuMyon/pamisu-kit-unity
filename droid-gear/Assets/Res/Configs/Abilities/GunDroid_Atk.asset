@@ -18,6 +18,7 @@ MonoBehaviour:
   ActRange: 5
   ActPreDelay: 0
   ActPostDelay: 0
+  ActLayer: 17
   PrefabRes:
     m_AssetGUID: edebfbbf5a6cd7c4c9b7649ffec902d4
     m_SubObjectName: 

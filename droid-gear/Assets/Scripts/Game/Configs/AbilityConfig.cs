@@ -1,3 +1,4 @@
+using Game.Common;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -20,6 +21,8 @@ namespace Game.Configs
         public float ActRange;
         public float ActPreDelay;
         public float ActPostDelay;
+        [Layer]
+        public int ActLayer;
         public AssetReferenceGameObject PrefabRes;
     }
 

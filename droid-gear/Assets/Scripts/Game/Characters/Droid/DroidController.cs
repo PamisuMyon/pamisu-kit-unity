@@ -19,6 +19,7 @@ namespace Game.Characters
         private TriggerArea _senseArea;
 
         public float TrackFrequency = .2f;
+        public float TargetingFrequency = 1f;
         public float TurnSpeed = 720f;
         public Vector2 WanderRange = new(1f, 5f);
 

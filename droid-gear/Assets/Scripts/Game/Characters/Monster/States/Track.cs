@@ -49,6 +49,7 @@ namespace Game.Characters.Monster.States
                 if (Bb.Target == null || !Bb.Target.IsAlive)
                 {
                     Machine.ChangeState<Idle>();
+                    return;
                 }
 
                 var timescale = Owner.Region.Ticker.TimeScale;

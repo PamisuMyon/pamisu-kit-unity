@@ -14,6 +14,7 @@ namespace Game.Characters.Drone
     {
         public float OrbitSpeed = 180f;
         public float OrbitRadius = .7f;
+        public float TargetingFrequency = .5f;
 
         [SerializeField]
         private TriggerArea _senseArea;
@@ -63,14 +64,16 @@ namespace Game.Characters.Drone
             Trans.localPosition = new Vector3(x, Trans.localPosition.y, z);
         }
 
-        public bool SelectTarget()
+        public Character SelectTarget()
         {
             if (Bb.Targets.Count == 0)
-                return false;
+                return null;
             var minDis = float.MaxValue;
-            var minTarget = Bb.Targets[0];
+            Character minTarget = null;
             for (int i = 0; i < Bb.Targets.Count; i++)
             {
+                if (Bb.Targets[i] == null || !Bb.Targets[i].IsAlive)
+                    continue;                    
                 var dis = Bb.Targets[i].Trans.position - Chara.Trans.position;
                 if (dis.sqrMagnitude < minDis)
                 {
@@ -78,15 +81,7 @@ namespace Game.Characters.Drone
                     minTarget = Bb.Targets[i];
                 }
             }
-            Bb.Target = minTarget;
-            return true;
-        }
-
-        internal void PerformAttack()
-        {
-            if (!AttackAbility.CanActivate())
-                return;
-            AttackAbility.Activate(destroyCancellationToken).Forget();
+            return minTarget;
         }
 
         private void OnSenseAreaEnter(Collider collider)

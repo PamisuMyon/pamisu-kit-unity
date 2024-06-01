@@ -14,6 +14,19 @@ TagManager:
   - 
   - Water
   - UI
+  - Environment
+  - Obstacle
+  - 
+  - 
+  - 
+  - Player
+  - Enemy
+  - 
+  - 
+  - 
+  - 
+  - PlayerAttack
+  - EnemyAttack
   - 
   - 
   - 
@@ -25,20 +38,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Void
   - 
   m_SortingLayers:
   - name: Default

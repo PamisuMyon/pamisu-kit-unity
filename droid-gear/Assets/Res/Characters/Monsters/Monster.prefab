@@ -13,6 +13,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster
       objectReference: {fileID: 0}
+    - target: {fileID: 1250176693954558661, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250176693954558661, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919480173473849464, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919480173473849464, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 4298333225180743979, guid: bd49ca71ddacf9e4eb935da31cdcce84,
         type: 3}
       propertyPath: m_LocalPosition.x

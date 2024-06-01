@@ -18,6 +18,9 @@ MonoBehaviour:
   ActRange: 7
   ActPreDelay: 0
   ActPostDelay: 0
+  ActLayer:
+    serializedVersion: 2
+    m_Bits: 131072
   PrefabRes:
     m_AssetGUID: edebfbbf5a6cd7c4c9b7649ffec902d4
     m_SubObjectName: 

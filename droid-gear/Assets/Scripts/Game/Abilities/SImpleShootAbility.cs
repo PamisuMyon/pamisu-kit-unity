@@ -52,12 +52,11 @@ namespace Game.Abilities
             var pooler = Owner.GetDirector<GameDirector>().Pooler;
             var proj = await pooler.Spawn<Projectile>(Config.PrefabRes.RuntimeKey.ToString());
             proj.Setup(Owner.Region);
-            proj.Activate(damage, firePoint.position, direction, Owner.Go.layer);
+            proj.Activate(damage, firePoint.position, direction, Config.ActLayer);
 
             // post-delay
             if (Config.ActPostDelay != 0)
                 await Owner.Region.Ticker.Delay(Config.ActPostDelay, cancellationToken);
-
             
             // cooldown affected by attack speed
             var attackSpeed = Owner.AttrComp[AttributeType.AttackSpeed].Value;

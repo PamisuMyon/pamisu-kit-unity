@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using Game.Common;
 using LitMotion;
 using LitMotion.Extensions;
+using UnityEngine;
 
 namespace Game.Characters.Monster.States
 {
@@ -9,6 +10,9 @@ namespace Game.Characters.Monster.States
     {
         public class Death : Base
         {
+
+            private int _originalLayer;
+
             public Death(MonsterController owner) : base(owner)
             {
             }
@@ -16,12 +20,21 @@ namespace Game.Characters.Monster.States
             public override void OnEnter()
             {
                 base.OnEnter();
+                _originalLayer = Owner.Chara.BodyCollider.gameObject.layer;
+                Owner.Chara.BodyCollider.gameObject.layer = LayerMask.NameToLayer("Void");
+
                 Owner.Agent.isStopped = true;
                 Owner.Agent.enabled = false;
                 
                 Owner.Chara.Model.Anim.SetTrigger(AnimConst.Death);
                 Sink().Forget();
                 // DropItems().Forget();
+            }
+
+            public override void OnExit()
+            {
+                base.OnExit();
+                Owner.Chara.BodyCollider.gameObject.layer = _originalLayer;
             }
 
             private async UniTaskVoid Sink()

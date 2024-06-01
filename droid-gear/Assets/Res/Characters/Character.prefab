@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 7126601450715654692}
   - component: {fileID: 6710718338245942970}
   m_Layer: 0
-  m_Name: Collision
+  m_Name: BodyCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

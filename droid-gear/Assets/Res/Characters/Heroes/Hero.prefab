@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2476612363932407074}
   - component: {fileID: 879994518188271650}
   - component: {fileID: 3960321313848937718}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PickupArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 1624180125033308810}
   - component: {fileID: 45990010734342038}
   - component: {fileID: 5300463348190123187}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SenseArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,10 +145,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
+    - target: {fileID: 1250176693954558661, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250176693954558661, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919480173473849464, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 2919480173473849464, guid: bd49ca71ddacf9e4eb935da31cdcce84,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919480173473849464, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4298333225180743979, guid: bd49ca71ddacf9e4eb935da31cdcce84,
         type: 3}
@@ -269,7 +289,6 @@ MonoBehaviour:
   _autoInit: 0
   _autoInitCharacterId: 
   _turnSpeed: 720
-  _senseArea: {fileID: 5300463348190123187}
   _pickupArea: {fileID: 3960321313848937718}
   Drone: {fileID: 0}
 --- !u!4 &8526722243320592372 stripped

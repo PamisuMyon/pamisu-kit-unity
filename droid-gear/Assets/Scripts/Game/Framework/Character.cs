@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Game.Abilities;
 using Game.Configs;
 using PamisuKit.Framework;
+using UnityEngine;
 
 namespace Game.Framework
 {
@@ -14,6 +15,7 @@ namespace Game.Framework
 
         public AttributeComponent AttrComp { get; protected set; }
         public AbilityComponent AbilityComp { get; protected set; }
+        public Collider BodyCollider { get; protected set; }
         public CharacterModel Model { get; protected set; }
         public CharacterConfig Config { get; protected set; }
         public CharacterController Controller { get; internal set; }
@@ -23,6 +25,9 @@ namespace Game.Framework
         public virtual void Init(CharacterConfig config)
         {
             Config = config;
+            var bodyColliderTrans = Trans.Find("BodyCollider");
+            if (bodyColliderTrans != null)
+                BodyCollider = bodyColliderTrans.GetComponent<Collider>();
             Model = GetComponentInChildren<CharacterModel>();
 
             AttrComp = GetComponent<AttributeComponent>();

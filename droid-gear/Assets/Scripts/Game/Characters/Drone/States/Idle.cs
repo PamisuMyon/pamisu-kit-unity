@@ -19,8 +19,10 @@ namespace Game.Characters.Drone.States
             {
                 base.OnUpdate(deltaTime);
 
-                if (Owner.SelectTarget()) 
+                var target = Owner.SelectTarget();
+                if (target != null) 
                 {
+                    Bb.Target = target;
                     Machine.ChangeState<Attack>();
                     return;
                 }

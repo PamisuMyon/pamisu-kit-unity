@@ -61,6 +61,7 @@ namespace Game.Props
 
         public void Activate(Damage damage, Vector3 position, Vector3 direction, int layer)
         {
+            Debug.Log($"Layer: {layer}");
             _damage = damage;
             Go.layer = layer;
             Trans.position = position;

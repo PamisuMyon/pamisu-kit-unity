@@ -110,6 +110,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone
       objectReference: {fileID: 0}
+    - target: {fileID: 1250176693954558661, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 1574606001188712518, guid: bd49ca71ddacf9e4eb935da31cdcce84,
         type: 3}
       propertyPath: FirePoints.Array.size
@@ -220,6 +225,7 @@ MonoBehaviour:
   _autoInitCharacterId: 
   OrbitSpeed: 180
   OrbitRadius: 0.7
+  TargetingFrequency: 0.5
   _senseArea: {fileID: 5275011355962520255}
 --- !u!4 &7929096480607705987 stripped
 Transform:
