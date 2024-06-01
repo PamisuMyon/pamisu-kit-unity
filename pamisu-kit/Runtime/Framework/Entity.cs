@@ -33,19 +33,6 @@ namespace PamisuKit.Framework
             Region.AddEntity(this);
         }
         
-        public void SetupEntity(GameObject go, Region region)
-        {
-            if (Region != null)
-                return;
-            if (go != null)
-            {
-                Go = go;
-                Trans = Go.transform;
-            }
-            Region = region;
-            Region.AddEntity(this);
-        }
-        
         public virtual void Destroy()
         {
             IsPendingDestroy = true;

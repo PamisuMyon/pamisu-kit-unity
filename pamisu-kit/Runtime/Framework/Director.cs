@@ -3,35 +3,21 @@ using UnityEngine;
 
 namespace PamisuKit.Framework
 {
-    public abstract class Director<T> : MonoBehaviour where T : MonoBehaviour
+    public abstract class Director : MonoBehaviour
     {
-
-        public static T Instance { get; private set; }
-
-        [SerializeField]
-        private bool _dontDestroyOnLoad = false;
-        
         protected List<ISystem> Systems;
         public Ticker Ticker { get; protected set; }
         public Region Region { get; protected set; }
 
-        protected void Awake()
+        protected virtual void Awake()
         {
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            Instance = GetComponent<T>();
-            if (_dontDestroyOnLoad)
-                DontDestroyOnLoad(gameObject);
             OnCreate();
         }
 
         protected virtual void OnCreate()
         {
             Ticker = new Ticker();
-            Region = new Region(Ticker, transform);
+            Region = new Region(Ticker, this);
             Systems = new List<ISystem>();
         }
 
@@ -48,9 +34,9 @@ namespace PamisuKit.Framework
         protected virtual void CreateSystem<TSystem>() where TSystem : System, new()
         {
             var system = new TSystem();
-            system.SetupEntity(null, Region);
-            system.OnCreate();
+            system.Setup(null, Region);
             Systems.Add(system);
+            Ticker.Add(system);
         }
 
         protected virtual void CreateMonoSystem<TSystem>() where TSystem : MonoSystem
@@ -58,11 +44,11 @@ namespace PamisuKit.Framework
             var system = GetComponentInChildren<TSystem>();
             if (system == null)
             {
-                var go = new GameObject(typeof(T).Name);
+                var go = new GameObject(typeof(TSystem).Name);
                 go.transform.SetParent(transform);
                 system = go.AddComponent<TSystem>();
-                system.SetupEntity(Region);
             }
+            system.Setup(Region);
             Systems.Add(system);
             Ticker.Add(system);
         }
@@ -83,6 +69,28 @@ namespace PamisuKit.Framework
                 DestroySystem(Systems[i]);
             }
         }
-        
     }
+
+    // public abstract class Director<T> : Director where T : Director
+    // {
+
+    //     public static T Instance { get; private set; }
+
+    //     [SerializeField]
+    //     private bool _dontDestroyOnLoad = false;
+
+    //     protected override void Awake()
+    //     {
+    //         if (Instance != null)
+    //         {
+    //             Destroy(gameObject);
+    //             return;
+    //         }
+    //         Instance = GetComponent<T>();
+    //         if (_dontDestroyOnLoad)
+    //             DontDestroyOnLoad(gameObject);
+    //         base.Awake();
+    //     }
+        
+    // }
 }

@@ -7,7 +7,7 @@ using Game.Combat;
 using Game.Characters.Player;
 using PamisuKit.Framework;
 
-namespace Game.Characters
+namespace Game.Characters.Monster
 {
     public class MonsterController : Framework.CharacterController, IUpdatable
     {
@@ -17,9 +17,12 @@ namespace Game.Characters
         public NavMeshAgent Agent { get; private set; }
         public StateMachine Fsm { get; private set; }
         public MonsterStates.Blackboard Bb { get; private set; }
+        
 
         public override void Init(CharacterConfig config)
         {
+            if (IsInitiated)
+                return;
             base.Init(config);
 
             Agent = GetComponent<NavMeshAgent>();
@@ -48,9 +51,9 @@ namespace Game.Characters
 
         public void SelectTarget()
         {
-            if (CombatDirector.Instance.Bb.Player != null)
+            if (CombatSystem.Instance.Bb.Player != null)
             {
-                Bb.Target = CombatDirector.Instance.Bb.Player.Chara;
+                Bb.Target = CombatSystem.Instance.Bb.Player.Chara;
             }
             else 
             {

@@ -27,7 +27,7 @@ namespace PamisuKit.Common.Pool
                     pool = value;
                 _poolDic[address] = pool;
             }
-            var go = pool.SpawnSync();
+            var go = pool.Spawn();
             if (go != null)
                 _instanceToPoolDic.TryAdd(go.GetInstanceID(), pool);
             return go;

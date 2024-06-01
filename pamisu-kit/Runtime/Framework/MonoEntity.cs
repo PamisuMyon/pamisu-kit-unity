@@ -7,11 +7,11 @@ namespace PamisuKit.Framework
 {
     public class MonoEntity : MonoBehaviour, IEntity
     {
-        public Transform Trans { get; protected set; }
+        public Transform Trans { get; private set; }
 
-        public GameObject Go { get; protected set; }
+        public GameObject Go { get; private set; }
         
-        public Region Region { get; protected set; }
+        public Region Region { get; private set; }
         
         public virtual bool IsActive => !IsPendingDestroy && Go.activeInHierarchy;
 
@@ -19,7 +19,7 @@ namespace PamisuKit.Framework
         
         protected List<IDisposable> EventSubscriptions; 
         
-        public void SetupEntity(Region region, bool reparent = true)
+        public void Setup(Region region, bool reparent = true)
         {
             if (Region != null)
                 return;
@@ -27,6 +27,11 @@ namespace PamisuKit.Framework
             Trans = Go.transform;
             Region = region;
             Region.AddEntity(this, reparent);
+            OnCreate();
+        }
+
+        protected virtual void OnCreate() 
+        {
         }
 
         public void OnDestroy()
@@ -75,5 +80,10 @@ namespace PamisuKit.Framework
             EventSubscriptions.Clear();
         }
         
+        public TDirector GetDirector<TDirector>() where TDirector : Director
+        {
+            return Region.GetDirector<TDirector>();
+        }
+
     }
 }

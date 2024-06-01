@@ -19,7 +19,7 @@ namespace PamisuKit.Framework
             if (name != null)
                 go.name = name;
             var entity = go.GetOrAddComponent<T>();
-            entity.SetupEntity(region);
+            entity.Setup(region);
             return entity;
         }
         
@@ -29,7 +29,7 @@ namespace PamisuKit.Framework
             name ??= typeof(T).Name;
             go.name = name;
             var entity = go.GetOrAddComponent<T>();
-            entity.SetupEntity(region);
+            entity.Setup(region);
             return entity;
         }
         

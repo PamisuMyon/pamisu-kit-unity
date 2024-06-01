@@ -241,7 +241,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 384689852}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &77433230
@@ -256,9 +257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4efe79325dd09458fe2e0b16b896e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dontDestroyOnLoad: 0
-  _levelConfig: {fileID: 11400000, guid: ad7009cf6ebcf95469b85e88b49399c6, type: 2}
-  _playerId: ronin
 --- !u!1001 &115574355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -373,7 +371,7 @@ Transform:
   m_GameObject: {fileID: 140360280}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.13, y: -0.23464966, z: -0.08}
+  m_LocalPosition: {x: 2.78, y: -0.23464966, z: -0.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -557,6 +555,52 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 342872777}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &384689851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 384689852}
+  - component: {fileID: 384689853}
+  m_Layer: 0
+  m_Name: CombatSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &384689852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384689851}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 77433229}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &384689853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384689851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813c1b5b41c349e4391aec7bd300f803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelConfig: {fileID: 11400000, guid: ad7009cf6ebcf95469b85e88b49399c6, type: 2}
+  _playerId: ronin
 --- !u!1 &430921670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,7 +1822,7 @@ Transform:
   m_LocalScale: {x: 7, y: 1, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1907949280}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1479038386
 MeshCollider:
@@ -2758,6 +2802,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1479038385}
   - {fileID: 863353921814104974}
   - {fileID: 1767933191010695731}
   - {fileID: 3548234111643179027}
@@ -3523,7 +3568,7 @@ PrefabInstance:
     - target: {fileID: 600849590515051536, guid: f83ae4698d04fee4cb8758931956cbeb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 600849590515051536, guid: f83ae4698d04fee4cb8758931956cbeb,
         type: 3}
@@ -4563,7 +4608,6 @@ SceneRoots:
   - {fileID: 764363447}
   - {fileID: 1156326678}
   - {fileID: 1019003246}
-  - {fileID: 1479038385}
   - {fileID: 1907949280}
   - {fileID: 1638488018}
   - {fileID: 1490377102}

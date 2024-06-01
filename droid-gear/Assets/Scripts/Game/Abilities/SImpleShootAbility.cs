@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Game.Combat;
 using Game.Common;
 using Game.Configs;
 using Game.Framework;
@@ -46,8 +47,10 @@ namespace Game.Abilities
             var damage = new Damage(Owner, -Owner.AttrComp[AttributeType.Damage].Value);
             var firePoint = Owner.Model.FirePoints[0];
             var direction = _target.Trans.position - firePoint.position;
-            var proj = await Owner.Pooler.Spawn<Projectile>(Config.PrefabRes.RuntimeKey.ToString());
-            proj.SetupEntity(Owner.Region);
+            
+            var pooler = Owner.GetDirector<GameDirector>().Pooler;
+            var proj = await pooler.Spawn<Projectile>(Config.PrefabRes.RuntimeKey.ToString());
+            proj.Setup(Owner.Region);
             proj.Activate(damage, firePoint.position, direction, Owner.Go.layer);
 
             // post-delay

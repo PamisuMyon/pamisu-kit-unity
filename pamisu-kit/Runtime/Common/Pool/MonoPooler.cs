@@ -33,7 +33,7 @@ namespace PamisuKit.Common.Pool
                 _poolDic[address] = pool;
             }
             
-            var item = pool.SpawnSync();
+            var item = pool.Spawn();
             if (item != null)
                 _instanceToPoolDic.TryAdd(item.gameObject.GetInstanceID(), pool);
             return item;

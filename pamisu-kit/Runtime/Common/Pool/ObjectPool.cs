@@ -49,8 +49,9 @@ namespace PamisuKit.Common.Pool
             return UniTask.FromResult<T>(default);
         }
 
-        public T SpawnSync()
+        public T Spawn()
         {
+            Debug.Assert(CreateInstanceFuncSync != null, "CreateInstanceFuncSync is null, make sure you created the pool by the synchronous method, otherwise use SpawnAsync instead.");
             if (AvailableInstances.Count == 0)
             {
                 if (MaxCapacity != -1 && Capacity >= MaxCapacity)
@@ -67,6 +68,7 @@ namespace PamisuKit.Common.Pool
         
         public async UniTask<T> SpawnAsync()
         {
+            Debug.Assert(CreateInstanceFuncAsync != null, "CreateInstanceFuncAsync is null, make sure you created the pool by the asynchronous method, otherwise use Spawn instead.");
             if (AvailableInstances.Count == 0)
             {
                 if (MaxCapacity != -1 && Capacity >= MaxCapacity)

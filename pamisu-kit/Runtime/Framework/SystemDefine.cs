@@ -5,7 +5,7 @@ namespace PamisuKit.Framework
 {
     public interface ISystem
     {
-        void OnCreate();
+        // void OnCreate();
 
         void OnDestroy();
 
@@ -14,6 +14,20 @@ namespace PamisuKit.Framework
 
     public abstract class System : Entity, ISystem
     {
+        public void Setup(GameObject go, Region region)
+        {
+            if (Region != null)
+                return;
+            if (go != null)
+            {
+                Go = go;
+                Trans = Go.transform;
+            }
+            Region = region;
+            Region.AddEntity(this);
+            OnCreate();
+        }
+
         public virtual void OnCreate() {}
 
         public override void OnDestroy() {}
@@ -45,7 +59,7 @@ namespace PamisuKit.Framework
     
     public abstract class MonoSystem : MonoEntity, ISystem
     {
-        public virtual void OnCreate() {}
+        // public virtual void OnCreate() {}
         
         public abstract void Destroy();
     }
@@ -63,7 +77,6 @@ namespace PamisuKit.Framework
                 return;
             }
             Instance = this as T;
-            OnCreate();
         }
         
         public override void Destroy()

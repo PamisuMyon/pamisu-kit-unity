@@ -8,6 +8,8 @@ using PamisuKit.Common.FSM;
 using Game.Characters.Player.States;
 using Game.Framework;
 using PamisuKit.Common.Util;
+using PamisuKit.Common;
+using Game.Events;
 
 namespace Game.Characters.Player
 {
@@ -39,7 +41,7 @@ namespace Game.Characters.Player
             Rb = GetComponent<Rigidbody>();
             MoveSpeed = Chara.AttrComp[AttributeType.MoveSpeed].Value;
 
-            Drone.SetupEntity(Region, false);
+            Drone.Setup(Region, false);
             Drone.Init(Chara);
 
             _pickupArea.TriggerEnter += OnPickupAreaEnter;
@@ -58,6 +60,7 @@ namespace Game.Characters.Player
 
         protected override void OnSelfDestroy()
         {
+            base.OnSelfDestroy();
             Fsm?.OnDestroy();
             _pickupArea.TriggerEnter -= OnPickupAreaEnter;
             if (InputWrapper.Instance != null)
@@ -76,6 +79,16 @@ namespace Game.Characters.Player
         public void OnFixedUpdate(float deltaTime)
         {
             Fsm?.OnFixedUpdate(deltaTime);
+        }
+
+        protected override void OnDie(Character character)
+        {
+            base.OnDie(character);
+            if (Fsm.CurrentState is not PlayerStates.Death) 
+            {
+                Fsm.ChangeState<PlayerStates.Death>();
+                EventBus.Emit(new PlayerDie());
+            }
         }
         
         #region Input Actions

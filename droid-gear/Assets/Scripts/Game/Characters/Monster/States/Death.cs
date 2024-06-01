@@ -1,7 +1,5 @@
 using Cysharp.Threading.Tasks;
-using Game.Characters;
 using Game.Common;
-using UnityEngine;
 
 namespace Game.Characters.Monster.States
 {
@@ -27,13 +25,11 @@ namespace Game.Characters.Monster.States
             {
                 // hard-code
                 await Owner.Region.Ticker.Delay(1.5f, Owner.destroyCancellationToken);
-
                 var targetPos = Owner.Trans.position;
                 targetPos.y -= Owner.Model.VisualHeight - .5f;
-                // TODO
+                // TODO Anim
                 await Owner.Region.Ticker.Delay(1f, Owner.destroyCancellationToken);
-                // TODO Return to pool
-                Object.Destroy(Owner.gameObject);
+                Owner.Chara.Died?.Invoke(Owner.Chara);
             }
 
             // private async UniTaskVoid DropItems()

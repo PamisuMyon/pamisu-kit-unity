@@ -1,15 +1,13 @@
-using System;
 using Cysharp.Threading.Tasks;
 using Game.Common;
 using Game.Framework;
-using PamisuKit.Common.Pool;
 using PamisuKit.Common.Util;
 using PamisuKit.Framework;
 using UnityEngine;
 
 namespace Game.Props
 {
-    public class Projectile : MonoEntity
+    public class Projectile : MonoEntity, IFixedUpdatable
     {
         [SerializeField]
         private float _moveSpeed = 10f;
@@ -31,28 +29,28 @@ namespace Game.Props
         private Rigidbody rb;
         private ParticleGroup _muzzle;
         private ParticleGroup _explosion;
-        private MonoPooler _pooler;
         private Damage _damage;
         private bool _isExploded;
 
-        private void Awake()
+        protected override void OnCreate()
         {
+            base.OnCreate();
             rb = GetComponent<Rigidbody>();
         }
-
-        private void FixedUpdate()
+        
+        public void OnFixedUpdate(float deltaTime)
         {
             if (_isExploded)
                 rb.velocity = Vector3.zero;
             else
-                rb.velocity = transform.forward * _moveSpeed;
+                rb.velocity = _moveSpeed * Region.Ticker.TimeScale * Trans.forward;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (_isExploded) return;
             if (other.isTrigger) return;
-            var explodePos = transform.position;
+            var explodePos = Trans.position;
             if (other.TryGetComponentInDirectParent<Character>(out var chara))
             {
                 chara.AttrComp.ChangeHealth(_damage);
@@ -63,7 +61,7 @@ namespace Game.Props
 
         public void Activate(Damage damage, Vector3 position, Vector3 direction, int layer)
         {
-            _pooler = damage.Instigator.Pooler;
+            _damage = damage;
             Go.layer = layer;
             Trans.position = position;
             Trans.forward = direction;
@@ -98,8 +96,9 @@ namespace Game.Props
             {
                 _otherParts[i].Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
             }
-            _pooler.Release(this);
+            GetDirector<GameDirector>().Pooler.Release(this);
         }
+
     }
     
 }

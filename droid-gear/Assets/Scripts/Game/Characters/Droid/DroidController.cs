@@ -9,6 +9,7 @@ using UnityEngine;
 using Game.Common;
 using Game.Characters.Player;
 using Cysharp.Threading.Tasks;
+using Game.Events;
 
 namespace Game.Characters
 {
@@ -53,6 +54,8 @@ namespace Game.Characters
             Fsm.AddState(new DroidStates.Attack(this));
             Fsm.AddState(new DroidStates.Death(this));
             Fsm.ChangeState<DroidStates.Idle>();
+
+            On<PlayerDie>(OnPlayerDie);
         }
 
         protected override void OnSelfDestroy()
@@ -95,6 +98,12 @@ namespace Game.Characters
                     Bb.Target = null;
                 }
             }
+        }
+
+        private void OnPlayerDie(PlayerDie e)
+        {
+            if (Fsm.CurrentState is not DroidStates.Death)
+                Fsm.ChangeState<DroidStates.Death>();
         }
 
         internal bool SelectTarget()

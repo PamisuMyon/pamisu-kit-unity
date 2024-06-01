@@ -19,4 +19,4 @@ MonoBehaviour:
     SpawnInterval: 0.1
     EnemyIds:
     - mushnub
-    EnemyNum: 10
+    EnemyNum: 2

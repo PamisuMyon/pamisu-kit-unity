@@ -57,7 +57,7 @@ namespace Game.Props
                 return;
             _isPicking = true;
             _picker = picker;
-            _pooler = picker.Pooler;
+            _pooler = picker.GetDirector<GameDirector>().Pooler;
             _onPickComplete = onComplete;
         }
 

@@ -3,6 +3,7 @@ using Game.Configs;
 using Game.Input;
 using PamisuKit.Framework;
 using UnityEditor;
+using UnityEngine;
 
 namespace Game
 {
@@ -12,10 +13,28 @@ namespace Game
         GlobalSystemsReady
     }
 
-    public class GlobalDirector : Director<GlobalDirector>
+    public class GlobalDirector : Director
     {
-        public GameState GameState { get; private set; } = GameState.None;
+        public static GlobalDirector Instance { get; private set; }
         public static bool IsGlobalSystemsReady => Instance != null && Instance.GameState >= GameState.GlobalSystemsReady;
+
+        [SerializeField]
+        private bool _dontDestroyOnLoad = false;
+
+        public GameState GameState { get; private set; } = GameState.None;
+
+        protected override void Awake()
+        {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = GetComponent<GlobalDirector>();
+            if (_dontDestroyOnLoad)
+                DontDestroyOnLoad(gameObject);
+            base.Awake();
+        }
 
         protected override void OnCreate()
         {
