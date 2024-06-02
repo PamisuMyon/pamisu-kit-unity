@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Game.Characters;
 using Game.Characters.Monster;
 using Game.Characters.Player;
 using Game.Configs;
@@ -16,6 +17,8 @@ namespace Game.Combat
         private LevelConfig _levelConfig;
         [SerializeField]
         private string _playerId;
+        [SerializeField]
+        private string _droidId;
 
         public CombatBlackboard Bb { get; private set; }
 
@@ -28,10 +31,11 @@ namespace Game.Combat
         public async UniTaskVoid StartCombat()
         {
             await InitPlayer();
+            await InitDroid();
             PerformLevel().Forget();
         }
 
-        protected async UniTask InitPlayer()
+        private async UniTask InitPlayer()
         {
             if (string.IsNullOrEmpty(_playerId))
                 return;
@@ -55,15 +59,38 @@ namespace Game.Combat
             Bb.Player = player;
         }
 
+        // TODO TEMP
+        private async UniTask InitDroid()
+        {
+            if (string.IsNullOrEmpty(_droidId))
+                return;
+            if (!ConfigSystem.Instance.Characters.TryGetValue(_droidId, out var config))
+            {
+                Debug.LogError($"Droid config of Id {_droidId} not found");
+                return;
+            }
+
+            RandomUtil.RandomPositionOnNavMesh(Bb.Player.Trans.position, 1f, 8f, out var pos);
+            var prefab = await AssetManager.LoadAsset<GameObject>(config.PrefabRef.RuntimeKey.ToString());
+            var go = Instantiate(prefab);
+            var droid = go.GetComponent<DroidController>();
+            droid.Setup(Region);
+            droid.Init(config);
+            droid.Trans.SetPositionAndRotation(pos, RandomUtil.RandomYRotation());
+        }
+
         private async UniTaskVoid PerformLevel()
         {
             TickCombatTimer();
+            if (_levelConfig == null)
+                return;
             var waves = _levelConfig.Waves;
             var enemyStarts = FindObjectsByType<EnemyStart>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
 
             for (int i = 0; i < waves.Count; i++)
             {
-                await PerformWave(waves[i], enemyStarts);
+                PerformWave(waves[i], enemyStarts).Forget();
+                await Region.Ticker.Delay(waves[i].WaveDuration, destroyCancellationToken);
             }
             Debug.Log("All waves processed.");
         }
@@ -92,8 +119,7 @@ namespace Game.Combat
                 }
 
                 var enemyStart = enemyStarts.RandomItem();
-                if (!RandomUtil.RandomPositionOnNavMesh(enemyStart.transform.position, enemyStart.SpawnRadius, out var resultPos))
-                    resultPos = enemyStart.transform.position;
+                RandomUtil.RandomPositionOnNavMesh(enemyStart.transform.position, enemyStart.SpawnRadius, out var resultPos);
 
                 var controller = await pooler.Spawn<MonsterController>(enemyConfig.PrefabRef.RuntimeKey.ToString());
                 controller.transform.SetPositionAndRotation(resultPos, RandomUtil.RandomYRotation());

@@ -9,6 +9,7 @@ using Game.Characters.Player.States;
 using Game.Framework;
 using PamisuKit.Common;
 using Game.Events;
+using Game.Characters.Drone;
 
 namespace Game.Characters.Player
 {
@@ -21,8 +22,7 @@ namespace Game.Characters.Player
         [SerializeField]
         private TriggerArea _pickupArea;
 
-        [SerializeField]
-        private Drone.DroneController Drone;
+        public DroneController Drone;
 
         internal float MoveSpeed;
         internal Vector3 Movement;
@@ -82,6 +82,7 @@ namespace Game.Characters.Player
             if (Fsm.CurrentState is not PlayerStates.Death) 
             {
                 Fsm.ChangeState<PlayerStates.Death>();
+                Drone.Die();
                 EventBus.Emit(new PlayerDie());
             }
         }

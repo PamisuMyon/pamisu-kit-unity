@@ -1,3 +1,4 @@
+using Game.Framework;
 using UnityEngine;
 
 namespace Game.Events
@@ -9,6 +10,12 @@ namespace Game.Events
     {
         public Vector3 WorldPos;
         public string Content;
+    }
+
+    public struct RequestShowDamageText
+    {
+        public Vector3 WorldPos;
+        public Damage Damage;
     }
 
     #endregion

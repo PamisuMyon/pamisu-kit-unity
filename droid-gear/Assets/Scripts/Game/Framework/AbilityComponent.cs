@@ -77,6 +77,15 @@ namespace Game.Framework
             Debug.LogWarning($"{Tag} Try activate ability that not exists: {id}");
             return UniTask.FromResult(false);
         }
+
+        public void ResetAbilities()
+        {
+            for (int i = 0; i < Abilities.Count; i++)
+            {
+                Abilities[i].Cancel();
+                Abilities[i].Cooldown = 0;
+            }
+        }
         
     }
 }

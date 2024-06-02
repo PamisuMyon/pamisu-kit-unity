@@ -4,12 +4,17 @@ using Game.Events;
 using PamisuKit.Common;
 using PamisuKit.Common.Assets;
 using UnityEngine;
+using Game.UI.Common;
+using UnityEngine.AddressableAssets;
+using System;
 
 namespace Game.UI.Combat
 {
-    // TODO TEMP
     public class CombatOverlay : MonoBehaviour
     {
+        [SerializeField]
+        private AssetReferenceGameObject _floatingTextRef;
+
         private RectTransform _rectTrans;
         private Camera _cam;
 
@@ -25,16 +30,16 @@ namespace Game.UI.Combat
         {
             _rectTrans = transform as RectTransform;
             _cam = Camera.main;
-            _floatingTextPrefab = await AssetManager.LoadAsset<GameObject>("Assets/Res/UI/Combat/FloatingText.prefab");
-            EventBus.On<RequestShowFloatingText>(OnRequestShowFloatingText);
+            _floatingTextPrefab = await AssetManager.LoadAsset<GameObject>(_floatingTextRef.RuntimeKey.ToString());
+            EventBus.On<RequestShowDamageText>(OnRequestShowDamageText);
         }
 
         private void OnDestroy()
         {
-            EventBus.Off<RequestShowFloatingText>(OnRequestShowFloatingText);
+            EventBus.Off<RequestShowDamageText>(OnRequestShowDamageText);
         }
 
-        private void OnRequestShowFloatingText(RequestShowFloatingText e)
+        private void OnRequestShowDamageText(RequestShowDamageText e)
         {
             FloatingText floatingText = null;
             for (int i = 0; i < _floatingTextPool.Count; i++)
@@ -55,8 +60,7 @@ namespace Game.UI.Combat
 
             var screenPos = _cam.WorldToScreenPoint(e.WorldPos);
             RectTransformUtility.ScreenPointToLocalPointInRectangle(_rectTrans, screenPos, null, out var localPoint);
-            // Debug.Log($"Screen pos {screenPos}   local pos: {localPoint}");
-            floatingText.Popup(localPoint, e.Content).Forget();
+            floatingText.Popup(localPoint, Math.Abs(e.Damage.Value).ToString()).Forget();
         }
 
     }

@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using Game.Framework;
 using PamisuKit.Common.FSM;
 using PamisuKit.Common.Util;
@@ -18,6 +17,7 @@ namespace Game.Characters.Drone
 
         [SerializeField]
         private TriggerArea _senseArea;
+        private SphereCollider _senseAreaCollider;
 
         internal float CurrentAngle;
         internal Ability AttackAbility;
@@ -34,7 +34,9 @@ namespace Game.Characters.Drone
             CurrentAngle = Mathf.Atan2(offset.z, offset.x) * Mathf.Rad2Deg;
 
             Chara.AbilityComp.TryGetAbility(config.AttackAbility.Id, out AttackAbility);
-            _senseArea.GetComponent<SphereCollider>().radius = AttackAbility.Config.ActRange;
+
+            _senseAreaCollider = _senseArea.GetComponent<SphereCollider>();
+            _senseAreaCollider.radius = AttackAbility.Config.ActRange;
             _senseArea.TriggerEnter += OnSenseAreaEnter;
             _senseArea.TriggerExit += OnSenseAreaExit;
 
@@ -42,6 +44,7 @@ namespace Game.Characters.Drone
             Fsm = new StateMachine();
             Fsm.AddState(new DroneStates.Idle(this));
             Fsm.AddState(new DroneStates.Attack(this));
+            Fsm.AddState(new DroneStates.Death(this));
             Fsm.ChangeState<DroneStates.Idle>();
         }
 
@@ -64,7 +67,7 @@ namespace Game.Characters.Drone
             Trans.localPosition = new Vector3(x, Trans.localPosition.y, z);
         }
 
-        public Character SelectTarget()
+        internal Character SelectTarget()
         {
             if (Bb.Targets.Count == 0)
                 return null;
@@ -82,6 +85,11 @@ namespace Game.Characters.Drone
                 }
             }
             return minTarget;
+        }
+
+        public void Die()
+        {
+            Fsm.ChangeState<DroneStates.Death>();
         }
 
         private void OnSenseAreaEnter(Collider collider)

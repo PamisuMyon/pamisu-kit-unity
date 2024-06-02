@@ -1,4 +1,6 @@
 ﻿using Game.Common;
+using Game.Events;
+using PamisuKit.Common;
 using UnityEngine;
 
 namespace Game.Characters.Droid.States
@@ -24,9 +26,13 @@ namespace Game.Characters.Droid.States
             public override void OnUpdate(float deltaTime)
             {
                 base.OnUpdate(deltaTime);
-                if (Owner.SelectTarget()) 
+
+                var target = Owner.SelectTarget();
+                if (target != null) 
                 {
+                    Bb.Target = target;
                     Bb.ShouldReturnToPlayer = false;
+                    EventBus.Emit(new EnemySpotted(Owner.Chara, target));
                     Machine.ChangeState<Track>();
                     return;
                 }

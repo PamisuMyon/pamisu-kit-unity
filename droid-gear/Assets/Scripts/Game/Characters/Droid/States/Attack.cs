@@ -11,6 +11,7 @@ namespace Game.Characters.Droid.States
         public class Attack : Base
         {
             private Ability _attackAbility;
+            private float _targetingCounter;
             private bool _isLookingAtTarget;
             private bool _isPerformingAttack;
             
@@ -40,7 +41,10 @@ namespace Game.Characters.Droid.States
                 Owner.Model.Anim.SetBool(AnimConst.IsRunning, Owner.Agent.velocity != Vector3.zero);
 
                 if (_isPerformingAttack)
+                {
+                    _targetingCounter -= deltaTime;
                     return;
+                }
                 if (!_isLookingAtTarget)
                 {
                     var dir = Bb.Target.Trans.position - Owner.Chara.Trans.position;
@@ -50,8 +54,9 @@ namespace Game.Characters.Droid.States
 
                 if (_isLookingAtTarget && _attackAbility.CanActivate())
                 {
-                    PerformAttack().Forget();
+                    _targetingCounter = Owner.TargetingFrequency;
                     _isPerformingAttack = true;
+                    PerformAttack().Forget();
                 }
             }
 
@@ -70,17 +75,27 @@ namespace Game.Characters.Droid.States
                     return;
                 }
 
-                if (Owner.Chara.IsAdjacent(Bb.Target, .2f))
+                if (_targetingCounter < 0)
                 {
-                    // Debug.Log("Target in range, keep attacking", Owner.gameObject);
+                    _targetingCounter = Owner.TargetingFrequency;
+                    var target = Owner.SelectTarget();
+                    if (target != null && target != Bb.Target) 
+                    {
+                        Bb.Target = target;
+                        _attackAbility.SetTarget(new AbilityTargetInfo { MainTarget = Bb.Target });
+                    }
+                }
+
+                if (Owner.Chara.IsAdjacent(Bb.Target, _attackAbility.Config.ActRange))
+                {
                     _isLookingAtTarget = false;
                 }
                 else
                 {
-                    // Debug.Log("Target not in range, tracking", Owner.gameObject);
                     Machine.ChangeState<Track>();
                     return;
                 }
+
             }
             
         }

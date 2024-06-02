@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
-namespace Game.UI
+namespace Game.UI.Common
 {
     public class FloatingText : MonoBehaviour
     {

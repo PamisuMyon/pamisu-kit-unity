@@ -1,13 +1,15 @@
 using Cysharp.Threading.Tasks;
+using Game.Combat;
 using Game.Common;
 using Game.Framework;
+using PamisuKit.Common.Pool;
 using PamisuKit.Common.Util;
 using PamisuKit.Framework;
 using UnityEngine;
 
 namespace Game.Props
 {
-    public class Projectile : MonoEntity, IFixedUpdatable
+    public class Projectile : MonoEntity, IFixedUpdatable, IPoolElement
     {
         [SerializeField]
         private float _moveSpeed = 10f;
@@ -30,7 +32,7 @@ namespace Game.Props
         private ParticleGroup _muzzle;
         private ParticleGroup _explosion;
         private Damage _damage;
-        private bool _isExploded;
+        private bool _isHit;
 
         protected override void OnCreate()
         {
@@ -40,7 +42,7 @@ namespace Game.Props
         
         public void OnFixedUpdate(float deltaTime)
         {
-            if (_isExploded)
+            if (_isHit)
                 rb.velocity = Vector3.zero;
             else
                 rb.velocity = _moveSpeed * Region.Ticker.TimeScale * Trans.forward;
@@ -48,26 +50,35 @@ namespace Game.Props
 
         private void OnTriggerEnter(Collider other)
         {
-            if (_isExploded) return;
+            if (_isHit) return;
             if (other.isTrigger) return;
-            var explodePos = Trans.position;
-            if (other.TryGetComponentInDirectParent<Character>(out var chara))
+            var hitPos = Trans.position;
+            if (other.TryGetComponentInDirectParent<Character>(out var target))
             {
-                chara.AttrComp.ChangeHealth(_damage);
+                DamageHelper.ApplyDamage(_damage, target);
             }
 
-            Explode(explodePos).Forget();
+            Hit(hitPos).Forget();
+        }
+
+        public void OnSpawnFromPool()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public void OnReleaseToPool()
+        {
+            gameObject.SetActive(false);
         }
 
         public void Activate(Damage damage, Vector3 position, Vector3 direction, int layer)
         {
-            Debug.Log($"Layer: {layer}");
+            _isHit = false;
             _damage = damage;
             Go.layer = layer;
             Trans.position = position;
             Trans.forward = direction;
             _body.SetActive(true);
-            _isExploded = false;
 
             if (_showMuzzle && _muzzlePrefab != null)
             {
@@ -79,9 +90,9 @@ namespace Game.Props
             }
         }
 
-        private async UniTaskVoid Explode(Vector3 explodePosition)
+        private async UniTaskVoid Hit(Vector3 explodePosition)
         {
-            _isExploded = true;
+            _isHit = true;
             if (_explosionPrefab != null)
             {
                 if (_explosion == null)

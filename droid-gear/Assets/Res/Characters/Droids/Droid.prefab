@@ -163,6 +163,10 @@ PrefabInstance:
       addedObject: {fileID: 6360737777274265777}
     - targetCorrespondingSourceObject: {fileID: 1250176693954558661, guid: bd49ca71ddacf9e4eb935da31cdcce84,
         type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 3773107197343356915}
+    - targetCorrespondingSourceObject: {fileID: 1250176693954558661, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 3880720634868564250}
   m_SourcePrefab: {fileID: 100100000, guid: bd49ca71ddacf9e4eb935da31cdcce84, type: 3}
@@ -183,7 +187,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 1080
   m_StoppingDistance: 0
@@ -194,6 +198,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!54 &3773107197343356915
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5573579281044308509}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!114 &3880720634868564250
 MonoBehaviour:
   m_ObjectHideFlags: 0

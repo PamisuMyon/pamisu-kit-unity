@@ -22,7 +22,10 @@ namespace Game.Characters.Monster
         public override void Init(CharacterConfig config)
         {
             if (IsInitiated)
+            {
+                ReInit();
                 return;
+            }
             base.Init(config);
 
             Agent = GetComponent<NavMeshAgent>();
@@ -36,6 +39,13 @@ namespace Game.Characters.Monster
             Fsm.AddState(new MonsterStates.Track(this));
             Fsm.AddState(new MonsterStates.Attack(this));
             Fsm.AddState(new MonsterStates.Death(this));
+            Fsm.ChangeState<MonsterStates.Idle>();
+        }
+
+        public void ReInit()
+        {
+            Chara.AttrComp.Revive();
+            Chara.AbilityComp.ResetAbilities();
             Fsm.ChangeState<MonsterStates.Idle>();
         }
 

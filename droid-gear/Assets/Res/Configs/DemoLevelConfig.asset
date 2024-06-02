@@ -15,6 +15,16 @@ MonoBehaviour:
   Id: 1001
   EnemyLimit: 200
   Waves:
+  - WaveDuration: 10
+    SpawnInterval: 0.1
+    EnemyIds:
+    - mushnub
+    EnemyNum: 10
+  - WaveDuration: 20
+    SpawnInterval: 0.1
+    EnemyIds:
+    - mushnub
+    EnemyNum: 10
   - WaveDuration: 20
     SpawnInterval: 0.1
     EnemyIds:

@@ -91,7 +91,7 @@ namespace PamisuKit.Common.Util
                     return true;
                 }
             }
-            result = Vector3.zero;
+            result = center;
             return false;
         }
 
@@ -107,7 +107,7 @@ namespace PamisuKit.Common.Util
                     return true;
                 }
             }
-            result = Vector3.zero;
+            result = center;
             return false;
         }
 

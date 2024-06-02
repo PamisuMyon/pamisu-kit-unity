@@ -1,5 +1,8 @@
 namespace Game.Framework
 {
+    /// <summary>
+    /// Damage and healing
+    /// </summary>
     public struct Damage
     {
         public Character Instigator;

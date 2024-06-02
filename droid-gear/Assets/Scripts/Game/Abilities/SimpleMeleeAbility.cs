@@ -34,7 +34,7 @@ namespace Game.Combat.Abilities.Spec
 
             Debug.Log($"{Owner.Go} Attack {_target.Go}");
             var damage = new Damage(Owner, -Owner.AttrComp[AttributeType.Damage].Value);
-            _target.AttrComp.ChangeHealth(damage);
+            DamageHelper.ApplyDamage(damage, _target);
 
             if (Config.ActPostDelay != 0)
                 await Owner.Region.Ticker.Delay(Config.ActPostDelay, cancellationToken);

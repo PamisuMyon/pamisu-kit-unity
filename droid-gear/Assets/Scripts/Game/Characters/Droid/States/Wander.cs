@@ -1,5 +1,7 @@
 using Game.Common;
+using Game.Events;
 using Game.Framework;
+using PamisuKit.Common;
 using PamisuKit.Common.Util;
 using UnityEngine;
 
@@ -19,6 +21,7 @@ namespace Game.Characters.Droid.States
                 if (RandomUtil.RandomPositionOnNavMesh(Owner.Trans.position, Owner.WanderRange.x, Owner.WanderRange.y, out var point))
                 {
                     Owner.Agent.destination = point;
+                    Owner.Agent.isStopped = false;
                 }
                 else
                     Machine.ChangeState<Idle>();
@@ -34,9 +37,13 @@ namespace Game.Characters.Droid.States
             public override void OnUpdate(float deltaTime)
             {
                 base.OnUpdate(deltaTime); 
-                if (Owner.SelectTarget()) 
+                
+                var target = Owner.SelectTarget();
+                if (target != null) 
                 {
+                    Bb.Target = target;
                     Bb.ShouldReturnToPlayer = false;
+                    EventBus.Emit(new EnemySpotted(Owner.Chara, target));
                     Machine.ChangeState<Track>();
                     return;
                 }
@@ -49,7 +56,7 @@ namespace Game.Characters.Droid.States
                     && !Owner.Agent.pathPending 
                     && Owner.Agent.remainingDistance < Owner.Agent.stoppingDistance + 0.1f)
                 {
-                    Machine.ChangeState<Attack>();
+                    Machine.ChangeState<Idle>();
                     return;
                 }
 

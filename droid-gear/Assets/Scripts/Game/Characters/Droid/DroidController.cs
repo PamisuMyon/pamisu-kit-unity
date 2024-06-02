@@ -10,6 +10,9 @@ using Game.Common;
 using Game.Characters.Player;
 using Cysharp.Threading.Tasks;
 using Game.Events;
+using Game.Combat;
+using System.Collections.Generic;
+using PamisuKit.Common;
 
 namespace Game.Characters
 {
@@ -17,11 +20,12 @@ namespace Game.Characters
     {
         [SerializeField]
         private TriggerArea _senseArea;
+        // private SphereCollider _senseAreaCollider;
 
         public float TrackFrequency = .2f;
-        public float TargetingFrequency = 1f;
+        public float TargetingFrequency = 2f;
         public float TurnSpeed = 720f;
-        public Vector2 WanderRange = new(1f, 5f);
+        public Vector2 WanderRange = new(2f, 6f);
 
         public DroidConfig DroidConfig { get; private set; }
         public NavMeshAgent Agent { get; private set; }
@@ -42,9 +46,11 @@ namespace Game.Characters
             UniTask.Action(async () => 
             {
                 await UniTask.Yield();
-                Bb.Player = FindFirstObjectByType<PlayerController>().Chara;
+                // Bb.Player = FindFirstObjectByType<PlayerController>().Chara;
+                Bb.Player = CombatSystem.Instance.Bb.Player.Chara;
             })();
 
+            // _senseAreaCollider = _senseArea.GetComponent<SphereCollider>();
             _senseArea.TriggerEnter += OnSenseAreaEnter;
             _senseArea.TriggerExit += OnSenseAreaExit;
 
@@ -57,6 +63,7 @@ namespace Game.Characters
             Fsm.ChangeState<DroidStates.Idle>();
 
             On<PlayerDie>(OnPlayerDie);
+            On<EnemySpotted>(OnEnemySpotted);
         }
 
         protected override void OnSelfDestroy()
@@ -94,10 +101,11 @@ namespace Game.Characters
             if (collider.gameObject.TryGetComponentInDirectParent(out Character character))
             {
                 Bb.Targets.Remove(character);
-                if (Bb.Target == character) 
-                {
-                    Bb.Target = null;
-                }
+                // dont clear current target
+                // if (Bb.Target == character) 
+                // {
+                //     Bb.Target = null;
+                // }
             }
         }
 
@@ -107,23 +115,50 @@ namespace Game.Characters
                 Fsm.ChangeState<DroidStates.Death>();
         }
 
-        internal bool SelectTarget()
+        private void OnEnemySpotted(EnemySpotted e)
         {
-            if (Bb.Targets.Count == 0)
-                return false;
+            if (e.Instigator == Chara)
+                return;
+            var currentState = Fsm.CurrentState;
+            if (currentState is DroidStates.Death
+                || (currentState is DroidStates.Track
+                    && !Bb.ShouldReturnToPlayer)
+                || currentState is DroidStates.Attack)
+                return;
+            Bb.Target = e.Target;
+            Bb.ShouldReturnToPlayer = false;
+            Fsm.ChangeState<DroidStates.Track>();
+            return;
+        }
+
+        internal Character SelectTarget()
+        {
+            List<Character> targets = null;
+            if (Bb.Targets.Count != 0)
+                targets = Bb.Targets;
+            else if (Bb.Player != null && Bb.Player.IsAlive)
+            {
+                var pc = Bb.Player.Controller as PlayerController;
+                if (pc.Drone.Bb.Targets.Count != 0)
+                    targets = pc.Drone.Bb.Targets;
+            }
+            if (targets == null)
+                return null;
+
             var minDis = float.MaxValue;
-            var minTarget = Bb.Targets[0];
+            Character minTarget = null;
             for (int i = 0; i < Bb.Targets.Count; i++)
             {
-                var dis = Bb.Targets[i].Trans.position - Chara.Trans.position;
+                if (targets[i] == null || !targets[i].IsAlive)
+                    continue;                    
+                var dis = targets[i].Trans.position - Bb.Player.Trans.position;
                 if (dis.sqrMagnitude < minDis)
                 {
                     minDis = dis.sqrMagnitude;
                     minTarget = Bb.Targets[i];
                 }
             }
-            Bb.Target = minTarget;
-            return true;
+            return minTarget;
         }
 
 #if UNITY_EDITOR
