@@ -14,18 +14,19 @@ namespace PamisuKit.Common.Assets
 
     public class AssetManager
     {
-        private static readonly Dictionary<string, object> _assets = new Dictionary<string, object>();
+        private static readonly Dictionary<object, object> _assets = new();
 
-        public static UniTask<T> LoadAsset<T>(string key, AssetRefCountMode mode = AssetRefCountMode.Single)
+        public static UniTask<T> LoadAsset<T>(object key, AssetRefCountMode mode = AssetRefCountMode.Single)
         {
             if (mode == AssetRefCountMode.Single)
                 return LoadAssetSingleRefCount<T>(key);
             return LoadAssetMultipleRefCount<T>(key);
         }
 
-        private static async UniTask<T> LoadAssetSingleRefCount<T>(string key)
+        private static async UniTask<T> LoadAssetSingleRefCount<T>(object key)
         {
-            if (_assets.TryGetValue(key, out var obj))
+            object dictKey = key is IKeyEvaluator? (key as IKeyEvaluator).RuntimeKey : key;
+            if (_assets.TryGetValue(dictKey, out var obj))
             {
                 if (obj is T assetT)
                     return assetT;
@@ -37,13 +38,13 @@ namespace PamisuKit.Common.Assets
             try
             {
                 var asset = await Addressables.LoadAssetAsync<T>(key).ToUniTask();
-                if (_assets.TryGetValue(key, out var obj1) && obj1 is T assetT)
+                if (_assets.TryGetValue(dictKey, out var obj1) && obj1 is T assetT)
                 {
-                    // Addressables.Release(key); // 减少本次多余的引用计数
+                    // Addressables.Release(key);
                     return assetT;
                 }
 
-                _assets[key] = asset;
+                _assets[dictKey] = asset;
                 return asset;
             }
             catch (Exception e)
@@ -55,7 +56,7 @@ namespace PamisuKit.Common.Assets
             }
         }
 
-        private static async UniTask<T> LoadAssetMultipleRefCount<T>(string key)
+        private static async UniTask<T> LoadAssetMultipleRefCount<T>(object key)
         {
             try
             {
@@ -71,7 +72,7 @@ namespace PamisuKit.Common.Assets
             }
         }
 
-        public static async UniTask<GameObject> Instantiate(string key, Transform parent = null, bool inWorldSpace = false, bool trackHandle = true)
+        public static async UniTask<GameObject> Instantiate(object key, Transform parent = null, bool inWorldSpace = false, bool trackHandle = true)
         {
             try
             {
@@ -87,13 +88,14 @@ namespace PamisuKit.Common.Assets
             }
         }
 
-        public static void Release(string key)
+        public static void Release(object key)
         {
-            if (_assets.ContainsKey(key))
+            object dictKey = key is IKeyEvaluator? (key as IKeyEvaluator).RuntimeKey : key;
+            if (_assets.ContainsKey(dictKey))
             {
-                _assets.Remove(key);
+                _assets.Remove(dictKey);
             }
-            Addressables.Release(key);
+            Addressables.Release(dictKey);
         }
 
         public static void ReleaseInstance(GameObject go)

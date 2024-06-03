@@ -99,15 +99,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 10
   _showMuzzle: 1
-  _muzzlePrefab: {fileID: 2293557352434619339, guid: 185e0861f71dfce4cb82b5ad6733940f,
-    type: 3}
-  _explosionPrefab: {fileID: 5439200296401347323, guid: 113021ab3f3a34d0cb0e03055e787f88,
-    type: 3}
+  _muzzleRef:
+    m_AssetGUID: 185e0861f71dfce4cb82b5ad6733940f
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _explosionRef:
+    m_AssetGUID: 113021ab3f3a34d0cb0e03055e787f88
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   _body: {fileID: 1366800498901944848}
   _otherParts:
   - {fileID: 1366800498821707601}
   _otherPartsRecycleDelay: 1
-  _isExploded: 0
 --- !u!1 &1366800498793047457
 GameObject:
   m_ObjectHideFlags: 0

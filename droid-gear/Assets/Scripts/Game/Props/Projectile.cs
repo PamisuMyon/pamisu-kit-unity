@@ -6,6 +6,7 @@ using PamisuKit.Common.Pool;
 using PamisuKit.Common.Util;
 using PamisuKit.Framework;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Game.Props
 {
@@ -14,11 +15,13 @@ namespace Game.Props
         [SerializeField]
         private float _moveSpeed = 10f;
         [SerializeField]
+        private float _maxLifetime = 2f;
+        [SerializeField]
         private bool _showMuzzle = true;
         [SerializeField]
-        private ParticleGroup _muzzlePrefab;
+        private AssetReferenceGameObject _muzzleRef;
         [SerializeField]
-        private ParticleGroup _explosionPrefab;
+        private AssetReferenceGameObject _explosionRef;
 
         [Space]
         [SerializeField]
@@ -29,8 +32,6 @@ namespace Game.Props
         private float _otherPartsRecycleDelay = 1f;
 
         private Rigidbody rb;
-        private ParticleGroup _muzzle;
-        private ParticleGroup _explosion;
         private Damage _damage;
         private bool _isHit;
 
@@ -80,26 +81,20 @@ namespace Game.Props
             Trans.forward = direction;
             _body.SetActive(true);
 
-            if (_showMuzzle && _muzzlePrefab != null)
+            LifetimeCountdown().Forget();
+
+            if (_showMuzzle && _muzzleRef != null)
             {
-                if (_muzzle == null)
-                    _muzzle = Instantiate(_muzzlePrefab, Trans.parent);
-                _muzzle.transform.position = Trans.position;
-                _muzzle.Clear();
-                _muzzle.Play();
+                SpawnAndReleaseParticleGroupAsync(_muzzleRef, Trans.position).Forget();
             }
         }
 
         private async UniTaskVoid Hit(Vector3 explodePosition)
         {
             _isHit = true;
-            if (_explosionPrefab != null)
+            if (_explosionRef != null)
             {
-                if (_explosion == null)
-                    _explosion = Instantiate(_explosionPrefab, Trans.parent);
-                _explosion.transform.position = explodePosition;
-                _explosion.Clear();
-                _explosion.Play();
+                SpawnAndReleaseParticleGroupAsync(_explosionRef, explodePosition).Forget();
             }
 
             _body.SetActive(false);
@@ -109,6 +104,29 @@ namespace Game.Props
                 _otherParts[i].Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
             }
             GetDirector<GameDirector>().Pooler.Release(this);
+        }
+
+        private async UniTaskVoid SpawnAndReleaseParticleGroupAsync(object key, Vector3 position)
+        {
+            var pooler = GetDirector<GameDirector>().Pooler;
+            var muzzle = await pooler.Spawn<ParticleGroup>(key);
+            muzzle.transform.position = position;
+            muzzle.PlayAndRelease(Region.Ticker, pooler).Forget();
+        }
+
+        private async UniTaskVoid LifetimeCountdown()
+        {
+            var counter = _maxLifetime;
+            while (!_isHit && !destroyCancellationToken.IsCancellationRequested)
+            {
+                await UniTask.Yield(destroyCancellationToken);
+                counter -= Region.Ticker.DeltaTime;
+                if (counter <= 0)
+                {
+                    GetDirector<GameDirector>().Pooler.Release(this);
+                    break;
+                }
+            }
         }
 
     }

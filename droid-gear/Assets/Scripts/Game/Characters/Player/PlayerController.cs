@@ -29,7 +29,7 @@ namespace Game.Characters.Player
         // internal UnityEngine.CharacterController Cc { get; private set; }
         internal Rigidbody Rb { get; private set; }
         public StateMachine Fsm { get; private set; }
-        public PlayerStates.Blackboard Bb { get; private set; }
+        // public PlayerStates.Blackboard Bb { get; private set; }
         
         public override void Init(CharacterConfig config)
         {
@@ -46,7 +46,7 @@ namespace Game.Characters.Player
             InputWrapper.Actions.Combat.Move.performed += OnMove;
             InputWrapper.Actions.Combat.Move.canceled += OnMove;
 
-            Bb = new PlayerStates.Blackboard();
+            // Bb = new PlayerStates.Blackboard();
             Fsm = new StateMachine();
             Fsm.AddState(new PlayerStates.Normal(this));
             Fsm.AddState(new PlayerStates.Death(this));

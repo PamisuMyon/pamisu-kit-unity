@@ -2,25 +2,27 @@ using System;
 using Cysharp.Threading.Tasks;
 using PamisuKit.Common.Assets;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace PamisuKit.Common.Pool
 {
     public class MonoPool<T> : ObjectPool<T> where T : Component 
     {
-        protected string Address;
+        protected object Key;
         protected GameObject Prefab;
         protected Transform Root;
 
-        public static async UniTask<MonoPool<T>> Create(string address, Transform root, int maxCapacity = -1, bool autoManagePoolElement = true)
+        public static async UniTask<MonoPool<T>> Create(object key, Transform root, int maxCapacity = -1, bool autoManagePoolElement = true)
         {
-            var prefab = await AssetManager.LoadAsset<GameObject>(address);
-            var pool = new MonoPool<T>(address, prefab, root, maxCapacity, autoManagePoolElement);
+            object realKey = key is IKeyEvaluator? (key as IKeyEvaluator).RuntimeKey : key;
+            var prefab = await AssetManager.LoadAsset<GameObject>(realKey);
+            var pool = new MonoPool<T>(realKey, prefab, root, maxCapacity, autoManagePoolElement);
             return pool;
         }
         
-        protected MonoPool(string address, GameObject prefab, Transform root, int maxCapacity = -1, bool autoManagePoolElement = true)
+        protected MonoPool(object key, GameObject prefab, Transform root, int maxCapacity = -1, bool autoManagePoolElement = true)
         {
-            Address = address;
+            Key = key;
             Prefab = prefab;
             Root = root;
             MaxCapacity = maxCapacity;
@@ -38,7 +40,7 @@ namespace PamisuKit.Common.Pool
         
         public virtual void Destroy()
         {
-            AssetManager.Release(Address);
+            AssetManager.Release(Key);
         }
     }
 

@@ -7,7 +7,7 @@ namespace Game.Characters.Player.States
         public abstract class Base : State
         {
             protected PlayerController Owner;
-            protected Blackboard Bb => Owner.Bb;
+            // protected Blackboard Bb => Owner.Bb;
 
             protected Base(PlayerController owner)
             {

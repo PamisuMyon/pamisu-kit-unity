@@ -10,7 +10,7 @@ namespace Game.Framework
         protected override void OnCreate()
         {
             base.OnCreate();
-            Pooler = new MonoPooler(transform);
+            Pooler = new MonoPooler(Region.Trans);
         }
     }
 }

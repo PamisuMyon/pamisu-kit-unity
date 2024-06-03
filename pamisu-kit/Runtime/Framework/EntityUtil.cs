@@ -7,9 +7,9 @@ namespace PamisuKit.Framework
 {
     public static class EntityUtil
     {
-        public static async UniTask<T> InstantiateMonoEntity<T>(this Region region, string address, string name = null) where T : MonoEntity
+        public static async UniTask<T> InstantiateMonoEntity<T>(this Region region, object key, string name = null) where T : MonoEntity
         {
-            var prefab = await AssetManager.LoadAsset<GameObject>(address);
+            var prefab = await AssetManager.LoadAsset<GameObject>(key);
             return InstantiateMonoEntity<T>(region, prefab, name);
         }
 

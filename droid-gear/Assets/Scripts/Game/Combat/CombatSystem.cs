@@ -50,7 +50,7 @@ namespace Game.Combat
             }
 
             var playerStart = playerStarts.RandomItem().transform;
-            var prefab = await AssetManager.LoadAsset<GameObject>(config.PrefabRef.RuntimeKey.ToString());
+            var prefab = await AssetManager.LoadAsset<GameObject>(config.PrefabRef);
             var go = Instantiate(prefab);
             var player = go.GetComponent<PlayerController>();
             player.Setup(Region);
@@ -71,7 +71,7 @@ namespace Game.Combat
             }
 
             RandomUtil.RandomPositionOnNavMesh(Bb.Player.Trans.position, 1f, 8f, out var pos);
-            var prefab = await AssetManager.LoadAsset<GameObject>(config.PrefabRef.RuntimeKey.ToString());
+            var prefab = await AssetManager.LoadAsset<GameObject>(config.PrefabRef);
             var go = Instantiate(prefab);
             var droid = go.GetComponent<DroidController>();
             droid.Setup(Region);
@@ -122,10 +122,10 @@ namespace Game.Combat
                 RandomUtil.RandomPositionOnNavMesh(enemyStart.transform.position, enemyStart.SpawnRadius, out var resultPos);
 
                 var controller = await pooler.Spawn<MonsterController>(enemyConfig.PrefabRef.RuntimeKey.ToString());
+                controller.gameObject.SetActive(true);
                 controller.transform.SetPositionAndRotation(resultPos, RandomUtil.RandomYRotation());
                 controller.Setup(Region);
                 controller.Init(enemyConfig);
-                controller.gameObject.SetActive(true);
                 controller.Chara.Die += OnMonsterDie;
                 controller.Chara.Died += OnMonsterDied;
 

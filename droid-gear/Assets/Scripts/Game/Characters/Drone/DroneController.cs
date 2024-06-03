@@ -73,10 +73,13 @@ namespace Game.Characters.Drone
                 return null;
             var minDis = float.MaxValue;
             Character minTarget = null;
-            for (int i = 0; i < Bb.Targets.Count; i++)
+            for (int i = Bb.Targets.Count - 1; i >= 0; i--)
             {
                 if (Bb.Targets[i] == null || !Bb.Targets[i].IsAlive)
-                    continue;                    
+                {
+                    Bb.Targets.RemoveAt(i);
+                    continue;
+                }
                 var dis = Bb.Targets[i].Trans.position - Chara.Trans.position;
                 if (dis.sqrMagnitude < minDis)
                 {

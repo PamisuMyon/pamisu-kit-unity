@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace PamisuKit.Common.Pool
 {
     public class GameObjectPooler
     {
-        private readonly Dictionary<string, GameObjectPool> _poolDic = new();
+        private readonly Dictionary<object, GameObjectPool> _poolDic = new();
         private readonly Dictionary<int, GameObjectPool> _instanceToPoolDic = new();
         private Transform _root;
 
@@ -18,14 +19,15 @@ namespace PamisuKit.Common.Pool
                 _root = new GameObject("GameObjectPoolerRoot").transform;
         }
         
-        public async UniTask<GameObject> Spawn(string address, int maxCapacity = -1)
+        public async UniTask<GameObject> Spawn(object key, int maxCapacity = -1)
         {
-            if (!_poolDic.TryGetValue(address, out var pool))
+            object realKey = key is IKeyEvaluator? (key as IKeyEvaluator).RuntimeKey : key;
+            if (!_poolDic.TryGetValue(realKey, out var pool))
             {
-                pool = await GameObjectPool.Create(address, _root, maxCapacity);
-                if (_poolDic.TryGetValue(address, out var value))
+                pool = await GameObjectPool.Create(realKey, _root, maxCapacity);
+                if (_poolDic.TryGetValue(realKey, out var value))
                     pool = value;
-                _poolDic[address] = pool;
+                _poolDic[realKey] = pool;
             }
             var go = pool.Spawn();
             if (go != null)

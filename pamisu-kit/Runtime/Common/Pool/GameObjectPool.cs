@@ -1,25 +1,27 @@
 ﻿using Cysharp.Threading.Tasks;
 using PamisuKit.Common.Assets;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace PamisuKit.Common.Pool
 {
     public class GameObjectPool : ObjectPool<GameObject>
     {
-        protected string Address;
+        protected object Key;
         protected GameObject Prefab;
         protected Transform Root;
 
-        public static async UniTask<GameObjectPool> Create(string address, Transform root, int maxCapacity = -1)
+        public static async UniTask<GameObjectPool> Create(object key, Transform root, int maxCapacity = -1)
         {
-            var prefab = await AssetManager.LoadAsset<GameObject>(address);
-            var pool = new GameObjectPool(address, prefab, root, maxCapacity);
+            object realKey = key is IKeyEvaluator? (key as IKeyEvaluator).RuntimeKey : key;
+            var prefab = await AssetManager.LoadAsset<GameObject>(realKey);
+            var pool = new GameObjectPool(realKey, prefab, root, maxCapacity);
             return pool;
         }
         
-        protected GameObjectPool(string address, GameObject prefab, Transform root, int maxCapacity = -1)
+        protected GameObjectPool(object key, GameObject prefab, Transform root, int maxCapacity = -1)
         {
-            Address = address;
+            Key = key;
             Prefab = prefab;
             Root = root;
             MaxCapacity = maxCapacity;
@@ -34,7 +36,7 @@ namespace PamisuKit.Common.Pool
         
         public virtual void Destroy()
         {
-            AssetManager.Release(Address);
+            AssetManager.Release(Key);
         }
         
     }

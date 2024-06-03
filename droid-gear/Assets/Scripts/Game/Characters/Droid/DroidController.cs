@@ -147,15 +147,18 @@ namespace Game.Characters
 
             var minDis = float.MaxValue;
             Character minTarget = null;
-            for (int i = 0; i < Bb.Targets.Count; i++)
+            for (int i = targets.Count - 1; i >= 0; i--)
             {
                 if (targets[i] == null || !targets[i].IsAlive)
+                {
+                    targets.RemoveAt(i);
                     continue;                    
+                }
                 var dis = targets[i].Trans.position - Bb.Player.Trans.position;
                 if (dis.sqrMagnitude < minDis)
                 {
                     minDis = dis.sqrMagnitude;
-                    minTarget = Bb.Targets[i];
+                    minTarget = targets[i];
                 }
             }
             return minTarget;

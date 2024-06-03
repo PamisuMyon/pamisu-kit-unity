@@ -77,6 +77,41 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 04c8a89e2e822174c98d1d9ac1f400f7
+    m_Address: Assets/Res/Vfx/Explosions/ExplosionLightBig.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb834d3cbbdd81e4aafe258db0b8beda
+    m_Address: Assets/Res/Vfx/Explosions/ExplosionScorch02Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 113021ab3f3a34d0cb0e03055e787f88
+    m_Address: Assets/Res/Vfx/Explosions/ExplosionScorch03Light.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3d8561bf51a7474bbdeb276a9d3bc4b
+    m_Address: Assets/Res/Vfx/Explosions/ExplosionSimpleRed.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 185e0861f71dfce4cb82b5ad6733940f
+    m_Address: Assets/Res/Vfx/Muzzles/MuzzleSimpleLight.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e3184a421d3bae4d921ea96bf6917b9
+    m_Address: Assets/Res/Vfx/Muzzles/MuzzleSimpleRed.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d12044f30c7de24da0996e0ceaa4511
+    m_Address: Assets/Res/Vfx/Muzzles/Muzzle04Blue.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c22d07014cbbd544a9de5aea1c1203a0, type: 2}
   m_SchemaSet:

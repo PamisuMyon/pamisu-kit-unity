@@ -30,7 +30,7 @@ namespace Game.UI.Combat
         {
             _rectTrans = transform as RectTransform;
             _cam = Camera.main;
-            _floatingTextPrefab = await AssetManager.LoadAsset<GameObject>(_floatingTextRef.RuntimeKey.ToString());
+            _floatingTextPrefab = await AssetManager.LoadAsset<GameObject>(_floatingTextRef);
             EventBus.On<RequestShowDamageText>(OnRequestShowDamageText);
         }
 

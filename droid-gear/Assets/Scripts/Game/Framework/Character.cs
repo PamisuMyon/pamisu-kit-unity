@@ -59,9 +59,8 @@ namespace Game.Framework
             // EventBus.Emit(new CharacterHealthChanged(this, newHealth, attrComp[AttributeType.MaxHealth].Value,delta));
         }
         
-        public virtual async UniTask Revive()
+        public void Revive()
         {
-            await Region.Ticker.Delay(2f, destroyCancellationToken);
             AttrComp.Revive();
             IsAlive = AttrComp[AttributeType.Health].Value > 0;
         }

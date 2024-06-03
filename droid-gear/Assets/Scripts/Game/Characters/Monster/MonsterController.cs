@@ -44,7 +44,7 @@ namespace Game.Characters.Monster
 
         public void ReInit()
         {
-            Chara.AttrComp.Revive();
+            Chara.Revive();
             Chara.AbilityComp.ResetAbilities();
             Fsm.ChangeState<MonsterStates.Idle>();
         }

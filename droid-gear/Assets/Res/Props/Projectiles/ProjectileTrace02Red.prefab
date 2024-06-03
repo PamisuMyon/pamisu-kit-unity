@@ -4927,11 +4927,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 10
   _showMuzzle: 1
-  _muzzlePrefab: {fileID: 3877063412352875224, guid: 4e3184a421d3bae4d921ea96bf6917b9,
-    type: 3}
-  _explosionPrefab: {fileID: 3467188153210389497, guid: d3d8561bf51a7474bbdeb276a9d3bc4b,
-    type: 3}
+  _muzzleRef:
+    m_AssetGUID: 4e3184a421d3bae4d921ea96bf6917b9
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
+  _explosionRef:
+    m_AssetGUID: d3d8561bf51a7474bbdeb276a9d3bc4b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   _body: {fileID: 4867721905279907823}
   _otherParts: []
   _otherPartsRecycleDelay: 1
-  _isExploded: 0

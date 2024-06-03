@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace PamisuKit.Common.Pool
 {
     public class MonoPooler
     {
-        private readonly Dictionary<string, object> _poolDic = new();
+        private readonly Dictionary<object, object> _poolDic = new();
         private readonly Dictionary<int, object> _instanceToPoolDic = new();
         private readonly Transform _root;
 
@@ -18,19 +19,20 @@ namespace PamisuKit.Common.Pool
                 _root = new GameObject("MonoPoolerRoot").transform;
         }
         
-        public async UniTask<T> Spawn<T>(string address, int maxCapacity = -1) where T : Component
+        public async UniTask<T> Spawn<T>(object key, int maxCapacity = -1) where T : Component
         {
+            object realKey = key is IKeyEvaluator? (key as IKeyEvaluator).RuntimeKey : key;
             MonoPool<T> pool;
-            if (_poolDic.TryGetValue(address, out var poolObj))
+            if (_poolDic.TryGetValue(realKey, out var poolObj))
             {
                 pool = poolObj as MonoPool<T>;
             }
             else
             {
-                pool = await MonoPool<T>.Create(address, _root, maxCapacity);
-                if (_poolDic.TryGetValue(address, out var value))
+                pool = await MonoPool<T>.Create(realKey, _root, maxCapacity);
+                if (_poolDic.TryGetValue(realKey, out var value))
                     pool = value as MonoPool<T>;
-                _poolDic[address] = pool;
+                _poolDic[realKey] = pool;
             }
             
             var item = pool.Spawn();
