@@ -60,7 +60,8 @@ namespace Game.Characters.Drone.States
                     _targetingCounter -= deltaTime;
                     if (!Owner.AttackAbility.CanActivate())
                         return;
-                    PerformAttack().Forget();
+                    if (CanSeeTarget())
+                        PerformAttack().Forget();
                 }
 
                 Owner.UpdatePosition();
@@ -84,6 +85,20 @@ namespace Game.Characters.Drone.States
                     Bb.Target = target;
                     Owner.AttackAbility.SetTarget(new AbilityTargetInfo { MainTarget = Bb.Target });
                 }
+            }
+
+            private bool CanSeeTarget()
+            {
+                var targetPos = Bb.Target.Trans.position;
+                targetPos.y += Bb.Target.Model.VisualHeight;
+                var selfPos = Owner.Trans.position;
+                selfPos.y += Owner.Model.VisualHeight;
+
+                var b = Physics.Linecast(selfPos, targetPos, Owner.ObstacleLayer);
+#if UNITY_EDITOR
+                Debug.DrawLine(selfPos, targetPos, b ? Color.yellow : Color.gray, 0.5f);
+#endif
+                return !b;
             }
 
         }

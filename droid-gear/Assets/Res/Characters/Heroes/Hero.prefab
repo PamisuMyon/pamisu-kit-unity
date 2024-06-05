@@ -155,6 +155,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1574606001188712518, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: VisualHeight
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574606001188712518, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: VisualRadius
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 2919480173473849464, guid: bd49ca71ddacf9e4eb935da31cdcce84,
         type: 3}
       propertyPath: m_Layer

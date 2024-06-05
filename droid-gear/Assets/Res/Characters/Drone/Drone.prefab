@@ -226,6 +226,9 @@ MonoBehaviour:
   OrbitSpeed: 180
   OrbitRadius: 0.7
   TargetingFrequency: 0.5
+  ObstacleLayer:
+    serializedVersion: 2
+    m_Bits: 192
   _senseArea: {fileID: 5275011355962520255}
 --- !u!4 &7929096480607705987 stripped
 Transform:

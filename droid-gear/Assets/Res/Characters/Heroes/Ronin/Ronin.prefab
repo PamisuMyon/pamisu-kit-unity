@@ -58,6 +58,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4241171030885657513, guid: 41740cc486dad4f45ad45b297a9efe41,
+        type: 3}
+      propertyPath: VisualHeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4492393750071533866, guid: 41740cc486dad4f45ad45b297a9efe41,
         type: 3}
       propertyPath: m_Name
@@ -246,13 +251,8 @@ PrefabInstance:
       objectReference: {fileID: 3183056925580520711}
     - target: {fileID: 6352784875735404185, guid: 55fd19121785b5a448e8f17a7f1160df,
         type: 3}
-      propertyPath: VisualRadius
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6352784875735404185, guid: 55fd19121785b5a448e8f17a7f1160df,
-        type: 3}
       propertyPath: FirePoints.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6677214178706572314, guid: 55fd19121785b5a448e8f17a7f1160df,
         type: 3}

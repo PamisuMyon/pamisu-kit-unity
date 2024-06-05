@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 8769705705336737754, guid: 1723e625740c1f64fb149098a56b8db2,
         type: 3}
       propertyPath: VisualHeight
-      value: 1.8
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 9022920229046388057, guid: 1723e625740c1f64fb149098a56b8db2,
         type: 3}

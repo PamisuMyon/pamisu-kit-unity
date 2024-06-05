@@ -112,6 +112,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 161f53678f739ac4096f89fa1a2b8505
+    m_Address: Assets/Res/Characters/Monsters/Dummy.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c22d07014cbbd544a9de5aea1c1203a0, type: 2}
   m_SchemaSet:

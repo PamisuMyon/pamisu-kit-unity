@@ -19,7 +19,6 @@ namespace Game.Framework
         public CharacterModel Model { get; protected set; }
         public CharacterConfig Config { get; protected set; }
         public CharacterController Controller { get; internal set; }
-        // public MonoPooler Pooler { get; internal set; }
         public bool IsAlive { get; protected set; }
 
         public virtual void Init(CharacterConfig config)

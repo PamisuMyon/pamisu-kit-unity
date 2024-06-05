@@ -9,6 +9,8 @@ namespace Game.Combat
 {
     public class CombatDirector : GameDirector
     {
+        public bool IsReady { get; private set; }
+
         protected override void OnCreate()
         {
             base.OnCreate();
@@ -23,6 +25,8 @@ namespace Game.Combat
             CreateMonoSystem<CombatSystem>();
 
             CombatSystem.Instance.StartCombat().Forget();
+
+            IsReady = true;
         }
 
 #if UNITY_EDITOR
