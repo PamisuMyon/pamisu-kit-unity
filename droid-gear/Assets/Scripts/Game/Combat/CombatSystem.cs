@@ -21,6 +21,7 @@ namespace Game.Combat
         private string _droidId;
 
         public CombatBlackboard Bb { get; private set; }
+        public CameraController Cam { get; private set; }
 
         protected override void OnCreate()
         {
@@ -57,6 +58,9 @@ namespace Game.Combat
             player.Init(config);
             player.Trans.SetPositionAndRotation(playerStart.position, playerStart.rotation);
             Bb.Player = player;
+
+            Cam = FindFirstObjectByType<CameraController>();
+            Cam.Target = player.Trans;
         }
 
         // TODO TEMP

@@ -85,7 +85,7 @@ namespace Game.Props
 
             if (_showMuzzle && _muzzleRef != null)
             {
-                SpawnAndReleaseParticleGroupAsync(_muzzleRef, Trans.position).Forget();
+                SpawnAndReleaseParticleGroupAsync(_muzzleRef, Trans.position, Trans.rotation).Forget();
             }
         }
 
@@ -94,7 +94,7 @@ namespace Game.Props
             _isHit = true;
             if (_explosionRef != null)
             {
-                SpawnAndReleaseParticleGroupAsync(_explosionRef, explodePosition).Forget();
+                SpawnAndReleaseParticleGroupAsync(_explosionRef, explodePosition, Trans.rotation).Forget();
             }
 
             _body.SetActive(false);
@@ -106,11 +106,11 @@ namespace Game.Props
             GetDirector<GameDirector>().Pooler.Release(this);
         }
 
-        private async UniTaskVoid SpawnAndReleaseParticleGroupAsync(object key, Vector3 position)
+        private async UniTaskVoid SpawnAndReleaseParticleGroupAsync(object key, Vector3 position, Quaternion rotation)
         {
             var pooler = GetDirector<GameDirector>().Pooler;
             var muzzle = await pooler.Spawn<ParticleGroup>(key);
-            muzzle.transform.position = position;
+            muzzle.transform.SetPositionAndRotation(position, rotation);
             muzzle.PlayAndRelease(Region.Ticker, pooler).Forget();
         }
 
