@@ -125,8 +125,18 @@ SubShader {
 		fixed4 _MaskEdgeColor;
 		bool _MaskInverse;
 
+        int _UIVertexColorAlwaysGammaSpace;
+
 		pixel_t VertShader(vertex_t input)
 		{
+			if (_UIVertexColorAlwaysGammaSpace)
+            {
+                if(!IsGammaSpace())
+                {
+                    input.color.rgb = UIGammaToLinear(input.color.rgb);
+                }
+            }
+
 			float bold = step(input.texcoord1.y, 0);
 
 			float4 vert = input.vertex;

@@ -158,6 +158,8 @@ SubShader {
 		float4 _FaceTex_ST;
 		float4 _OutlineTex_ST;
 
+        int _UIVertexColorAlwaysGammaSpace;
+		
 		pixel_t VertShader(vertex_t input)
 		{
 			pixel_t output;
@@ -167,6 +169,14 @@ SubShader {
 			UNITY_TRANSFER_INSTANCE_ID(input,output);
 			UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
+			if (_UIVertexColorAlwaysGammaSpace)
+            {
+                if(!IsGammaSpace())
+                {
+                    input.color.rgb = UIGammaToLinear(input.color.rgb);
+                }
+            }
+			
 			float bold = step(input.texcoord1.y, 0);
 
 			float4 vert = input.position;

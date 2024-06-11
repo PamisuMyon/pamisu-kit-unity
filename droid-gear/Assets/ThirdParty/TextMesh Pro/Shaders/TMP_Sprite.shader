@@ -82,6 +82,8 @@ Shader "TextMeshPro/Sprite"
 			float4 _ClipRect;
             float4 _MainTex_ST;
 
+			int _UIVertexColorAlwaysGammaSpace;
+
             v2f vert(appdata_t v)
 			{
 				v2f OUT;
@@ -92,6 +94,14 @@ Shader "TextMeshPro/Sprite"
 
                 OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
 				
+				if (_UIVertexColorAlwaysGammaSpace)
+	            {
+	                if(!IsGammaSpace())
+	                {
+	                    v.color.rgb = UIGammaToLinear(v.color.rgb);
+	                }
+	            }
+
                 OUT.color = v.color * _Color;
 				return OUT;
 			}

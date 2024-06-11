@@ -117,6 +117,7 @@ SubShader {
 			#endif
 		};
 
+        int _UIVertexColorAlwaysGammaSpace;
 
 		pixel_t VertShader(vertex_t input)
 		{
@@ -126,6 +127,14 @@ SubShader {
 			UNITY_SETUP_INSTANCE_ID(input);
 			UNITY_TRANSFER_INSTANCE_ID(input, output);
 			UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
+
+			if (_UIVertexColorAlwaysGammaSpace)
+            {
+                if(!IsGammaSpace())
+                {
+                    input.color.rgb = UIGammaToLinear(input.color.rgb);
+                }
+            }
 
 			float bold = step(input.texcoord1.y, 0);
 
@@ -187,7 +196,7 @@ SubShader {
 			output.texcoord1 = float4(input.texcoord0 + layerOffset, input.color.a, 0);
 			output.underlayParam = half2(layerScale, layerBias);
 			#endif
-
+			
 			return output;
 		}
 
