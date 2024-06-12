@@ -12,6 +12,7 @@ namespace Game.Configs
         public string Id;
         public AssetReferenceGameObject PrefabRef;
         public AbilityConfig AttackAbility;
+
         [Header("Attributes")]
         public float MaxHealth = 5f;
         public float MoveSpeed = 3f;
@@ -19,6 +20,11 @@ namespace Game.Configs
         public float AttackSpeed = 1f;
 
         public Dictionary<AttributeType, float> AttributeDict = new();
+
+        [Header("UI Display")]
+        public string DisplayName;
+        public AssetReferenceSprite IconRef;
+        
 
         public virtual void Init()
         {

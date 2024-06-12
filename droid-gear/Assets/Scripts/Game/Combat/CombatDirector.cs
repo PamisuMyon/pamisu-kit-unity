@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Game.Framework;
+using Game.Save;
 using PamisuKit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,14 +20,15 @@ namespace Game.Combat
 
         protected async UniTaskVoid Init()
         {
-            if (!GlobalDirector.IsGlobalSystemsReady)
-                await UniTask.WaitUntil(() => GlobalDirector.IsGlobalSystemsReady);
+            if (!SaveSystem.Instance.RuntimeData.IsAppReady)
+                await UniTask.WaitUntil(() => SaveSystem.Instance.RuntimeData.IsAppReady);
             
             CreateMonoSystem<CombatSystem>();
 
-            CombatSystem.Instance.StartCombat().Forget();
-
             IsReady = true;
+            SaveSystem.Instance.RuntimeData.GameState = GameState.Combat;
+
+            CombatSystem.Instance.StartCombat();
         }
 
 #if UNITY_EDITOR

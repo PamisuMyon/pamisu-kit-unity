@@ -55,6 +55,7 @@ namespace PamisuKit.Common
                 {
                     isFound = true;
                     entry.Handlers.RemoveAt(i);
+                    entry.Options.RemoveAt(i);
                 }
             }
 
@@ -78,6 +79,15 @@ namespace PamisuKit.Common
                 {
                     Debug.LogError("Event Emit ERROR:");
                     Debug.LogException(ex);
+                }
+                finally
+                {
+                    if (entry.Options[i].HasFlag(SubscribeOptions.Once))
+                    {
+                        entry.Handlers.RemoveAt(i);
+                        entry.Options.RemoveAt(i);
+                        i--;
+                    }
                 }
             }
         }

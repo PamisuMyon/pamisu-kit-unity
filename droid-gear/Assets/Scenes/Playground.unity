@@ -1892,7 +1892,7 @@ GameObject:
   - component: {fileID: 765994564}
   - component: {fileID: 765994565}
   m_Layer: 0
-  m_Name: GlobalDirector
+  m_Name: AppDirector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

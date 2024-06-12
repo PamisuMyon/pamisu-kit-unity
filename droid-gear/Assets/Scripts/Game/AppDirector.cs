@@ -1,27 +1,19 @@
 using Cysharp.Threading.Tasks;
 using Game.Configs;
 using Game.Input;
+using Game.Save;
 using PamisuKit.Framework;
 using UnityEditor;
 using UnityEngine;
 
 namespace Game
 {
-    public enum GameState
+    public class AppDirector : Director
     {
-        None,
-        GlobalSystemsReady
-    }
-
-    public class GlobalDirector : Director
-    {
-        public static GlobalDirector Instance { get; private set; }
-        public static bool IsGlobalSystemsReady => Instance != null && Instance.GameState >= GameState.GlobalSystemsReady;
+        public static AppDirector Instance { get; private set; }
 
         [SerializeField]
         private bool _dontDestroyOnLoad = false;
-
-        public GameState GameState { get; private set; } = GameState.None;
 
         protected override void Awake()
         {
@@ -30,7 +22,7 @@ namespace Game
                 Destroy(gameObject);
                 return;
             }
-            Instance = GetComponent<GlobalDirector>();
+            Instance = GetComponent<AppDirector>();
             if (_dontDestroyOnLoad)
                 DontDestroyOnLoad(gameObject);
             base.Awake();
@@ -44,13 +36,14 @@ namespace Game
 
         public async UniTaskVoid Init()
         {
+            CreateSystem<SaveSystem>();
             CreateSystem<InputWrapper>();
             CreateSystem<ConfigSystem>();
             
             InputWrapper.Instance.Init();
             await ConfigSystem.Instance.Init();
 
-            GameState = GameState.GlobalSystemsReady;
+            SaveSystem.Instance.RuntimeData.GameState = GameState.AppReady;
         }
         
         public void Quit()

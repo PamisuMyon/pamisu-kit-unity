@@ -14,11 +14,8 @@ namespace Game.UI.Combat
         [SerializeField]
         private AssetReferenceGameObject _floatingTextRef;
 
-        private RectTransform _rectTrans;
         private Camera _cam;
-
         private MonoPool<FloatingText> _damageTextPool;
-        private GameObject _floatingTextPrefab;
 
         private void Awake()
         {
@@ -27,7 +24,6 @@ namespace Game.UI.Combat
 
         private async UniTaskVoid Init() 
         {
-            _rectTrans = transform as RectTransform;
             _cam = Camera.main;
             _damageTextPool = await MonoPool<FloatingText>.Create(_floatingTextRef, transform, 64);
             EventBus.On<RequestShowDamageText>(OnRequestShowDamageText);
