@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace Game.Props
 {
-
     public class Pickup : MonoEntity, IUpdatable, IPoolElement
     {
         [SerializeField]

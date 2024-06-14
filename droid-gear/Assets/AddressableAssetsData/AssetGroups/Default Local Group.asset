@@ -22,26 +22,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a6ae72e31ff3641109faa48576a03eb3
-    m_Address: Assets/Res/Props/Projectiles/ProjectileLight03Red.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8f1930ea78617fa4fab3771177c5b554
-    m_Address: Assets/Res/Props/Projectiles/ProjectileStar09Light.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ee7dfda23c81e4b17b92ba4028d0d3f4
-    m_Address: Assets/Res/Props/Projectiles/ProjectileTrace02Red.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: edebfbbf5a6cd7c4c9b7649ffec902d4
-    m_Address: Assets/Res/Props/Projectiles/ProjectileTrace05Blue.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0af95b9ee44bf3c42a1f9cac0271f883
     m_Address: Assets/Res/Characters/Heroes/Ronin/Ronin.prefab
     m_ReadOnly: 0
@@ -77,43 +57,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 04c8a89e2e822174c98d1d9ac1f400f7
-    m_Address: Assets/Res/Vfx/Explosions/ExplosionLightBig.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bb834d3cbbdd81e4aafe258db0b8beda
-    m_Address: Assets/Res/Vfx/Explosions/ExplosionScorch02Blue.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 113021ab3f3a34d0cb0e03055e787f88
-    m_Address: Assets/Res/Vfx/Explosions/ExplosionScorch03Light.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d3d8561bf51a7474bbdeb276a9d3bc4b
-    m_Address: Assets/Res/Vfx/Explosions/ExplosionSimpleRed.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 185e0861f71dfce4cb82b5ad6733940f
-    m_Address: Assets/Res/Vfx/Muzzles/MuzzleSimpleLight.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4e3184a421d3bae4d921ea96bf6917b9
-    m_Address: Assets/Res/Vfx/Muzzles/MuzzleSimpleRed.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4d12044f30c7de24da0996e0ceaa4511
-    m_Address: Assets/Res/Vfx/Muzzles/Muzzle04Blue.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 161f53678f739ac4096f89fa1a2b8505
     m_Address: Assets/Res/Characters/Monsters/Dummy.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 364f93f39ee45eb4389b63715ab59f21
+    m_Address: Assets/Res/UI/Hud/DroidItem.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

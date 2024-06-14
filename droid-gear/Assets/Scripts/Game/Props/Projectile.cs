@@ -18,20 +18,14 @@ namespace Game.Props
         private float _maxLifetime = 2f;
         [SerializeField]
         private bool _showMuzzle = true;
+        // Preload these assets to prevent lagging
         [SerializeField]
         private AssetReferenceGameObject _muzzleRef;
         [SerializeField]
-        private AssetReferenceGameObject _explosionRef;
-
-        [Space]
-        [SerializeField]
-        private GameObject _body;
-        [SerializeField]
-        private ParticleSystem[] _otherParts;
-        [SerializeField]
-        private float _otherPartsRecycleDelay = 1f;
+        private AssetReferenceGameObject _hitRef;
 
         private Rigidbody rb;
+        private ProjectileModel _model;
         private Damage _damage;
         private bool _isHit;
 
@@ -39,6 +33,7 @@ namespace Game.Props
         {
             base.OnCreate();
             rb = GetComponent<Rigidbody>();
+            _model = GetComponentInChildren<ProjectileModel>();
         }
         
         public void OnFixedUpdate(float deltaTime)
@@ -79,7 +74,7 @@ namespace Game.Props
             Go.layer = layer;
             Trans.position = position;
             Trans.forward = direction;
-            _body.SetActive(true);
+            _model.gameObject.SetActive(true);
 
             LifetimeCountdown().Forget();
 
@@ -92,16 +87,16 @@ namespace Game.Props
         private async UniTaskVoid Hit(Vector3 explodePosition)
         {
             _isHit = true;
-            if (_explosionRef != null)
+            if (_hitRef != null)
             {
-                SpawnAndReleaseParticleGroupAsync(_explosionRef, explodePosition, Trans.rotation).Forget();
+                SpawnAndReleaseParticleGroupAsync(_hitRef, explodePosition, Trans.rotation).Forget();
             }
 
-            _body.SetActive(false);
-            await Region.Ticker.Delay(_otherPartsRecycleDelay, destroyCancellationToken);
-            for (int i = 0; i < _otherParts.Length; i++)
+            _model.gameObject.SetActive(false);
+            await Region.Ticker.Delay(_model.TrailsReleaseDelay, destroyCancellationToken);
+            for (int i = 0; i < _model.Trails.Length; i++)
             {
-                _otherParts[i].Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
+                _model.Trails[i].Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
             }
             GetDirector<GameDirector>().Pooler.Release(this);
         }
@@ -109,9 +104,9 @@ namespace Game.Props
         private async UniTaskVoid SpawnAndReleaseParticleGroupAsync(object key, Vector3 position, Quaternion rotation)
         {
             var pooler = GetDirector<GameDirector>().Pooler;
-            var muzzle = await pooler.Spawn<ParticleGroup>(key);
-            muzzle.transform.SetPositionAndRotation(position, rotation);
-            muzzle.PlayAndRelease(Region.Ticker, pooler).Forget();
+            var it = await pooler.Spawn<ParticleGroup>(key);
+            it.transform.SetPositionAndRotation(position, rotation);
+            it.PlayAndRelease(Region.Ticker, pooler).Forget();
         }
 
         private async UniTaskVoid LifetimeCountdown()

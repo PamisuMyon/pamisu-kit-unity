@@ -38,7 +38,7 @@ namespace Game.UI.Combat
                 _heroPanel.gameObject.SetActive(true);
                 _heroPanel.Init();
                 _droidsPanel.gameObject.SetActive(true);
-                _droidsPanel.Init();
+                _droidsPanel.Init().Forget();
             }
         }
     }
