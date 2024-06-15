@@ -4901,7 +4901,7 @@ GameObject:
   - component: {fileID: 6931672044760527543}
   - component: {fileID: 1398703663911045790}
   m_Layer: 0
-  m_Name: Vfx_Hit_Bullet
+  m_Name: Vfx_Hit_Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9727,7 +9727,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cba935c4a4b55454eb21d4ee4d4d813a, type: 2}
+  - {fileID: 2100000, guid: d482cc52138d0f24181062874cfe0030, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14630,7 +14630,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 08403ea9582e7e8438a2c8fedd516b30, type: 2}
+  - {fileID: 2100000, guid: 8bbd83f39310f4a54813dbbe635ba5c6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14737,7 +14737,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 08403ea9582e7e8438a2c8fedd516b30, type: 2}
+  - {fileID: 2100000, guid: 06c7ac8a35deaea43a6cbd8cea710864, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
