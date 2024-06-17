@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -19,12 +20,12 @@ namespace PamisuKit.Common.Pool
                 _root = new GameObject("GameObjectPoolerRoot").transform;
         }
         
-        public async UniTask<GameObject> Spawn(object key, int maxCapacity = -1)
+        public async UniTask<GameObject> Spawn(object key, int maxCapacity = -1, CancellationToken cancellationToken = default)
         {
             object realKey = key is IKeyEvaluator? (key as IKeyEvaluator).RuntimeKey : key;
             if (!_poolDic.TryGetValue(realKey, out var pool))
             {
-                pool = await GameObjectPool.Create(realKey, _root, maxCapacity);
+                pool = await GameObjectPool.Create(realKey, _root, maxCapacity, cancellationToken);
                 if (_poolDic.TryGetValue(realKey, out var value))
                     pool = value;
                 _poolDic[realKey] = pool;

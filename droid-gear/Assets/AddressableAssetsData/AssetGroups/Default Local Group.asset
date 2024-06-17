@@ -67,6 +67,41 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a4cd9dc3700a70e45bd8b6fff9e9aac4
+    m_Address: Assets/Res/Props/Projectiles/Projectile_Laser.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f65f23915f5ca440aa1766c21c33b5b
+    m_Address: Assets/Res/Vfx/Muzzles/Vfx_Muzzle_Bullet.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3bc861ff9ab4b90428c695a80992814e
+    m_Address: Assets/Res/Vfx/Muzzles/Vfx_Muzzle_Cannonball.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2fc1c3f2c0faab744a7a8524efc16431
+    m_Address: Assets/Res/Vfx/Muzzles/Vfx_Muzzle_Laser.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d894c2c360e6ce0478ddfea901ef7b81
+    m_Address: Assets/Res/Vfx/Hits/Vfx_Hit_Cannonball.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f76ccfd09e926144b96daf8617bcb12
+    m_Address: Assets/Res/Vfx/Hits/Vfx_Hit_Bullet.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff53d1a0ef04516419a036acdad7c769
+    m_Address: Assets/Res/Vfx/Hits/Vfx_Hit_Laser.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c22d07014cbbd544a9de5aea1c1203a0, type: 2}
   m_SchemaSet:

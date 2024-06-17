@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1712074118259246061}
   - component: {fileID: 1288795968100522077}
-  - component: {fileID: 9096401963189273166}
+  - component: {fileID: -2889657395004746034}
   m_Layer: 0
   m_Name: BaseProjectile
   m_TagString: Untagged
@@ -62,7 +62,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &9096401963189273166
+--- !u!114 &-2889657395004746034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,7 +71,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6225382369349264551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a608547620959b244bda8a8f7ab1e311, type: 3}
+  m_Script: {fileID: 11500000, guid: 4931cb19c1c308a46929aa0b5274033f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 10
@@ -87,9 +87,6 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  _body: {fileID: 0}
-  _otherParts: []
-  _otherPartsRecycleDelay: 1
 --- !u!1 &7280393541485905798
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +134,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2

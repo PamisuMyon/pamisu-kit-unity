@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -16,14 +16,14 @@ namespace PamisuKit.Common.Assets
     {
         private static readonly Dictionary<object, object> _assets = new();
 
-        public static UniTask<T> LoadAsset<T>(object key, AssetRefCountMode mode = AssetRefCountMode.Single)
+        public static UniTask<T> LoadAsset<T>(object key, AssetRefCountMode mode = AssetRefCountMode.Single, CancellationToken cancellationToken = default)
         {
             if (mode == AssetRefCountMode.Single)
-                return LoadAssetSingleRefCount<T>(key);
-            return LoadAssetMultipleRefCount<T>(key);
+                return LoadAssetSingleRefCount<T>(key, cancellationToken);
+            return LoadAssetMultipleRefCount<T>(key, cancellationToken);
         }
 
-        private static async UniTask<T> LoadAssetSingleRefCount<T>(object key)
+        private static async UniTask<T> LoadAssetSingleRefCount<T>(object key, CancellationToken cancellationToken)
         {
             object dictKey = key is IKeyEvaluator? (key as IKeyEvaluator).RuntimeKey : key;
             if (_assets.TryGetValue(dictKey, out var obj))
@@ -35,57 +35,28 @@ namespace PamisuKit.Common.Assets
                 return default;
             }
 
-            try
-            {
-                var asset = await Addressables.LoadAssetAsync<T>(key).ToUniTask();
-                if (_assets.TryGetValue(dictKey, out var obj1) && obj1 is T assetT)
-                {
-                    // Addressables.Release(key);
-                    return assetT;
-                }
 
-                _assets[dictKey] = asset;
-                return asset;
-            }
-            catch (Exception e)
+            var asset = await Addressables.LoadAssetAsync<T>(key).ToUniTask(null, PlayerLoopTiming.Update,cancellationToken);
+            if (_assets.TryGetValue(dictKey, out var obj1) && obj1 is T assetT1)
             {
-                Debug.LogError($"AssetManager LoadAsset error: {e.Message}");
-                Debug.LogException(e);
-
-                return default;
+                // Addressables.Release(key);
+                return assetT1;
             }
+
+            _assets[dictKey] = asset;
+            return asset;
         }
 
-        private static async UniTask<T> LoadAssetMultipleRefCount<T>(object key)
+        private static async UniTask<T> LoadAssetMultipleRefCount<T>(object key, CancellationToken cancellationToken)
         {
-            try
-            {
-                var asset = await Addressables.LoadAssetAsync<T>(key).ToUniTask();
-                return asset;
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"AssetManager LoadAsset error: {e.Message}");
-                Debug.LogException(e);
-
-                return default;
-            }
+            var asset = await Addressables.LoadAssetAsync<T>(key).ToUniTask(null, PlayerLoopTiming.Update,cancellationToken);
+            return asset;
         }
 
-        public static async UniTask<GameObject> Instantiate(object key, Transform parent = null, bool inWorldSpace = false, bool trackHandle = true)
+        public static async UniTask<GameObject> Instantiate(object key, Transform parent = null, bool inWorldSpace = false, bool trackHandle = true, CancellationToken cancellationToken = default)
         {
-            try
-            {
-                var go = await Addressables.InstantiateAsync(key, parent, inWorldSpace, trackHandle).ToUniTask();
-                return go;
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"AssetManager Instantiate error: {e.Message}");
-                Debug.LogException(e);
-
-                return default;
-            }
+            var go = await Addressables.InstantiateAsync(key, parent, inWorldSpace, trackHandle).ToUniTask(null, PlayerLoopTiming.Update, cancellationToken);
+            return go;
         }
 
         public static void Release(object key)

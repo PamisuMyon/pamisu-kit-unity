@@ -8,25 +8,40 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2889657395004746034, guid: 900162dccc5041347850fe3bc281e861,
+        type: 3}
+      propertyPath: _hitRef.m_AssetGUID
+      value: ff53d1a0ef04516419a036acdad7c769
+      objectReference: {fileID: 0}
+    - target: {fileID: -2889657395004746034, guid: 900162dccc5041347850fe3bc281e861,
+        type: 3}
+      propertyPath: _muzzleRef.m_AssetGUID
+      value: 2fc1c3f2c0faab744a7a8524efc16431
+      objectReference: {fileID: 0}
+    - target: {fileID: -2889657395004746034, guid: 900162dccc5041347850fe3bc281e861,
+        type: 3}
+      propertyPath: _attachMuzzleToFirePoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1712074118259246061, guid: 900162dccc5041347850fe3bc281e861,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5.8526826
       objectReference: {fileID: 0}
     - target: {fileID: 1712074118259246061, guid: 900162dccc5041347850fe3bc281e861,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.556
       objectReference: {fileID: 0}
     - target: {fileID: 1712074118259246061, guid: 900162dccc5041347850fe3bc281e861,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5.577486
       objectReference: {fileID: 0}
     - target: {fileID: 1712074118259246061, guid: 900162dccc5041347850fe3bc281e861,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9110079
       objectReference: {fileID: 0}
     - target: {fileID: 1712074118259246061, guid: 900162dccc5041347850fe3bc281e861,
         type: 3}
@@ -36,7 +51,7 @@ PrefabInstance:
     - target: {fileID: 1712074118259246061, guid: 900162dccc5041347850fe3bc281e861,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.41238904
       objectReference: {fileID: 0}
     - target: {fileID: 1712074118259246061, guid: 900162dccc5041347850fe3bc281e861,
         type: 3}
@@ -51,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 1712074118259246061, guid: 900162dccc5041347850fe3bc281e861,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 48.71
       objectReference: {fileID: 0}
     - target: {fileID: 1712074118259246061, guid: 900162dccc5041347850fe3bc281e861,
         type: 3}
@@ -61,24 +76,25 @@ PrefabInstance:
     - target: {fileID: 6225382369349264551, guid: 900162dccc5041347850fe3bc281e861,
         type: 3}
       propertyPath: m_Name
-      value: Projectile_DroneLaser
+      value: Projectile_Laser
       objectReference: {fileID: 0}
     - target: {fileID: 6583460205234374848, guid: 900162dccc5041347850fe3bc281e861,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.095
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7057746726493101670, guid: 900162dccc5041347850fe3bc281e861,
         type: 3}
       propertyPath: m_Height
-      value: 0.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7057746726493101670, guid: 900162dccc5041347850fe3bc281e861,
         type: 3}
       propertyPath: m_Radius
-      value: 0.4
+      value: 0.2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9096401963189273166, guid: 900162dccc5041347850fe3bc281e861, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6736477855824696777, guid: 900162dccc5041347850fe3bc281e861,

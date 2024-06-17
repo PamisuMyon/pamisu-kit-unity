@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -19,7 +20,7 @@ namespace PamisuKit.Common.Pool
                 _root = new GameObject("MonoPoolerRoot").transform;
         }
         
-        public async UniTask<T> Spawn<T>(object key, int maxCapacity = -1) where T : Component
+        public async UniTask<T> Spawn<T>(object key, int maxCapacity = -1, CancellationToken cancellationToken = default) where T : Component
         {
             object realKey = key is IKeyEvaluator? (key as IKeyEvaluator).RuntimeKey : key;
             MonoPool<T> pool;
@@ -29,7 +30,7 @@ namespace PamisuKit.Common.Pool
             }
             else
             {
-                pool = await MonoPool<T>.Create(realKey, _root, maxCapacity);
+                pool = await MonoPool<T>.Create(realKey, _root, maxCapacity, true, cancellationToken);
                 if (_poolDic.TryGetValue(realKey, out var value))
                     pool = value as MonoPool<T>;
                 _poolDic[realKey] = pool;

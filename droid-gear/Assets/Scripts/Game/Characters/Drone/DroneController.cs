@@ -13,6 +13,7 @@ namespace Game.Characters.Drone
     {
         public float OrbitSpeed = 180f;
         public float OrbitRadius = .7f;
+        public float TurnSpeed = 720f;
         public float TargetingFrequency = .5f;
         public LayerMask ObstacleLayer;
 

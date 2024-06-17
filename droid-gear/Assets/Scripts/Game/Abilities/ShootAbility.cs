@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Game.Common;
@@ -37,27 +38,22 @@ namespace Game.Abilities
                 return;
             }
 
-            if (Owner.Model.Anim != null)
-                Owner.Model.Anim.SetTrigger(AnimConst.RangedAttack1);
+            // if (Owner.Model.Anim != null)
+            //     Owner.Model.Anim.SetTrigger(AnimConst.RangedAttack1);
 
-            // pre-delay
-            if (Config.ActPreDelay != 0)
-                await Owner.Region.Ticker.Delay(Config.ActPreDelay, cancellationToken);
+            // // pre-delay
+            // if (Config.ActPreDelay != 0)
+            //     await Owner.Region.Ticker.Delay(Config.ActPreDelay, cancellationToken);
 
             // act
-            var damage = new Damage(Owner, -Owner.AttrComp[AttributeType.Damage].Value);
-            var firePoint = Owner.Model.FirePoints[0];
-            var direction = _target.Trans.position - firePoint.position;
-            direction.y = 0;
+            for (int i = 0; i < _config.Emitters.Length; i++)
+            {
+                await ProcessEmitter(_config.Emitters[i], cancellationToken);
+            }
 
-            var pooler = Owner.GetDirector<GameDirector>().Pooler;
-            var proj = await pooler.Spawn<Projectile>(Config.PrefabRes.RuntimeKey.ToString());
-            proj.Setup(Owner.Region);
-            proj.Activate(damage, firePoint.position, direction, Config.ActLayer);
-
-            // post-delay
-            if (Config.ActPostDelay != 0)
-                await Owner.Region.Ticker.Delay(Config.ActPostDelay, cancellationToken);
+            // // post-delay
+            // if (Config.ActPostDelay != 0)
+            //     await Owner.Region.Ticker.Delay(Config.ActPostDelay, cancellationToken);
 
             // cooldown affected by attack speed
             var attackSpeed = Owner.AttrComp[AttributeType.AttackSpeed].Value;
@@ -65,6 +61,64 @@ namespace Game.Abilities
                 Cooldown = Config.Cooldown / attackSpeed;
             else
                 Cooldown = Config.Cooldown;
+        }
+
+        private async UniTask ProcessEmitter(EmitterConfig config, CancellationToken cancellationToken)
+        {
+            Debug.Assert(config.FirePointIndex < Owner.Model.FirePoints.Length, "FirePointIndex out of bounds");
+            var firePoint = Owner.Model.FirePoints[config.FirePointIndex];
+            var startAngle = -(config.BranchCount - 1) / 2f * config.BranchAngleDelta;
+            var startDirection = firePoint.forward;
+            startDirection.y = 0;
+            startDirection = Quaternion.AngleAxis(startAngle, Vector3.up) * startDirection;
+            var rotDelta = Quaternion.AngleAxis(config.BranchAngleDelta, Vector3.up);
+
+            var pooler = Owner.GetDirector<GameDirector>().Pooler;
+            var damage = new Damage(Owner, -Owner.AttrComp[AttributeType.Damage].Value);
+
+            // Every burst 
+            for (int i = 0; i < config.BurstCount; i++)
+            {
+                if (config.IsPlayAnim && Owner.Model.Anim != null)
+                    if (!string.IsNullOrEmpty(config.AnimTriggerParam))
+                        Owner.Model.Anim.SetTrigger(config.AnimTriggerParam);
+                    else
+                        Owner.Model.Anim.SetTrigger(AnimConst.RangedAttack1);
+
+                // pre-delay
+                if (config.BurstPreDelay != 0)
+                    await Owner.Region.Ticker.Delay(Config.ActPreDelay, cancellationToken);
+
+                // emit projectiles
+                var direction = startDirection;
+                for (int j = 0; j < config.BranchCount; j++)
+                {
+                    var proj = await pooler.Spawn<Projectile>(config.Projectile.PrefabRef, -1, cancellationToken);
+                    // if (cancellationToken.IsCancellationRequested)
+                    // {
+                    //     pooler.Release(proj);
+                    //     throw new OperationCanceledException();
+                    // }
+                    proj.Setup(Owner.Region);
+                    proj.SetData(
+                        config.Projectile, 
+                        damage, 
+                        firePoint.position, 
+                        direction, 
+                        Config.ActLayer,
+                        firePoint).Activate();
+
+                    direction = rotDelta * direction;
+                }
+
+                // post-delay
+                if (config.BurstPreDelay != 0)
+                    await Owner.Region.Ticker.Delay(config.BurstPreDelay, cancellationToken);
+
+                // interval
+                if (config.BurstInterval != 0 && i != config.BurstCount - 1)
+                    await Owner.Region.Ticker.Delay(config.BurstInterval, cancellationToken);
+            }
         }
 
     }

@@ -1093,6 +1093,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ronin
       objectReference: {fileID: 0}
+    - target: {fileID: 2373735041977666004, guid: 0af95b9ee44bf3c42a1f9cac0271f883,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2006,6 +2011,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Vfx_Hit_Cannonball
+      objectReference: {fileID: 0}
+    - target: {fileID: 3707097680789216688, guid: d894c2c360e6ce0478ddfea901ef7b81,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3707097680789216717, guid: d894c2c360e6ce0478ddfea901ef7b81,
         type: 3}
@@ -3352,6 +3362,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vfx_Projectile_Cannonball
       objectReference: {fileID: 0}
+    - target: {fileID: 1366800498651028619, guid: 6ff9abe8f919796459e5561f06126e29,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3404,7 +3419,7 @@ PrefabInstance:
     - target: {fileID: 1573038027992498881, guid: 161f53678f739ac4096f89fa1a2b8505,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.41
+      value: 10.05
       objectReference: {fileID: 0}
     - target: {fileID: 1573038027992498881, guid: 161f53678f739ac4096f89fa1a2b8505,
         type: 3}
@@ -3414,7 +3429,7 @@ PrefabInstance:
     - target: {fileID: 1573038027992498881, guid: 161f53678f739ac4096f89fa1a2b8505,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.37
+      value: 2.24
       objectReference: {fileID: 0}
     - target: {fileID: 1573038027992498881, guid: 161f53678f739ac4096f89fa1a2b8505,
         type: 3}
@@ -4747,6 +4762,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Vfx_Projectile_BulletSmall
+      objectReference: {fileID: 0}
+    - target: {fileID: 4867721905631912308, guid: 26c5e394a5ce72445967891f1d62cea0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4867721905631912309, guid: 26c5e394a5ce72445967891f1d62cea0,
         type: 3}
@@ -6602,6 +6622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FrostSpray
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373218568602148282, guid: 65912a23aa809e14287dc1c3f91a397f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6305292628399293077, guid: 65912a23aa809e14287dc1c3f91a397f,
         type: 3}

@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using PamisuKit.Common.Assets;
 using UnityEngine;
@@ -12,10 +13,10 @@ namespace PamisuKit.Common.Pool
         protected GameObject Prefab;
         protected Transform Root;
 
-        public static async UniTask<MonoPool<T>> Create(object key, Transform root, int maxCapacity = -1, bool autoManagePoolElement = true)
+        public static async UniTask<MonoPool<T>> Create(object key, Transform root, int maxCapacity = -1, bool autoManagePoolElement = true, CancellationToken cancellationToken = default)
         {
             object realKey = key is IKeyEvaluator? (key as IKeyEvaluator).RuntimeKey : key;
-            var prefab = await AssetManager.LoadAsset<GameObject>(realKey);
+            var prefab = await AssetManager.LoadAsset<GameObject>(realKey, AssetRefCountMode.Single, cancellationToken);
             var pool = new MonoPool<T>(realKey, prefab, root, maxCapacity, autoManagePoolElement);
             return pool;
         }

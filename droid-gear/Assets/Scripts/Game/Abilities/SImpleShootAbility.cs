@@ -49,7 +49,7 @@ namespace Game.Abilities
             direction.y = 0;
             
             var pooler = Owner.GetDirector<GameDirector>().Pooler;
-            var proj = await pooler.Spawn<Projectile>(Config.PrefabRes.RuntimeKey.ToString());
+            var proj = await pooler.Spawn<SimpleProjectile>(Config.PrefabRef, -1, cancellationToken);
             proj.Setup(Owner.Region);
             proj.Activate(damage, firePoint.position, direction, Config.ActLayer);
 

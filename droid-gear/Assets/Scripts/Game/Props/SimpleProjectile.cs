@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Game.Combat;
 using Game.Common;
-using Game.Configs;
 using Game.Framework;
 using PamisuKit.Common.Pool;
 using PamisuKit.Common.Util;
@@ -11,7 +10,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Game.Props
 {
-    public class Projectile : MonoEntity, IFixedUpdatable, IPoolElement
+    public class SimpleProjectile : MonoEntity, IFixedUpdatable, IPoolElement
     {
         [SerializeField]
         private float _moveSpeed = 10f;
@@ -19,39 +18,30 @@ namespace Game.Props
         private float _maxLifetime = 2f;
         [SerializeField]
         private bool _showMuzzle = true;
-        [SerializeField]
-        private bool _attachMuzzleToFirePoint = false;
         // Preload these assets to prevent lagging
         [SerializeField]
         private AssetReferenceGameObject _muzzleRef;
         [SerializeField]
         private AssetReferenceGameObject _hitRef;
 
-        private Rigidbody _rb;
-        private Collider _col;
+        private Rigidbody rb;
         private ProjectileModel _model;
-
-        private ProjectileConfig _config;
         private Damage _damage;
-        private Transform _firePoint;
         private bool _isHit;
-        private bool _isActivated;
-
 
         protected override void OnCreate()
         {
             base.OnCreate();
-            _rb = GetComponent<Rigidbody>();
-            _col = Trans.Find("Collision").GetComponent<Collider>();
+            rb = GetComponent<Rigidbody>();
             _model = GetComponentInChildren<ProjectileModel>();
         }
-
+        
         public void OnFixedUpdate(float deltaTime)
         {
-            if (!_isActivated)
-                _rb.velocity = Vector3.zero;
+            if (_isHit)
+                rb.velocity = Vector3.zero;
             else
-                _rb.velocity = _moveSpeed * Region.Ticker.TimeScale * Trans.forward;
+                rb.velocity = _moveSpeed * Region.Ticker.TimeScale * Trans.forward;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -70,46 +60,27 @@ namespace Game.Props
         public void OnSpawnFromPool()
         {
             gameObject.SetActive(true);
-            _isActivated = false;
         }
 
         public void OnReleaseToPool()
         {
             gameObject.SetActive(false);
-            _isActivated = false;
-            _config = null;
-            _firePoint = null;
         }
 
-        public Projectile SetData(
-            ProjectileConfig config, 
-            Damage damage, 
-            Vector3 position,
-            Vector3 direction,
-            int layer,
-            Transform firePoint = null)
+        public void Activate(Damage damage, Vector3 position, Vector3 direction, int layer)
         {
-            _config = config;
+            _isHit = false;
             _damage = damage;
             Go.layer = layer;
-            _col.gameObject.layer = layer;
             Trans.position = position;
             Trans.forward = direction;
-            _firePoint = firePoint;
-            return this;
-        }
-
-        public void Activate()
-        {
-            _isActivated = true;
-            _isHit = false;
             _model.gameObject.SetActive(true);
 
             LifetimeCountdown().Forget();
 
             if (_showMuzzle && _muzzleRef != null)
             {
-                SpawnAndReleaseParticleGroup(_muzzleRef, Trans.position, Trans.rotation, _attachMuzzleToFirePoint).Forget();
+                SpawnAndReleaseParticleGroup(_muzzleRef, Trans.position, Trans.rotation).Forget();
             }
         }
 
@@ -130,12 +101,10 @@ namespace Game.Props
             GetDirector<GameDirector>().Pooler.Release(this);
         }
 
-        private async UniTaskVoid SpawnAndReleaseParticleGroup(object key, Vector3 position, Quaternion rotation, bool attachToFirePoint = false)
+        private async UniTaskVoid SpawnAndReleaseParticleGroup(object key, Vector3 position, Quaternion rotation)
         {
             var pooler = GetDirector<GameDirector>().Pooler;
             var it = await pooler.Spawn<ParticleGroup>(key, -1, destroyCancellationToken);
-            if (attachToFirePoint && _firePoint != null)
-                it.transform.SetParent(_firePoint);
             it.transform.SetPositionAndRotation(position, rotation);
             it.PlayAndRelease(Region.Ticker, pooler).Forget();
         }
@@ -156,5 +125,5 @@ namespace Game.Props
         }
 
     }
-
+    
 }

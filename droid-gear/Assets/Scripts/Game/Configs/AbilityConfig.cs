@@ -9,6 +9,7 @@ namespace Game.Configs
         None,
         SimpleShoot,
         SimpleMelee,
+        Shoot,
     }
 
     [CreateAssetMenu(fileName = "AbilityConfig", menuName = "Configs/AbilityConfig", order = 0)]
@@ -23,7 +24,7 @@ namespace Game.Configs
         public float ActPostDelay;
         [Layer]
         public int ActLayer;
-        public AssetReferenceGameObject PrefabRes;
+        public AssetReferenceGameObject PrefabRef;
     }
 
 }

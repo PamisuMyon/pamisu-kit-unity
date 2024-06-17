@@ -9,18 +9,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2a4872600621214480979515e0bc79c, type: 3}
+  m_Script: {fileID: 11500000, guid: 537d65504978f5d44b6a79bd949c6200, type: 3}
   m_Name: Drone_Atk
   m_EditorClassIdentifier: 
   Id: drone_atk
-  Type: 1
-  Cooldown: 0.3
+  Type: 3
+  Cooldown: 0.8
   ActRange: 7
   ActPreDelay: 0
   ActPostDelay: 0
   ActLayer: 17
-  PrefabRes:
-    m_AssetGUID: edebfbbf5a6cd7c4c9b7649ffec902d4
+  PrefabRef:
+    m_AssetGUID: 
     m_SubObjectName: 
     m_SubObjectType: 
-    m_EditorAssetChanged: 1
+    m_EditorAssetChanged: 0
+  EmitMethod: 0
+  Emitters:
+  - IsPlayAnim: 1
+    AnimTriggerParam: 
+    FirePointIndex: 0
+    BranchCount: 1
+    BranchAngleDelta: 0
+    BurstCount: 3
+    BurstPreDelay: 0
+    BurstPostDelay: 0
+    BurstInterval: 0.1
+    Projectile:
+      PrefabRef:
+        m_AssetGUID: a4cd9dc3700a70e45bd8b6fff9e9aac4
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+      MoveSpeed: 10
+      PierceCount: 0
+      IsExplosion: 0
+      ExplosionRange: 0

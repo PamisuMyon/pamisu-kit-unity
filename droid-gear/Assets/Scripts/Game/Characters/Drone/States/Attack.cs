@@ -9,7 +9,6 @@ namespace Game.Characters.Drone.States
     {
         public class Attack : Base
         {
-
             private bool _isReadyForAttack = false;
             private float _targetingCounter;
 
@@ -48,7 +47,9 @@ namespace Game.Characters.Drone.States
                 var dir = Bb.Target.Trans.position - Owner.Owner.Trans.position;
                 var targetAngle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
                 Owner.CurrentAngle = Mathf.MoveTowardsAngle(Owner.CurrentAngle, targetAngle, Owner.OrbitSpeed * 2f * deltaTime);
-                var b = Owner.Trans.SmoothRotateTowards(dir, deltaTime, Owner.OrbitSpeed * 2f);
+                Owner.UpdatePosition();
+
+                var b = Owner.Trans.SmoothRotateTowards(dir, deltaTime, Owner.TurnSpeed);
                 if (!_isReadyForAttack && b)
                 {
                     _targetingCounter = Owner.TargetingFrequency;
@@ -63,8 +64,6 @@ namespace Game.Characters.Drone.States
                     if (CanSeeTarget())
                         PerformAttack().Forget();
                 }
-
-                Owner.UpdatePosition();
             }
 
             private async UniTaskVoid PerformAttack() 

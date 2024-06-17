@@ -66,7 +66,7 @@ namespace Game.Combat.States
                     var enemyStart = enemyStarts.RandomItem();
                     RandomUtil.RandomPositionOnNavMesh(enemyStart.transform.position, enemyStart.SpawnRadius, out var resultPos);
 
-                    var controller = await pooler.Spawn<MonsterController>(enemyConfig.PrefabRef.RuntimeKey.ToString());
+                    var controller = await pooler.Spawn<MonsterController>(enemyConfig.PrefabRef, -1, Owner.destroyCancellationToken);
                     controller.gameObject.SetActive(true);
                     controller.transform.SetPositionAndRotation(resultPos, RandomUtil.RandomYRotation());
                     controller.Setup(Owner.Region);

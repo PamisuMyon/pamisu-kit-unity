@@ -46,7 +46,7 @@ namespace Game.Characters.Drone.States
                     }
                     else
                     {
-                        Owner.transform.rotation = Quaternion.RotateTowards(rotation, _idleRotation, Owner.OrbitSpeed * 2f * deltaTime);
+                        Owner.transform.rotation = Quaternion.RotateTowards(rotation, _idleRotation, Owner.TurnSpeed * deltaTime);
                     }
                 }
 
