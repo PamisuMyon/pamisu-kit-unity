@@ -90,6 +90,7 @@ namespace Game.Props
             Transform firePoint = null)
         {
             _config = config;
+            _moveSpeed = config.MoveSpeed;
             _damage = damage;
             Go.layer = layer;
             _col.gameObject.layer = layer;

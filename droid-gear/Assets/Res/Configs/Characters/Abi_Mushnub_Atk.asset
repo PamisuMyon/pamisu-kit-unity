@@ -9,19 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac6619f212237f749950947e0834c958, type: 3}
-  m_Name: Mushnub
+  m_Script: {fileID: 11500000, guid: e2a4872600621214480979515e0bc79c, type: 3}
+  m_Name: Abi_Mushnub_Atk
   m_EditorClassIdentifier: 
-  Id: mushnub
-  PrefabRef:
-    m_AssetGUID: 64f17dcf20d6cca41a6bdc7ddebaf564
+  Id: mushnub_atk
+  Type: 2
+  Cooldown: 0.5
+  ActRange: 0.2
+  ActPreDelay: 0.1
+  ActPostDelay: 0.1
+  PrefabRes:
+    m_AssetGUID: 
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  AttackAbility: {fileID: 11400000, guid: 9d1c0ee0f10c33c4f9b52d33b93376ea, type: 2}
-  MaxHealth: 5
-  MoveSpeed: 2
-  Damage: 1
-  AttackSpeed: 1
-  HealthGrowth: 0.6
-  DamageGrowth: 0.6

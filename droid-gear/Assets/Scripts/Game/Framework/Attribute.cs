@@ -2,7 +2,8 @@ namespace Game.Framework
 {
     public struct Attribute
     {
-        public float Value { get; set; }
+        public float BaseValue;
+        public float Value;
         
         // ...BaseValue CurrentValue
     }

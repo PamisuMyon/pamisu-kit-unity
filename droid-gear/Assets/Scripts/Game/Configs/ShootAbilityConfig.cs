@@ -43,6 +43,7 @@ namespace Game.Configs
     {
         public AssetReferenceGameObject PrefabRef;
         public float MoveSpeed = 10f;
+        public float DamageScale = 1f;
         public int PierceCount;
         public bool IsExplosion;
         public float ExplosionRange;

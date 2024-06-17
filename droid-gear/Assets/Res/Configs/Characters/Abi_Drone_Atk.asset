@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 537d65504978f5d44b6a79bd949c6200, type: 3}
-  m_Name: Drone_Atk
+  m_Name: Abi_Drone_Atk
   m_EditorClassIdentifier: 
   Id: drone_atk
   Type: 3
@@ -26,12 +26,12 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   EmitMethod: 0
   Emitters:
-  - IsPlayAnim: 1
+  - IsPlayAnim: 0
     AnimTriggerParam: 
     FirePointIndex: 0
-    BranchCount: 1
-    BranchAngleDelta: 0
-    BurstCount: 3
+    BranchCount: 6
+    BranchAngleDelta: 5
+    BurstCount: 10
     BurstPreDelay: 0
     BurstPostDelay: 0
     BurstInterval: 0.1
@@ -42,6 +42,7 @@ MonoBehaviour:
         m_SubObjectType: 
         m_EditorAssetChanged: 0
       MoveSpeed: 10
+      DamageScale: 1
       PierceCount: 0
       IsExplosion: 0
       ExplosionRange: 0
