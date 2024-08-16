@@ -19,9 +19,10 @@ namespace Game.UI.Combat
         [SerializeField]
         private TMP_Text _levelText;
 
-        public void Init() 
+        public void Init()
         {
-            var bb = CombatSystem.Instance.Bb;
+            var combatDirector = FindFirstObjectByType<CombatDirector>();
+            var bb = combatDirector.GetSystem<CombatSystem>().Bb;
             var player = bb.Player.Chara;
             _healthSlider.value = player.AttrComp[AttributeType.Health].Value / player.AttrComp[AttributeType.MaxHealth].Value;
             player.AttrComp.HealthChanged += OnPlayerHealthChanged;

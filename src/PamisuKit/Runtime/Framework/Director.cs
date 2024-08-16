@@ -1,66 +1,65 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PamisuKit.Framework
 {
     public abstract class Director : MonoBehaviour
     {
+
         protected List<ISystem> Systems;
+        
+        public BaseApp App { get; protected set; }
         public Ticker Ticker { get; protected set; }
         public Region Region { get; protected set; }
 
         protected virtual void Awake()
         {
+            App = FindFirstObjectByType<BaseApp>();
             OnCreate();
         }
 
         protected virtual void OnCreate()
         {
-            Ticker = new Ticker();
-            Region = new Region(Ticker, this);
+            Ticker = gameObject.AddComponent<Ticker>();
+            Region = gameObject.AddComponent<Region>();
+            Region.Init(Ticker, this);
             Systems = new List<ISystem>();
         }
 
-        protected virtual void Update()
+        protected virtual TSystem CreateMonoSystem<TSystem>() where TSystem : MonoSystem
         {
-            Ticker.OnUpdate(Time.deltaTime);
-        }
-        
-        protected virtual void FixedUpdate()
-        {
-            Ticker.OnFixedUpdate(Time.fixedDeltaTime);
-        }
-
-        protected virtual void CreateMonoSystem<TSystem>() where TSystem : MonoSystem
-        {
-            var system = GetComponentInChildren<TSystem>();
-            if (system == null)
-            {
-                var go = new GameObject(typeof(TSystem).Name);
-                go.transform.SetParent(transform);
-                system = go.AddComponent<TSystem>();
-            }
+            var system = App.CreateMonoSystem<TSystem>(transform);
             system.Setup(Region);
             Systems.Add(system);
-            Ticker.Add(system);
+            return system;
         }
 
-        protected virtual void DestroySystem(ISystem system)
+        public TSystem GetSystem<TSystem>() where TSystem : class, ISystem
         {
-            Ticker.Remove(system);
+            return App.GetSystem<TSystem>();
+        }
+
+        public ISystem GetSystem(Type type)
+        {
+            return App.GetSystem(type);
+        }
+
+        protected void DestroySystem(ISystem system)
+        {
+            App.DestroySystem(system);
             Systems.Remove(system);
-            system.Destroy();
         }
 
         protected void OnDestroy()
         {
-            if (Systems == null)
-                return;
-            for (var i = 0; i < Systems.Count; i++)
+            for (int i = 0; i < Systems.Count; i++)
             {
-                DestroySystem(Systems[i]);
+                App.DestroySystem(Systems[i]);
             }
+            Systems.Clear();
         }
+
     }
 
 }

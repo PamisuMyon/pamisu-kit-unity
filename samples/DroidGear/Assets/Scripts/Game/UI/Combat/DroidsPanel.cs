@@ -24,7 +24,7 @@ namespace Game.UI.Combat
         {
             _droidItemPool = await MonoPool<DroidItem>.Create(_droidItemRef, _group.transform);
             
-            var drone = CombatSystem.Instance.Bb.Player.Drone;
+            // var drone = GetSystem<CombatSystem>().Bb.Player.Drone;
         }
     }
 }

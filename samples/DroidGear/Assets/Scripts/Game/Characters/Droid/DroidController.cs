@@ -47,7 +47,7 @@ namespace Game.Characters
             {
                 await UniTask.Yield();
                 // Bb.Player = FindFirstObjectByType<PlayerController>().Chara;
-                Bb.Player = CombatSystem.Instance.Bb.Player.Chara;
+                Bb.Player = GetSystem<CombatSystem>().Bb.Player.Chara;
             })();
 
             // _senseAreaCollider = _senseArea.GetComponent<SphereCollider>();

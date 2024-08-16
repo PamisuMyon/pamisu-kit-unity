@@ -61,9 +61,9 @@ namespace Game.Characters.Monster
 
         public void SelectTarget()
         {
-            if (CombatSystem.Instance.Bb.Player != null)
+            if (GetSystem<CombatSystem>().Bb.Player != null)
             {
-                Bb.Target = CombatSystem.Instance.Bb.Player.Chara;
+                Bb.Target = GetSystem<CombatSystem>().Bb.Player.Chara;
             }
             else 
             {

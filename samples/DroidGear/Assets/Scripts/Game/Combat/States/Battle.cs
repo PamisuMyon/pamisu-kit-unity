@@ -57,7 +57,7 @@ namespace Game.Combat.States
                 for (int i = 0; i < wave.EnemyNum; i++)
                 {
                     var enemyId = wave.EnemyIds.RandomItem();
-                    if (!ConfigSystem.Instance.Characters.TryGetValue(enemyId, out var enemyConfig))
+                    if (!Owner.GetSystem<ConfigSystem>().Characters.TryGetValue(enemyId, out var enemyConfig))
                     {
                         Debug.LogError($"Character config of Id {enemyId} not found.");
                         continue;

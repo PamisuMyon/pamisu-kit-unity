@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PamisuKit.Framework
 {
-    public class Region
+    public class Region : MonoBehaviour
     {
 
         public Transform Trans { get; private set; }
@@ -13,42 +14,18 @@ namespace PamisuKit.Framework
         
         private readonly List<IEntity> _entities = new();
 
-        public Region(Ticker ticker, Director director, string name = null)
+        public void Init(Ticker ticker, Director director)
         {
             Ticker = ticker;
             Director = director;
-            name ??= GetType().Name;
-            Go = new GameObject();
-            Go.name = name;
-            Trans = Go.transform;
-            Trans.SetParent(director.transform); 
         }
-
-        // public Region(Ticker ticker, Transform parent = null, string name = null)
-        // {
-        //     Ticker = ticker;
-        //     name ??= GetType().Name;
-        //     Go = new GameObject();
-        //     Go.name = name;
-        //     Trans = Go.transform;
-        //     Trans.SetParent(parent);
-        // }
-        
-        // public Region(Transform parent = null, string name = null)
-        // {
-        //     name ??= GetType().Name;
-        //     Go = new GameObject();
-        //     Go.name = name;
-        //     Trans = Go.transform;
-        //     Trans.SetParent(parent);
-        // }
         
         public void AddEntity(IEntity entity)
         {
             _entities.Add(entity);
             if (entity.Trans != null && entity.Trans.parent == null)
                 entity.Trans.SetParent(Trans);
-            Ticker?.Add(entity);
+            Ticker.Add(entity);
         }
 
         public void RemoveEntity(IEntity entity)
@@ -56,12 +33,22 @@ namespace PamisuKit.Framework
             if (!_entities.Contains(entity))
                 return;
             _entities.Remove(entity);
-            Ticker?.Remove(entity);
+            Ticker.Remove(entity);
         }
 
         public TDirector GetDirector<TDirector>() where TDirector : Director
         {
             return Director as TDirector;
+        }
+        
+        public TSystem GetSystem<TSystem>() where TSystem : class, ISystem
+        {
+            return Director.GetSystem<TSystem>();
+        }
+        
+        public ISystem GetSystem(Type type)
+        {
+            return Director.GetSystem(type);
         }
         
     }

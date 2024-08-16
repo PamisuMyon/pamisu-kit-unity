@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace PamisuKit.Framework
 {
@@ -19,54 +20,53 @@ namespace PamisuKit.Framework
         void OnFixedUpdate(float deltaTime);
     }
     
-    [Serializable]
-    public class Ticker
+    public class Ticker : MonoBehaviour
     {
-        public float TimeScale { get; set; } = 1f;
+        public float TimeScale = 1f;
         public float DeltaTime { get; private set; }
         public float TickerTime { get; private set; }
         
-        protected readonly List<IUpdatable> _updateObjects = new List<IUpdatable>();
-        protected readonly List<IFixedUpdatable> _fixedUpdateObjects = new List<IFixedUpdatable>();
+        protected readonly List<IUpdatable> UpdateObjects = new List<IUpdatable>();
+        protected readonly List<IFixedUpdatable> FixedUpdateObjects = new List<IFixedUpdatable>();
 
         public void Add(object obj)
         {
             if (obj is IUpdatable updatableObj)
-                _updateObjects.Add(updatableObj);
+                UpdateObjects.Add(updatableObj);
             if (obj is IFixedUpdatable fixedUpdatableObj)
-                _fixedUpdateObjects.Add(fixedUpdatableObj);
+                FixedUpdateObjects.Add(fixedUpdatableObj);
         }
 
         public void Remove(object obj)
         {
             if (obj is IUpdatable updatableObj)
-                _updateObjects.Remove(updatableObj);
+                UpdateObjects.Remove(updatableObj);
             if (obj is IFixedUpdatable fixedUpdatableObj)
-                _fixedUpdateObjects.Remove(fixedUpdatableObj);
+                FixedUpdateObjects.Remove(fixedUpdatableObj);
         }
 
-        public void OnUpdate(float delta)
+        private void Update()
         {
+            var delta = Time.deltaTime;
             delta *= TimeScale;
             TickerTime += delta;
             DeltaTime = delta;
-            if (_updateObjects.Count == 0) return;
-            for (var i = 0; i < _updateObjects.Count; i++)
+            if (UpdateObjects.Count == 0) return;
+            for (var i = 0; i < UpdateObjects.Count; i++)
             {
-                if (_updateObjects[i].IsActive)
-                    _updateObjects[i].OnUpdate(delta);
+                if (UpdateObjects[i].IsActive)
+                    UpdateObjects[i].OnUpdate(delta);
             }
         }
 
-        public void OnFixedUpdate(float delta)
+        private void FixedUpdate()
         {
-            if (TimeScale == 0)
-                return;
-            if (_fixedUpdateObjects.Count == 0) return;
-            for (var i = 0; i < _fixedUpdateObjects.Count; i++)
+            var delta = Time.fixedDeltaTime;
+            if (FixedUpdateObjects.Count == 0) return;
+            for (var i = 0; i < FixedUpdateObjects.Count; i++)
             {
-                if (_fixedUpdateObjects[i].IsActive)
-                    _fixedUpdateObjects[i].OnFixedUpdate(delta);
+                if (FixedUpdateObjects[i].IsActive)
+                    FixedUpdateObjects[i].OnFixedUpdate(delta);
             }
         }
 

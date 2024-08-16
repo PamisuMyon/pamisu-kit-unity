@@ -6,7 +6,7 @@ using PamisuKit.Framework;
 
 namespace Game.Combat
 {
-    public class CombatSystem : MonoSystem<CombatSystem>
+    public class CombatSystem : MonoSystem
     {
         public LevelConfig LevelConfig;
         public string PlayerId;

@@ -5,13 +5,13 @@ using UnityEngine.InputSystem.Utilities;
 
 namespace Game.Input
 {
-    public class InputWrapper : MonoSystem<InputWrapper>
+    public class InputWrapper : MonoSystem
     {
 
         private GameInputActions _actions;
         private IDisposable _anyButtonEventListener;
 
-        public static GameInputActions Actions => Instance != null ? Instance._actions : null;
+        public GameInputActions Actions => _actions;
         public InputDevice CurrentDevice { get; set; }
 
         public void Init()

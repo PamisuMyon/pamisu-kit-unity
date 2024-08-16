@@ -85,5 +85,15 @@ namespace PamisuKit.Framework
             return Region.GetDirector<TDirector>();
         }
 
+        public TSystem GetSystem<TSystem>() where TSystem : class, ISystem
+        {
+            return Region.GetSystem<TSystem>();
+        }
+        
+        public ISystem GetSystem(Type type)
+        {
+            return Region.GetSystem(type);
+        }
+
     }
 }

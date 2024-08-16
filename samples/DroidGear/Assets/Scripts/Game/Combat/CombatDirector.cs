@@ -1,7 +1,5 @@
 using Cysharp.Threading.Tasks;
 using Game.Framework;
-using Game.Save;
-using PamisuKit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -15,26 +13,25 @@ namespace Game.Combat
         protected override void OnCreate()
         {
             base.OnCreate();
-            Init().Forget();
+            if (GameApp.Instance.IsReady)
+                Init().Forget();
+            else
+                GameApp.Instance.Ready += OnAppReady;
         }
+
+        private void OnAppReady() => Init().Forget();
 
         protected async UniTaskVoid Init()
         {
-            if (!SaveSystem.Instance.RuntimeData.IsAppReady)
-                await UniTask.WaitUntil(() => SaveSystem.Instance.RuntimeData.IsAppReady);
-            
             CreateMonoSystem<CombatSystem>();
-
             IsReady = true;
-            SaveSystem.Instance.RuntimeData.GameState = GameState.Combat;
-
-            CombatSystem.Instance.StartCombat();
+            
+            GetSystem<CombatSystem>().StartCombat();
         }
 
 #if UNITY_EDITOR
-        protected override void Update()
+        private void Update()
         {
-            base.Update();
             if (Keyboard.current.rKey.wasPressedThisFrame)
             {
                 Debug.Log("Reload current scene");

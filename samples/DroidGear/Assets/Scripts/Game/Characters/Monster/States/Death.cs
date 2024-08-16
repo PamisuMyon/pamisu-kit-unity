@@ -56,9 +56,9 @@ namespace Game.Characters.Monster.States
             // private async UniTaskVoid DropItems()
             // {
             //     // TODO TEMP
-            //     var pickup = await CombatSystem.Instance.Pooler.Spawn<Pickup>("Assets/Res/Props/CrystalShards/CrystalShard_1.prefab");
+            //     var pickup = await GetSystem<CombatSystem>().Pooler.Spawn<Pickup>("Assets/Res/Props/CrystalShards/CrystalShard_1.prefab");
             //     pickup.SetupEntity(Owner.Region);
-            //     pickup.SetData(CombatSystem.Instance.Pooler);
+            //     pickup.SetData(GetSystem<CombatSystem>().Pooler);
             //     var pos = Owner.Trans.position;
             //     var rand = RandomUtil.InsideAnnulus(Owner.Model.VisualRadius, Owner.Model.VisualRadius + .2f);
             //     pos.x += rand.x;

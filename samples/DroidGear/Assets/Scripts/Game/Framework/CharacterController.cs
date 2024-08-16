@@ -31,7 +31,7 @@ namespace Game.Framework
             if (!combatDirector.IsReady)
                 await UniTask.WaitUntil(() => combatDirector.IsReady);
 
-            if (!ConfigSystem.Instance.Characters.TryGetValue(_autoInitCharacterId, out var config))
+            if (!GameApp.Instance.GetSystem<ConfigSystem>().Characters.TryGetValue(_autoInitCharacterId, out var config))
             {
                 Debug.LogError($"Character Id {_autoInitCharacterId} could not be found", Go);
                 return;

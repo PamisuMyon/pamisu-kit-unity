@@ -42,9 +42,10 @@ namespace Game.Characters.Player
             Drone.Init((config as HeroConfig).DroneConfig, Chara);
 
             _pickupArea.TriggerEnter += OnPickupAreaEnter;
-            InputWrapper.Actions.Combat.Move.started += OnMove;
-            InputWrapper.Actions.Combat.Move.performed += OnMove;
-            InputWrapper.Actions.Combat.Move.canceled += OnMove;
+            var input = GetSystem<InputWrapper>();
+            input.Actions.Combat.Move.started += OnMove;
+            input.Actions.Combat.Move.performed += OnMove;
+            input.Actions.Combat.Move.canceled += OnMove;
 
             // Bb = new PlayerStates.Blackboard();
             Fsm = new StateMachine();
@@ -58,11 +59,12 @@ namespace Game.Characters.Player
             base.OnSelfDestroy();
             Fsm?.OnDestroy();
             _pickupArea.TriggerEnter -= OnPickupAreaEnter;
-            if (InputWrapper.Instance != null)
+            var input = GetSystem<InputWrapper>();
+            if (input != null)
             {
-                InputWrapper.Actions.Combat.Move.started -= OnMove;
-                InputWrapper.Actions.Combat.Move.performed -= OnMove;
-                InputWrapper.Actions.Combat.Move.canceled -= OnMove;
+                input.Actions.Combat.Move.started -= OnMove;
+                input.Actions.Combat.Move.performed -= OnMove;
+                input.Actions.Combat.Move.canceled -= OnMove;
             }
         }
 

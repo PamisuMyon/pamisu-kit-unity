@@ -41,7 +41,7 @@ namespace Game.Combat.States
                 if (playerStarts == null || playerStarts.Length == 0)
                     return;
 
-                if (!ConfigSystem.Instance.Characters.TryGetValue(Owner.PlayerId, out var config))
+                if (!Owner.GetSystem<ConfigSystem>().Characters.TryGetValue(Owner.PlayerId, out var config))
                 {
                     Debug.LogError($"Player config of Id {Owner.PlayerId} not found");
                     return;
@@ -64,7 +64,7 @@ namespace Game.Combat.States
             {
                 if (string.IsNullOrEmpty(Owner.DroidId))
                     return;
-                if (!ConfigSystem.Instance.Characters.TryGetValue(Owner.DroidId, out var config))
+                if (!Owner.GetSystem<ConfigSystem>().Characters.TryGetValue(Owner.DroidId, out var config))
                 {
                     Debug.LogError($"Droid config of Id {Owner.DroidId} not found");
                     return;
