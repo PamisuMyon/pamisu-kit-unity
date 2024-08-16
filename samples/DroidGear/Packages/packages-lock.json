@@ -18,11 +18,20 @@
       },
       "hash": "b6002a25d18b889216d886ee787fe1878e66be00"
     },
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "9057452c86079e4265228480b1439442894d5078"
+    },
     "com.pamisu.unitykit": {
       "version": "file:../../../src/PamisuKit",
       "depth": 0,
       "source": "local",
-      "dependencies": {}
+      "dependencies": {
+        "com.unity.addressables": "1.21.21"
+      }
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -32,7 +41,7 @@
     },
     "com.unity.addressables": {
       "version": "1.21.21",
-      "depth": 0,
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.scriptablebuildpipeline": "1.21.23",
@@ -178,7 +187,7 @@
     },
     "com.unity.scriptablebuildpipeline": {
       "version": "1.21.23",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.cn"

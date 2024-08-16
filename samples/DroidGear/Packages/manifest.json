@@ -2,9 +2,9 @@
   "dependencies": {
     "com.adamgryu.inspectorhistory": "https://github.com/adamgryu/InspectorHistory-Unity.git",
     "com.annulusgames.lit-motion": "https://github.com/AnnulusGames/LitMotion.git?path=src/LitMotion/Assets/LitMotion",
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.pamisu.unitykit": "file:../../../src/PamisuKit",
     "com.unity.2d.sprite": "1.0.0",
-    "com.unity.addressables": "1.21.21",
     "com.unity.ai.navigation": "1.1.5",
     "com.unity.collab-proxy": "2.4.3",
     "com.unity.ide.rider": "3.0.31",

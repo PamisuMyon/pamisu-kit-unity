@@ -9,5 +9,7 @@
     },
     "unity": "2019.1",
     "license": "MIT",
-    "dependencies": {}
+    "dependencies": {
+        "com.unity.addressables": "1.21.21"
+    }
   }
