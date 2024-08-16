@@ -5,13 +5,13 @@ using UnityEngine.InputSystem.Utilities;
 
 namespace Game.Input
 {
-    public class InputWrapper : System<InputWrapper>
+    public class InputWrapper : MonoSystem<InputWrapper>
     {
 
         private GameInputActions _actions;
         private IDisposable _anyButtonEventListener;
 
-        public static GameInputActions Actions => Instance?._actions;
+        public static GameInputActions Actions => Instance != null ? Instance._actions : null;
         public InputDevice CurrentDevice { get; set; }
 
         public void Init()
@@ -22,9 +22,9 @@ namespace Game.Input
             _anyButtonEventListener = InputSystem.onAnyButtonPress.Call(OnAnyButtonPressed);
         }
 
-        public override void OnDestroy()
+        protected override void OnSelfDestroy()
         {
-            base.OnDestroy();
+            base.OnSelfDestroy();
             _anyButtonEventListener?.Dispose();
         }
 

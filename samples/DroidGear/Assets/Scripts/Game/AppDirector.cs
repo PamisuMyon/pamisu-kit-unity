@@ -36,9 +36,9 @@ namespace Game
 
         public async UniTaskVoid Init()
         {
-            CreateSystem<SaveSystem>();
-            CreateSystem<InputWrapper>();
-            CreateSystem<ConfigSystem>();
+            CreateMonoSystem<SaveSystem>();
+            CreateMonoSystem<InputWrapper>();
+            CreateMonoSystem<ConfigSystem>();
             
             InputWrapper.Instance.Init();
             await ConfigSystem.Instance.Init();

@@ -5,7 +5,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Game.Configs
 {
-    public class ConfigSystem : System<ConfigSystem>
+    public class ConfigSystem : MonoSystem<ConfigSystem>
     {
         public Dictionary<string, CharacterConfig> Characters { get; private set;} = new();
 

@@ -31,14 +31,6 @@ namespace PamisuKit.Framework
             Ticker.OnFixedUpdate(Time.fixedDeltaTime);
         }
 
-        protected virtual void CreateSystem<TSystem>() where TSystem : System, new()
-        {
-            var system = new TSystem();
-            system.Setup(null, Region);
-            Systems.Add(system);
-            Ticker.Add(system);
-        }
-
         protected virtual void CreateMonoSystem<TSystem>() where TSystem : MonoSystem
         {
             var system = GetComponentInChildren<TSystem>();
@@ -71,26 +63,4 @@ namespace PamisuKit.Framework
         }
     }
 
-    // public abstract class Director<T> : Director where T : Director
-    // {
-
-    //     public static T Instance { get; private set; }
-
-    //     [SerializeField]
-    //     private bool _dontDestroyOnLoad = false;
-
-    //     protected override void Awake()
-    //     {
-    //         if (Instance != null)
-    //         {
-    //             Destroy(gameObject);
-    //             return;
-    //         }
-    //         Instance = GetComponent<T>();
-    //         if (_dontDestroyOnLoad)
-    //             DontDestroyOnLoad(gameObject);
-    //         base.Awake();
-    //     }
-        
-    // }
 }
