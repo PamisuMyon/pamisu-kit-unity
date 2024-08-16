@@ -11,6 +11,13 @@ namespace PamisuKit.Common.Pool
         protected object Key;
         protected GameObject Prefab;
         protected Transform Root;
+        
+        public static GameObjectPool Create(GameObject prefab, Transform root, int maxCapacity = -1)
+        {
+            object key = prefab;
+            var pool = new GameObjectPool(key, prefab, root, maxCapacity);
+            return pool;
+        }
 
         public static async UniTask<GameObjectPool> Create(object key, Transform root, int maxCapacity = -1, CancellationToken cancellationToken = default)
         {
@@ -26,11 +33,11 @@ namespace PamisuKit.Common.Pool
             Prefab = prefab;
             Root = root;
             MaxCapacity = maxCapacity;
-            CreateInstanceFuncSync = CreateInstanceSync;
+            CreateInstanceFunc = CreateInstance;
             AutoManagePoolElements = false;
         }
 
-        protected override GameObject CreateInstanceSync()
+        protected override GameObject CreateInstance()
         {
             return Object.Instantiate(Prefab, Root);
         }

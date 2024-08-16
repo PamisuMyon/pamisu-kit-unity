@@ -8,7 +8,7 @@ namespace PamisuKit.Common.Pool
     public class ObjectPool<T>
     {
 
-        protected Func<T> CreateInstanceFuncSync;
+        protected Func<T> CreateInstanceFunc;
         protected Func<UniTask<T>> CreateInstanceFuncAsync;
         protected Action<T> DestroyInstanceFunc;
 
@@ -18,9 +18,9 @@ namespace PamisuKit.Common.Pool
         protected int Capacity => AvailableInstances.Count + InUseInstances.Count;
         protected bool AutoManagePoolElements;
 
-        public ObjectPool(Func<T> createInstanceFuncSync = null, Action<T> destroyInstanceFunc = null, int maxCapacity = -1, bool autoManagePoolElement = true)
+        public ObjectPool(Func<T> createInstanceFunc = null, Action<T> destroyInstanceFunc = null, int maxCapacity = -1, bool autoManagePoolElement = true)
         {
-            CreateInstanceFuncSync = createInstanceFuncSync?? CreateInstanceSync;
+            CreateInstanceFunc = createInstanceFunc?? CreateInstance;
             DestroyInstanceFunc = destroyInstanceFunc;
             MaxCapacity = maxCapacity;
             AutoManagePoolElements = autoManagePoolElement;
@@ -39,7 +39,7 @@ namespace PamisuKit.Common.Pool
             MaxCapacity = -1;
         }
 
-        protected virtual T CreateInstanceSync()
+        protected virtual T CreateInstance()
         {
             return default;
         }
@@ -49,14 +49,34 @@ namespace PamisuKit.Common.Pool
             return UniTask.FromResult<T>(default);
         }
 
+        public void WarmPool(int spawnNumber)
+        {
+            if (MaxCapacity != -1)
+                spawnNumber = Mathf.Min(MaxCapacity, spawnNumber);
+            for (int i = 0; i < spawnNumber; i++)
+            {
+                Spawn();
+            }
+        }
+        
+        public async UniTask WarmPoolAsync(int spawnNumber)
+        {
+            if (MaxCapacity != -1)
+                spawnNumber = Mathf.Min(MaxCapacity, spawnNumber);
+            for (int i = 0; i < spawnNumber; i++)
+            {
+                await SpawnAsync();
+            }
+        }
+
         public T Spawn()
         {
-            Debug.Assert(CreateInstanceFuncSync != null, "CreateInstanceFuncSync is null, make sure you created the pool by the synchronous method, otherwise use SpawnAsync instead.");
+            Debug.Assert(CreateInstanceFunc != null, "CreateInstanceFuncSync is null, make sure you created the pool by the synchronous method, otherwise use SpawnAsync instead.");
             if (AvailableInstances.Count == 0)
             {
                 if (MaxCapacity != -1 && Capacity >= MaxCapacity)
                     return default;
-                var newGo = CreateInstanceFuncSync();
+                var newGo = CreateInstanceFunc();
                 AvailableInstances.Enqueue(newGo);
             }
             var item = AvailableInstances.Dequeue();

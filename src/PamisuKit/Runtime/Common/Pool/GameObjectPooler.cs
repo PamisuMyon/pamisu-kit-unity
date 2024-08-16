@@ -20,6 +20,21 @@ namespace PamisuKit.Common.Pool
                 _root = new GameObject("GameObjectPoolerRoot").transform;
         }
         
+        public GameObject Spawn(GameObject prefab, int maxCapacity = -1, CancellationToken cancellationToken = default)
+        {
+            if (!_poolDic.TryGetValue(prefab, out var pool))
+            {
+                pool = GameObjectPool.Create(prefab, _root, maxCapacity);
+                if (_poolDic.TryGetValue(prefab, out var value))
+                    pool = value;
+                _poolDic[prefab] = pool;
+            }
+            var go = pool.Spawn();
+            if (go != null)
+                _instanceToPoolDic.TryAdd(go.GetInstanceID(), pool);
+            return go;
+        }
+        
         public async UniTask<GameObject> Spawn(object key, int maxCapacity = -1, CancellationToken cancellationToken = default)
         {
             object realKey = key is IKeyEvaluator? (key as IKeyEvaluator).RuntimeKey : key;

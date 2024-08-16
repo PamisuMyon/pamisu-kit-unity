@@ -19,6 +19,27 @@ namespace PamisuKit.Common.Pool
             else
                 _root = new GameObject("MonoPoolerRoot").transform;
         }
+
+        public T Spawn<T>(GameObject prefab, int maxCapacity = -1) where T : Component
+        {
+            MonoPool<T> pool;
+            if (_poolDic.TryGetValue(prefab, out var poolObj))
+            {
+                pool = poolObj as MonoPool<T>;
+            }
+            else
+            {
+                pool = MonoPool<T>.Create(prefab, _root, maxCapacity);
+                if (_poolDic.TryGetValue(prefab, out var value))
+                    pool = value as MonoPool<T>;
+                _poolDic[prefab] = pool;
+            }
+            
+            var item = pool.Spawn();
+            if (item != null)
+                _instanceToPoolDic.TryAdd(item.gameObject.GetInstanceID(), pool);
+            return item;
+        }
         
         public async UniTask<T> Spawn<T>(object key, int maxCapacity = -1, CancellationToken cancellationToken = default) where T : Component
         {

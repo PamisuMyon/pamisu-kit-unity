@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using PamisuKit.Common.Assets;
@@ -13,6 +12,13 @@ namespace PamisuKit.Common.Pool
         protected GameObject Prefab;
         protected Transform Root;
 
+        public static MonoPool<T> Create(GameObject prefab, Transform root, int maxCapacity = -1, bool autoManagePoolElement = true)
+        {
+            object key = prefab;
+            var pool = new MonoPool<T>(key, prefab, root, maxCapacity, autoManagePoolElement);
+            return pool;
+        }
+        
         public static async UniTask<MonoPool<T>> Create(object key, Transform root, int maxCapacity = -1, bool autoManagePoolElement = true, CancellationToken cancellationToken = default)
         {
             object realKey = key is IKeyEvaluator? (key as IKeyEvaluator).RuntimeKey : key;
@@ -28,10 +34,10 @@ namespace PamisuKit.Common.Pool
             Root = root;
             MaxCapacity = maxCapacity;
             AutoManagePoolElements = autoManagePoolElement;
-            CreateInstanceFuncSync = CreateInstanceSync;
+            CreateInstanceFunc = CreateInstance;
         }
 
-        protected override T CreateInstanceSync()
+        protected override T CreateInstance()
         {
             var go = UnityEngine.Object.Instantiate(Prefab, Root);
             if (!go.TryGetComponent(out T component))
