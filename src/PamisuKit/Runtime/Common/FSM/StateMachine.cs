@@ -98,6 +98,11 @@ namespace PamisuKit.Common.FSM
             CurrentState.OnFixedUpdate(deltaTime);
         }
 
+        public void OnLateUpdate(float deltaTime)
+        {
+            CurrentState.OnLateUpdate(deltaTime);
+        }
+
         public void OnDestroy()
         {
             if (CurrentState != null)

@@ -31,6 +31,9 @@
         public virtual void OnFixedUpdate(float deltaTime)
         {
         }
-        
+
+        public virtual void OnLateUpdate(float deltaTime)
+        {
+        }
     }
 }

@@ -29,6 +29,8 @@ namespace PamisuKit.Common.FSM
         void OnUpdate(float deltaTime);
 
         void OnFixedUpdate(float deltaTime);
+        
+        void OnLateUpdate(float deltaTime);
 
         void OnDestroy();
 
