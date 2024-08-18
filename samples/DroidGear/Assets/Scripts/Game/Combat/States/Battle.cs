@@ -56,13 +56,7 @@ namespace Game.Combat.States
                 var pooler = Owner.GetDirector<GameDirector>().Pooler;
                 for (int i = 0; i < wave.EnemyNum; i++)
                 {
-                    var enemyId = wave.EnemyIds.RandomItem();
-                    if (!Owner.GetSystem<ConfigSystem>().Characters.TryGetValue(enemyId, out var enemyConfig))
-                    {
-                        Debug.LogError($"Character config of Id {enemyId} not found.");
-                        continue;
-                    }
-
+                    var enemyConfig = wave.Enemies.RandomItem();
                     var enemyStart = enemyStarts.RandomItem();
                     RandomUtil.RandomPositionOnNavMesh(enemyStart.transform.position, enemyStart.SpawnRadius, out var resultPos);
 

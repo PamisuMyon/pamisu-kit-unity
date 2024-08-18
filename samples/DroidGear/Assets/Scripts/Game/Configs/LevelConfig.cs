@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Configs
 {
@@ -17,7 +18,7 @@ namespace Game.Configs
     {
         public float WaveDuration = 30;
         public float SpawnInterval = .2f;
-        public List<string> EnemyIds;
+        public List<MonsterConfig> Enemies;
         public int EnemyNum;
     }
 }

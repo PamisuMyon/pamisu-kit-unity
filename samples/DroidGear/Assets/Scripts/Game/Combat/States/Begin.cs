@@ -35,18 +35,13 @@ namespace Game.Combat.States
 
             private async UniTask InitPlayer()
             {
-                if (string.IsNullOrEmpty(Owner.PlayerId))
+                if (Owner.PlayerConfig == null)
                     return;
                 var playerStarts = GameObject.FindGameObjectsWithTag("PlayerStart");
                 if (playerStarts == null || playerStarts.Length == 0)
                     return;
 
-                if (!Owner.GetSystem<ConfigSystem>().Characters.TryGetValue(Owner.PlayerId, out var config))
-                {
-                    Debug.LogError($"Player config of Id {Owner.PlayerId} not found");
-                    return;
-                }
-
+                var config = Owner.PlayerConfig;
                 var playerStart = playerStarts.RandomItem().transform;
                 var prefab = await AssetManager.LoadAsset<GameObject>(config.PrefabRef);
                 var go = Object.Instantiate(prefab);
@@ -62,14 +57,10 @@ namespace Game.Combat.States
             // TODO TEMP
             private async UniTask InitDroid()
             {
-                if (string.IsNullOrEmpty(Owner.DroidId))
+                if (Owner.DroidConfig == null)
                     return;
-                if (!Owner.GetSystem<ConfigSystem>().Characters.TryGetValue(Owner.DroidId, out var config))
-                {
-                    Debug.LogError($"Droid config of Id {Owner.DroidId} not found");
-                    return;
-                }
 
+                var config = Owner.DroidConfig;
                 RandomUtil.RandomPositionOnNavMesh(Bb.Player.Trans.position, 1f, 8f, out var pos);
                 var prefab = await AssetManager.LoadAsset<GameObject>(config.PrefabRef);
                 var go = Object.Instantiate(prefab);

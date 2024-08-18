@@ -9,17 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f6f4108d646ac4aa73b4af72b950a2, type: 3}
-  m_Name: Char_Drone
+  m_Script: {fileID: 11500000, guid: 9fe46f3462bc63540b32106420d1b422, type: 3}
+  m_Name: Ronin
   m_EditorClassIdentifier: 
-  Id: done
+  Id: ronin
   PrefabRef:
-    m_AssetGUID: 41740cc486dad4f45ad45b297a9efe41
+    m_AssetGUID: 0af95b9ee44bf3c42a1f9cac0271f883
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  AttackAbility: {fileID: 11400000, guid: 013cf807df391d744b549507ffe97181, type: 2}
-  MaxHealth: 1
-  MoveSpeed: 0
-  Damage: 3
-  AttackSpeed: 1
+  AttackAbility: {fileID: 0}
+  MaxHealth: 15
+  MoveSpeed: 5
+  Damage: 0
+  AttackSpeed: 0
+  DroneConfig: {fileID: 11400000, guid: 3b10350ccb7290b4e8f5889846f93963, type: 2}

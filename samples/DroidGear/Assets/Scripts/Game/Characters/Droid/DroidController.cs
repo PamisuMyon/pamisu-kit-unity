@@ -41,6 +41,7 @@ namespace Game.Characters
             Agent = GetComponent<NavMeshAgent>();
 
             Bb = new DroidStates.Blackboard();
+            Debug.Assert(Config.AttackAbility != null, "AttackAbility is null", Go);
             if (Chara.AbilityComp.TryGetAbility(Config.AttackAbility.Id, out var attackAbility))
                 Bb.AttackAbility = attackAbility;
             UniTask.Action(async () => 

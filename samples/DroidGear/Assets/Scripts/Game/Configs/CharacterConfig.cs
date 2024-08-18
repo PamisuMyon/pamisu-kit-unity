@@ -24,7 +24,11 @@ namespace Game.Configs
         [Header("UI Display")]
         public string DisplayName;
         public AssetReferenceSprite IconRef;
-        
+
+        protected virtual void OnEnable()
+        {
+            Init();
+        }
 
         public virtual void Init()
         {

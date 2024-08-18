@@ -1,6 +1,5 @@
 using System;
 using Cysharp.Threading.Tasks;
-using Game.Configs;
 using Game.Input;
 using Game.Save;
 using PamisuKit.Framework;
@@ -24,10 +23,10 @@ namespace Game
         {
             CreateMonoSystem<SaveSystem>();
             CreateMonoSystem<InputWrapper>();
-            CreateMonoSystem<ConfigSystem>();
+            // CreateMonoSystem<ConfigSystem>();
             
             GetSystem<InputWrapper>().Init();
-            await GetSystem<ConfigSystem>().Init();
+            // await GetSystem<ConfigSystem>().Init();
 
             IsReady = true;
             Ready?.Invoke();

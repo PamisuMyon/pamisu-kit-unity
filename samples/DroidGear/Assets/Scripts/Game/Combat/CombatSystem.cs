@@ -9,8 +9,8 @@ namespace Game.Combat
     public class CombatSystem : MonoSystem
     {
         public LevelConfig LevelConfig;
-        public string PlayerId;
-        public string DroidId;
+        public HeroConfig PlayerConfig;
+        public DroidConfig DroidConfig;
 
         public CombatStates.Blackboard Bb { get; private set; }
         public StateMachine Fsm { get; private set;}

@@ -893,8 +893,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelConfig: {fileID: 0}
-  PlayerId: ronin
-  DroidId: 
+  PlayerConfig: {fileID: 11400000, guid: 9d049a62ca6e315449b15a073f2a7f26, type: 2}
+  DroidConfig: {fileID: 11400000, guid: 62d04d2f8a3bf6d41b444c467a32a825, type: 2}
 --- !u!1 &430921670
 GameObject:
   m_ObjectHideFlags: 0
@@ -3496,6 +3496,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2321657468654771340, guid: 161f53678f739ac4096f89fa1a2b8505,
+        type: 3}
+      propertyPath: _autoInitConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 3b4c8f0018d71c04aa72828806b9ba9d,
+        type: 2}
     - target: {fileID: 4551933744803934511, guid: 161f53678f739ac4096f89fa1a2b8505,
         type: 3}
       propertyPath: m_Name

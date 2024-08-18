@@ -11,7 +11,7 @@ namespace Game.Framework
         [SerializeField]
         private bool _autoInit = false;
         [SerializeField]
-        private string _autoInitCharacterId;
+        private CharacterConfig _autoInitConfig;
 
         public CharacterConfig Config => Chara.Config;
         public Character Chara { get; private set; }
@@ -20,25 +20,19 @@ namespace Game.Framework
 
         private void Awake()
         {
-            if (_autoInit && !string.IsNullOrEmpty(_autoInitCharacterId))
+            if (_autoInit && _autoInitConfig != null)
                 AutoInit().Forget();
         }
 
         private async UniTaskVoid AutoInit()
         {
-            Debug.Log($"{GetType().Name} AutoInit Id {_autoInitCharacterId}");
+            Debug.Log($"{GetType().Name} AutoInit {_autoInitConfig.Id}");
             var combatDirector = FindFirstObjectByType<CombatDirector>();
             if (!combatDirector.IsReady)
                 await UniTask.WaitUntil(() => combatDirector.IsReady);
 
-            if (!GameApp.Instance.GetSystem<ConfigSystem>().Characters.TryGetValue(_autoInitCharacterId, out var config))
-            {
-                Debug.LogError($"Character Id {_autoInitCharacterId} could not be found", Go);
-                return;
-            }
-
             Setup(combatDirector.Region);
-            Init(config);
+            Init(_autoInitConfig);
         }
 
         public virtual void Init(CharacterConfig config)

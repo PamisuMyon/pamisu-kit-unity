@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d0b307f5384054fa4c82d2c187f776, type: 3}
+  m_Name: GunDroid
+  m_EditorClassIdentifier: 
+  Id: gun_droid
+  PrefabRef:
+    m_AssetGUID: 671896e6c8cc95d4590fcb81251460c1
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  AttackAbility: {fileID: 11400000, guid: 9ba157e1db63e624f9c5e6df8e7a5000, type: 2}
+  MaxHealth: 1
+  MoveSpeed: 5
+  Damage: 1
+  AttackSpeed: 1
+  DisplayName: 
+  IconRef:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  MinFollowRadius: 5
+  MaxFollowRadius: 10
