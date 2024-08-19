@@ -7,6 +7,9 @@ namespace PamisuKit.Framework
 {
     public class MonoEntity : MonoBehaviour, IEntity
     {
+        [SerializeField]
+        protected bool AutoSetup;
+        
         public Transform Trans { get; private set; }
 
         public GameObject Go { get; private set; }
@@ -17,8 +20,21 @@ namespace PamisuKit.Framework
 
         public bool IsPendingDestroy { get; private set; }
         
-        protected List<IDisposable> EventSubscriptions; 
-        
+        protected List<IDisposable> EventSubscriptions;
+
+        protected virtual void Start()
+        {
+            if (AutoSetup && Region == null)
+            {
+                var director = FindFirstObjectByType<Director>();
+                if (director != null)
+                {
+                    Setup(director.Region);
+                    OnAutoSetup();
+                }
+            }
+        }
+
         public void Setup(Region region)
         {
             if (Region != null)
@@ -31,6 +47,10 @@ namespace PamisuKit.Framework
         }
 
         protected virtual void OnCreate() 
+        {
+        }
+
+        protected virtual void OnAutoSetup()
         {
         }
 

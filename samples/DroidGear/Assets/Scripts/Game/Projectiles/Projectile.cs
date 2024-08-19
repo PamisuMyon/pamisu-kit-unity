@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Combat;
 using Game.Common;
@@ -9,7 +10,7 @@ using PamisuKit.Framework;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Game.Props
+namespace Game.Projectiles
 {
     public class Projectile : MonoEntity, IFixedUpdatable, IPoolElement
     {
@@ -21,11 +22,15 @@ namespace Game.Props
         private bool _showMuzzle = true;
         [SerializeField]
         private bool _attachMuzzleToFirePoint = false;
+        
         // Preload these assets to prevent lagging
+        [Space]
         [SerializeField]
         private AssetReferenceGameObject _muzzleRef;
         [SerializeField]
         private AssetReferenceGameObject _hitRef;
+        [SerializeField]
+        private float _hitModelRadius;
 
         private Rigidbody _rb;
         private Collider _col;
@@ -34,6 +39,8 @@ namespace Game.Props
         private ProjectileConfig _config;
         private Damage _damage;
         private Transform _firePoint;
+        private Collider[] _overlapResults = new Collider[128];
+        private HashSet<Character> _damagedTargets = new();
         private bool _isHit;
         private bool _isActivated;
 
@@ -59,12 +66,9 @@ namespace Game.Props
             if (_isHit) return;
             if (other.isTrigger) return;
             var hitPos = Trans.position;
-            if (other.TryGetComponentInDirectParent<Character>(out var target))
-            {
-                DamageHelper.ApplyDamage(_damage, target);
-            }
+            other.TryGetComponentInDirectParent<Character>(out var target);
 
-            Hit(hitPos).Forget();
+            Hit(hitPos, target).Forget();
         }
 
         public void OnSpawnFromPool()
@@ -106,23 +110,81 @@ namespace Game.Props
             _isHit = false;
             _model.gameObject.SetActive(true);
 
-            LifetimeCountdown().Forget();
+            if (!_config.IsExplosion)
+                LifetimeCountdown().Forget();
 
             if (_showMuzzle && _muzzleRef != null)
             {
-                SpawnAndReleaseParticleGroup(_muzzleRef, Trans.position, Trans.rotation, _attachMuzzleToFirePoint).Forget();
+                SpawnAndReleaseParticleGroup(_muzzleRef, Trans.position, Trans.rotation, Vector3.one, _attachMuzzleToFirePoint).Forget();
+            }
+
+            if (_config.IsExplosion)
+            {
+                Explode(transform.position).Forget();
             }
         }
 
-        private async UniTaskVoid Hit(Vector3 explodePosition)
+        private async UniTaskVoid Hit(Vector3 position, Character target = null)
         {
             _isHit = true;
+            if (target != null)
+            {
+                var damage = _damage;
+                damage.Value *= _config.DamageScale;
+                DamageHelper.ApplyDamage(damage, target);
+            }
+            
             if (_hitRef != null)
             {
-                SpawnAndReleaseParticleGroup(_hitRef, explodePosition, Trans.rotation).Forget();
+                SpawnAndReleaseParticleGroup(_hitRef, position, Trans.rotation, Vector3.one).Forget();
             }
 
             _model.gameObject.SetActive(false);
+            
+            await ProcessSubEmitters();
+            
+            await Region.Ticker.Delay(_model.TrailsReleaseDelay, destroyCancellationToken);
+            for (int i = 0; i < _model.Trails.Length; i++)
+            {
+                _model.Trails[i].Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
+            }
+            
+            GetDirector<GameDirector>().Pooler.Release(this);
+        }
+
+        private async UniTaskVoid Explode(Vector3 position)
+        {
+            _isHit = true;
+
+            // Apply damage
+            _damagedTargets.Clear();
+            var damage = _damage;
+            damage.Value *= _config.DamageScale;
+            var count = Physics.OverlapSphereNonAlloc(transform.position, _config.ExplosionRadius, _overlapResults, _config.ExplosionDamageLayerMask);
+            for (int i = 0; i < count; i++)
+            {
+                if (_overlapResults[i].TryGetComponentInDirectParent<Character>(out var target))
+                {
+                    if (!_damagedTargets.Contains(target))
+                    {
+                        DamageHelper.ApplyDamage(damage, target);
+                        _damagedTargets.Add(target);
+                    }
+                }
+            }
+            
+            // Effects
+            if (_hitRef != null)
+            {
+                var s = _config.ExplosionRadius / _hitModelRadius;
+                var scale = new Vector3(s, s, s);
+                SpawnAndReleaseParticleGroup(_hitRef, position, Trans.rotation, scale).Forget();
+            }
+
+            _model.gameObject.SetActive(false);
+
+            await ProcessSubEmitters();
+            
             await Region.Ticker.Delay(_model.TrailsReleaseDelay, destroyCancellationToken);
             for (int i = 0; i < _model.Trails.Length; i++)
             {
@@ -131,12 +193,23 @@ namespace Game.Props
             GetDirector<GameDirector>().Pooler.Release(this);
         }
 
-        private async UniTaskVoid SpawnAndReleaseParticleGroup(object key, Vector3 position, Quaternion rotation, bool attachToFirePoint = false)
+        private async UniTaskVoid SpawnAndReleaseParticleGroup(
+            object key, 
+            Vector3 position, 
+            Quaternion rotation, 
+            Vector3 scale, 
+            bool attachToFirePoint = false)
         {
             var pooler = GetDirector<GameDirector>().Pooler;
             var it = await pooler.Spawn<ParticleGroup>(key, -1, destroyCancellationToken);
             if (attachToFirePoint && _firePoint != null)
+            {
+                it.transform.SetParent(null);
+                it.transform.localScale = scale;
                 it.transform.SetParent(_firePoint);
+            }
+            else
+                it.transform.localScale = scale;
             it.transform.SetPositionAndRotation(position, rotation);
             it.PlayAndRelease(Region.Ticker, pooler).Forget();
         }
@@ -154,6 +227,11 @@ namespace Game.Props
                     break;
                 }
             }
+        }
+
+        private UniTask ProcessSubEmitters()
+        {
+            return this.ProcessEmitters(_config.Emitters, _config.EmitMethod, _damage, destroyCancellationToken);
         }
 
     }

@@ -8,7 +8,7 @@ using PamisuKit.Framework;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Game.Props
+namespace Game.Projectiles
 {
     public class SimpleProjectile : MonoEntity, IFixedUpdatable, IPoolElement
     {
