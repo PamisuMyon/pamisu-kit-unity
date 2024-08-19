@@ -16,10 +16,10 @@ namespace Game
         protected override void OnCreate()
         {
             base.OnCreate();
-            Init().Forget();
+            Init();
         }
 
-        public async UniTaskVoid Init()
+        public void Init()
         {
             CreateMonoSystem<SaveSystem>();
             CreateMonoSystem<InputWrapper>();

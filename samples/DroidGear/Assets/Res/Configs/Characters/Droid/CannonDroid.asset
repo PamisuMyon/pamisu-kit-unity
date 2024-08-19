@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: gun_droid
   PrefabRef:
-    m_AssetGUID: 671896e6c8cc95d4590fcb81251460c1
+    m_AssetGUID: b584b79d15892794982cbef6f975ad59
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  AttackAbility: {fileID: 11400000, guid: 9ba157e1db63e624f9c5e6df8e7a5000, type: 2}
+  AttackAbility: {fileID: 11400000, guid: 141138d9b01effd4d86bd5a7d2f4a5f9, type: 2}
   MaxHealth: 1
   MoveSpeed: 5
   Damage: 1

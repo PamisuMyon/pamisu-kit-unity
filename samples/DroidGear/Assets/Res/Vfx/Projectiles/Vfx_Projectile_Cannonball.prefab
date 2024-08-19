@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1366800498651028618}
   - component: {fileID: 8836639270938663616}
   - component: {fileID: 7459893645516123196}
+  - component: {fileID: 3467104970921851584}
   m_Layer: 0
   m_Name: Vfx_Projectile_Cannonball
   m_TagString: Untagged
@@ -4869,6 +4870,23 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &3467104970921851584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366800498651028619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b8e245cce6c8045856d014e025525a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trails:
+  - {fileID: 1366800498821707601}
+  - {fileID: 3060169399606221636}
+  - {fileID: 4756956558469197541}
+  TrailsReleaseDelay: 1
 --- !u!1 &1366800498821707612
 GameObject:
   m_ObjectHideFlags: 0
@@ -4918,7 +4936,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -9746,7 +9764,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  emitterVelocityMode: 0
+  emitterVelocityMode: 1
   looping: 1
   prewarm: 0
   playOnAwake: 1
@@ -9868,7 +9886,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.1
       minScalar: 5
       maxCurve:
         serializedVersion: 2

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537d65504978f5d44b6a79bd949c6200, type: 3}
   m_Name: CannonDroid_Atk
   m_EditorClassIdentifier: 
-  Id: gundroid_atk
+  Id: cannondroid_atk
   Type: 3
   Cooldown: 0.8
   ActRange: 7
@@ -31,23 +31,21 @@ MonoBehaviour:
     FirePointIndex: 0
     BranchCount: 1
     BranchAngleDelta: 5
-    BurstCount: 2
+    BurstCount: 1
     BurstPreDelay: 0
     BurstPostDelay: 0
     BurstInterval: 0.1
     Projectile:
       PrefabRef:
-        m_AssetGUID: a4cd9dc3700a70e45bd8b6fff9e9aac4
+        m_AssetGUID: ecfd958fc3329a04aaf4135fd8fe382d
         m_SubObjectName: 
         m_SubObjectType: 
         m_EditorAssetChanged: 0
       MoveSpeed: 10
       DamageScale: 1
       PierceCount: 0
-      IsExplosion: 0
-      ExplosionRadius: 0
+      IsExplosion: 1
+      ExplosionRadius: 4.5
       ExplosionDamageLayerMask:
         serializedVersion: 2
-        m_Bits: 0
-      EmitMethod: 0
-      Emitters: []
+        m_Bits: 4096

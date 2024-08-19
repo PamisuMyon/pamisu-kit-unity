@@ -66,9 +66,15 @@ namespace Game.Projectiles
             if (_isHit) return;
             if (other.isTrigger) return;
             var hitPos = Trans.position;
-            other.TryGetComponentInDirectParent<Character>(out var target);
-
-            Hit(hitPos, target).Forget();
+            if (_config.IsExplosion)
+            {
+                Explode(hitPos).Forget();
+            }
+            else
+            {
+                other.TryGetComponentInDirectParent<Character>(out var target);
+                Hit(hitPos, target).Forget();
+            }
         }
 
         public void OnSpawnFromPool()
@@ -117,11 +123,6 @@ namespace Game.Projectiles
             {
                 SpawnAndReleaseParticleGroup(_muzzleRef, Trans.position, Trans.rotation, Vector3.one, _attachMuzzleToFirePoint).Forget();
             }
-
-            if (_config.IsExplosion)
-            {
-                Explode(transform.position).Forget();
-            }
         }
 
         private async UniTaskVoid Hit(Vector3 position, Character target = null)
@@ -141,7 +142,7 @@ namespace Game.Projectiles
 
             _model.gameObject.SetActive(false);
             
-            await ProcessSubEmitters();
+            // await ProcessSubEmitters();
             
             await Region.Ticker.Delay(_model.TrailsReleaseDelay, destroyCancellationToken);
             for (int i = 0; i < _model.Trails.Length; i++)
@@ -183,7 +184,7 @@ namespace Game.Projectiles
 
             _model.gameObject.SetActive(false);
 
-            await ProcessSubEmitters();
+            // await ProcessSubEmitters();
             
             await Region.Ticker.Delay(_model.TrailsReleaseDelay, destroyCancellationToken);
             for (int i = 0; i < _model.Trails.Length; i++)
@@ -229,10 +230,10 @@ namespace Game.Projectiles
             }
         }
 
-        private UniTask ProcessSubEmitters()
-        {
-            return this.ProcessEmitters(_config.Emitters, _config.EmitMethod, _damage, destroyCancellationToken);
-        }
+        // private UniTask ProcessSubEmitters()
+        // {
+        //     return this.ProcessEmitters(_config.Emitters, _config.EmitMethod, _damage, destroyCancellationToken);
+        // }
 
     }
 

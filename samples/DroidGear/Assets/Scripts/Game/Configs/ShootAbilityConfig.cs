@@ -57,9 +57,10 @@ namespace Game.Configs
         public float ExplosionRadius;
         public LayerMask ExplosionDamageLayerMask;
         
-        [Space]
-        public EmitMethod EmitMethod = EmitMethod.None;
-        public EmitterConfig[] Emitters;
+        // Use ISerializationCallbackReceiver or Odin to solve the serializing problem of cyclic reference 
+        // [Space] 
+        // public EmitMethod EmitMethod = EmitMethod.None;
+        // public EmitterConfig[] Emitters;
     }
 
 }

@@ -14,14 +14,14 @@ namespace Game.Combat
         {
             base.OnCreate();
             if (GameApp.Instance.IsReady)
-                Init().Forget();
+                Init();
             else
                 GameApp.Instance.Ready += OnAppReady;
         }
 
-        private void OnAppReady() => Init().Forget();
+        private void OnAppReady() => Init();
 
-        protected async UniTaskVoid Init()
+        protected void Init()
         {
             CreateMonoSystem<CombatSystem>();
             IsReady = true;
