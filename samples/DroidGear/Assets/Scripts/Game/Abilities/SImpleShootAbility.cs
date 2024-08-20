@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using Game.Common;
 using Game.Configs;
 using Game.Framework;
-using Game.Projectiles;
+using Game.Props.Projectiles;
 using UnityEngine;
 
 namespace Game.Abilities

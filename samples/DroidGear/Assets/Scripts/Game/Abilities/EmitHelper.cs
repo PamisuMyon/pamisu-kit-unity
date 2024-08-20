@@ -4,10 +4,11 @@ using Cysharp.Threading.Tasks;
 using Game.Common;
 using Game.Configs;
 using Game.Framework;
+using Game.Props.Projectiles;
 using PamisuKit.Framework;
 using UnityEngine;
 
-namespace Game.Projectiles
+namespace Game.Abilities
 {
     public static class EmitHelper
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Projectiles
+namespace Game.Props.Projectiles
 {
     public class ProjectileModel : MonoBehaviour
     {
