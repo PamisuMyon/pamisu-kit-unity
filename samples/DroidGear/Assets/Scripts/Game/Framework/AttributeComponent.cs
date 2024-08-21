@@ -5,12 +5,14 @@ namespace Game.Framework
 {
     public class AttributeComponent : MonoBehaviour
     {
-
+        
+        private readonly Dictionary<AttributeType, Attribute> _attrDict = new();
+        
+        public Character Owner { get; private set; }
+        public List<IAttributeModifier> Modifiers { get; private set; }
+        
         public delegate void HealthChangeDelegate(AttributeComponent attrComp, float delta, float newHealth);
         public event HealthChangeDelegate HealthChanged;
-
-        public Character Owner { get; private set; }
-        private readonly Dictionary<AttributeType, Attribute> _attrDict = new();
 
         public void Init(Character owner, Dictionary<AttributeType, float> valueDic = null)
         {
@@ -42,6 +44,24 @@ namespace Game.Framework
             }
             attr.Value = value;
             _attrDict[key] = attr;
+        }
+
+        public void AddModifier(IAttributeModifier modifier)
+        {
+            Modifiers.Add(modifier);
+        }
+
+        public void RemoveModifier(IAttributeModifier modifier)
+        {
+            Modifiers.Remove(modifier);
+        }
+
+        public void Refresh()
+        {
+            for (int i = 0; i < Modifiers.Count; i++)
+            {
+                
+            }
         }
 
         public void SetMaxHealth(float maxHealthValue, bool updateHealth = false)

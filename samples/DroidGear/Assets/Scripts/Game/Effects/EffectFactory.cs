@@ -9,6 +9,7 @@ namespace Game.Effects
         {
             return config.Type switch
             {
+                EffectType.Cold => new ColdEffect(config),
                 _ => null
             };
         }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Common;
+using UnityEngine;
 
 namespace Game.Framework
 {
@@ -8,5 +9,6 @@ namespace Game.Framework
         public float VisualHeight = 2.5f;
         public Animator Anim;
         public Transform[] FirePoints;
+        public MeshEffector MeshEffector;
     }
 }
