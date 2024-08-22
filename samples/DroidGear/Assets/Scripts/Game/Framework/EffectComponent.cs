@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Configs;
 using PamisuKit.Framework;
 using UnityEngine;
 
@@ -8,7 +9,9 @@ namespace Game.Framework
     {
         public bool IsActive => Owner.IsActive;
         public Character Owner { get; private set; }
+        public Dictionary<EffectType, Effect> EffectDict = new();
         public List<Effect> Effects = new();
+        
         
         public void Init(Character owner)
         {
@@ -33,33 +36,30 @@ namespace Game.Framework
                 {
                     var effect = Effects[i];
                     Effects.RemoveAt(i);
+                    EffectDict.Remove(effect.Config.Type);
                     effect.OnRemoved();
                 }
             }
         }
 
+        public bool TryGetEffect(EffectType type, out Effect effect)
+        {
+            return EffectDict.TryGetValue(type, out effect);
+        }
+        
         public bool TryApplyEffect(Effect effect)
         {
             if (!effect.CanApply(this))
                 return false;
-            
-            if (effect.Config.IsStackable)
-            {
-                for (int i = 0; i < Effects.Count; i++)
-                {
-                    if (Effects[i].Config.Type == effect.Config.Type
-                        && Effects[i].CanApply(this))
-                    {
-                        Effects[i].OnStack(effect);
-                        return true;
-                    }
-                }
-            }
+
+            if (TryStackEffect(effect.Config))
+                return true;
             
             if (effect.Config.DurationPolicy == EffectDurationPolicy.Infinite
                 || effect.Config.DurationPolicy == EffectDurationPolicy.Durationnal)
             {
                 Effects.Add(effect);
+                EffectDict[effect.Config.Type] = effect;
             }
             
             effect.OnApplied(this);
@@ -70,6 +70,16 @@ namespace Game.Framework
             }
             
             return true;
+        }
+
+        public bool TryStackEffect(EffectConfig config)
+        {
+            if (EffectDict.TryGetValue(config.Type, out var appliedEffect))
+            {
+                appliedEffect.OnStack(config);
+                return true;
+            }
+            return false;
         }
         
     }

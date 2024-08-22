@@ -34,6 +34,12 @@ namespace Game.Framework
                 {
                     Abilities[i].Cooldown -= deltaTime;
                 }
+                // ReSharper disable once SuspiciousTypeConversion.Global
+                if (Abilities[i].State == AbilityState.Active
+                    && Abilities[i] is IUpdatable updatable)
+                {
+                    updatable.OnUpdate(deltaTime);
+                }
             }
         }
         

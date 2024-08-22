@@ -61,7 +61,7 @@ namespace Game.Framework
         {
         }
 
-        public virtual void OnStack(Effect effect)
+        public virtual void OnStack(EffectConfig config)
         {
         }
 

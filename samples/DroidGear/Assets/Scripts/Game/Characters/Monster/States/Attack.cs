@@ -35,6 +35,12 @@ namespace Game.Characters.Monster.States
                 Owner.Model.Anim.SetBool(AnimConst.IsRunning, false);
             }
 
+            public override void OnExit()
+            {
+                base.OnExit();
+                _attackAbility.Cancel();
+            }
+
             public override void OnUpdate(float deltaTime)
             {
                 base.OnUpdate(deltaTime);

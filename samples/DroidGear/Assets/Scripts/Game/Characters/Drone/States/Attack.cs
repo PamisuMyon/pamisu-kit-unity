@@ -31,6 +31,7 @@ namespace Game.Characters.Drone.States
             public override void OnExit()
             {
                 base.OnExit();
+                Owner.AttackAbility.Cancel();
                 Owner.AttackAbility.ClearTarget();
             }
 
@@ -68,7 +69,7 @@ namespace Game.Characters.Drone.States
 
             private async UniTaskVoid PerformAttack() 
             {
-                await Owner.AttackAbility.Activate(Owner.destroyCancellationToken);
+                await Owner.AttackAbility.Activate(Owner.destroyCancellationToken); // ?
                 if (Bb.Target == null || !Bb.Target.IsActive)
                 {
                     Machine.ChangeState<Idle>();

@@ -6,10 +6,9 @@ namespace Game.Configs
     public class SprayAbilityConfig : AbilityConfig
     {
         [Header("SprayAbilityConfig")]
-        public float Length;
+        public float Duration;
         public float DamageScale = 1;
-
-        public EffectType EffectType;
+        public EffectConfig Effect;
         
         [Space]
         public float MoveSpeedMultiplier;

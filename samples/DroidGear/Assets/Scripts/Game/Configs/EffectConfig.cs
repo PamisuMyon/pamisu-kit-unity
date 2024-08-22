@@ -19,6 +19,5 @@ namespace Game.Configs
         public float Duration;
         public float Period;
         public bool PeriodExecuteWhenApply;
-        public bool IsStackable;
     }
 }

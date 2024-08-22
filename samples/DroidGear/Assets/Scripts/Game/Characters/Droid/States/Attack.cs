@@ -60,6 +60,12 @@ namespace Game.Characters.Droid.States
                 }
             }
 
+            public override void OnExit()
+            {
+                base.OnExit();
+                _attackAbility.Cancel();
+            }
+
             private async UniTaskVoid PerformAttack()
             {
                 _attackAbility.SetTarget(new AbilityTargetInfo

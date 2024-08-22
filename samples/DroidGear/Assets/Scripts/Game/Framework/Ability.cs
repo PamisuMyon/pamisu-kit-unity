@@ -1,6 +1,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Game.Configs;
+using PamisuKit.Framework;
 
 namespace Game.Framework
 {
@@ -20,6 +21,7 @@ namespace Game.Framework
         public AbilityConfig Config { get; protected set; }
         public AbilityComponent Comp { get; protected set; }
         public Character Owner => Comp.Owner;
+        public Region Region => Owner.Region;
         public AbilityState State { get; protected set; } = AbilityState.None;
         public float Cooldown { get; internal set; }
         public bool IsCooldownManaged { get; protected set; } = true;
@@ -49,7 +51,7 @@ namespace Game.Framework
                    && CheckCooldown();
         }
 
-        public virtual async UniTask<bool> TryActivate(CancellationToken cancellationToken = default)
+        public async UniTask<bool> TryActivate(CancellationToken cancellationToken = default)
         {
             if (!CanActivate())
                 return false;
@@ -57,7 +59,7 @@ namespace Game.Framework
             return true;
         }
 
-        public virtual async UniTask Activate(CancellationToken cancellationToken = default)
+        public async UniTask Activate(CancellationToken cancellationToken = default)
         {
             if (cancellationToken == default)
             {
@@ -72,13 +74,18 @@ namespace Game.Framework
 
         protected abstract UniTask DoActivate(CancellationToken cancellationToken);
         
-        public virtual void Cancel()
+        public void Cancel()
         {
             if (State == AbilityState.Active)
             {
                 CtsActivate?.Cancel();
+                OnCanceled();
                 State = AbilityState.Inactive;
             }
+        }
+
+        protected virtual void OnCanceled()
+        {
         }
 
         protected virtual bool CheckTags()

@@ -27,6 +27,12 @@ namespace Game.Effects
                 meshEffector.ChangeEffect(MeshEffector.EffectType.Ice);
         }
 
+        public override void OnStack(EffectConfig config)
+        {
+            base.OnStack(config);
+            DurationRemain = Config.Duration;
+        }
+
         public override void OnRemoved()
         {
             var meshEffector = Owner.Model.MeshEffector;
