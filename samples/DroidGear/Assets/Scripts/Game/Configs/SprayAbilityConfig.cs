@@ -9,5 +9,10 @@ namespace Game.Configs
         public float Length;
         public float DamageScale = 1;
 
+        public EffectType EffectType;
+        
+        [Space]
+        public float MoveSpeedMultiplier;
+
     }
 }

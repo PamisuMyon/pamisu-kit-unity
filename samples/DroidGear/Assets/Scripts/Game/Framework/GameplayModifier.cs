@@ -1,11 +1,11 @@
 
 namespace Game.Framework
 {
-    public interface IModifier
+    public interface IGameplayModifier
     {
     }
 
-    public abstract class CharacterModifier: IModifier
+    public abstract class CharacterModifier: IGameplayModifier
     {
         public abstract void Apply(Character owner);
 

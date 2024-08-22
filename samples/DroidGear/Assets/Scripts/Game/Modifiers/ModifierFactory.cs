@@ -7,7 +7,7 @@ namespace Game.Modifiers
     public static class ModifierFactory
     {
 
-        public static IModifier Create(ModifierConfig config)
+        public static IGameplayModifier Create(ModifierConfig config)
         {
             // return config.Type switch
             // {

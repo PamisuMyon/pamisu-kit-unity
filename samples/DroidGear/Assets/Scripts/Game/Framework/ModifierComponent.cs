@@ -6,17 +6,17 @@ namespace Game.Framework
     public class ModifierComponent : MonoBehaviour
     {
         public Character Owner { get; private set; }
-        public List<IModifier> Modifiers { get; } = new();
+        public List<IGameplayModifier> Modifiers { get; } = new();
 
         public void Init(Character owner)
         {
             Owner = owner;
         }
 
-        public void AddModifier(IModifier modifier)
+        public void AddModifier(IGameplayModifier gameplayModifier)
         {
-            Modifiers.Add(modifier);
-            if (modifier is CharacterModifier characterModifier)
+            Modifiers.Add(gameplayModifier);
+            if (gameplayModifier is CharacterModifier characterModifier)
                 characterModifier.Apply(Owner);
         }
 
