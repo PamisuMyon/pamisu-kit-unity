@@ -9,8 +9,8 @@ namespace Game.Framework
     {
         public bool IsActive => Owner.IsActive;
         public Character Owner { get; private set; }
-        public Dictionary<EffectType, Effect> EffectDict = new();
-        public List<Effect> Effects = new();
+        public Dictionary<EffectType, Effect> EffectDict { get; private set; } = new();
+        public List<Effect> Effects { get; private set; } = new();
         
         
         public void Init(Character owner)

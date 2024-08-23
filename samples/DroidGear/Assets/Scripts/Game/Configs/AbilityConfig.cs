@@ -10,6 +10,7 @@ namespace Game.Configs
         SimpleShoot,
         SimpleMelee,
         Shoot,
+        Spray,
     }
 
     [CreateAssetMenu(fileName = "AbilityConfig", menuName = "Configs/AbilityConfig", order = 0)]

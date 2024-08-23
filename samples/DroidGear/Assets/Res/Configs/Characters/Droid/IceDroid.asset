@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27d0b307f5384054fa4c82d2c187f776, type: 3}
-  m_Name: CannonDroid
+  m_Name: IceDroid
   m_EditorClassIdentifier: 
-  Id: cannon_droid
+  Id: ice_droid
   PrefabRef:
-    m_AssetGUID: b584b79d15892794982cbef6f975ad59
+    m_AssetGUID: c097ad000241a2d48964321ac126b8cd
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  AttackAbility: {fileID: 11400000, guid: 141138d9b01effd4d86bd5a7d2f4a5f9, type: 2}
+  AttackAbility: {fileID: 11400000, guid: 7844e23b7fe5d0242a1b023e37eda169, type: 2}
   MaxHealth: 1
   MoveSpeed: 5
   Damage: 1

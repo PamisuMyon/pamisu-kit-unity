@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5262400622868366930}
   - component: {fileID: 3061228549346715625}
   - component: {fileID: 8287527367198069151}
+  - component: {fileID: 2982952261704469430}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2982952261704469430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6393900939822836759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbbc075658c4bfbbe720d32370ced1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iceMaterial: {fileID: 2100000, guid: c2643d04ce169ee4ea332b1fb309cc43, type: 2}
 --- !u!1001 &3346793049857772522
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,6 +120,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1574606001188712518, guid: bd49ca71ddacf9e4eb935da31cdcce84,
+        type: 3}
+      propertyPath: MeshEffector
+      value: 
+      objectReference: {fileID: 2982952261704469430}
     - target: {fileID: 1574606001188712518, guid: bd49ca71ddacf9e4eb935da31cdcce84,
         type: 3}
       propertyPath: VisualHeight
@@ -227,8 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004c38d0a84c625498d5a27346219f62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoInit: 1
-  _autoInitCharacterId: dummy
+  AutoSetup: 0
+  _autoSetupConfig: {fileID: 0}
 --- !u!4 &8032813093353950086 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4686130072824627308, guid: bd49ca71ddacf9e4eb935da31cdcce84,

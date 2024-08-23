@@ -12,7 +12,6 @@ namespace Game.Props
         [SerializeField]
         private ParticleSystem _mainParticle;
 
-        [SerializeField]
         private Collider _hitBox;
         
         public EffectConfig EffectConfig { get; protected set; }
@@ -22,6 +21,7 @@ namespace Game.Props
 
         private void Awake()
         {
+            _hitBox = GetComponent<Collider>();
             _hitBox.enabled = false;
         }
 
@@ -44,6 +44,7 @@ namespace Game.Props
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log($"OnTriggerEnter {other.gameObject}");
             if (other.TryGetComponentInDirectParent<Character>(out var character))
             {
                 AreaEnter?.Invoke(character);
@@ -52,6 +53,7 @@ namespace Game.Props
 
         private void OnTriggerExit(Collider other)
         {
+            Debug.Log($"OnTriggerExit {other.gameObject}");
             if (other.TryGetComponentInDirectParent<Character>(out var character))
             {
                 AreaExit?.Invoke(character);

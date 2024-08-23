@@ -9,7 +9,7 @@ namespace Game.Framework
         private readonly Dictionary<AttributeType, Attribute> _attrDict = new();
         
         public Character Owner { get; private set; }
-        public List<IAttributeModifier> Modifiers { get; private set; }
+        public List<IAttributeModifier> Modifiers { get; private set; } = new();
         
         public delegate void HealthChangeDelegate(AttributeComponent attrComp, float delta, float newHealth);
         public event HealthChangeDelegate HealthChanged;

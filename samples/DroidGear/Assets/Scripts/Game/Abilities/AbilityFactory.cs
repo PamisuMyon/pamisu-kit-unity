@@ -14,6 +14,7 @@ namespace Game.Abilities
                 AbilityType.SimpleShoot => new SimpleShootAbility(config),
                 AbilityType.SimpleMelee => new SimpleMeleeAbility(config),
                 AbilityType.Shoot => new ShootAbility(config),
+                AbilityType.Spray => new SprayAbility(config),
                 _ => null
             };
         }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4298333225180743979}
   - component: {fileID: 716757864787504343}
   - component: {fileID: 5303790999693210407}
+  - component: {fileID: 4276484668086523039}
   - component: {fileID: 6463656811818290346}
   m_Layer: 0
   m_Name: Character
@@ -60,6 +61,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142eff58f450fea46bfc23b7d48191a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4276484668086523039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250176693954558661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d4588bea2644d7a6d97b0e61c93e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6463656811818290346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,6 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4254d12dd0e703418924c552a0753a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AutoSetup: 0
 --- !u!1 &2919480173473849464
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,3 +189,4 @@ MonoBehaviour:
   VisualHeight: 3
   Anim: {fileID: 0}
   FirePoints: []
+  MeshEffector: {fileID: 0}

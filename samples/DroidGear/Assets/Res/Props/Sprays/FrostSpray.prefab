@@ -64,14 +64,64 @@ PrefabInstance:
       value: FrostSpray
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2523202874685743052, guid: 859ebfbc198cc2a49aace7b2d1125fd8, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3013924479394085556, guid: 859ebfbc198cc2a49aace7b2d1125fd8,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 670664125175460595}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5493745835953594154, guid: 859ebfbc198cc2a49aace7b2d1125fd8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5140401333472593922}
+    - targetCorrespondingSourceObject: {fileID: 5493745835953594154, guid: 859ebfbc198cc2a49aace7b2d1125fd8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 880470257073207653}
   m_SourcePrefab: {fileID: 100100000, guid: 859ebfbc198cc2a49aace7b2d1125fd8, type: 3}
+--- !u!1 &142540489817676774 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5493745835953594154, guid: 859ebfbc198cc2a49aace7b2d1125fd8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5604680717599163596}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5140401333472593922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142540489817676774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc728a32b384d95aa861be8d2db308d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainParticle: {fileID: 2323790851310163890}
+  _hitBox: {fileID: 0}
+--- !u!65 &880470257073207653
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142540489817676774}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8, y: 1, z: 3.1}
+  m_Center: {x: 0, y: 0, z: 1.5}
 --- !u!4 &7211475981739605624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3013924479394085556, guid: 859ebfbc198cc2a49aace7b2d1125fd8,
@@ -149,6 +199,12 @@ PrefabInstance:
 --- !u!4 &670664125175460595 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6305292628399293077, guid: 65912a23aa809e14287dc1c3f91a397f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6831480469860610150}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2323790851310163890 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 9147242114959697876, guid: 65912a23aa809e14287dc1c3f91a397f,
     type: 3}
   m_PrefabInstance: {fileID: 6831480469860610150}
   m_PrefabAsset: {fileID: 0}

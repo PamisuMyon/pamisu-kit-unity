@@ -1,5 +1,4 @@
-﻿
-using Game.Configs;
+﻿using Game.Configs;
 using UnityEngine;
 
 namespace Game.Framework

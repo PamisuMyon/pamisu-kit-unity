@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Game.Common;
 using Game.Configs;
 using Game.Effects;
 using Game.Framework;
@@ -21,6 +22,7 @@ namespace Game.Abilities
         
         public SprayAbility(AbilityConfig config) : base(config)
         {
+            _config = config as SprayAbilityConfig;
         }
 
         public override void OnGranted(AbilityComponent comp)
@@ -44,10 +46,14 @@ namespace Game.Abilities
 
         protected override async UniTask DoActivate(CancellationToken cancellationToken)
         {
+            if (Owner.Model.Anim != null)
+                Owner.Model.Anim.SetBool(AnimConst.IsShooting, true);
             _targets.Clear();
             _spray.Activate();
             await Region.Ticker.Delay(_config.Duration, cancellationToken);
             _spray.Cancel();
+            if (Owner.Model.Anim != null)
+                Owner.Model.Anim.SetBool(AnimConst.IsShooting, false);
         }
         
         public void OnUpdate(float deltaTime)
@@ -67,6 +73,8 @@ namespace Game.Abilities
         {
             base.OnCanceled();
             _spray.Cancel();
+            if (Owner.Model.Anim != null)
+                Owner.Model.Anim.SetBool(AnimConst.IsShooting, false);
         }
 
         private void OnSprayAreaEnter(Character c)
