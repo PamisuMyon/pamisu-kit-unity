@@ -21,6 +21,7 @@ namespace Game.Effects
         {
             base.OnApplied(comp);
             Owner.AttrComp.AddModifier(this);
+            Owner.AttrComp.Refresh();
             
             var meshEffector = Owner.Model.MeshEffector;
             if (meshEffector != null)

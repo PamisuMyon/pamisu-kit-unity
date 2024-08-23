@@ -48,6 +48,7 @@ namespace Game.Framework
         public void OnUpdate(float deltaTime)
         {
             AbilityComp.OnUpdate(deltaTime);
+            EffectComp.OnUpdate(deltaTime);
         }
 
         protected virtual void OnHealthChanged(AttributeComponent attrComp, float delta, float newHealth)

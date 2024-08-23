@@ -115,11 +115,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Droid_2Legs
       objectReference: {fileID: 0}
-    - target: {fileID: 3487097227973384852, guid: 97f54116d2d91bc458a06eb229c8ea47,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: e29f6a6d5c9566246a294249b412f206, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

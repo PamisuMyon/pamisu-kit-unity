@@ -7,6 +7,7 @@ namespace Game.Framework
     {
         
         private readonly Dictionary<AttributeType, Attribute> _attrDict = new();
+        private readonly List<AttributeType> _attrKeys = new();
         
         public Character Owner { get; private set; }
         public List<IAttributeModifier> Modifiers { get; private set; } = new();
@@ -32,6 +33,7 @@ namespace Game.Framework
             {
                 if (_attrDict.TryGetValue(key, out var value))
                     return value;
+                _attrKeys.Add(key);
                 return _attrDict[key] = new Attribute();
             }
         }
@@ -41,8 +43,9 @@ namespace Game.Framework
             if (!_attrDict.TryGetValue(key, out var attr))
             {
                 attr = new Attribute();
+                _attrKeys.Add(key);
             }
-            attr.Value = value;
+            attr.BaseValue = attr.Value = value;
             _attrDict[key] = attr;
         }
 
@@ -58,9 +61,21 @@ namespace Game.Framework
 
         public void Refresh()
         {
-            for (int i = 0; i < Modifiers.Count; i++)
+            for (int i = 0; i < _attrKeys.Count; i++)
             {
-                
+                var key = _attrKeys[i];
+                var multiplier = 1f;
+                var addend = 0f;
+                for (int j = 0; j < Modifiers.Count; j++)
+                {
+                    multiplier += Modifiers[j].GetMultiplier(key);
+                    addend += Modifiers[j].GetAddend(key);
+                }
+                multiplier = Mathf.Max(0, multiplier);
+                var attr = _attrDict[key];
+                attr.Value = attr.BaseValue * multiplier + addend;
+                _attrDict[key] = attr;
+                // ...To be implemented: Attribute value restriction
             }
         }
 

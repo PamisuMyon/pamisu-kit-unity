@@ -52,8 +52,11 @@ namespace Game.Abilities
             _spray.Activate();
             await Region.Ticker.Delay(_config.Duration, cancellationToken);
             _spray.Cancel();
+            _targets.Clear();
             if (Owner.Model.Anim != null)
                 Owner.Model.Anim.SetBool(AnimConst.IsShooting, false);
+            
+            Cooldown = Config.Cooldown;
         }
         
         public void OnUpdate(float deltaTime)
@@ -73,6 +76,7 @@ namespace Game.Abilities
         {
             base.OnCanceled();
             _spray.Cancel();
+            _targets.Clear();
             if (Owner.Model.Anim != null)
                 Owner.Model.Anim.SetBool(AnimConst.IsShooting, false);
         }

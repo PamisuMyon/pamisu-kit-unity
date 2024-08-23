@@ -7,7 +7,7 @@ namespace Game.Framework
     {
         Instant,
         Infinite,
-        Durationnal,
+        Durational,
     }
     
     public abstract class Effect
@@ -31,7 +31,7 @@ namespace Game.Framework
         public virtual void OnApplied(EffectComponent comp)
         {
             Comp = comp;
-            if (Config.DurationPolicy == EffectDurationPolicy.Durationnal)
+            if (Config.DurationPolicy == EffectDurationPolicy.Durational)
                 DurationRemain = Mathf.Max(0, Config.Duration);
             else
                 DurationRemain = -1;
@@ -40,7 +40,7 @@ namespace Game.Framework
 
         public virtual void OnUpdate(float deltaTime)
         {
-            if (Config.DurationPolicy == EffectDurationPolicy.Durationnal)
+            if (Config.DurationPolicy == EffectDurationPolicy.Durational)
             {
                 DurationRemain -= deltaTime;
             }

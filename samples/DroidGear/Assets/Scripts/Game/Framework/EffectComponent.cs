@@ -31,7 +31,7 @@ namespace Game.Framework
         {
             for (int i = Effects.Count - 1; i >= 0; i--)
             {
-                if (Effects[i].Config.DurationPolicy == EffectDurationPolicy.Durationnal
+                if (Effects[i].Config.DurationPolicy == EffectDurationPolicy.Durational
                     && Effects[i].DurationRemain <= 0)
                 {
                     var effect = Effects[i];
@@ -56,7 +56,7 @@ namespace Game.Framework
                 return true;
             
             if (effect.Config.DurationPolicy == EffectDurationPolicy.Infinite
-                || effect.Config.DurationPolicy == EffectDurationPolicy.Durationnal)
+                || effect.Config.DurationPolicy == EffectDurationPolicy.Durational)
             {
                 Effects.Add(effect);
                 EffectDict[effect.Config.Type] = effect;

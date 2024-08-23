@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: ice_droid_atk
   Type: 4
-  Cooldown: 1
+  Cooldown: 10
   ActRange: 3
   ActPreDelay: 0
   ActPostDelay: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  Duration: 4
+  Duration: 2
   DamageScale: 1
   Effect: {fileID: 11400000, guid: 0de68baf799c82a47b6d1392c295c31f, type: 2}
   MoveSpeedMultiplier: -0.8
