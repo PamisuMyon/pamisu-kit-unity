@@ -52,7 +52,7 @@ namespace Game.Framework
             if (!effect.CanApply(this))
                 return false;
 
-            if (TryStackEffect(effect.Config))
+            if (TryStackEffect(effect.Config, out _))
                 return true;
             
             if (effect.Config.DurationPolicy == EffectDurationPolicy.Infinite
@@ -72,9 +72,9 @@ namespace Game.Framework
             return true;
         }
 
-        public bool TryStackEffect(EffectConfig config)
+        public bool TryStackEffect(EffectConfig config, out Effect appliedEffect)
         {
-            if (EffectDict.TryGetValue(config.Type, out var appliedEffect))
+            if (EffectDict.TryGetValue(config.Type, out appliedEffect))
             {
                 appliedEffect.OnStack(config);
                 return true;

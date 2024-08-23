@@ -17,12 +17,18 @@ namespace Game.Abilities
         private SprayAbilityConfig _config;
         private Spray _spray;
         private List<Character> _targets = new();
+
+        protected Dictionary<AttributeType, float> AttributeDict = new();
         
         public bool IsActive => State == AbilityState.Active;
         
         public SprayAbility(AbilityConfig config) : base(config)
         {
             _config = config as SprayAbilityConfig;
+            foreach (var it in _config.AttributeDict)
+            {
+                AttributeDict[it.Key] = it.Value;
+            }
         }
 
         public override void OnGranted(AbilityComponent comp)
@@ -61,13 +67,18 @@ namespace Game.Abilities
         
         public void OnUpdate(float deltaTime)
         {
+            AttributeDict[AttributeType.Damage] = Owner.AttrComp[AttributeType.Damage].Value * _config.DamageScale;
             for (int i = 0; i < _targets.Count; i++)
             {
                 var effectComp = _targets[i].EffectComp;
-                if (effectComp.TryStackEffect(_config.Effect))
+                if (effectComp.TryStackEffect(_config.Effect, out var appliedEffect))
+                {
+                    appliedEffect.SetAttributes(AttributeDict);
                     continue;
+                }
                 
                 var effect = EffectFactory.Create(_config.Effect);
+                effect.SetAttributes(AttributeDict);
                 effectComp.TryApplyEffect(effect);
             }
         }

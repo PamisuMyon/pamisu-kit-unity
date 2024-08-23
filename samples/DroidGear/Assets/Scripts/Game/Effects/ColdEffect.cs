@@ -1,4 +1,5 @@
-﻿using Game.Common;
+﻿using Game.Combat;
+using Game.Common;
 using Game.Configs;
 using Game.Framework;
 
@@ -6,15 +7,8 @@ namespace Game.Effects
 {
     public class ColdEffect : Effect, IAttributeModifier
     {
-        private float _moveSpeedMultiplier;
-        
         public ColdEffect(EffectConfig config, Character instigator = null) : base(config, instigator)
         {
-        }
-
-        public void SetAttributes(float moveSpeedMultiplier)
-        {
-            _moveSpeedMultiplier = moveSpeedMultiplier;
         }
         
         public override void OnApplied(EffectComponent comp)
@@ -26,6 +20,18 @@ namespace Game.Effects
             var meshEffector = Owner.Model.MeshEffector;
             if (meshEffector != null)
                 meshEffector.ChangeEffect(MeshEffector.EffectType.Ice);
+        }
+
+        protected override void OnPeriodExecute()
+        {
+            base.OnPeriodExecute();
+            if (!AttributeDict.TryGetValue(AttributeType.Damage, out var damageValue))
+                damageValue = 0;
+            if (damageValue != 0)
+            {
+                var damage = new Damage(Instigator, -damageValue);
+                DamageHelper.ApplyDamage(damage, Owner);
+            }
         }
 
         public override void OnStack(EffectConfig config)
@@ -46,8 +52,8 @@ namespace Game.Effects
 
         public float GetMultiplier(AttributeType attributeType)
         {
-            if (attributeType == AttributeType.MoveSpeed)
-                return _moveSpeedMultiplier;
+            if (AttributeDict.TryGetValue(attributeType, out var value))
+                return value;
             return 0;
         }
 

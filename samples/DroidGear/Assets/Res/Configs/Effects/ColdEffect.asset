@@ -15,5 +15,5 @@ MonoBehaviour:
   Type: 1
   DurationPolicy: 2
   Duration: 3
-  Period: 0
-  PeriodExecuteWhenApply: 0
+  Period: 1
+  PeriodExecuteWhenApply: 1

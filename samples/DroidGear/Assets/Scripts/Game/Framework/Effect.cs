@@ -1,4 +1,5 @@
-﻿using Game.Configs;
+﻿using System.Collections.Generic;
+using Game.Configs;
 using UnityEngine;
 
 namespace Game.Framework
@@ -13,6 +14,8 @@ namespace Game.Framework
     public abstract class Effect
     {
         
+        protected Dictionary<AttributeType, float> AttributeDict = new();
+        
         public float DurationRemain { get; protected set; }
         public float PeriodCounter { get; protected set; }
         public int StackNum { get; protected set; }
@@ -26,6 +29,14 @@ namespace Game.Framework
         {
             Config = config;
             Instigator = instigator;
+        }
+
+        public void SetAttributes(Dictionary<AttributeType, float> dict)
+        {
+            foreach (var it in dict)
+            {
+                AttributeDict[it.Key] = it.Value;
+            }
         }
         
         public virtual void OnApplied(EffectComponent comp)
