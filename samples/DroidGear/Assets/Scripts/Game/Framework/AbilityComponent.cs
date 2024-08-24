@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -70,6 +71,16 @@ namespace Game.Framework
         public bool TryGetAbility(string id, out Ability ability)
         {
             return _abilityDic.TryGetValue(id, out ability);
+        }
+
+        public Ability GetAbility<TAbility>() where TAbility : Ability
+        {
+            for (int i = 0; i < Abilities.Count; i++)
+            {
+                if (Abilities[i] is TAbility)
+                    return Abilities[i];
+            }
+            return null;
         }
 
         public UniTask<bool> TryActiveAbility(string id, CancellationToken cancellationToken = default)

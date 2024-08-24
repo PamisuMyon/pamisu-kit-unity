@@ -67,5 +67,12 @@ namespace Game.Framework
             IsAlive = AttrComp[AttributeType.Health].Value > 0;
         }
 
+        public Ability GetAttackAbility()
+        {
+            if (AbilityComp.TryGetAbility(Config.AttackAbility.Id, out var attackAbility))
+                return attackAbility;
+            return null;
+        }
+
     }
 }
