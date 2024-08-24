@@ -27,7 +27,7 @@ namespace Game.UI.Combat
             player.AttrComp.HealthChanged += OnPlayerHealthChanged;
 
             _expSlider.value = bb.Experience / bb.NextLevelExperience;
-            _levelText.text = $"Lv.{bb.Level}";
+            _levelText.text = $"Lv.{bb.PlayerLevel}";
             EventBus.OnRaw<PlayerExpChanged>(OnPlayerExpChanged);
         }
 

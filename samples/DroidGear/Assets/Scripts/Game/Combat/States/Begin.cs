@@ -26,8 +26,12 @@ namespace Game.Combat.States
                 DoInit().Forget();
             }
 
-            private async UniTaskVoid DoInit() 
+            private async UniTaskVoid DoInit()
             {
+                Bb.PlayerLevel = 1;
+                Bb.Experience = 0;
+                Bb.NextLevelExperience = 5;
+                
                 await InitPlayer();
                 await InitDroid();
                 Machine.ChangeState<Battle>();

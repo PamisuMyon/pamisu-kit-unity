@@ -32,5 +32,24 @@ namespace Game.Combat
             Fsm.ChangeState<CombatStates.Begin>();
         }
 
+        public void AddPlayerExp(float experience)
+        {
+            Bb.Experience += experience;
+            if (Bb.Experience >= Bb.NextLevelExperience)
+            {
+                // Level up
+                Bb.PlayerLevel++;
+                Bb.Experience -= Bb.NextLevelExperience;
+                float increment;
+                if (Bb.PlayerLevel >= 2 && Bb.PlayerLevel < 20)
+                    increment = 10;
+                else if (Bb.PlayerLevel >= 20 && Bb.PlayerLevel < 40)
+                    increment = 13;
+                else
+                    increment = 16;
+                Bb.NextLevelExperience += increment;
+            }
+        }
+        
     }
 }

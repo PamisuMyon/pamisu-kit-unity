@@ -11,7 +11,7 @@ namespace Game.Combat.States
         public class Blackboard
         {
             public float CombatTime { get; internal set; }
-            public int Level { get; internal set; }
+            public int PlayerLevel { get; internal set; }
             public float Experience { get; internal set; }
             public float NextLevelExperience { get; internal set; }
             public PlayerController Player { get; internal set; }
