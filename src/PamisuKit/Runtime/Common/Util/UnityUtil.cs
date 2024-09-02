@@ -3,6 +3,7 @@ using System.Collections;
 using Cysharp.Threading.Tasks;
 using PamisuKit.Common.Assets;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -217,6 +218,16 @@ namespace PamisuKit.Common.Util
             if (isTempTransparent)
                 image.color = Transparent;
             image.sprite = await AssetManager.LoadAsset<Sprite>(spriteRes, mode);
+            if (isTempTransparent)
+                image.color = originalColor;
+        }
+        
+        public static async UniTask LoadSprite(this Image image, AssetReference refer, bool isTempTransparent = true, AssetRefCountMode mode = AssetRefCountMode.Single)
+        {
+            var originalColor = image.color;
+            if (isTempTransparent)
+                image.color = Transparent;
+            image.sprite = await AssetManager.LoadAsset<Sprite>(refer, mode);
             if (isTempTransparent)
                 image.color = originalColor;
         }

@@ -21,7 +21,7 @@ namespace Game.UI.Combat
 
         public void Init()
         {
-            var bb = GameApp.Instance.GetSystem<CombatSystem>().Bb;
+            var bb = App.Instance.GetSystem<CombatSystem>().Bb;
             var player = bb.Player.Chara;
             _healthSlider.value = player.AttrComp[AttributeType.Health].Value / player.AttrComp[AttributeType.MaxHealth].Value;
             player.AttrComp.HealthChanged += OnPlayerHealthChanged;

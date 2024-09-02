@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using Game.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,23 +7,15 @@ namespace Game.Combat
 {
     public class CombatDirector : GameDirector
     {
-        public bool IsReady { get; private set; }
-
         protected override void OnCreate()
         {
             base.OnCreate();
-            if (GameApp.Instance.IsReady)
-                Init();
-            else
-                GameApp.Instance.Ready += OnAppReady;
+            Init();
         }
-
-        private void OnAppReady() => Init();
 
         protected void Init()
         {
             CreateMonoSystem<CombatSystem>();
-            IsReady = true;
             
             GetSystem<CombatSystem>().StartCombat();
         }

@@ -91,7 +91,7 @@ namespace PamisuKit.Common.Pool
                     pool = value;
                 Instance._poolDic[address] = pool;
             }
-            var go = pool.SpawnSync();
+            var go = pool.Spawn();
             if (go != null)
                 Instance._instanceToPoolDic.TryAdd(go.GetInstanceID(), pool);
             return go;

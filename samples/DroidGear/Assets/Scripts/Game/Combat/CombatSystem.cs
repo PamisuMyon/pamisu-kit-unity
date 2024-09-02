@@ -1,6 +1,8 @@
 using Game.Combat.States;
 using Game.Configs;
+using Game.Events;
 using Game.Framework;
+using PamisuKit.Common;
 using PamisuKit.Common.FSM;
 using PamisuKit.Framework;
 
@@ -35,8 +37,11 @@ namespace Game.Combat
         public void AddPlayerExp(float experience)
         {
             Bb.Experience += experience;
-            if (Bb.Experience >= Bb.NextLevelExperience)
+            var level = Bb.PlayerLevel;
+            var levelUpDelta = 0;
+            while (Bb.Experience >= Bb.NextLevelExperience)
             {
+                levelUpDelta++;
                 // Level up
                 Bb.PlayerLevel++;
                 Bb.Experience -= Bb.NextLevelExperience;
@@ -49,6 +54,11 @@ namespace Game.Combat
                     increment = 16;
                 Bb.NextLevelExperience += increment;
             }
+            EventBus.Emit(new PlayerExpChanged
+            {
+                NewLevel = Bb.PlayerLevel,
+                
+            });
         }
         
     }

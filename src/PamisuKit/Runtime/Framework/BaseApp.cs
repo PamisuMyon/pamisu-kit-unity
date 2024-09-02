@@ -1,21 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PamisuKit.Framework
 {
     public abstract class BaseApp : MonoBehaviour
     {
-        public Dictionary<Type, ISystem> SystemDict { get; protected set; }
+        protected Dictionary<Type, ISystem> SystemDict { get; set; }
+        protected Dictionary<Type, object> ServiceDict { get; set; }
+        
+        public Director Director { get; private set; }
+        public bool IsDirectorSingleton { get; private set; }
 
         protected virtual void Awake()
         {
+            SystemDict = new Dictionary<Type, ISystem>();
+            ServiceDict = new Dictionary<Type, object>();
             OnCreate();
         }
 
         protected virtual void OnCreate()
         {
-            SystemDict = new Dictionary<Type, ISystem>();
+            Director = GetComponentInChildren<Director>();
+            if (Director != null)
+                IsDirectorSingleton = true;
+            else
+                Director = FindFirstObjectByType<Director>();
+            Debug.Assert(Director != null, "There must be one director in the scene.");
+            Director.Setup(this);
+            
+            if (!IsDirectorSingleton)
+                SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        protected void OnDestroy()
+        {
+            if (SystemDict == null)
+                return;
+            foreach (var it in SystemDict.Values)
+            {
+                if (it is MonoSystem monoSystem)
+                    Destroy(monoSystem.gameObject);
+            }
+            SystemDict.Clear();
+        }
+        
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            var director = FindFirstObjectByType<Director>();
+            if (director != null && director != Director)
+            {
+                Director = director;
+                Director.Setup(this);
+            }
         }
         
         public virtual TSystem CreateMonoSystem<TSystem>(Transform parent = null) where TSystem : MonoSystem
@@ -23,7 +61,7 @@ namespace PamisuKit.Framework
             var type = typeof(TSystem);
             if (SystemDict.ContainsKey(type))
             {
-                Debug.LogWarning($"{GetType().Name} The system({type}) you want to create already exists.");
+                Debug.LogError($"{GetType().Name} The system({type}) you want to create already exists.");
                 return null;
             }
             
@@ -61,16 +99,26 @@ namespace PamisuKit.Framework
                 Destroy(monoSystem.gameObject);
         }
 
-        protected void OnDestroy()
+        public void RegisterService<TService>(TService service) where TService : class
         {
-            if (SystemDict == null)
-                return;
-            foreach (var it in SystemDict.Values)
-            {
-                if (it is MonoSystem monoSystem)
-                    Destroy(monoSystem.gameObject);
-            }
-            SystemDict.Clear();
+            ServiceDict[typeof(TService)] = service;
+        }
+
+        public TService GetService<TService>() where TService : class
+        {
+            if (ServiceDict.TryGetValue(typeof(TService), out var service))
+                return service as TService;
+            return null;
+        }
+
+        public bool RemoveService<TService>()
+        {
+            return ServiceDict.Remove(typeof(TService));
+        }
+
+        public bool RemoveService(object serivce)
+        {
+            return ServiceDict.Remove(serivce.GetType());
         }
         
     }
@@ -87,7 +135,8 @@ namespace PamisuKit.Framework
         {
             if (Instance != null)
             {
-                Destroy(gameObject);
+                // Destroy(gameObject);
+                DestroyImmediate(gameObject);
                 return;
             }
             Instance = GetComponent<T>();

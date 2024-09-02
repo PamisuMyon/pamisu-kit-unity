@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using PamisuKit.Common;
 using UnityEngine;
 
@@ -26,12 +27,20 @@ namespace PamisuKit.Framework
         {
             if (AutoSetup && Region == null)
             {
-                var director = FindFirstObjectByType<Director>();
-                if (director != null)
-                {
-                    Setup(director.Region);
-                    OnAutoSetup();
-                }
+                DoAutoSetup().Forget();
+            }
+        }
+
+        protected virtual async UniTaskVoid DoAutoSetup()
+        {
+            await UniTask.Yield();
+            if (Region != null)
+                return;
+            var director = FindFirstObjectByType<Director>();
+            if (director != null)
+            {
+                director.SetupMonoEntity(this);
+                OnAutoSetup();
             }
         }
 
@@ -57,7 +66,8 @@ namespace PamisuKit.Framework
         public void OnDestroy()
         {
             IsPendingDestroy = true;
-            Region?.RemoveEntity(this);
+            if (Region != null)
+                Region.RemoveEntity(this);
             ClearEventSubscriptions();
             OnSelfDestroy();
             Go = null;
@@ -84,10 +94,9 @@ namespace PamisuKit.Framework
             EventSubscriptions.Add(disposable);
         }
 
-        public void Off<TMessage>(Action<TMessage> handler) where TMessage : struct
-        {
-            EventBus.Off(handler);
-        }
+        public void Off<TMessage>(Action<TMessage> handler) where TMessage : struct => EventBus.Off(handler);
+
+        public void Emit<TMessage>(TMessage message) where TMessage : struct => EventBus.Emit(message);
 
         protected void ClearEventSubscriptions()
         {

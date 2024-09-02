@@ -9,13 +9,15 @@ namespace PamisuKit.Framework
 
         protected List<ISystem> Systems;
         
-        public BaseApp App { get; protected set; }
-        public Ticker Ticker { get; protected set; }
-        public Region Region { get; protected set; }
+        public BaseApp App { get; private set; }
+        public Ticker Ticker { get; private set; }
+        public Region Region { get; private set; }
 
-        protected virtual void Awake()
+        internal void Setup(BaseApp app)
         {
-            App = FindFirstObjectByType<BaseApp>();
+            if (App != null)
+                return;
+            App = app;
             OnCreate();
         }
 
@@ -25,6 +27,11 @@ namespace PamisuKit.Framework
             Region = gameObject.AddComponent<Region>();
             Region.Init(Ticker, this);
             Systems = new List<ISystem>();
+        }
+
+        public virtual void SetupMonoEntity(MonoEntity entity)
+        {
+            entity.Setup(Region);
         }
 
         protected virtual TSystem CreateMonoSystem<TSystem>() where TSystem : MonoSystem
@@ -53,11 +60,13 @@ namespace PamisuKit.Framework
 
         protected void OnDestroy()
         {
-            for (int i = 0; i < Systems.Count; i++)
+            if (Systems != null)
             {
-                App.DestroySystem(Systems[i]);
+                for (int i = 0; i < Systems.Count; i++)
+                {
+                    App.DestroySystem(Systems[i]);
+                }
             }
-            Systems.Clear();
         }
 
     }

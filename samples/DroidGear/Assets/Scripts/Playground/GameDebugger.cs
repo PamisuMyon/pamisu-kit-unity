@@ -9,7 +9,7 @@ namespace Playground
 #if UNITY_EDITOR
 
         [SerializeField]
-        private float _addExp = 10;
+        private float _addExp = 2;
         
         private CombatDirector _combatDirector;
         private CombatSystem _combatSystem;

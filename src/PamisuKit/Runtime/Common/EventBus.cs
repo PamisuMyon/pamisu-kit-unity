@@ -77,7 +77,7 @@ namespace PamisuKit.Common
                 }
                 catch (Exception ex)
                 {
-                    Debug.LogError("Event Emit ERROR:");
+                    // Debug.LogError("Event Emit ERROR:");
                     Debug.LogException(ex);
                 }
                 finally
