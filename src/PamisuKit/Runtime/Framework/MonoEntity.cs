@@ -66,10 +66,12 @@ namespace PamisuKit.Framework
         public void OnDestroy()
         {
             IsPendingDestroy = true;
-            if (Region != null)
-                Region.RemoveEntity(this);
             ClearEventSubscriptions();
-            OnSelfDestroy();
+            if (Region != null)
+            {
+                OnSelfDestroy();
+                Region.RemoveEntity(this);
+            }
             Go = null;
             Trans = null;
             Region = null;

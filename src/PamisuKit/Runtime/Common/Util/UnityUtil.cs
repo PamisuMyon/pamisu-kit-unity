@@ -13,7 +13,8 @@ namespace PamisuKit.Common.Util
     public static class UnityUtil
     {
         public static readonly Vector3 Niv3 = new(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
-        public static readonly Color Transparent = new(0, 0, 0, 0);
+        public static readonly Color TransparentWhite = new(1, 1, 1, 0);
+        public static readonly Color TransparentBlack = new(0, 0, 0, 0);
 
         /// <summary>
         /// Compares two Vectors and returns true if they are similar.
@@ -201,7 +202,7 @@ namespace PamisuKit.Common.Util
         
         public static void ToggleVisibility(this Image image, bool visible, float visibleAlpha = 1f, bool interactable = true)
         {
-            image.color = visible ? new Color(1f, 1f, 1f, visibleAlpha) : Transparent;
+            image.color = visible ? new Color(1f, 1f, 1f, visibleAlpha) : TransparentWhite;
             image.raycastTarget = visible && interactable;
         }
 
@@ -216,7 +217,7 @@ namespace PamisuKit.Common.Util
         {
             var originalColor = image.color;
             if (isTempTransparent)
-                image.color = Transparent;
+                image.color = TransparentWhite;
             image.sprite = await AssetManager.LoadAsset<Sprite>(spriteRes, mode);
             if (isTempTransparent)
                 image.color = originalColor;
@@ -226,7 +227,7 @@ namespace PamisuKit.Common.Util
         {
             var originalColor = image.color;
             if (isTempTransparent)
-                image.color = Transparent;
+                image.color = TransparentWhite;
             image.sprite = await AssetManager.LoadAsset<Sprite>(refer, mode);
             if (isTempTransparent)
                 image.color = originalColor;
