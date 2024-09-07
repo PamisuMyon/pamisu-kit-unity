@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
 namespace PamisuKit.Framework
@@ -11,7 +14,6 @@ namespace PamisuKit.Framework
         protected Dictionary<Type, object> ServiceDict { get; set; }
         
         public Director Director { get; private set; }
-        public bool IsDirectorSingleton { get; private set; }
 
         protected virtual void Awake()
         {
@@ -22,15 +24,13 @@ namespace PamisuKit.Framework
 
         protected virtual void OnCreate()
         {
-            Director = GetComponentInChildren<Director>();
-            if (Director != null)
-                IsDirectorSingleton = true;
-            else
-                Director = FindFirstObjectByType<Director>();
+            Director = FindFirstObjectByType<Director>();
             Debug.Assert(Director != null, "There must be one director in the scene.");
+            if (Director.Mode == DirectorMode.Global)
+                Director.transform.SetParent(transform);
             Director.Setup(this);
-            
-            if (!IsDirectorSingleton)
+
+            if (Director.Mode != DirectorMode.Global)
                 SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
@@ -48,14 +48,19 @@ namespace PamisuKit.Framework
         
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            if (mode == LoadSceneMode.Additive)
+                return;
+            
             var director = FindFirstObjectByType<Director>();
             if (director != null && director != Director)
             {
                 Director = director;
                 Director.Setup(this);
+                if (Director.Mode == DirectorMode.Global)
+                    SceneManager.sceneLoaded -= OnSceneLoaded;
             }
         }
-        
+
         public virtual TSystem CreateMonoSystem<TSystem>(Transform parent = null) where TSystem : MonoSystem
         {
             var type = typeof(TSystem);

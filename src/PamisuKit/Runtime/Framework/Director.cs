@@ -7,6 +7,8 @@ namespace PamisuKit.Framework
     public abstract class Director : MonoBehaviour
     {
 
+        public DirectorMode Mode = DirectorMode.Normal;
+        
         protected List<ISystem> Systems;
         
         public BaseApp App { get; private set; }
@@ -69,6 +71,11 @@ namespace PamisuKit.Framework
             }
         }
 
+    }
+
+    public enum DirectorMode
+    {
+        Normal, Global
     }
 
 }

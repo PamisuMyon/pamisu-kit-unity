@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using PamisuKit.Common;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ namespace PamisuKit.Framework
     public class MonoEntity : MonoBehaviour, IEntity
     {
         [SerializeField]
-        protected bool AutoSetup;
+        protected bool AutoSetup = true;
         
         public Transform Trans { get; private set; }
 
@@ -27,20 +26,12 @@ namespace PamisuKit.Framework
         {
             if (AutoSetup && Region == null)
             {
-                DoAutoSetup().Forget();
-            }
-        }
-
-        protected virtual async UniTaskVoid DoAutoSetup()
-        {
-            await UniTask.Yield();
-            if (Region != null)
-                return;
-            var director = FindFirstObjectByType<Director>();
-            if (director != null)
-            {
-                director.SetupMonoEntity(this);
-                OnAutoSetup();
+                var director = FindFirstObjectByType<Director>();
+                if (director != null)
+                {
+                    director.SetupMonoEntity(this);
+                    OnAutoSetup();
+                }
             }
         }
 
