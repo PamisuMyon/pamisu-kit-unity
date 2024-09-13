@@ -50,7 +50,7 @@ namespace CustomUpdate
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             if (_debugger.IsEnabled)
             {
-                _infoText.text = $"Last: {_debugger.LastTime:0.00}ms\nAverate: {_debugger.AverageTime:0.00}ms\nFPS: {1f / Time.unscaledDeltaTime:0}";
+                _infoText.text = $"Last: {_debugger.LastTime:0.00}ms\nAverage: {_debugger.AverageTime:0.00}ms\nFPS: {1f / Time.unscaledDeltaTime:0}";
             }
         }
 
