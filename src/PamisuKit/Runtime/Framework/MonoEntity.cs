@@ -9,6 +9,8 @@ namespace PamisuKit.Framework
     {
         [SerializeField]
         protected bool AutoSetup = true;
+
+        protected virtual bool AutoSetupOverride => AutoSetup;
         
         public Transform Trans { get; private set; }
 
@@ -24,7 +26,7 @@ namespace PamisuKit.Framework
 
         protected virtual void Start()
         {
-            if (AutoSetup && Region == null)
+            if (AutoSetupOverride && Region == null)
             {
                 var director = FindFirstObjectByType<Director>();
                 if (director != null)
