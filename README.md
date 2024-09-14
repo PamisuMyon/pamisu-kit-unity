@@ -1,6 +1,8 @@
-﻿(WIP) Self-using tool kit for Unity game development.
+> 旧版本已弃坑，[V2版本(分支)](https://github.com/PamisuMyon/pamisu-kit-unity/tree/v2)开发中. 
 
-### Contents (TODO)
+---
+
+### Contents
 
 - [x] Finite State Machine
 - [x] Object Pool
