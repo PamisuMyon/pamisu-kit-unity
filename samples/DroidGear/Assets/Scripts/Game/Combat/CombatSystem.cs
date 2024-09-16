@@ -34,10 +34,10 @@ namespace Game.Combat
             Fsm.ChangeState<CombatStates.Begin>();
         }
 
-        public void AddPlayerExp(float experience)
+        public void AddPlayerExp(float delta)
         {
-            Bb.Experience += experience;
-            var level = Bb.PlayerLevel;
+            Bb.Experience += delta;
+            // var level = Bb.PlayerLevel;
             var levelUpDelta = 0;
             while (Bb.Experience >= Bb.NextLevelExperience)
             {
@@ -57,7 +57,10 @@ namespace Game.Combat
             EventBus.Emit(new PlayerExpChanged
             {
                 NewLevel = Bb.PlayerLevel,
-                
+                LevelUpDelta = levelUpDelta,
+                NewExp = Bb.Experience,
+                ExpDelta = delta,
+                NextLevelExp = Bb.NextLevelExperience
             });
         }
         

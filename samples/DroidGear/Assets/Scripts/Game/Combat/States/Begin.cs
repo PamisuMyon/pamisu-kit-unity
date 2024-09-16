@@ -1,8 +1,6 @@
-
 using Cysharp.Threading.Tasks;
 using Game.Characters;
 using Game.Characters.Player;
-using Game.Configs;
 using Game.Events;
 using PamisuKit.Common;
 using PamisuKit.Common.Assets;
@@ -31,9 +29,19 @@ namespace Game.Combat.States
                 Bb.PlayerLevel = 1;
                 Bb.Experience = 0;
                 Bb.NextLevelExperience = 5;
-                
+
                 await InitPlayer();
                 await InitDroid();
+
+                EventBus.Emit(new PlayerExpChanged
+                {
+                    NewLevel = Bb.PlayerLevel,
+                    LevelUpDelta = 0,
+                    NewExp = Bb.Experience,
+                    ExpDelta = 0,
+                    NextLevelExp = Bb.NextLevelExperience
+                });
+
                 Machine.ChangeState<Battle>();
             }
 

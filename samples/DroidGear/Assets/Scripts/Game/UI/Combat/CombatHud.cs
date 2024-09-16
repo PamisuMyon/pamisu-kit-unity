@@ -1,11 +1,12 @@
 using Game.Combat.States;
 using Game.Events;
 using PamisuKit.Common;
+using PamisuKit.Framework;
 using UnityEngine;
 
 namespace Game.UI.Combat
 {
-    public class CombatHud : MonoBehaviour
+    public class CombatHud : MonoEntity
     {
         [SerializeField]
         private HeroPanel _heroPanel;
@@ -13,33 +14,27 @@ namespace Game.UI.Combat
         [SerializeField]
         private DroidsPanel _droidsPanel;
 
-        private void Awake()
+        protected override void OnCreate()
         {
-            Init();
-        }
-
-        private void Init() 
-        {
-            EventBus.OnRaw<CombatStateChanged>(OnCombatStateChanged, EventBus.SubscribeOptions.Once);
-            _heroPanel.gameObject.SetActive(false);
-            _droidsPanel.gameObject.SetActive(false);
-        }
-
-        private void OnDestroy()
-        {
-            EventBus.Off<CombatStateChanged>(OnCombatStateChanged);
+            base.OnCreate();
+            _heroPanel.Setup(Region);
+            _droidsPanel.Setup(Region);
+            _heroPanel.Go.SetActive(false);
+            _droidsPanel.Go.SetActive(false);
+            
+            On<CombatStateChanged>(OnCombatStateChanged);
         }
 
         private void OnCombatStateChanged(CombatStateChanged e)
         {
-            Debug.Log("CombatHud OnCombatStateChanged");
             if (e.StateType == typeof(CombatStates.Battle))
             {
-                _heroPanel.gameObject.SetActive(true);
+                _heroPanel.Go.SetActive(true);
                 _heroPanel.Init();
-                _droidsPanel.gameObject.SetActive(true);
-                _droidsPanel.Init().Forget();
+                _droidsPanel.Go.SetActive(true);
+                _droidsPanel.Init();
             }
         }
+        
     }
 }

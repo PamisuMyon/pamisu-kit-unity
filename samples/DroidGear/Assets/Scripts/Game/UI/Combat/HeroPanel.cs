@@ -1,14 +1,14 @@
 using Game.Combat;
 using Game.Events;
 using Game.Framework;
-using PamisuKit.Common;
+using PamisuKit.Framework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.UI.Combat
 {
-    public class HeroPanel : MonoBehaviour
+    public class HeroPanel : MonoEntity
     {
         [SerializeField]
         private Slider _healthSlider;
@@ -28,7 +28,7 @@ namespace Game.UI.Combat
 
             _expSlider.value = bb.Experience / bb.NextLevelExperience;
             _levelText.text = $"Lv.{bb.PlayerLevel}";
-            EventBus.OnRaw<PlayerExpChanged>(OnPlayerExpChanged);
+            On<PlayerExpChanged>(OnPlayerExpChanged);
         }
 
         private void OnPlayerHealthChanged(AttributeComponent attrComp, float delta, float newHealth)
@@ -38,15 +38,10 @@ namespace Game.UI.Combat
 
         private void OnPlayerExpChanged(PlayerExpChanged e)
         {
-            if (e.LevelDelta != 0)
+            if (e.LevelUpDelta != 0)
                 _levelText.text = $"Lv.{e.NewLevel}";
             if (e.ExpDelta != 0)
                 _expSlider.value = e.NewExp / e.NextLevelExp;
-        }
-
-        private void OnDestroy()
-        {
-            EventBus.Off<PlayerExpChanged>(OnPlayerExpChanged);
         }
 
     }

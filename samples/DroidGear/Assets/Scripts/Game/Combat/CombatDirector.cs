@@ -1,4 +1,6 @@
 using Game.Framework;
+using Game.UI.Combat;
+using PamisuKit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -7,15 +9,29 @@ namespace Game.Combat
 {
     public class CombatDirector : GameDirector
     {
+        [SerializeField]
+        private CombatUI _combatUI;
+
+        private Ticker _uiTicker;
+        public Region UIRegion { get; private set; }
+        
         protected override void OnCreate()
         {
             base.OnCreate();
+            var uiRegionGo = new GameObject("UIRegion");
+            uiRegionGo.transform.SetParent(transform);
+            _uiTicker = uiRegionGo.AddComponent<Ticker>();
+            UIRegion = uiRegionGo.AddComponent<Region>();
+            UIRegion.Init(_uiTicker, this);
             Init();
         }
 
         protected void Init()
         {
             CreateMonoSystem<CombatSystem>();
+            
+            if (_combatUI != null)
+                _combatUI.Setup(UIRegion);
             
             GetSystem<CombatSystem>().StartCombat();
         }

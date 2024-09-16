@@ -235,6 +235,7 @@ PlayerSettings:
   iOSMetalForceHardShadows: 0
   metalEditorSupport: 1
   metalAPIValidation: 1
+  metalCompileShaderBinary: 0
   iOSRenderExtraFrameOnPause: 0
   iosCopyPluginsCodeInsteadOfSymlink: 0
   appleDeveloperTeamID: 
@@ -806,7 +807,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: LITMOTION_SUPPORT_UNITASK
+    Standalone: LITMOTION_SUPPORT_UNITASK;PAMISUKIT_ENTITY_AUTOSETUP_DEFAULT_OFF
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

@@ -17,43 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: cd3dfeeb6819bd6488336b6d95c6c25a
   m_SerializeEntries:
-  - m_GUID: 20f87845827443242ae38eea162b8ef5
-    m_Address: Assets/Res/Characters/Heroes/Spacesuit/Spacesuit.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0af95b9ee44bf3c42a1f9cac0271f883
     m_Address: Assets/Res/Characters/Heroes/Ronin/Ronin.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 671896e6c8cc95d4590fcb81251460c1
-    m_Address: Assets/Res/Characters/Droids/GunDroid/GunDroid.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b584b79d15892794982cbef6f975ad59
-    m_Address: Assets/Res/Characters/Droids/CannonDroid/CannonDroid.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 64f17dcf20d6cca41a6bdc7ddebaf564
-    m_Address: Assets/Res/Characters/Monsters/Mushnub/Mushnub.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4c57c0f66d5f70a47883d75b16872d24
-    m_Address: Assets/Res/Characters/Heroes/Ronin/Cube.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 41740cc486dad4f45ad45b297a9efe41
-    m_Address: Assets/Res/Characters/Drone/Drone.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3d2ec4e906e928f47ac2b1ea9c245b5f
-    m_Address: Assets/Res/UI/FloatingText.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -62,23 +27,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 364f93f39ee45eb4389b63715ab59f21
-    m_Address: Assets/Res/UI/Hud/DroidItem.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a4cd9dc3700a70e45bd8b6fff9e9aac4
-    m_Address: Assets/Res/Props/Projectiles/Projectile_Laser.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8f65f23915f5ca440aa1766c21c33b5b
-    m_Address: Assets/Res/Vfx/Muzzles/Vfx_Muzzle_Bullet.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3bc861ff9ab4b90428c695a80992814e
-    m_Address: Assets/Res/Vfx/Muzzles/Vfx_Muzzle_Cannonball.prefab
+  - m_GUID: 20f87845827443242ae38eea162b8ef5
+    m_Address: Assets/Res/Characters/Heroes/Spacesuit/Spacesuit.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -87,8 +37,48 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d894c2c360e6ce0478ddfea901ef7b81
-    m_Address: Assets/Res/Vfx/Hits/Vfx_Hit_Cannonball.prefab
+  - m_GUID: 364f93f39ee45eb4389b63715ab59f21
+    m_Address: Assets/Res/UI/Hud/DroidItem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3bc861ff9ab4b90428c695a80992814e
+    m_Address: Assets/Res/Vfx/Muzzles/Vfx_Muzzle_Cannonball.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3d2ec4e906e928f47ac2b1ea9c245b5f
+    m_Address: Assets/Res/UI/FloatingText.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41740cc486dad4f45ad45b297a9efe41
+    m_Address: Assets/Res/Characters/Drone/Drone.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c57c0f66d5f70a47883d75b16872d24
+    m_Address: Assets/Res/Characters/Heroes/Ronin/Cube.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64f17dcf20d6cca41a6bdc7ddebaf564
+    m_Address: Assets/Res/Characters/Monsters/Mushnub/Mushnub.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 671896e6c8cc95d4590fcb81251460c1
+    m_Address: Assets/Res/Characters/Droids/GunDroid/GunDroid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 878c4c9f99e54164cb9ff27ddc51467d
+    m_Address: Assets/Scenes/Combat.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f65f23915f5ca440aa1766c21c33b5b
+    m_Address: Assets/Res/Vfx/Muzzles/Vfx_Muzzle_Bullet.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -97,13 +87,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ff53d1a0ef04516419a036acdad7c769
-    m_Address: Assets/Res/Vfx/Hits/Vfx_Hit_Laser.prefab
+  - m_GUID: a4cd9dc3700a70e45bd8b6fff9e9aac4
+    m_Address: Assets/Res/Props/Projectiles/Projectile_Laser.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ecfd958fc3329a04aaf4135fd8fe382d
-    m_Address: Assets/Res/Projectiles/Projectile_Cannonball.prefab
+  - m_GUID: b584b79d15892794982cbef6f975ad59
+    m_Address: Assets/Res/Characters/Droids/CannonDroid/CannonDroid.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -112,9 +102,24 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d894c2c360e6ce0478ddfea901ef7b81
+    m_Address: Assets/Res/Vfx/Hits/Vfx_Hit_Cannonball.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ecfd958fc3329a04aaf4135fd8fe382d
+    m_Address: Assets/Res/Projectiles/Projectile_Cannonball.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff53d1a0ef04516419a036acdad7c769
+    m_Address: Assets/Res/Vfx/Hits/Vfx_Hit_Laser.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c22d07014cbbd544a9de5aea1c1203a0, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: f2bcccf7587ad2940b2d5bb36e52f727, type: 2}
     - {fileID: 11400000, guid: e17cd9f7eedbd544d8a18a7014226085, type: 2}
+    - {fileID: 11400000, guid: f2bcccf7587ad2940b2d5bb36e52f727, type: 2}

@@ -131,6 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 28997109}
+  - component: {fileID: 28997113}
   - component: {fileID: 28997112}
   - component: {fileID: 28997111}
   m_Layer: 5
@@ -201,6 +202,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &28997113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28997108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 467ed4b58e6770e419402684f2abde5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoSetup: 0
+  _heroPanel: {fileID: 336460199}
+  _droidsPanel: {fileID: 924055772}
 --- !u!1001 &73138175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -336,6 +352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4efe79325dd09458fe2e0b16b896e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mode: 0
+  _combatUI: {fileID: 282395560}
 --- !u!1001 &115574355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -629,11 +647,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282395559}
+  - component: {fileID: 282395560}
   - component: {fileID: 282395558}
   - component: {fileID: 282395557}
   - component: {fileID: 282395556}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CombatUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -723,6 +742,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &282395560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282395555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3aa012413d74ad88cce6fcfed433502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoSetup: 0
+  Overlay: {fileID: 1123830957}
+  Hud: {fileID: 28997113}
 --- !u!1 &336460197
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,6 +766,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 336460198}
+  - component: {fileID: 336460199}
   m_Layer: 5
   m_Name: HeroPanel
   m_TagString: Untagged
@@ -760,6 +795,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &336460199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336460197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a3606ee7162d343a07a12b9551ee0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoSetup: 0
+  _healthSlider: {fileID: 533461950}
+  _expSlider: {fileID: 692522478}
+  _levelText: {fileID: 1204370151}
 --- !u!1001 &342872777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1294,6 +1345,52 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5494025941971728526}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &565414167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 565414168}
+  - component: {fileID: 565414169}
+  m_Layer: 0
+  m_Name: CombatDebugger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &565414168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565414167}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &565414169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565414167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baaa9347762443b686badbe208a4d73d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoSetup: 1
+  _addExp: 2
 --- !u!1 &603200493
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,6 +2303,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 924055767}
+  - component: {fileID: 924055772}
   - component: {fileID: 924055769}
   - component: {fileID: 924055768}
   - component: {fileID: 924055770}
@@ -2316,6 +2414,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
+--- !u!114 &924055772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924055766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfbe89d1177025742bdbd88021efa767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoSetup: 0
+  _droidItemPrefab: {fileID: 4617474109348267293, guid: 364f93f39ee45eb4389b63715ab59f21,
+    type: 3}
 --- !u!1 &952919559
 GameObject:
   m_ObjectHideFlags: 0
@@ -2809,9 +2922,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1123830953}
+  - component: {fileID: 1123830957}
   - component: {fileID: 1123830956}
   - component: {fileID: 1123830954}
-  - component: {fileID: 1123830957}
   m_Layer: 5
   m_Name: CombatOverlay
   m_TagString: Untagged
@@ -2890,6 +3003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dea223b10ca81443aaffa50a80efadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AutoSetup: 0
   _floatingTextRef:
     m_AssetGUID: 3d2ec4e906e928f47ac2b1ea9c245b5f
     m_SubObjectName: 
@@ -7123,6 +7237,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 765994564}
   - {fileID: 77433229}
+  - {fileID: 565414168}
+  - {fileID: 282395559}
+  - {fileID: 1131761548}
   - {fileID: 1017367852}
   - {fileID: 721924269}
   - {fileID: 764363447}
@@ -7133,8 +7250,6 @@ SceneRoots:
   - {fileID: 1490377102}
   - {fileID: 1049781372}
   - {fileID: 140360281}
-  - {fileID: 282395559}
-  - {fileID: 1131761548}
   - {fileID: 1385374785}
   - {fileID: 1781087385}
   - {fileID: 496682854}

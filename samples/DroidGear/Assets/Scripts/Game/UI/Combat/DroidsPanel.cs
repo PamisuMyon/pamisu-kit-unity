@@ -1,29 +1,27 @@
-using Cysharp.Threading.Tasks;
-using Game.Combat;
 using PamisuKit.Common.Pool;
+using PamisuKit.Framework;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 namespace Game.UI.Combat
 {
-    public class DroidsPanel : MonoBehaviour
+    public class DroidsPanel : MonoEntity
     {
         [SerializeField]
-        private AssetReferenceGameObject _droidItemRef;
+        private GameObject _droidItemPrefab;
 
         private MonoPool<DroidItem> _droidItemPool;
         private LayoutGroup _group;
 
-        private void Awake()
+        protected override void OnCreate()
         {
+            base.OnCreate();
             _group = GetComponent<LayoutGroup>();
         }
 
-        public async UniTaskVoid Init()
+        public void Init()
         {
-            _droidItemPool = await MonoPool<DroidItem>.Create(_droidItemRef, _group.transform);
-            
+            _droidItemPool = MonoPool<DroidItem>.Create(_droidItemPrefab, _group.transform);
             // var drone = GetSystem<CombatSystem>().Bb.Player.Drone;
         }
     }

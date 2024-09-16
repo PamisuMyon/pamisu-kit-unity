@@ -1,26 +1,26 @@
 ﻿using Game.Combat;
+using PamisuKit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Playground
 {
-    public class GameDebugger : MonoBehaviour
+    public class CombatDebugger : MonoEntity, IUpdatable
     {
 #if UNITY_EDITOR
 
         [SerializeField]
         private float _addExp = 2;
         
-        private CombatDirector _combatDirector;
         private CombatSystem _combatSystem;
-        
-        private void Start()
-        {
-            _combatDirector = FindFirstObjectByType<CombatDirector>();
-            _combatSystem = _combatDirector.GetSystem<CombatSystem>();
-        }
 
-        public void Update()
+        protected override void OnCreate()
+        {
+            base.OnCreate();
+            _combatSystem = GetSystem<CombatSystem>();
+        }
+        
+        public void OnUpdate(float deltaTime)
         {
             if (Keyboard.current.uKey.wasPressedThisFrame)
             {
@@ -29,5 +29,6 @@ namespace Playground
         }
 
 #endif
+
     }
 }

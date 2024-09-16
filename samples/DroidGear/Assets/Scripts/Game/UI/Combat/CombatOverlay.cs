@@ -1,15 +1,15 @@
 using Cysharp.Threading.Tasks;
 using Game.Events;
-using PamisuKit.Common;
 using UnityEngine;
 using Game.UI.Common;
 using UnityEngine.AddressableAssets;
 using System;
 using PamisuKit.Common.Pool;
+using PamisuKit.Framework;
 
 namespace Game.UI.Combat
 {
-    public class CombatOverlay : MonoBehaviour
+    public class CombatOverlay : MonoEntity
     {
         [SerializeField]
         private AssetReferenceGameObject _floatingTextRef;
@@ -17,8 +17,9 @@ namespace Game.UI.Combat
         private Camera _cam;
         private MonoPool<FloatingText> _damageTextPool;
 
-        private void Awake()
+        protected override void OnCreate()
         {
+            base.OnCreate();
             Init().Forget();
         }
 
@@ -26,12 +27,7 @@ namespace Game.UI.Combat
         {
             _cam = Camera.main;
             _damageTextPool = await MonoPool<FloatingText>.Create(_floatingTextRef, transform, 64);
-            EventBus.On<RequestShowDamageText>(OnRequestShowDamageText);
-        }
-
-        private void OnDestroy()
-        {
-            EventBus.Off<RequestShowDamageText>(OnRequestShowDamageText);
+            On<RequestShowDamageText>(OnRequestShowDamageText);
         }
 
         private void OnRequestShowDamageText(RequestShowDamageText e)
@@ -41,7 +37,7 @@ namespace Game.UI.Combat
 
         private async UniTaskVoid ShowDamageText(RequestShowDamageText e)
         {
-            FloatingText floatingText = _damageTextPool.Spawn();
+            var floatingText = _damageTextPool.Spawn();
             if (floatingText == null)
                 return;
 

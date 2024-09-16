@@ -18,7 +18,7 @@ namespace Game.Events
     public struct PlayerExpChanged
     {
         public int NewLevel;
-        public int LevelDelta;
+        public int LevelUpDelta;
         public float NewExp;
         public float ExpDelta;
         public float NextLevelExp;
