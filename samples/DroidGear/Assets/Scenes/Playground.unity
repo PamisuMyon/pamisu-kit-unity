@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 77433229}
   - component: {fileID: 77433230}
   m_Layer: 0
-  m_Name: CombatDirector
+  m_Name: GameDirector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

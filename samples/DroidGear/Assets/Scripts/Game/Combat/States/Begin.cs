@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using Game.Characters;
 using Game.Characters.Player;
 using Game.Events;
 using PamisuKit.Common;
@@ -31,7 +30,7 @@ namespace Game.Combat.States
                 Bb.NextLevelExperience = 5;
 
                 await InitPlayer();
-                await InitDroid();
+                // await InitDroid();
 
                 EventBus.Emit(new PlayerExpChanged
                 {
@@ -66,21 +65,22 @@ namespace Game.Combat.States
                 Owner.Cam.Target = player.Trans;
             }
 
-            // TODO TEMP
-            private async UniTask InitDroid()
-            {
-                if (Owner.DroidConfig == null)
-                    return;
-
-                var config = Owner.DroidConfig;
-                RandomUtil.RandomPositionOnNavMesh(Bb.Player.Trans.position, 1f, 8f, out var pos);
-                var prefab = await AssetManager.LoadAsset<GameObject>(config.PrefabRef);
-                var go = Object.Instantiate(prefab);
-                var droid = go.GetComponent<DroidController>();
-                droid.Setup(Owner.Region);
-                droid.Init(config);
-                droid.Trans.SetPositionAndRotation(pos, RandomUtil.RandomYRotation());
-            }
+            // TEMP
+            // private async UniTask InitDroid()
+            // {
+            //     if (Owner.DroidConfig == null)
+            //         return;
+            //
+            //     var config = Owner.DroidConfig;
+            //     RandomUtil.RandomPositionOnNavMesh(Bb.Player.Trans.position, 1f, 8f, out var pos);
+            //     var prefab = await AssetManager.LoadAsset<GameObject>(config.PrefabRef);
+            //     var go = Object.Instantiate(prefab);
+            //     var droid = go.GetComponent<DroidController>();
+            //     droid.Setup(Owner.Region);
+            //     droid.Init(config);
+            //     droid.Trans.SetPositionAndRotation(pos, RandomUtil.RandomYRotation());
+            // }
+            
         }
     }
 }

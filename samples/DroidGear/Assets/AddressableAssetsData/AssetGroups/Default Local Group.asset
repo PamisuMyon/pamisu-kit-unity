@@ -72,11 +72,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 878c4c9f99e54164cb9ff27ddc51467d
-    m_Address: Assets/Scenes/Combat.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8f65f23915f5ca440aa1766c21c33b5b
     m_Address: Assets/Res/Vfx/Muzzles/Vfx_Muzzle_Bullet.prefab
     m_ReadOnly: 0

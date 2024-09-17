@@ -213,23 +213,23 @@ namespace PamisuKit.Common.Util
             position.y /= scale.y;
         }
         
-        public static async UniTask LoadSprite(this Image image, string spriteRes, bool isTempTransparent = true, AssetRefCountMode mode = AssetRefCountMode.Single)
+        public static async UniTask LoadSprite(this Image image, string spriteRes, bool transparentWhenLoading = true, AssetRefCountMode mode = AssetRefCountMode.Single)
         {
             var originalColor = image.color;
-            if (isTempTransparent)
+            if (transparentWhenLoading)
                 image.color = TransparentWhite;
             image.sprite = await AssetManager.LoadAsset<Sprite>(spriteRes, mode);
-            if (isTempTransparent)
+            if (transparentWhenLoading)
                 image.color = originalColor;
         }
         
-        public static async UniTask LoadSprite(this Image image, AssetReference refer, bool isTempTransparent = true, AssetRefCountMode mode = AssetRefCountMode.Single)
+        public static async UniTask LoadSprite(this Image image, AssetReference refer, bool transparentWhenLoading = true, AssetRefCountMode mode = AssetRefCountMode.Single)
         {
             var originalColor = image.color;
-            if (isTempTransparent)
+            if (transparentWhenLoading)
                 image.color = TransparentWhite;
             image.sprite = await AssetManager.LoadAsset<Sprite>(refer, mode);
-            if (isTempTransparent)
+            if (transparentWhenLoading)
                 image.color = originalColor;
         }
         

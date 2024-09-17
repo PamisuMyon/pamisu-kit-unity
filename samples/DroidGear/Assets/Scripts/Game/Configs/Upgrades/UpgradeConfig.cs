@@ -1,4 +1,3 @@
-using System;
 using Game.Framework;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -14,6 +13,5 @@ namespace Game.Configs
         public AssetReferenceSprite Icon;
         public string Description;
         
-        public abstract Upgrade CreateUpgrade();
     }
 }

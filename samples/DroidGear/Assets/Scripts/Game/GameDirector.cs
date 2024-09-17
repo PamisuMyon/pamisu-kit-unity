@@ -1,19 +1,21 @@
-using Game.Framework;
+using Game.Combat;
 using Game.UI.Combat;
+using PamisuKit.Common.Pool;
 using PamisuKit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-namespace Game.Combat
+namespace Game
 {
-    public class CombatDirector : GameDirector
+    public class GameDirector : Director
     {
         [SerializeField]
         private CombatUI _combatUI;
 
         private Ticker _uiTicker;
         public Region UIRegion { get; private set; }
+        public MonoPooler Pooler { get; private set; }
         
         protected override void OnCreate()
         {
@@ -23,11 +25,9 @@ namespace Game.Combat
             _uiTicker = uiRegionGo.AddComponent<Ticker>();
             UIRegion = uiRegionGo.AddComponent<Region>();
             UIRegion.Init(_uiTicker, this);
-            Init();
-        }
-
-        protected void Init()
-        {
+            
+            Pooler = new MonoPooler(transform);
+            
             CreateMonoSystem<CombatSystem>();
             
             if (_combatUI != null)
