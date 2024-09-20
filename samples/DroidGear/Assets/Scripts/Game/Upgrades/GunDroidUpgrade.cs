@@ -1,9 +1,10 @@
 ﻿using Game.Abilities;
 using Game.Configs;
+using Game.Configs.Upgrades;
 using Game.Framework;
 using UnityEngine;
 
-namespace Game.Modifiers
+namespace Game.Upgrades
 {
     public class GunDroidUpgrade : Upgrade, IAttributeModifier
     {

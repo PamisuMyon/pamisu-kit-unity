@@ -1,11 +1,11 @@
 ﻿using Game.Framework;
-using Game.Modifiers;
+using Game.Upgrades;
 using UnityEngine;
 
-namespace Game.Configs
+namespace Game.Configs.Upgrades
 {
     [CreateAssetMenu(fileName = "GunDroid_", menuName = "Configs/Upgrades/GunDroidUpgradeConfig", order = 0)]
-    public class GunDroidUpgradeConfig : GearUpgradeConfig
+    public class GunDroidUpgradeConfig : UpgradeConfig
     {
 
         public int BranchCountAddend;

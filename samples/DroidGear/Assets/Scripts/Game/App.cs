@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace Game
 {
-    public class App : BaseApp<App>
+    public class App : AppDirector<App>
     {
 
         protected override void OnCreate()
@@ -14,12 +14,10 @@ namespace Game
             base.OnCreate();
         }
 
-        public void Init()
+        private void Init()
         {
             CreateMonoSystem<SaveSystem>();
             CreateMonoSystem<InputWrapper>();
-            
-            GetSystem<InputWrapper>().Init();
         }
         
         public void Quit()

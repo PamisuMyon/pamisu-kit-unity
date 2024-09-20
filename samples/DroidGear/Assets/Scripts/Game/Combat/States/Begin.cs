@@ -64,22 +64,6 @@ namespace Game.Combat.States
 
                 Owner.Cam.Target = player.Trans;
             }
-
-            // TEMP
-            // private async UniTask InitDroid()
-            // {
-            //     if (Owner.DroidConfig == null)
-            //         return;
-            //
-            //     var config = Owner.DroidConfig;
-            //     RandomUtil.RandomPositionOnNavMesh(Bb.Player.Trans.position, 1f, 8f, out var pos);
-            //     var prefab = await AssetManager.LoadAsset<GameObject>(config.PrefabRef);
-            //     var go = Object.Instantiate(prefab);
-            //     var droid = go.GetComponent<DroidController>();
-            //     droid.Setup(Owner.Region);
-            //     droid.Init(config);
-            //     droid.Trans.SetPositionAndRotation(pos, RandomUtil.RandomYRotation());
-            // }
             
         }
     }

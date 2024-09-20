@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Game.Framework;
+using Game.Upgrades;
 using UnityEngine;
 
 namespace Game.Events
@@ -12,10 +14,15 @@ namespace Game.Events
         public string Content;
     }
 
-    public struct RequestShowDamageText
+    public struct ReqShowDamageText
     {
         public Vector3 WorldPos;
         public Damage Damage;
+    }
+
+    public struct ReqShowUpgradeItems
+    {
+        public List<UpgradeItem> Items;
     }
 
     #endregion

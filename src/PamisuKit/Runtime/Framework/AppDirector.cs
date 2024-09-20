@@ -1,24 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
 namespace PamisuKit.Framework
 {
-    public abstract class BaseApp : MonoBehaviour
+    public abstract class AppDirector : MonoBehaviour, IDirector
     {
+        
         protected Dictionary<Type, ISystem> SystemDict { get; set; }
         protected Dictionary<Type, object> ServiceDict { get; set; }
         
+        public Transform Trans { get; private set; }
+        public GameObject Go { get; private set; }
+        public Ticker Ticker { get; private set; }
+        public Region Region { get; private set; }
         public Director Director { get; private set; }
 
         protected virtual void Awake()
         {
+            Go = gameObject;
+            Trans = Go.transform;
             SystemDict = new Dictionary<Type, ISystem>();
             ServiceDict = new Dictionary<Type, object>();
+            Ticker = gameObject.AddComponent<Ticker>();
+            Region = gameObject.AddComponent<Region>();
+            Region.Init(Ticker, this);
             OnCreate();
         }
 
@@ -61,7 +68,7 @@ namespace PamisuKit.Framework
             }
         }
 
-        public virtual TSystem CreateMonoSystem<TSystem>(Transform parent = null) where TSystem : MonoSystem
+        public virtual TSystem CreateMonoSystem<TSystem>(IDirector owner = null) where TSystem : MonoSystem
         {
             var type = typeof(TSystem);
             if (SystemDict.ContainsKey(type))
@@ -70,15 +77,16 @@ namespace PamisuKit.Framework
                 return null;
             }
             
-            if (parent == null)
-                parent = transform;
-            var system = parent.GetComponentInChildren<TSystem>();
+            if (owner == null)
+                owner = this;
+            var system = owner.Trans.GetComponentInChildren<TSystem>();
             if (system == null)
             {
                 var go = new GameObject(typeof(TSystem).Name);
-                go.transform.SetParent(parent);
+                go.transform.SetParent(owner.Trans);
                 system = go.AddComponent<TSystem>();
             }
+            system.Setup(owner.Region);
             SystemDict.Add(type, system);
             return system;
         }
@@ -128,7 +136,7 @@ namespace PamisuKit.Framework
         
     }
     
-    public abstract class BaseApp<T> : BaseApp where T : BaseApp
+    public abstract class AppDirector<T> : AppDirector where T : AppDirector
     {
 
         public static T Instance { get; private set; }

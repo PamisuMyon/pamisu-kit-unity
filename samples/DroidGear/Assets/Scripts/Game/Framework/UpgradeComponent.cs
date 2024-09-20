@@ -6,21 +6,23 @@ namespace Game.Framework
     public class UpgradeComponent : MonoBehaviour
     {
         public Character Owner { get; private set; }
-        public List<Upgrade> Modifiers { get; } = new();
+        public List<Upgrade> Upgrades { get; } = new();
 
         public void Init(Character owner)
         {
             Owner = owner;
         }
 
-        public void ApplyModifier(Upgrade modifier)
+        public void ApplyUpgrade(Upgrade upgrade)
         {
-            Modifiers.Add(modifier);
+            Upgrades.Add(upgrade);
+            upgrade.OnApplied(this);
         }
 
-        public void RemoveModifier(Upgrade modifier)
+        public void RemoveUpgrade(Upgrade upgrade)
         {
-            Modifiers.Remove(modifier);
+            Upgrades.Remove(upgrade);
+            upgrade.OnRemoved();
         }
 
     }

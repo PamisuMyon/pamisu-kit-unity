@@ -41,7 +41,7 @@ namespace Game.Common
                 var sphereCenter = center + new Vector3(radius * Mathf.Cos(angle), 0f, radius * Mathf.Sin(angle));
                 var num = Physics.OverlapSphereNonAlloc(sphereCenter, sphereRadius, _tempResults, obstacleLayerMask, queryTriggerInteraction);
 #if UNITY_EDITOR
-                EventBus.Emit(new RequestDrawDebugSphere 
+                EventBus.Emit(new ReqDrawDebugSphere 
                 {
                     Center = sphereCenter,
                     Radius = sphereRadius,

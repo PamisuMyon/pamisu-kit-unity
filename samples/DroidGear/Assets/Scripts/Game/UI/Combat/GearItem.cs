@@ -9,13 +9,13 @@ using UnityEngine.UI;
 
 namespace Game.UI.Combat
 {
-    public class DroidItem : MonoEntity
+    public class GearItem : MonoEntity
     {
         [SerializeField]
         private Image _icon;
 
         [SerializeField]
-        private RectTransform _upgrade;
+        private RectTransform _upgradeMark;
 
         [SerializeField]
         private TMP_Text _levelText;
@@ -25,7 +25,7 @@ namespace Game.UI.Combat
         protected override void OnCreate()
         {
             base.OnCreate();
-            _upgrade.gameObject.SetActive(false);
+            _upgradeMark.gameObject.SetActive(false);
         }
 
         public void Init(CharacterConfig config)
@@ -33,16 +33,16 @@ namespace Game.UI.Combat
             _config = config;
             _icon.LoadSprite(config.IconRef).Forget();
             
-            On<DroidUpgraded>(OnDroidUpgraded);
+            On<GearUpgraded>(OnGearUpgraded);
         }
         
-        private void OnDroidUpgraded(DroidUpgraded e)
+        private void OnGearUpgraded(GearUpgraded e)
         {
             if (e.Config != _config)
                 return;
             if (e.Level > 0)
             {
-                _upgrade.gameObject.SetActive(true);
+                _upgradeMark.gameObject.SetActive(true);
                 _levelText.text = e.Level.ToString();
             }
         }

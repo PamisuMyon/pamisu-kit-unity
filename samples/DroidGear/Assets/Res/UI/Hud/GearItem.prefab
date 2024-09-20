@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 5946830810513148119}
   - component: {fileID: 7626965293943761815}
   m_Layer: 5
-  m_Name: DroidItem
+  m_Name: GearItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,8 +274,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d5cca6a33ae2424a8956b42d574badf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AutoSetup: 0
   _icon: {fileID: 2771529353730038395}
-  _upgrade: {fileID: 39744216351508239}
+  _upgradeMark: {fileID: 39744216351508239}
   _levelText: {fileID: 2220086892681349034}
 --- !u!1 &5704278026908640945
 GameObject:
@@ -289,7 +290,7 @@ GameObject:
   - component: {fileID: 8934295111023271665}
   - component: {fileID: 2481492999497042306}
   m_Layer: 5
-  m_Name: Upgrade
+  m_Name: UpgradeMark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

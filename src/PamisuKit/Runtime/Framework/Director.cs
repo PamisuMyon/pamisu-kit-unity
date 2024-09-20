@@ -4,22 +4,26 @@ using UnityEngine;
 
 namespace PamisuKit.Framework
 {
-    public abstract class Director : MonoBehaviour
+    public abstract class Director : MonoBehaviour, IDirector
     {
 
         public DirectorMode Mode = DirectorMode.Normal;
         
         protected List<ISystem> Systems;
         
-        public BaseApp App { get; private set; }
+        public Transform Trans { get; private set; }
+        public GameObject Go { get; private set; }
+        public AppDirector AppDirector { get; private set; }
         public Ticker Ticker { get; private set; }
         public Region Region { get; private set; }
 
-        internal void Setup(BaseApp app)
+        internal void Setup(AppDirector appDirector)
         {
-            if (App != null)
+            if (AppDirector != null)
                 return;
-            App = app;
+            Go = gameObject;
+            Trans = Go.transform;
+            AppDirector = appDirector;
             OnCreate();
         }
 
@@ -38,25 +42,24 @@ namespace PamisuKit.Framework
 
         protected virtual TSystem CreateMonoSystem<TSystem>() where TSystem : MonoSystem
         {
-            var system = App.CreateMonoSystem<TSystem>(transform);
-            system.Setup(Region);
+            var system = AppDirector.CreateMonoSystem<TSystem>(this);
             Systems.Add(system);
             return system;
         }
 
         public TSystem GetSystem<TSystem>() where TSystem : class, ISystem
         {
-            return App.GetSystem<TSystem>();
+            return AppDirector.GetSystem<TSystem>();
         }
 
         public ISystem GetSystem(Type type)
         {
-            return App.GetSystem(type);
+            return AppDirector.GetSystem(type);
         }
 
         protected void DestroySystem(ISystem system)
         {
-            App.DestroySystem(system);
+            AppDirector.DestroySystem(system);
             Systems.Remove(system);
         }
 
@@ -66,16 +69,11 @@ namespace PamisuKit.Framework
             {
                 for (int i = 0; i < Systems.Count; i++)
                 {
-                    App.DestroySystem(Systems[i]);
+                    AppDirector.DestroySystem(Systems[i]);
                 }
             }
         }
 
-    }
-
-    public enum DirectorMode
-    {
-        Normal, Global
     }
 
 }

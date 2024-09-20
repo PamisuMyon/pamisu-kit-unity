@@ -3,6 +3,7 @@ using Game.Events;
 using PamisuKit.Common;
 using PamisuKit.Framework;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.UI.Combat
 {
@@ -11,16 +12,17 @@ namespace Game.UI.Combat
         [SerializeField]
         private HeroPanel _heroPanel;
 
+        [FormerlySerializedAs("_droidsPanel")]
         [SerializeField]
-        private DroidsPanel _droidsPanel;
+        private GearsPanel _gearsPanel;
 
         protected override void OnCreate()
         {
             base.OnCreate();
             _heroPanel.Setup(Region);
-            _droidsPanel.Setup(Region);
+            _gearsPanel.Setup(Region);
             _heroPanel.Go.SetActive(false);
-            _droidsPanel.Go.SetActive(false);
+            _gearsPanel.Go.SetActive(false);
             
             On<CombatStateChanged>(OnCombatStateChanged);
         }
@@ -31,8 +33,8 @@ namespace Game.UI.Combat
             {
                 _heroPanel.Go.SetActive(true);
                 _heroPanel.Init();
-                _droidsPanel.Go.SetActive(true);
-                _droidsPanel.Init();
+                _gearsPanel.Go.SetActive(true);
+                _gearsPanel.Init();
             }
         }
         

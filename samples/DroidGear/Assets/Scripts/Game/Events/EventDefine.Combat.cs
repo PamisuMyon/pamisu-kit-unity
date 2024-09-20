@@ -1,6 +1,7 @@
 using System;
 using Game.Configs;
 using Game.Framework;
+using Game.Upgrades;
 
 namespace Game.Events
 {
@@ -24,12 +25,12 @@ namespace Game.Events
         public float NextLevelExp;
     }
 
-    public struct DroidAdded
+    public struct GearAdded
     {
         public CharacterConfig Config;
     }
 
-    public struct DroidUpgraded
+    public struct GearUpgraded
     {
         public CharacterConfig Config;
         public int Level;
@@ -49,6 +50,11 @@ namespace Game.Events
 
     public struct PlayerDie
     {
+    }
+
+    public struct ReqSelectUpgradeItem
+    {
+        public UpgradeItem Item;
     }
     
 }

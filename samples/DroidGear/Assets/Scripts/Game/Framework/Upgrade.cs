@@ -1,5 +1,4 @@
-
-using Game.Configs;
+using Game.Configs.Upgrades;
 
 namespace Game.Framework
 {

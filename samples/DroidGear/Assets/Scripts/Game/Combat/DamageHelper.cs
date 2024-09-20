@@ -18,7 +18,7 @@ namespace Game.Combat
             target.AttrComp.ChangeHealth(damage);
             var damageTextPos = target.Trans.position;
             damageTextPos.y += target.Model.VisualHeight;
-            EventBus.Emit(new RequestShowDamageText 
+            EventBus.Emit(new ReqShowDamageText 
             {
                 WorldPos = damageTextPos,
                 Damage = damage,

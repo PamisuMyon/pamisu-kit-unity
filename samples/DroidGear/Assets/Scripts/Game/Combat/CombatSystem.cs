@@ -1,10 +1,14 @@
+using Cysharp.Threading.Tasks;
+using Game.Characters;
 using Game.Combat.States;
 using Game.Configs;
 using Game.Events;
 using Game.Framework;
-using PamisuKit.Common;
+using PamisuKit.Common.Assets;
 using PamisuKit.Common.FSM;
+using PamisuKit.Common.Util;
 using PamisuKit.Framework;
+using UnityEngine;
 
 namespace Game.Combat
 {
@@ -12,7 +16,6 @@ namespace Game.Combat
     {
         public LevelConfig LevelConfig;
         public HeroConfig PlayerConfig;
-        public DroidConfig DroidConfig;
 
         public CombatStates.Blackboard Bb { get; private set; }
         public StateMachine Fsm { get; private set;}
@@ -54,7 +57,7 @@ namespace Game.Combat
                     increment = 16;
                 Bb.NextLevelExperience += increment;
             }
-            EventBus.Emit(new PlayerExpChanged
+            Emit(new PlayerExpChanged
             {
                 NewLevel = Bb.PlayerLevel,
                 LevelUpDelta = levelUpDelta,
@@ -62,6 +65,19 @@ namespace Game.Combat
                 ExpDelta = delta,
                 NextLevelExp = Bb.NextLevelExperience
             });
+        }
+        
+        public async UniTask AddDroid(CharacterConfig config)
+        {
+            RandomUtil.RandomPositionOnNavMesh(Bb.Player.Trans.position, 1f, 8f, out var pos);
+            var prefab = await AssetManager.LoadAsset<GameObject>(config.PrefabRef);
+            var go = Instantiate(prefab);
+            var droid = go.GetComponent<DroidController>();
+            droid.Setup(Region);
+            droid.Init(config);
+            droid.Trans.SetPositionAndRotation(pos, RandomUtil.RandomYRotation());
+            
+            Emit(new GearAdded { Config = config });
         }
         
     }

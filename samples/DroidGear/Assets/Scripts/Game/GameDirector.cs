@@ -1,5 +1,6 @@
 using Game.Combat;
 using Game.UI.Combat;
+using Game.Upgrades;
 using PamisuKit.Common.Pool;
 using PamisuKit.Framework;
 using UnityEngine;
@@ -29,6 +30,7 @@ namespace Game
             Pooler = new MonoPooler(transform);
             
             CreateMonoSystem<CombatSystem>();
+            CreateMonoSystem<UpgradeSystem>();
             
             if (_combatUI != null)
                 _combatUI.Setup(UIRegion);
@@ -56,6 +58,16 @@ namespace Game
             }
         }
 #endif
+
+        public void PauseCombat()
+        {
+            Region.Ticker.TimeScale = 0;
+        }
+        
+        public void ResumeCombat()
+        {
+            Region.Ticker.TimeScale = 1f;
+        }
 
     }
 }

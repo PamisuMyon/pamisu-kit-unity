@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game.Configs
 {
-    [CreateAssetMenu(fileName = "DroidConfig", menuName = "Configs/DroidConfig", order = 102)]
+    [CreateAssetMenu(fileName = "DroidConfig", menuName = "Configs/DroidConfig", order = 103)]
     public class DroidConfig : CharacterConfig
     {
         [Header("Droid")]

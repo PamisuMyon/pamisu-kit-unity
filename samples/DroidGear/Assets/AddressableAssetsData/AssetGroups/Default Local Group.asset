@@ -37,6 +37,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3612fce7f19a33546b8ab904b5b09f51
+    m_Address: Assets/Res/UI/Sprites/Icons/icon_ice_droid.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 364f93f39ee45eb4389b63715ab59f21
     m_Address: Assets/Res/UI/Hud/DroidItem.prefab
     m_ReadOnly: 0
@@ -62,6 +67,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5eecd73d4c813db44b3354f57c857318
+    m_Address: Assets/Res/UI/Sprites/Icons/icon_gun_droid.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 64f17dcf20d6cca41a6bdc7ddebaf564
     m_Address: Assets/Res/Characters/Monsters/Mushnub/Mushnub.prefab
     m_ReadOnly: 0
@@ -84,6 +94,16 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a4cd9dc3700a70e45bd8b6fff9e9aac4
     m_Address: Assets/Res/Props/Projectiles/Projectile_Laser.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b459f8f289977114db18e789e8905f81
+    m_Address: Assets/Res/UI/Sprites/Icons/icon_cannon_droid.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b45e58c3877d7574d96fcac8fb44c153
+    m_Address: Assets/Res/UI/Sprites/Icons/icon_drone.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

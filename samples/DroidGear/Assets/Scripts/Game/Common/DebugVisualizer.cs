@@ -9,19 +9,19 @@ namespace Game.Common
     {
 #if UNITY_EDITOR
 
-        private List<RequestDrawDebugSphere> _spheres = new();
+        private List<ReqDrawDebugSphere> _spheres = new();
 
         private void Start()
         {
-            EventBus.On<RequestDrawDebugSphere>(OnRequestDrawDebugSphere);
+            EventBus.On<ReqDrawDebugSphere>(OnReqDrawDebugSphere);
         }
 
         private void OnDestroy()
         {
-            EventBus.Off<RequestDrawDebugSphere>(OnRequestDrawDebugSphere);
+            EventBus.Off<ReqDrawDebugSphere>(OnReqDrawDebugSphere);
         }
 
-        private void OnRequestDrawDebugSphere(RequestDrawDebugSphere e)
+        private void OnReqDrawDebugSphere(ReqDrawDebugSphere e)
         {
             _spheres.Add(e);
         }
@@ -44,7 +44,7 @@ namespace Game.Common
             }
         }
 
-        private void DrawSphere(RequestDrawDebugSphere e)
+        private void DrawSphere(ReqDrawDebugSphere e)
         {
             Gizmos.color = e.Color;
             if (e.IsWired)

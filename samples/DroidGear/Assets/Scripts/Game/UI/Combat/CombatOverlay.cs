@@ -27,15 +27,15 @@ namespace Game.UI.Combat
         {
             _cam = Camera.main;
             _damageTextPool = await MonoPool<FloatingText>.Create(_floatingTextRef, transform, 64);
-            On<RequestShowDamageText>(OnRequestShowDamageText);
+            On<ReqShowDamageText>(OnReqShowDamageText);
         }
 
-        private void OnRequestShowDamageText(RequestShowDamageText e)
+        private void OnReqShowDamageText(ReqShowDamageText e)
         {
             ShowDamageText(e).Forget();
         }
 
-        private async UniTaskVoid ShowDamageText(RequestShowDamageText e)
+        private async UniTaskVoid ShowDamageText(ReqShowDamageText e)
         {
             var floatingText = _damageTextPool.Spawn();
             if (floatingText == null)

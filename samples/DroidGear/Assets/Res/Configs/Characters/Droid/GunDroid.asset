@@ -25,7 +25,7 @@ MonoBehaviour:
   AttackSpeed: 1
   DisplayName: 
   IconRef:
-    m_AssetGUID: 
+    m_AssetGUID: 5eecd73d4c813db44b3354f57c857318
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

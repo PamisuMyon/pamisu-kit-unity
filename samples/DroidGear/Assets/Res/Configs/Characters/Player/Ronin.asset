@@ -23,4 +23,10 @@ MonoBehaviour:
   MoveSpeed: 5
   Damage: 0
   AttackSpeed: 0
-  DroneConfig: {fileID: 11400000, guid: 3b10350ccb7290b4e8f5889846f93963, type: 2}
+  DisplayName: 
+  IconRef:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  DroneConfig: {fileID: 11400000, guid: 690a874d43e83cd498d7e094b6eddb9a, type: 2}

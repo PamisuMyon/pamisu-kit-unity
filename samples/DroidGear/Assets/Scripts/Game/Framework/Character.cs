@@ -15,6 +15,7 @@ namespace Game.Framework
         public AttributeComponent AttrComp { get; protected set; }
         public AbilityComponent AbilityComp { get; protected set; }
         public EffectComponent EffectComp { get; protected set; }
+        public UpgradeComponent UpgradeComp { get; protected set; }
         public Collider BodyCollider { get; protected set; }
         public CharacterModel Model { get; protected set; }
         public CharacterConfig Config { get; protected set; }
@@ -42,6 +43,10 @@ namespace Game.Framework
 
             EffectComp = GetComponent<EffectComponent>();
             EffectComp.Init(this);
+
+            UpgradeComp = GetComponent<UpgradeComponent>();
+            UpgradeComp.Init(this);
+
             // EventBus.Emit(new CharacterHealthChanged(this, AttrComp[AttributeType.Health].Value, AttrComp[AttributeType.MaxHealth].Value, 0f));
         }
 

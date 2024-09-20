@@ -14,8 +14,9 @@ namespace Game.Input
         public GameInputActions Actions => _actions;
         public InputDevice CurrentDevice { get; set; }
 
-        public void Init()
+        protected override void OnCreate()
         {
+            base.OnCreate();
             _actions = new GameInputActions();
             _actions.Combat.Enable();
 
