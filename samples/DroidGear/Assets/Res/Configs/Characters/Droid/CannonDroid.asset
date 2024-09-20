@@ -23,7 +23,7 @@ MonoBehaviour:
   MoveSpeed: 5
   Damage: 1
   AttackSpeed: 1
-  DisplayName: 
+  DisplayName: Cannon Droid
   IconRef:
     m_AssetGUID: b459f8f289977114db18e789e8905f81
     m_SubObjectName: 

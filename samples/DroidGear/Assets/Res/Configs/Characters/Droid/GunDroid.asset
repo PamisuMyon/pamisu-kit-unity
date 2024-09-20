@@ -23,7 +23,7 @@ MonoBehaviour:
   MoveSpeed: 5
   Damage: 1
   AttackSpeed: 1
-  DisplayName: 
+  DisplayName: Gun Droid
   IconRef:
     m_AssetGUID: 5eecd73d4c813db44b3354f57c857318
     m_SubObjectName: 

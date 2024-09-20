@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fb0a454ebce448da1f205c2e1ae5eb3, type: 3}
   m_Name: GunDroid_Upgrade1
   m_EditorClassIdentifier: 
-  Icon:
-    m_AssetGUID: 
+  IconRef:
+    m_AssetGUID: 5eecd73d4c813db44b3354f57c857318
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  Description: 
+  Description: --
   BranchCountAddend: 1
   BurstCountAddend: 0
   DamageMultiplier: -0.2

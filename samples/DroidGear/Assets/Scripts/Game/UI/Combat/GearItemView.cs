@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Game.UI.Combat
 {
-    public class GearItem : MonoEntity
+    public class GearItemView : MonoEntity
     {
         [SerializeField]
         private Image _icon;

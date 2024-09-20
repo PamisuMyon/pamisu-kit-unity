@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Game.Title
+namespace Game
 {
     public class TitleDirector : Director
     {

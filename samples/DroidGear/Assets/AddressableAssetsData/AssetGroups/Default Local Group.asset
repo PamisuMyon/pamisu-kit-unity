@@ -42,11 +42,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 364f93f39ee45eb4389b63715ab59f21
-    m_Address: Assets/Res/UI/Hud/DroidItem.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3bc861ff9ab4b90428c695a80992814e
     m_Address: Assets/Res/Vfx/Muzzles/Vfx_Muzzle_Cannonball.prefab
     m_ReadOnly: 0

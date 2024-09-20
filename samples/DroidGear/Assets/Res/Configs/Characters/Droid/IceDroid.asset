@@ -23,7 +23,7 @@ MonoBehaviour:
   MoveSpeed: 5
   Damage: 1
   AttackSpeed: 1
-  DisplayName: 
+  DisplayName: Ice Droid
   IconRef:
     m_AssetGUID: 3612fce7f19a33546b8ab904b5b09f51
     m_SubObjectName: 

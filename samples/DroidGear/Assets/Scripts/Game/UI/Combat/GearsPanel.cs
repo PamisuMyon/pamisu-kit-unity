@@ -12,7 +12,7 @@ namespace Game.UI.Combat
         [SerializeField]
         private GameObject _gearItemPrefab;
 
-        private MonoPool<GearItem> _gearItemPool;
+        private MonoPool<GearItemView> _gearItemPool;
         private LayoutGroup _group;
 
         protected override void OnCreate()
@@ -23,7 +23,7 @@ namespace Game.UI.Combat
 
         public void Init()
         {
-            _gearItemPool = MonoPool<GearItem>.Create(_gearItemPrefab, _group.transform);
+            _gearItemPool = MonoPool<GearItemView>.Create(_gearItemPrefab, _group.transform);
             
             var drone = GetSystem<CombatSystem>().Bb.Player.Drone;
             var droneItem = _gearItemPool.Spawn();
