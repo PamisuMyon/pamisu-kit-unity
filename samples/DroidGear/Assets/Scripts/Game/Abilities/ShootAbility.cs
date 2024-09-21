@@ -2,7 +2,6 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Game.Configs;
 using Game.Framework;
-using Game.Props.Projectiles;
 using UnityEngine;
 
 namespace Game.Abilities

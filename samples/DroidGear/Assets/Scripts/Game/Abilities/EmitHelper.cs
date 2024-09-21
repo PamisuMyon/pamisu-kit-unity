@@ -22,7 +22,7 @@ namespace Game.Abilities
             CancellationToken cancellationToken, 
             Animator animator = null)
         {
-            var startAngle = -(config.BranchCount - 1) / 2f * config.BranchAngleDelta;
+            var startAngle = -(config.AttributeDict[AttributeType.BranchCount] - 1) / 2f * config.BranchAngleDelta;
             var startDirection = firePoint.forward;
             startDirection.y = 0;
             startDirection = Quaternion.AngleAxis(startAngle, Vector3.up) * startDirection;
@@ -30,7 +30,7 @@ namespace Game.Abilities
 
             var pooler = region.GetDirector<GameDirector>().Pooler;
             // Every burst 
-            for (int i = 0; i < config.BurstCount; i++)
+            for (int i = 0; i < config.AttributeDict[AttributeType.BurstCount]; i++)
             {
                 if (config.IsPlayAnim && animator != null)
                     if (!string.IsNullOrEmpty(config.AnimTriggerParam))
@@ -44,7 +44,7 @@ namespace Game.Abilities
 
                 // emit projectiles
                 var direction = startDirection;
-                for (int j = 0; j < config.BranchCount; j++)
+                for (int j = 0; j < config.AttributeDict[AttributeType.BranchCount]; j++)
                 {
                     var proj = await pooler.Spawn<Projectile>(config.Projectile.PrefabRef, -1, cancellationToken);
                     // if (cancellationToken.IsCancellationRequested)
@@ -69,7 +69,7 @@ namespace Game.Abilities
                     await region.Ticker.Delay(config.BurstPreDelay, cancellationToken);
 
                 // interval
-                if (config.BurstInterval != 0 && i != config.BurstCount - 1)
+                if (config.BurstInterval != 0 && i != (int)config.AttributeDict[AttributeType.BurstCount] - 1)
                     await region.Ticker.Delay(config.BurstInterval, cancellationToken);
             }
         }

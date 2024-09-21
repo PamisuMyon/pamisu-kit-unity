@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Game.Framework;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -11,6 +13,22 @@ namespace Game.Configs
         [Header("ShootAbility")]
         public EmitMethod EmitMethod = EmitMethod.Sequence;
         public EmitterConfig[] Emitters;
+
+        private void OnEnable()
+        {
+            Init();
+        }
+
+        public void Init()
+        {
+            if (Emitters != null)
+            {
+                for (int i = 0; i < Emitters.Length; i++)
+                {
+                    Emitters[i].Init();
+                }
+            }
+        }
     }
     
     public enum EmitMethod
@@ -42,6 +60,20 @@ namespace Game.Configs
         
         [Space]
         public ProjectileConfig Projectile;
+        
+        public readonly Dictionary<AttributeType, float> AttributeDict = new();
+
+        public void Init()
+        {
+            AttributeDict.Clear();
+            AttributeDict[AttributeType.BranchCount] = BranchCount;
+            AttributeDict[AttributeType.BurstCount] = BurstCount;
+            if (Projectile != null)
+            {
+                Projectile.Init();
+            }
+        }
+
     }
 
     [Serializable]
@@ -62,6 +94,12 @@ namespace Game.Configs
         // [Space] 
         // public EmitMethod EmitMethod = EmitMethod.None;
         // public EmitterConfig[] Emitters;
+        
+        public void Init()
+        {
+            ExplosionRadiusMultiplier = 0;
+        }
+        
     }
 
 }

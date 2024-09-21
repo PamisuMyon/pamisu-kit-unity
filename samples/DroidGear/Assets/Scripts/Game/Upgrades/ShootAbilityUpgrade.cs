@@ -28,8 +28,8 @@ namespace Game.Upgrades
             var emitters = config!.Emitters;
             for (int i = 0; i < emitters.Length; i++)
             {
-                emitters[i].BranchCount += _config.BranchCountAddend;
-                emitters[i].BurstCount += _config.BurstCountAddend;
+                emitters[i].AttributeDict[AttributeType.BranchCount] += _config.BranchCountAddend;
+                emitters[i].AttributeDict[AttributeType.BurstCount] += _config.BurstCountAddend;
                 if (emitters[i].Projectile != null)
                 {
                     emitters[i].Projectile.ExplosionRadiusMultiplier += _config.ExplosionRadiusMultiplier;
@@ -46,8 +46,8 @@ namespace Game.Upgrades
             var emitters = config!.Emitters;
             for (int i = 0; i < emitters.Length; i++)
             {
-                emitters[i].BranchCount -= _config.BranchCountAddend;
-                emitters[i].BurstCount -= _config.BurstCountAddend;
+                emitters[i].AttributeDict[AttributeType.BranchCount] -= _config.BranchCountAddend;
+                emitters[i].AttributeDict[AttributeType.BurstCount] -= _config.BurstCountAddend;
                 if (emitters[i].Projectile != null)
                 {
                     emitters[i].Projectile.ExplosionRadiusMultiplier -= _config.ExplosionRadiusMultiplier;

@@ -19,7 +19,7 @@ namespace Game.Configs
         public float Damage = 1f;
         public float AttackSpeed = 1f;
 
-        public Dictionary<AttributeType, float> AttributeDict = new();
+        public readonly Dictionary<AttributeType, float> AttributeDict = new();
 
         [Header("UI Display")]
         public string DisplayName;

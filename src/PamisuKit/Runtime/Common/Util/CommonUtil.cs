@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using UnityEngine;
+using Random = System.Random;
 
 namespace PamisuKit.Common.Util
 {
@@ -102,7 +104,10 @@ namespace PamisuKit.Common.Util
                 {
                     field.SetValue(retval, DeepCopyByReflection(field.GetValue(obj)));
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    Debug.LogError(ex.StackTrace);
+                }
             }
 
             return (T)retval;
