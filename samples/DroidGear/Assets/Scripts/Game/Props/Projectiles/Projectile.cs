@@ -161,7 +161,8 @@ namespace Game.Props.Projectiles
             _damagedTargets.Clear();
             var damage = _damage;
             damage.Value *= _config.DamageScale;
-            var count = Physics.OverlapSphereNonAlloc(transform.position, _config.ExplosionRadius, _overlapResults, _config.ExplosionDamageLayerMask);
+            var radius = _config.ExplosionRadius * (1f + _config.ExplosionRadiusMultiplier);
+            var count = Physics.OverlapSphereNonAlloc(transform.position, radius, _overlapResults, _config.ExplosionDamageLayerMask);
             for (int i = 0; i < count; i++)
             {
                 if (_overlapResults[i].TryGetComponentInDirectParent<Character>(out var target))
@@ -177,7 +178,7 @@ namespace Game.Props.Projectiles
             // Effects
             if (_hitRef != null)
             {
-                var s = _config.ExplosionRadius / _hitModelRadius;
+                var s = radius / _hitModelRadius;
                 var scale = new Vector3(s, s, s);
                 SpawnAndReleaseParticleGroup(_hitRef, position, Trans.rotation, scale).Forget();
             }

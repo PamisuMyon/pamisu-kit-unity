@@ -55,6 +55,7 @@ namespace Game.Configs
         [Space]
         public bool IsExplosion;
         public float ExplosionRadius;
+        internal float ExplosionRadiusMultiplier;
         public LayerMask ExplosionDamageLayerMask;
         
         // Use ISerializationCallbackReceiver or Odin to solve the serializing problem of cyclic reference 

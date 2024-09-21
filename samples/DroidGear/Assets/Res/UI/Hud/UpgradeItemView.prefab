@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 292.85583, y: 0}
+  m_SizeDelta: {x: 292, y: 590}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7076766546275792142
 MonoBehaviour:
@@ -121,7 +121,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.22037399, g: 0.23339078, b: 0.318, a: 0.8}
     m_PressedColor: {r: 0.02036, g: 0.022978663, b: 0.04, a: 0.9019608}
     m_SelectedColor: {r: 0.06666667, g: 0.07450981, b: 0.1254902, a: 0.8}
-    m_DisabledColor: {r: 0.06666667, g: 0.07450981, b: 0.1254902, a: 0.29803923}
+    m_DisabledColor: {r: 0.06666667, g: 0.07450981, b: 0.1254902, a: 0.8}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:

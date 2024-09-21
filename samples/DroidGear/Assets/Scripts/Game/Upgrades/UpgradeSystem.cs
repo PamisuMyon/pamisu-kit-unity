@@ -91,7 +91,7 @@ namespace Game.Upgrades
         private async UniTask ApplyUpgradeItem(UpgradeItem item)
         {
             var combatSystem = GetSystem<CombatSystem>();
-            if (item.Chara != null)
+            if (item.IsUnlockCharacter)
             {
                 await combatSystem.AddDroid(item.Chara);
             }

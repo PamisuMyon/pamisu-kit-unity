@@ -31,13 +31,14 @@ namespace Game.UI.Combat
         protected override void OnCreate()
         {
             base.OnCreate();
-            _upgradeItemPool = MonoPool<UpgradeItemView>.Create(_upgradeItemPrfab, _panel);
+            _upgradeItemPool = MonoPool<UpgradeItemView>.Create(_upgradeItemPrfab, _container);
 
             for (int i = 0; i < 3; i++)
             {
                 var item = _upgradeItemPool.Spawn();
                 item.Setup(Region);
                 item.Go.SetActive(false);
+                _upgradeItemPool.Release(item);
             }
             
             _panel.gameObject.SetActive(false);
@@ -61,29 +62,32 @@ namespace Game.UI.Combat
                 item.Go.SetActive(true);
                 item.SetData(items[i]);
                 item.ItemClicked = OnItemClicked;
-                item.Show(_itemAnimDuration).Forget();
                 _items.Add(item);
+            }
+
+            for (int i = 0; i < _items.Count; i++)
+            {
+                _items[i].Show(_itemAnimDuration).Forget();
                 await Region.Ticker.Delay(_itemAnimInterval, destroyCancellationToken);
             }
+
         }
 
         private async UniTaskVoid Hide()
         {
             for (int i = 0; i < _items.Count; i++)
             {
-                HideAndReleaseItem(_items[i]).Forget();
+                _items[i].Hide(_itemAnimDuration).Forget();
                 if (i != _items.Count - 1)
                     await Region.Ticker.Delay(_itemAnimInterval, destroyCancellationToken);
             }
             await Region.Ticker.Delay(_itemAnimDuration);
+            for (int i = 0; i < _items.Count; i++)
+            {
+                _items[i].gameObject.SetActive(false);
+                _upgradeItemPool.Release(_items[i]);
+            }
             _panel.gameObject.SetActive(false);
-        }
-
-        private async UniTaskVoid HideAndReleaseItem(UpgradeItemView itemView)
-        {
-            await itemView.Hide(_itemAnimDuration);
-            itemView.gameObject.SetActive(false);
-            _upgradeItemPool.Release(itemView);
         }
 
         private void OnItemClicked(UpgradeItem item)

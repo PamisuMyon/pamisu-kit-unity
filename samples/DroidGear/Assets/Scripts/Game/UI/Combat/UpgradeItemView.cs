@@ -59,22 +59,24 @@ namespace Game.UI.Combat
                 _icon.LoadSprite(item.Upgrade.IconRef).Forget();
                 _description.text = item.Upgrade.Description;
             }
+
+            _contentPanel.anchoredPosition = new Vector2(0, _animShowStartPosY);
         }
 
         public async UniTaskVoid Show(float animDuration)
         {
-            _button.enabled = false;
+            _button.interactable = false;
             var pos = new Vector2(0, _animShowStartPosY);
             await LMotion.Create(pos, Vector2.zero, animDuration)
                 .WithEase(Ease.OutCubic)
                 .BindToAnchoredPosition(_contentPanel)
                 .ToUniTask();
-            _button.enabled = true;
+            _button.interactable = true;
         }
 
         public UniTask Hide(float animDuration)
         {
-            _button.enabled = false;
+            _button.interactable = false;
             var pos = new Vector2(0, _animHideEndPosY);
             return LMotion.Create(Vector2.zero, pos, animDuration)
                 .WithEase(Ease.OutCubic)

@@ -6,22 +6,23 @@ using UnityEngine;
 
 namespace Game.Upgrades
 {
-    public class GunDroidUpgrade : Upgrade, IAttributeModifier
+    public class ShootAbilityUpgrade : Upgrade, IAttributeModifier
     {
-        private GunDroidUpgradeConfig _config;
-        
-        public GunDroidUpgrade(UpgradeConfig config) : base(config)
-        {
-            _config = config as GunDroidUpgradeConfig;
-        }
 
+        private ShootAbilityUpgradeConfig _config;
+        
+        public ShootAbilityUpgrade(UpgradeConfig config) : base(config)
+        {
+            _config = config as ShootAbilityUpgradeConfig;
+        }
+        
         public override void OnApplied(UpgradeComponent comp)
         {
             base.OnApplied(comp);
             Owner.AttrComp.AddModifier(this);
             Owner.AttrComp.Refresh();
 
-            var ability = Owner.GetAttackAbility() as SimpleShootAbility;
+            var ability = Owner.GetAttackAbility() as ShootAbility;
             Debug.Assert(ability != null, "Attack ability is null", Owner.Go);
             var config = ability.Config as ShootAbilityConfig;
             var emitters = config!.Emitters;
@@ -29,13 +30,17 @@ namespace Game.Upgrades
             {
                 emitters[i].BranchCount += _config.BranchCountAddend;
                 emitters[i].BurstCount += _config.BurstCountAddend;
+                if (emitters[i].Projectile != null)
+                {
+                    emitters[i].Projectile.ExplosionRadiusMultiplier += _config.ExplosionRadiusMultiplier;
+                }
             }
         }
-
+        
         public override void OnRemoved()
         {
             base.OnRemoved();
-            var ability = Owner.GetAttackAbility() as SimpleShootAbility;
+            var ability = Owner.GetAttackAbility() as ShootAbility;
             Debug.Assert(ability != null, "Attack ability is null", Owner.Go);
             var config = ability.Config as ShootAbilityConfig;
             var emitters = config!.Emitters;
@@ -43,6 +48,10 @@ namespace Game.Upgrades
             {
                 emitters[i].BranchCount -= _config.BranchCountAddend;
                 emitters[i].BurstCount -= _config.BurstCountAddend;
+                if (emitters[i].Projectile != null)
+                {
+                    emitters[i].Projectile.ExplosionRadiusMultiplier -= _config.ExplosionRadiusMultiplier;
+                }
             }
             
             Owner.AttrComp.RemoveModifier(this);
