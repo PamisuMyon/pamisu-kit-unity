@@ -56,7 +56,7 @@ namespace Game.Abilities
                 Owner.Model.Anim.SetBool(AnimConst.IsShooting, true);
             _targets.Clear();
             _spray.Activate();
-            await Region.Ticker.Delay(_config.Duration, cancellationToken);
+            await Region.Ticker.Delay(AttributeDict[AttributeType.Duration], cancellationToken);
             _spray.Cancel();
             _targets.Clear();
             if (Owner.Model.Anim != null)

@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Game.Configs.Upgrades
 {
-    [CreateAssetMenu(fileName = "ShootAbilityUpgrade", menuName = "Configs/Upgrades/ShootAbilityUpgradeConfig", order = 0)]
-    public class ShootAbilityUpgradeConfig : UpgradeConfig
+    [CreateAssetMenu(fileName = "ShootDroidUpgrade", menuName = "Configs/Upgrades/ShootDroidUpgradeConfig")]
+    public class ShootDroidUpgradeConfig : UpgradeConfig
     {
         
         public int BranchCountAddend;
@@ -15,7 +15,7 @@ namespace Game.Configs.Upgrades
         
         public override Upgrade CreateUpgrade()
         {
-            return new ShootAbilityUpgrade(this);
+            return new ShootDroidUpgrade(this);
         }
     }
 }

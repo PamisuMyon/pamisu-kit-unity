@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace Game.Upgrades
 {
-    public class ShootAbilityUpgrade : Upgrade, IAttributeModifier
+    public class ShootDroidUpgrade : Upgrade, IAttributeModifier
     {
 
-        private ShootAbilityUpgradeConfig _config;
+        private ShootDroidUpgradeConfig _config;
         
-        public ShootAbilityUpgrade(UpgradeConfig config) : base(config)
+        public ShootDroidUpgrade(UpgradeConfig config) : base(config)
         {
-            _config = config as ShootAbilityUpgradeConfig;
+            _config = config as ShootDroidUpgradeConfig;
         }
         
         public override void OnApplied(UpgradeComponent comp)

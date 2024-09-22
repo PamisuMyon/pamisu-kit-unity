@@ -11,6 +11,8 @@ namespace Game.Framework
         AttackSpeed,
         
         // Ability Attributes
+        Duration,
+        Range,
         BranchCount,
         BurstCount,
     }

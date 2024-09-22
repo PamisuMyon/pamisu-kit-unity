@@ -17,7 +17,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  Description: Drone burst +1, damage -20%
+  Description: Burst +1, damage -20%
   BranchCountAddend: 0
   BurstCountAddend: 1
   ExplosionRadiusMultiplier: 0

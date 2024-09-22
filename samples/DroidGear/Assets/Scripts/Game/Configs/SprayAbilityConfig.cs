@@ -7,8 +7,9 @@ namespace Game.Configs
     [CreateAssetMenu(fileName = "SprayAbilityConfig", menuName = "Configs/SprayAbilityConfig", order = 0)]
     public class SprayAbilityConfig : AbilityConfig
     {
-        [Header("SprayAbilityConfig")]
+        [Header("SprayAbility")]
         public float Duration;
+        public float RangeScale = 1;
         public float DamageScale = 1;
         public EffectConfig Effect;
         
@@ -26,6 +27,8 @@ namespace Game.Configs
         public virtual void Init()
         {
             AttributeDict.Clear();
+            AttributeDict[AttributeType.Duration] = Duration;
+            AttributeDict[AttributeType.Range] = RangeScale;
             AttributeDict[AttributeType.MoveSpeed] = MoveSpeedMultiplier;
             AttributeDict[AttributeType.AttackSpeed] = AttackSpeedMultiplier;
         }

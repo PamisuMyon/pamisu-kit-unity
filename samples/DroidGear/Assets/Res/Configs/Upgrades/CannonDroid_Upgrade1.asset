@@ -17,7 +17,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  Description: Cannon Droid explosion range +50%
+  Description: Explosion range +50%
   BranchCountAddend: 0
   BurstCountAddend: 0
   ExplosionRadiusMultiplier: 0.5

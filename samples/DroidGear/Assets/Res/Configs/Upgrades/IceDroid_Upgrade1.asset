@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8388d7c1585a41c1ba34a633a51f8ce0, type: 3}
-  m_Name: GunDroid_Upgrade1
+  m_Script: {fileID: 11500000, guid: 6b846ca557a34a05a3db7062a96da09b, type: 3}
+  m_Name: IceDroid_Upgrade1
   m_EditorClassIdentifier: 
   IconRef:
-    m_AssetGUID: 5eecd73d4c813db44b3354f57c857318
+    m_AssetGUID: 3612fce7f19a33546b8ab904b5b09f51
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  Description: Projectile +1, damage -20%
-  BranchCountAddend: 1
-  BurstCountAddend: 0
-  ExplosionRadiusMultiplier: 0
-  DamageMultiplier: -0.2
+  Description: Spray range +20%
+  DurationMultiplier: 0
+  RangeMultiplier: 0.2
+  DamageMultiplier: 0
