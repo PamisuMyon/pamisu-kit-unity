@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: d7b8e90042b1a934082ca329da5b9b2b
+  m_SerializeEntries:
+  - m_GUID: 859ccf1109d66e04b9cc5d20ef1a5415
+    m_Address: Assets/Res/Projectiles/Proj_Mage_Attack.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b1c679dbc553a84eb1f8801aa1396e2
+    m_Address: Assets/Res/Characters/Heroes/Mage/Hero_Mage.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 286fec125d2f6e1449264263a98a1acb
+    m_Address: Assets/Res/Characters/Enemies/Mushnub/Enemy_Mushnub.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 77be0ca12e15a0a41ac76cf9ed8d1175
+    m_Address: Assets/Res/Characters/Enemies/Mushnub/Enemy_Mushnub_Elite.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6954b600dce6d55448eb0dae656a871e, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 6ada64b68fc1dfd4191906ae350c3c0f, type: 2}
+    - {fileID: 11400000, guid: d248497661965494aa77b8ad8ed21d5c, type: 2}
