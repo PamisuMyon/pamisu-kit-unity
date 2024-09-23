@@ -1,7 +1,11 @@
 using Cysharp.Threading.Tasks;
+using Game.Combat;
 using Game.Common;
+using Game.Configs;
+using Game.Props;
 using LitMotion;
 using LitMotion.Extensions;
+using PamisuKit.Common.Util;
 using UnityEngine;
 
 namespace Game.Characters.Monster.States
@@ -28,7 +32,7 @@ namespace Game.Characters.Monster.States
                 
                 Owner.Chara.Model.Anim.SetTrigger(AnimConst.Death);
                 Sink().Forget();
-                // DropItems().Forget();
+                DropItems().Forget();
             }
 
             public override void OnExit()
@@ -53,18 +57,20 @@ namespace Game.Characters.Monster.States
                 Owner.Chara.Died?.Invoke(Owner.Chara);
             }
 
-            // private async UniTaskVoid DropItems()
-            // {
-            //     // TODO TEMP
-            //     var pickup = await GetSystem<CombatSystem>().Pooler.Spawn<Pickup>("Assets/Res/Props/CrystalShards/CrystalShard_1.prefab");
-            //     pickup.SetupEntity(Owner.Region);
-            //     pickup.SetData(GetSystem<CombatSystem>().Pooler);
-            //     var pos = Owner.Trans.position;
-            //     var rand = RandomUtil.InsideAnnulus(Owner.Model.VisualRadius, Owner.Model.VisualRadius + .2f);
-            //     pos.x += rand.x;
-            //     pos.z += rand.y;
-            //     pickup.Trans.position = pos;
-            // }
+            private async UniTaskVoid DropItems()
+            {
+                var combatSystem = Owner.GetSystem<CombatSystem>();
+                if (Random.value > combatSystem.CrystalDropChance)
+                    return;
+                
+                var pickup = await Owner.GetDirector<GameDirector>().Pooler.Spawn<Crystal>(combatSystem.CrystalRef);
+                pickup.Setup(Owner.Region);
+                var pos = Owner.Trans.position;
+                var rand = RandomUtil.InsideAnnulus(Owner.Model.VisualRadius, Owner.Model.VisualRadius + .2f);
+                pos.x += rand.x;
+                pos.z += rand.y;
+                pickup.Trans.position = pos;
+            }
             
         }
     }

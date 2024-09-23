@@ -947,8 +947,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoSetup: 0
-  LevelConfig: {fileID: 0}
+  LevelConfig: {fileID: 11400000, guid: ad7009cf6ebcf95469b85e88b49399c6, type: 2}
   PlayerConfig: {fileID: 11400000, guid: 9d049a62ca6e315449b15a073f2a7f26, type: 2}
+  CrystalDropChance: 0.6
+  CrystalRef:
+    m_AssetGUID: fb9c7a0c9c4adfe4ba44228c58cd6446
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!1 &430921670
 GameObject:
   m_ObjectHideFlags: 0
@@ -3805,6 +3811,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dummy
       objectReference: {fileID: 0}
+    - target: {fileID: 4551933744803934511, guid: 161f53678f739ac4096f89fa1a2b8505,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4915,6 +4926,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Dummy_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4551933744803934511, guid: 161f53678f739ac4096f89fa1a2b8505,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

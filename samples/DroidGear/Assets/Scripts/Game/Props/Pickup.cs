@@ -11,13 +11,15 @@ namespace Game.Props
         [SerializeField]
         private float _flySpeed = 10;
 
+        protected Action<Pickup> OnPickupCompleteDelegate;
+        
         private bool _isPicking;
         private Character _picker;
-        private Action<Pickup> _onPickComplete;
         private MonoPooler _pooler;
 
+        public bool CanPickup => !_isPicking;
 
-        public void OnUpdate(float deltaTime)
+        public virtual void OnUpdate(float deltaTime)
         {
             if (!_isPicking)
                 return;
@@ -28,9 +30,7 @@ namespace Game.Props
             if (dir.sqrMagnitude < .1f)
             {
                 _isPicking = false;
-                _onPickComplete?.Invoke(this);
-                _pooler?.Release(this);
-                return;
+                OnPickupComplete(_picker);
             }
             else
             {
@@ -40,24 +40,30 @@ namespace Game.Props
             }
         }
 
-        public void OnSpawnFromPool()
+        public virtual void OnSpawnFromPool()
         {
             _isPicking = false;
         }
 
         public void OnReleaseToPool()
         {
-            Go.SetActive(false);
+            _isPicking = false;
+            gameObject.SetActive(false);
         }
 
-        public void Pick(Character picker, Action<Pickup> onComplete)
+        public void Pick(Character picker, Action<Pickup> onComplete = null)
         {
             if (_isPicking)
                 return;
             _isPicking = true;
             _picker = picker;
-            _pooler = picker.GetDirector<GameDirector>().Pooler;
-            _onPickComplete = onComplete;
+            OnPickupCompleteDelegate = onComplete;
+        }
+
+        protected virtual void OnPickupComplete(Character picker)
+        {
+            OnPickupCompleteDelegate?.Invoke(this);
+            GetDirector<GameDirector>().Pooler.Release(this);
         }
 
     }

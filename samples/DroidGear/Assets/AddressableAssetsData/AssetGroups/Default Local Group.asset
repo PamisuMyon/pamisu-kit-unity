@@ -122,6 +122,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb9c7a0c9c4adfe4ba44228c58cd6446
+    m_Address: Assets/Res/Props/Pickups/Crystal.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ff53d1a0ef04516419a036acdad7c769
     m_Address: Assets/Res/Vfx/Hits/Vfx_Hit_Laser.prefab
     m_ReadOnly: 0

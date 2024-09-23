@@ -9,6 +9,7 @@ using PamisuKit.Common.FSM;
 using PamisuKit.Common.Util;
 using PamisuKit.Framework;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Game.Combat
 {
@@ -16,6 +17,10 @@ namespace Game.Combat
     {
         public LevelConfig LevelConfig;
         public HeroConfig PlayerConfig;
+        
+        [Space]
+        public float CrystalDropChance = .6f;
+        public AssetReferenceGameObject CrystalRef;
 
         public CombatStates.Blackboard Bb { get; private set; }
         public StateMachine Fsm { get; private set;}

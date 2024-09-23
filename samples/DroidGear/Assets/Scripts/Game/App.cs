@@ -1,3 +1,4 @@
+using Game.Configs;
 using Game.Input;
 using Game.Save;
 using PamisuKit.Framework;
@@ -16,6 +17,7 @@ namespace Game
 
         private void Init()
         {
+            CreateMonoSystem<ConfigSystem>();
             CreateMonoSystem<SaveSystem>();
             CreateMonoSystem<InputWrapper>();
         }

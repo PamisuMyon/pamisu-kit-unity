@@ -17,56 +17,16 @@ MonoBehaviour:
   Waves:
   - WaveDuration: 10
     SpawnInterval: 0.1
-    EnemyIds:
-    - mushnub
+    Enemies:
+    - {fileID: 11400000, guid: 46fe52437e4234841b94e404a0e868d4, type: 2}
     EnemyNum: 10
   - WaveDuration: 20
     SpawnInterval: 0.1
-    EnemyIds:
-    - mushnub
-    EnemyNum: 10
+    Enemies:
+    - {fileID: 11400000, guid: 46fe52437e4234841b94e404a0e868d4, type: 2}
+    EnemyNum: 15
   - WaveDuration: 20
     SpawnInterval: 0.1
-    EnemyIds:
-    - mushnub
-    EnemyNum: 10
-  - WaveDuration: 20
-    SpawnInterval: 0.1
-    EnemyIds:
-    - mushnub
-    EnemyNum: 10
-  - WaveDuration: 20
-    SpawnInterval: 0.1
-    EnemyIds:
-    - mushnub
-    EnemyNum: 10
-  - WaveDuration: 20
-    SpawnInterval: 0.1
-    EnemyIds:
-    - mushnub
-    EnemyNum: 10
-  - WaveDuration: 20
-    SpawnInterval: 0.1
-    EnemyIds:
-    - mushnub
-    EnemyNum: 10
-  - WaveDuration: 20
-    SpawnInterval: 0.1
-    EnemyIds:
-    - mushnub
-    EnemyNum: 10
-  - WaveDuration: 20
-    SpawnInterval: 0.1
-    EnemyIds:
-    - mushnub
-    EnemyNum: 10
-  - WaveDuration: 20
-    SpawnInterval: 0.1
-    EnemyIds:
-    - mushnub
-    EnemyNum: 10
-  - WaveDuration: 20
-    SpawnInterval: 0.1
-    EnemyIds:
-    - mushnub
-    EnemyNum: 10
+    Enemies:
+    - {fileID: 11400000, guid: 46fe52437e4234841b94e404a0e868d4, type: 2}
+    EnemyNum: 20

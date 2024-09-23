@@ -10,6 +10,8 @@ using Game.Framework;
 using PamisuKit.Common;
 using Game.Events;
 using Game.Characters.Drone;
+using Game.Props;
+using PamisuKit.Common.Util;
 
 namespace Game.Characters.Player
 {
@@ -99,8 +101,14 @@ namespace Game.Characters.Player
 
         #endregion
 
-        private void OnPickupAreaEnter(Collider collider)
+        private void OnPickupAreaEnter(Collider col)
         {
+            if (col.CompareTag("Pickup") 
+                && col.TryGetComponentInDirectParent<Pickup>(out var pickup)
+                && pickup.CanPickup)
+            {
+                pickup.Pick(Chara);
+            }
         }
 
         internal void HandleMovement(float deltaTime) 
