@@ -8,11 +8,11 @@ namespace Game
     {
 
         [SerializeField]
-        private AssetReference _combatSceneRef;
+        private AssetReference _gameSceneRef;
         
         public void StartGame()
         {
-            Addressables.LoadSceneAsync(_combatSceneRef);
+            Addressables.LoadSceneAsync(_gameSceneRef);
         }
         
     }

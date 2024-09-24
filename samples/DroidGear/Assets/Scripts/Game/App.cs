@@ -3,6 +3,7 @@ using Game.Input;
 using Game.Save;
 using PamisuKit.Framework;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -20,6 +21,11 @@ namespace Game
             CreateMonoSystem<ConfigSystem>();
             CreateMonoSystem<SaveSystem>();
             CreateMonoSystem<InputWrapper>();
+        }
+
+        public void LoadTitle()
+        {
+            SceneManager.LoadScene(0);
         }
         
         public void Quit()

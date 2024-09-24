@@ -1,4 +1,5 @@
-﻿using PamisuKit.Framework;
+﻿using Game.UI.Common;
+using PamisuKit.Framework;
 
 namespace Game.UI.Combat
 {
@@ -6,6 +7,7 @@ namespace Game.UI.Combat
     {
         public CombatOverlay Overlay;
         public CombatHud Hud;
+        public InGameMenuView MenuView;
         
         protected override bool AutoSetupOverride => false;
 
@@ -15,6 +17,7 @@ namespace Game.UI.Combat
             
             Overlay.Setup(Region);
             Hud.Setup(Region);
+            MenuView.Setup(Region);
         }
     }
 }
