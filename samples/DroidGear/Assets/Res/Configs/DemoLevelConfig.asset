@@ -24,9 +24,9 @@ MonoBehaviour:
     SpawnInterval: 0.1
     Enemies:
     - {fileID: 11400000, guid: 46fe52437e4234841b94e404a0e868d4, type: 2}
-    EnemyNum: 15
+    EnemyNum: 10
   - WaveDuration: 20
     SpawnInterval: 0.1
     Enemies:
     - {fileID: 11400000, guid: 46fe52437e4234841b94e404a0e868d4, type: 2}
-    EnemyNum: 20
+    EnemyNum: 10

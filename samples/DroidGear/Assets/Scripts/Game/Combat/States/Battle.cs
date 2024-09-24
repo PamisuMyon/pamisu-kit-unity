@@ -34,7 +34,7 @@ namespace Game.Combat.States
 
                 for (int i = 0; i < waves.Count; i++)
                 {
-                    PerformWave(waves[i], enemyStarts).Forget();
+                    PerformWave(i, waves[i], enemyStarts).Forget();
                     await Owner.Region.Ticker.Delay(waves[i].WaveDuration, Owner.destroyCancellationToken);
                 }
                 Debug.Log("All waves processed.");
@@ -50,7 +50,7 @@ namespace Game.Combat.States
                 } while (Owner.destroyCancellationToken.IsCancellationRequested);
             }
 
-            private async UniTask PerformWave(WaveConfig wave, EnemyStart[] enemyStarts)
+            private async UniTask PerformWave(int index, WaveConfig wave, EnemyStart[] enemyStarts)
             {
                 var enemyCount = Bb.EnemiesOnStage.Count;
                 var pooler = Owner.GetDirector<GameDirector>().Pooler;
@@ -65,6 +65,7 @@ namespace Game.Combat.States
                     controller.transform.SetPositionAndRotation(resultPos, RandomUtil.RandomYRotation());
                     controller.Setup(Owner.Region);
                     controller.Init(enemyConfig);
+                    controller.ApplyGrowth(index + 1);
                     controller.Chara.Die += OnMonsterDie;
                     controller.Chara.Died += OnMonsterDied;
 

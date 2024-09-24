@@ -6,6 +6,7 @@ using Game.Characters.Monster.States;
 using Game.Combat;
 using Game.Characters.Player;
 using PamisuKit.Framework;
+using UnityEngine;
 
 namespace Game.Characters.Monster
 {
@@ -47,6 +48,17 @@ namespace Game.Characters.Monster
             Chara.Revive();
             Chara.AbilityComp.ResetAbilities();
             Fsm.ChangeState<MonsterStates.Idle>();
+        }
+
+        public void ApplyGrowth(int waveNum)
+        {
+            var config = Config as MonsterConfig;
+            Debug.Assert(config != null, $"Config {Config.name} is not MonsterConfig");
+            var maxHealth = config.AttributeDict[AttributeType.MaxHealth] * (1f + (waveNum - 1) * config.HealthGrowth);
+            var damage = config.AttributeDict[AttributeType.Damage] * (1f + (waveNum - 1) * config.DamageGrowth);
+            Chara.AttrComp.SetValue(AttributeType.MaxHealth, maxHealth);
+            Chara.AttrComp.SetValue(AttributeType.Damage, damage);
+            Chara.Revive();
         }
 
         protected override void OnSelfDestroy()
