@@ -568,7 +568,8 @@ PlayerSettings:
     Standalone: LITMOTION_SUPPORT_UNITASK;PAMISUKIT_ENTITY_AUTOSETUP_DEFAULT_OFF
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Standalone: 1
   il2cppCompilerConfiguration: {}
   il2cppCodeGeneration: {}
   managedStrippingLevel:
