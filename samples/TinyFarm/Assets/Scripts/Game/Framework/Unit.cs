@@ -5,9 +5,8 @@ namespace Game.Framework
 {
     public class Unit : MonoEntity
     {
-        [SerializeField]
-        protected Vector2Int Size;
-        
-        
+        public Vector2 VisualCenter = Vector2Int.zero;
+        public Vector2 VisualSize = Vector2Int.one;
+
     }
 }

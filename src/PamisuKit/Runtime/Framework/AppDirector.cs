@@ -86,8 +86,8 @@ namespace PamisuKit.Framework
                 go.transform.SetParent(owner.Trans);
                 system = go.AddComponent<TSystem>();
             }
-            system.Setup(owner.Region);
             SystemDict.Add(type, system);
+            system.Setup(owner.Region);
             return system;
         }
 

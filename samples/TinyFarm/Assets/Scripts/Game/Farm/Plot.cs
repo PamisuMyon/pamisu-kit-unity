@@ -1,8 +1,8 @@
-﻿using PamisuKit.Framework;
+﻿using Game.Framework;
 
 namespace Game.Farm
 {
-    public class Plot : MonoEntity
+    public class Plot : Unit
     {
         
     }

@@ -22,7 +22,8 @@ namespace Game.Farm
             Plots = new List<Plot>();
             for (int i = 0; i < _initPatchInfos.Length; i++)
             {
-                
+                var patch = Region.NewMonoEntity<Patch>();
+                patch.Init(_initPatchInfos[i]).Forget();
             }
         }
 
