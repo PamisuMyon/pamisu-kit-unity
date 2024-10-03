@@ -42,6 +42,20 @@ namespace Game.Framework
             {
                 _hoverIndicator.Detach();
             }
+            
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (_hoverIndicator.IsAttached)
+                {
+                    _selectionIndicator.Attach(_hoverIndicator.AttachedUnit);
+                    _hoverIndicator.Detach();
+                    return;
+                }
+                if (_selectionIndicator.IsAttached)
+                {
+                    _selectionIndicator.Detach();
+                }
+            }
         }
     }
 }
