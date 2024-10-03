@@ -2,7 +2,7 @@
 
 namespace Benchmarks
 {
-    public class App : BaseApp<App>
+    public class App : AppDirector<App>
     {
     }
 }
