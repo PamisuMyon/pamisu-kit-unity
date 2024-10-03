@@ -20,14 +20,26 @@ namespace PamisuKit.Framework
         void OnFixedUpdate(float deltaTime);
     }
     
+#if PAMISUKIT_TICKER_ENABLE_LATEUPDATE
+    public interface ILateUpdatable
+    {
+        bool IsActive { get; }
+
+        void OnLateUpdate(float deltaTime);
+    }
+#endif
+    
     public class Ticker : MonoBehaviour
     {
         public float TimeScale = 1f;
         public float DeltaTime { get; private set; }
         public float TickerTime { get; private set; }
         
-        protected readonly List<IUpdatable> UpdateObjects = new List<IUpdatable>();
-        protected readonly List<IFixedUpdatable> FixedUpdateObjects = new List<IFixedUpdatable>();
+        protected readonly List<IUpdatable> UpdateObjects = new();
+        protected readonly List<IFixedUpdatable> FixedUpdateObjects = new();
+#if PAMISUKIT_TICKER_ENABLE_LATEUPDATE
+        protected readonly List<ILateUpdatable> LateUpdateObjects = new();
+#endif
 
         public void Add(object obj)
         {
@@ -35,6 +47,10 @@ namespace PamisuKit.Framework
                 UpdateObjects.Add(updatableObj);
             if (obj is IFixedUpdatable fixedUpdatableObj)
                 FixedUpdateObjects.Add(fixedUpdatableObj);
+#if PAMISUKIT_TICKER_ENABLE_LATEUPDATE
+            if (obj is ILateUpdatable lateUpdatableObj)
+                LateUpdateObjects.Add(lateUpdatableObj);
+#endif
         }
 
         public void Remove(object obj)
@@ -43,6 +59,10 @@ namespace PamisuKit.Framework
                 UpdateObjects.Remove(updatableObj);
             if (obj is IFixedUpdatable fixedUpdatableObj)
                 FixedUpdateObjects.Remove(fixedUpdatableObj);
+#if PAMISUKIT_TICKER_ENABLE_LATEUPDATE
+            if (obj is ILateUpdatable lateUpdatableObj)
+                LateUpdateObjects.Remove(lateUpdatableObj);
+#endif
         }
 
         private void Update()
@@ -69,6 +89,20 @@ namespace PamisuKit.Framework
                     FixedUpdateObjects[i].OnFixedUpdate(delta);
             }
         }
+
+#if PAMISUKIT_TICKER_ENABLE_LATEUPDATE
+        private void LateUpdate()
+        {
+            var delta = Time.deltaTime;
+            delta *= TimeScale;
+            if (LateUpdateObjects.Count == 0) return;
+            for (var i = 0; i < LateUpdateObjects.Count; i++)
+            {
+                if (LateUpdateObjects[i].IsActive)
+                    LateUpdateObjects[i].OnLateUpdate(delta);
+            }
+        }
+#endif
 
         public async UniTask Delay(float seconds, CancellationToken cancellationToken = default)
         {
