@@ -1,4 +1,4 @@
-个人的Unity游戏开发套件与一些示例项目。（开发中，当前Unity版本2022.3.x LTS）
+个人的Unity游戏开发套件与一些示例项目。（开发中，当前Unity版本2022.3.x LTS） [旧v1版本](https://github.com/PamisuMyon/pamisu-kit-unity/tree/v1)
 
 开发套件基本成型，将会随着个人参与的项目与这里的示例项目的开发而不断更新。
 
