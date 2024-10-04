@@ -1,0 +1,9 @@
+<module name="">
+
+    <bean name="Reward">
+ 		<var name="item_id" type="int" comment="这是Id"/>
+ 		<var name="count" type="int" comment="数量"/>
+ 		<var name="description" type="string" comment="描述"/>
+	</bean>
+
+</module>

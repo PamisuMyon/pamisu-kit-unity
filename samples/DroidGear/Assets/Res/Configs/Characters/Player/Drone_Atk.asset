@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537d65504978f5d44b6a79bd949c6200, type: 3}
+  m_Name: Drone_Atk
+  m_EditorClassIdentifier: 
+  Id: drone_atk
+  Type: 3
+  Cooldown: 0.8
+  ActRange: 7
+  ActPreDelay: 0
+  ActPostDelay: 0
+  ActLayer: 17
+  PrefabRef:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  EmitMethod: 1
+  Emitters:
+  - IsPlayAnim: 0
+    AnimTriggerParam: 
+    FirePointIndex: 0
+    BranchCount: 1
+    BranchAngleDelta: 5
+    BurstCount: 1
+    BurstPreDelay: 0
+    BurstPostDelay: 0
+    BurstInterval: 0.1
+    Projectile:
+      PrefabRef:
+        m_AssetGUID: a4cd9dc3700a70e45bd8b6fff9e9aac4
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+      MoveSpeed: 10
+      DamageScale: 1
+      PierceCount: 0
+      IsExplosion: 0
+      ExplosionRadius: 0
+      ExplosionDamageLayerMask:
+        serializedVersion: 2
+        m_Bits: 0
+      EmitMethod: 0
+      Emitters: []

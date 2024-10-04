@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c3050493d6c40258322927120b92dd2, type: 3}
+  m_Name: Drone
+  m_EditorClassIdentifier: 
+  Id: drone
+  PrefabRef:
+    m_AssetGUID: 41740cc486dad4f45ad45b297a9efe41
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  AttackAbility: {fileID: 11400000, guid: 013cf807df391d744b549507ffe97181, type: 2}
+  MaxHealth: 1
+  MoveSpeed: 0
+  Damage: 3
+  AttackSpeed: 1
+  DisplayName: Drone
+  IconRef:
+    m_AssetGUID: b45e58c3877d7574d96fcac8fb44c153
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

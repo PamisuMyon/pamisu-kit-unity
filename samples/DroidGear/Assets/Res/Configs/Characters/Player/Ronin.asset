@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fe46f3462bc63540b32106420d1b422, type: 3}
+  m_Name: Ronin
+  m_EditorClassIdentifier: 
+  Id: ronin
+  PrefabRef:
+    m_AssetGUID: 0af95b9ee44bf3c42a1f9cac0271f883
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  AttackAbility: {fileID: 0}
+  MaxHealth: 15
+  MoveSpeed: 5
+  Damage: 0
+  AttackSpeed: 0
+  DisplayName: 
+  IconRef:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  DroneConfig: {fileID: 11400000, guid: 690a874d43e83cd498d7e094b6eddb9a, type: 2}
