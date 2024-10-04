@@ -12,26 +12,26 @@ using Luban;
 
 public partial class Tables
 {
-    public Examples.TbExampleBasic TbExampleBasic {get; }
-    public Examples.TbExampleAdvance TbExampleAdvance {get; }
-    public Examples.TbExampleSingleton TbExampleSingleton {get; }
-    public Examples.TbExampleList TbExampleList {get; }
+    public Examples.TbBasicConfig TbBasicConfig {get; }
+    public Examples.TbAdavancedConfig TbAdavancedConfig {get; }
+    public Examples.TbGlobalConfig TbGlobalConfig {get; }
+    public Examples.TbListConfig TbListConfig {get; }
 
     public Tables(System.Func<string, ByteBuf> loader)
     {
-        TbExampleBasic = new Examples.TbExampleBasic(loader("examples_tbexamplebasic"));
-        TbExampleAdvance = new Examples.TbExampleAdvance(loader("examples_tbexampleadvance"));
-        TbExampleSingleton = new Examples.TbExampleSingleton(loader("examples_tbexamplesingleton"));
-        TbExampleList = new Examples.TbExampleList(loader("examples_tbexamplelist"));
+        TbBasicConfig = new Examples.TbBasicConfig(loader("examples_tbbasicconfig"));
+        TbAdavancedConfig = new Examples.TbAdavancedConfig(loader("examples_tbadavancedconfig"));
+        TbGlobalConfig = new Examples.TbGlobalConfig(loader("examples_tbglobalconfig"));
+        TbListConfig = new Examples.TbListConfig(loader("examples_tblistconfig"));
         ResolveRef();
     }
     
     private void ResolveRef()
     {
-        TbExampleBasic.ResolveRef(this);
-        TbExampleAdvance.ResolveRef(this);
-        TbExampleSingleton.ResolveRef(this);
-        TbExampleList.ResolveRef(this);
+        TbBasicConfig.ResolveRef(this);
+        TbAdavancedConfig.ResolveRef(this);
+        TbGlobalConfig.ResolveRef(this);
+        TbListConfig.ResolveRef(this);
     }
 }
 

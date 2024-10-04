@@ -22,25 +22,25 @@ namespace Game.UI
 
             var configSystem = GetSystem<ConfigSystem>();
             var sb = new StringBuilder("基础示例表中所有记录：\n");
-            foreach (var it in configSystem.Tables.TbExampleBasic.DataList) 
+            foreach (var it in configSystem.Tables.TbBasicConfig.DataList) 
             {
                 sb.AppendLine($"{it.Id} {it.Name} {it.Type}");
             }
 
             sb.AppendLine("\n根据id获取基础示例表中单条记录：");
-            var item = configSystem.Tables.TbExampleBasic.GetOrDefault(1001);
+            var item = configSystem.Tables.TbBasicConfig.GetOrDefault(1001);
             sb.AppendLine($"{item.Id} {item.Name} {item.Type}");
 
             _detail1.text = sb.ToString();
 
             sb = new StringBuilder("列表表中所有记录：\n");
-            foreach (var it in configSystem.Tables.TbExampleList.DataList) 
+            foreach (var it in configSystem.Tables.TbListConfig.DataList) 
             {
                 sb.AppendLine($"{it.Name} {it.Race} {it.Occupation} {it.Age}岁 {it.Origin}");
             }
 
             sb.AppendLine("\n根据下标获取列表表中指定记录：");
-            var item1 = configSystem.Tables.TbExampleList.DataList[3];
+            var item1 = configSystem.Tables.TbListConfig.DataList[3];
             sb.AppendLine($"{item1.Name} {item1.Race} {item1.Occupation} {item1.Age}岁 {item1.Origin}");
 
             _detail2.text = sb.ToString();
