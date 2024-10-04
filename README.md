@@ -18,17 +18,17 @@
   - [Gameplay框架](#gameplay框架)
     - [开始上手](#开始上手)
     - [框架结构](#框架结构)
-    - [Director](#director)
+    - [导演](#导演)
     - [子系统](#子系统)
-    - [MonoEntity](#monoentity)
+    - [游戏实体](#游戏实体)
     - [事件总线集成](#事件总线集成)
     - [服务定位器](#服务定位器)
     - [区域暂停与倍速](#区域暂停与倍速)
     - [自管理的事件函数](#自管理的事件函数)
 
 # 示例项目
-## [Droid Gear](./samples/DroidGear/)
-类幸存者。
+## Droid Gear (WIP)
+[🔗]((./samples/DroidGear/)) 类幸存者。
 
 ![](./docs/images/droidgear_screenshot_1.png)
 
@@ -37,22 +37,22 @@
 - 能力系统（属性、技能、Buff)
 - 模块化升级
 
-## [Tiny Farm](./samples/TinyFarm/) (WIP)
-农场模拟。
+## Tiny Farm (WIP)
+[🔗](./samples/TinyFarm/) 农场模拟。
 
-## [Wizzywoods](./samples/Wizzywoods/) (WIP)
-回合制策略Rogue-like。
+## Wizzywoods (WIP)
+[🔗](./samples/Wizzywoods/)回合制策略Rogue-like。
 ![](./docs/images/wizzywoods_screenshot_1.jpg)
 
-## [Luban Example - Luban示例](./samples/LubanExample/)
+## Luban Example - Luban示例
+[🔗](./samples/LubanExample/) [配置工具Luban](https://luban.doc.code-philosophy.com/)使用示例。
+![](./docs/images/luban_example.png)
 
-[配置工具Luban](https://luban.doc.code-philosophy.com/)使用示例。
+## Benchmark - 基准测试
+[🔗](./samples/Benchmark/)一些针对套件的基准测试。
 
-## [Benchmark - 基准测试](./samples/Benchmark/)
-一些针对套件的基准测试。
-
-### [自管理的Update](./samples/Benchmark/Assets/Benchmark/CustomUpdate/)
-[Gameplay框架](#gameplay框架)实现了一套自管理的事件函数（OnCreate、IUpdatable、IFixedUpdatable等），以取代Unity原生的事件函数（Awake、Start、Update、FixedUpdate等）。与原生事件函数相比，自管理的事件函数有序执行，且执行效率略高于原生。
+### 自管理的Update
+[🔗](./samples/Benchmark/Assets/Benchmark/CustomUpdate/) [Gameplay框架](#gameplay框架)实现了一套自管理的事件函数（OnCreate、IUpdatable、IFixedUpdatable等），以取代Unity原生的事件函数（Awake、Start、Update、FixedUpdate等）。与原生事件函数相比，自管理的事件函数有序执行，且执行效率略高于原生。
 
 在这个测试中，场景中有20000个猴头在不断地移动和旋转，比较使用自管理实现（IUpdatable）的帧率，和使用原生事件函数（Update）实现的帧率，无论是编辑器中运行，还是打包后运行，自管理都比原生的帧数要高些。
 
@@ -60,7 +60,7 @@
 
 Last: 上一次所有物体Update执行总耗时
 
-Average: 所有物体Update执行平均耗时
+Average: 所有物体Update执行总耗时的平均值
 
 # 开发套件
 ## 安装
@@ -70,8 +70,8 @@ Average: 所有物体Update执行平均耗时
 
 > TODO 之后增加git URL与Unity Package安装方式
 
-## [通用工具](./src/PamisuKit/Runtime/Common/)
-包含一些基础的工具实现。
+## 通用工具
+[🔗](./src/PamisuKit/Runtime/Common/)包含一些基础的工具实现。
 
 - 简易Addressable资源管理
 - 有限状态机
@@ -79,12 +79,12 @@ Average: 所有物体Update执行平均耗时
 - 事件总线（零GC）
 - 工具类（Unity、随机、数学等等）
 
-## [Gameplay框架](./src/PamisuKit/Runtime/Framework/)
-一套极简且轻量的Gameplay框架。[框架结构UML](#框架结构)
+## Gameplay框架
+[🔗](./src/PamisuKit/Runtime/Framework/)一套极简且轻量的Gameplay框架。[框架结构UML](#框架结构)
 
 - 系统内角色划分清晰明确成体系
 - 抛弃传统单例模式，所有单例（子系统、服务等）更易于管理
-- 自管理的事件函数，所有事件函数有序执行且效率比原生高
+- 自管理的事件函数，事件函数有序执行且效率比原生高
 - 集成事件总线，无需手动处理事件的取消订阅
 - “区域”让部分元素暂停、倍速功能的实现更简单
 
@@ -201,10 +201,10 @@ public class MonsterSpawner : MonoEntity
 ![](./docs/images/framework_autosetup_1.png)
 
 ### 框架结构
+![](./docs/images/framework_uml_class.jpg)
 
-
-### Director
-`Director`负责处理某个场景/玩法/游戏模式层面的逻辑，这类逻辑都可以放到其中。`Director`同时只能存在一个，场景中所有的`MonoEntity`都会注册到`Director`中，`MonoEntity`中可以使用`GetDirector`函数获取到当前`Director`：
+### 导演
+导演`Director`负责处理某个场景/玩法/游戏模式层面的逻辑，这类逻辑都可以放到其中。`Director`同时只能存在一个，场景中所有的`MonoEntity`都会注册到`Director`中，`MonoEntity`中可以使用`GetDirector`函数获取到当前`Director`：
 
 ```C#
 public class Player : MonoEntity
@@ -284,10 +284,10 @@ public class Player : MonoEntity
 
 如果一个子系统需要在整个游戏层面全局存在，可以将它放到`AppDirector`中创建。
 
-### MonoEntity
+### 游戏实体
 `MonoEntity`是组成游戏世界的实体，Director和子系统之外的职责都可以交给`MonoEntity`实现。
 
-`MonoEntity`需要被包含在一个`Region`即“区域”内，关于`Region`下面会有详细介绍，这里只需要了解`Director`中会包含一个默认的`Region`，每个`MonoEntity`初始化时需要指定`Region`，初始化时传入的`Region`参数将会赋值给成员变量。
+`MonoEntity`需要被包含在一个`Region`即“区域”内，每个`MonoEntity`初始化时需要指定其`Region`，`Director`中会包含一个默认的`Region`，初始化时传入的`Region`参数将会赋值给成员变量，在初始化其他`MonoEntity`时可以使用这个变量。
 
 ```C#
 public class MonsterSpawner : MonoEntity
@@ -318,7 +318,7 @@ public class Player : MonoEntity
 }
 ```
 
-自动初始化将会寻找场景中第一个`Director`，调用它的相应函数来初始化自身，需要注意自动初始化将会让事件函数的执行回归无序，考虑到目前的使用场景，该选项默认不勾选（为false），可以在Project Settings -> Player -> Other Settings -> Scripting Define Symbols中添加`PAMISUKIT_ENTITY_AUTOSETUP_DEFAULT_ON`将其改为默认true。
+自动初始化将会寻找场景中第一个`Director`，调用它的相应函数，使用其中的默认`Region`来初始化自身。需要注意自动初始化将会让事件函数的执行回归无序（见[自管理的事件函数](#自管理的事件函数)），考虑到目前的使用场景，该选项默认不勾选（为false），可以在Project Settings -> Player -> Other Settings -> Scripting Define Symbols中添加`PAMISUKIT_ENTITY_AUTOSETUP_DEFAULT_ON`将其改为默认true。
 
 ![](./docs/images/framework_autosetup_macro.png)
 
@@ -439,7 +439,44 @@ public class Player : MonoEntity
 ```
 
 ### 区域暂停与倍速
+区域`Region`是游戏实体`MonoEntity`的实际管理者，每个`MonoEntity`初始化后都会被包含在一个区域内。区域使用一个钟表`Ticker`来驱动所有`MonoEntity`的事件函数，通过修改`Ticker`的`TimeScale`来影响区域内物体的时间流速。
 
+例如使用`IUpdatable`时，传入的`deltaTime`会受到`TimeScale`的影响:
+
+```C#
+public class Ball : MonoEntity, IUpdatable
+{
+    // ...    
+    public void OnUpdate(float deltaTime)
+    {
+        Trans.Translate(_moveSpeed * deltaTime * _moveDirection, Space.World);
+    }
+}
+```
+
+通过以下代码修改`Ticker`的`TimeScale`，球的运动速度将会减慢：
+
+```C#
+public void Foo()
+{
+    Region.Ticker.TimeScale = 0.5f;
+}
+```
+
+对于`IFixedUpdatable`，`deltaTime`固定为`Time.fixedDeltaTime`，不会受到`TimeScale`的影响，但可以直接使用`TimeScale`修改刚体速度：
+
+```C#
+public class PhysicsBall : MonoEntity, IFixedUpdatable
+{
+    // ...
+    public void OnFixedUpdate(float deltaTime)
+    {
+        _rigidbody.velocity = _moveSpeed * Region.Ticker.TimeScale * _moveDirection;
+    }
+}
+```
+
+一个常见的需求是，游戏内容在暂停和倍速时，UI内容不受影响，可以通过将游戏内容和UI内容放在不同区域来实现，详见示例项目[Droid Gear](#droid-gear)中的[GameDirector.cs](./samples/DroidGear/Assets/Scripts/Game/GameDirector.cs)。
 
 ### 自管理的事件函数
 Unity原生的事件函数（Awake、Start、Update、FixedUpdate等）有一个痛点，它们默认是无序执行的，如果需要调整执行顺序，需要在Script Execution Order里手动设置。
