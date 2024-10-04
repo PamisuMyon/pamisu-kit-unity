@@ -6,7 +6,7 @@
 
 # 目录
 - [示例项目](#示例项目)
-  - [Droid Gear](#droid-gear)
+  - [Droid Gear (WIP)](#droid-gear-wip)
   - [Tiny Farm (WIP)](#tiny-farm-wip)
   - [Wizzywoods (WIP)](#wizzywoods-wip)
   - [Luban Example - Luban示例](#luban-example---luban示例)
@@ -318,9 +318,11 @@ public class Player : MonoEntity
 }
 ```
 
-自动初始化将会寻找场景中第一个`Director`，调用它的相应函数，使用其中的默认`Region`来初始化自身。需要注意自动初始化将会让事件函数的执行回归无序（见[自管理的事件函数](#自管理的事件函数)），考虑到目前的使用场景，该选项默认不勾选（为false），可以在Project Settings -> Player -> Other Settings -> Scripting Define Symbols中添加`PAMISUKIT_ENTITY_AUTOSETUP_DEFAULT_ON`将其改为默认true。
+自动初始化将会寻找场景中第一个`Director`，调用它的相应函数，使用其中的默认`Region`来初始化自身。需要注意自动初始化将会让事件函数的执行回归无序（见[自管理的事件函数](#自管理的事件函数)），考虑到目前大部分使用场景都是手动初始化，该选项默认不勾选（为false），可以在Project Settings -> Player -> Other Settings -> Scripting Define Symbols中添加`PAMISUKIT_ENTITY_AUTOSETUP_DEFAULT_ON`将其改为默认true。
 
 ![](./docs/images/framework_autosetup_macro.png)
+
+如果`Director`的初始化为耗时操作，需要等待`Director`初始化完毕后才开始`MonoEntity`的自动初始化，可以在`Director`中自定义这个过程，详见[Luban Example](#luban-example---luban示例)中的[GameDirector.cs](samples\LubanExample\LubanExampleUnity\Assets\Scripts\Game\GameDirector.cs)。
 
 ### 事件总线集成
 
@@ -454,7 +456,7 @@ public class Ball : MonoEntity, IUpdatable
 }
 ```
 
-通过以下代码修改`Ticker`的`TimeScale`，球的运动速度将会减慢：
+通过以下代码修改`Ticker`的`TimeScale`，球的运动将会变慢：
 
 ```C#
 public void Foo()

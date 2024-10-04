@@ -54,6 +54,8 @@ namespace Game.Framework
         {
             AbilityComp.OnUpdate(deltaTime);
             EffectComp.OnUpdate(deltaTime);
+            if (Model.Anim != null)
+                Model.Anim.speed = Region.Ticker.TimeScale;
         }
 
         protected virtual void OnHealthChanged(AttributeComponent attrComp, float delta, float newHealth)

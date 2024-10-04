@@ -81,6 +81,7 @@ namespace Game.Combat
             droid.Setup(Region);
             droid.Init(config);
             droid.Trans.SetPositionAndRotation(pos, RandomUtil.RandomYRotation());
+            Bb.Droids.Add(droid);
             
             Emit(new GearAdded { Config = config });
         }

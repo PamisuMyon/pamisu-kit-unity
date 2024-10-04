@@ -111,7 +111,7 @@ namespace Game.Characters.Player
             }
         }
 
-        internal void HandleMovement(float deltaTime) 
+        internal void HandleOrientation(float deltaTime)
         {
             if (Movement != Vector3.zero)
             {
@@ -119,8 +119,10 @@ namespace Game.Characters.Player
                 var rotation = Model.transform.rotation;
                 Model.transform.rotation = Quaternion.RotateTowards(rotation, targetRotation, _turnSpeed * deltaTime);
             }
+        }
 
-            // Cc.Move(MoveSpeed * deltaTime * Movement);
+        internal void HandleMovement() 
+        {
             Rb.velocity = MoveSpeed * Region.Ticker.TimeScale * Movement;
         }
 

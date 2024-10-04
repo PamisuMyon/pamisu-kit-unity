@@ -15,11 +15,12 @@ namespace Game.Characters.Player.States
             {
                 base.OnUpdate(deltaTime);
                 Owner.Model.Anim.SetBool(AnimConst.IsRunning, Owner.Movement != Vector3.zero);
+                Owner.HandleOrientation(deltaTime);
             }
 
             public override void OnFixedUpdate(float deltaTime)
             {
-                Owner.HandleMovement(deltaTime);
+                Owner.HandleMovement();
             }
 
         }

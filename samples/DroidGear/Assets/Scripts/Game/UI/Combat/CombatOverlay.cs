@@ -41,7 +41,7 @@ namespace Game.UI.Combat
             if (floatingText == null)
                 return;
 
-            await floatingText.Popup(_cam, e.WorldPos, Math.Abs(e.Damage.Value).ToString());
+            await floatingText.Popup(_cam, e.WorldPos, Math.Abs(e.Damage.Value).ToString("0"));
             _damageTextPool.Release(floatingText);
         }
 
