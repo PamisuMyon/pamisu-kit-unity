@@ -64,7 +64,10 @@ namespace PamisuKit.Framework
                 Director = director;
                 Director.Setup(this);
                 if (Director.Mode == DirectorMode.Global)
+                {
+                    Director.transform.SetParent(transform);
                     SceneManager.sceneLoaded -= OnSceneLoaded;
+                }
             }
         }
 

@@ -7,12 +7,12 @@ namespace PamisuKit.Framework
 {
     public class MonoEntity : MonoBehaviour, IEntity
     {
-#if PAMISUKIT_ENTITY_AUTOSETUP_DEFAULT_OFF
-        [SerializeField]
-        protected bool AutoSetup = false;
-#else
+#if PAMISUKIT_ENTITY_AUTOSETUP_DEFAULT_ON
         [SerializeField]
         protected bool AutoSetup = true;
+#else
+        [SerializeField]
+        protected bool AutoSetup = false;
 #endif
 
         protected virtual bool AutoSetupOverride => AutoSetup;
