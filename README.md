@@ -13,16 +13,18 @@
   - [Benchmark - 基准测试](#benchmark---基准测试)
     - [自管理的Update](#自管理的update)
 - [开发套件](#开发套件)
+  - [安装](#安装)
   - [通用工具](#通用工具)
   - [Gameplay框架](#gameplay框架)
     - [开始上手](#开始上手)
+    - [框架结构](#框架结构)
     - [Director](#director)
     - [子系统](#子系统)
+    - [MonoEntity](#monoentity)
     - [事件总线集成](#事件总线集成)
-    - [自动Setup](#自动setup)
     - [服务定位器](#服务定位器)
+    - [区域暂停与倍速](#区域暂停与倍速)
     - [自管理的事件函数](#自管理的事件函数)
-    - [框架结构](#框架结构)
 
 # 示例项目
 ## [Droid Gear](./samples/DroidGear/)
@@ -37,7 +39,6 @@
 
 ## [Tiny Farm](./samples/TinyFarm/) (WIP)
 农场模拟。
-
 
 ## [Wizzywoods](./samples/Wizzywoods/) (WIP)
 回合制策略Rogue-like。
@@ -62,6 +63,13 @@ Last: 上一次所有物体Update执行总耗时
 Average: 所有物体Update执行平均耗时
 
 # 开发套件
+## 安装
+[UniTask](https://github.com/Cysharp/UniTask)是PamisuKit的唯一第三方依赖项，需要先安装它，可以通过[git URL](https://github.com/Cysharp/UniTask/?tab=readme-ov-file#install-via-git-url)方式安装，或通过[Unity Package](https://github.com/Cysharp/UniTask/releases/)方式安装。
+
+然后将[src/PamisuKit](./src/PamisuKit/)文件夹复制到项目的Packages文件夹下即可。
+
+> TODO 之后增加git URL与Unity Package安装方式
+
 ## [通用工具](./src/PamisuKit/Runtime/Common/)
 包含一些基础的工具实现。
 
@@ -82,7 +90,7 @@ Average: 所有物体Update执行平均耗时
 
 ### 开始上手
 
-首先创建一个类继承`AppDirector`，负责处理整个游戏层面的逻辑。
+首先创建一个类继承`AppDirector`，负责处理整个游戏层面的逻辑，整个游戏只会有一个`AppDirector`。
 
 **App.cs**
 
@@ -135,7 +143,7 @@ public class Player : MonoEntity, IUpdatable
     [SerializeField]
     private float _moveSpeed;
 
-    // 玩家被生成时执行
+    // Player被初始化时执行
     protected override void OnCreate()
     {
         base.OnCreate();
@@ -157,6 +165,44 @@ public class Player : MonoEntity, IUpdatable
 }
 ```
 
+`MonoEntity`需要初始化后才能工作，以下是几种初始化方式：
+
+**示例1 创建物体、挂载脚本并初始化**
+```C#
+public class CombatDirector : Director
+{
+    private void InitPlayer()
+    {
+        // 实例化玩家，将会创建一个名为Player的物体，挂载Player脚本，并执行其初始化
+        var player = Region.NewMonoEntity<Player>();
+    }
+}
+```
+
+**示例2 实例化预制体并初始化**
+```C#
+public class MonsterSpawner : MonoEntity
+{
+    [SerializeField]
+    private GameObject _monsterPrefab;
+
+    public void SpawnMonster()
+    {
+        // 实例化Monster预制体
+        var monster = Instantiate(_monsterPrefab, Trans).GetComponent<Monster>();
+        // 初始化
+        monster.Setup(Region);
+    }
+}
+```
+
+**示例3 勾选Auto Setup自动初始化**
+
+![](./docs/images/framework_autosetup_1.png)
+
+### 框架结构
+
+
 ### Director
 `Director`负责处理某个场景/玩法/游戏模式层面的逻辑，这类逻辑都可以放到其中。`Director`同时只能存在一个，场景中所有的`MonoEntity`都会注册到`Director`中，`MonoEntity`中可以使用`GetDirector`函数获取到当前`Director`：
 
@@ -173,8 +219,12 @@ public class Player : MonoEntity
 
 > `GetDirector`的开销非常小，不需要像`GetComponent`那样将结果保存为成员变量
 
+`Director`有两种模式，`Normal`和`Global`，可以在Inspector中设置。`Global`模式适合整个游戏只有一个Director存在的情况。
+
+场景加载后，场景中的第一个Director将被初始化。当一个模式为`Global`的Director被初始化后，它将成为App的子物体，不随场景切换而销毁（前提是App勾选了Dont Destroy On Load），之后再加载其他场景，其中的Director将不会被初始化。
+
 ### 子系统
-子系统负责处理全局的、或某个场景/玩法/游戏模式下特定功能模块的逻辑，例如存档系统、成就系统、物品与背包系统、商店系统等等。子系统必须通过`Director`或`AppDirector`来创建。
+子系统负责处理特定功能模块的逻辑，这个功能模块可以是全局的，也可以是特定游戏模式下的，例如存档系统、成就系统、物品与背包系统、商店系统等等。子系统必须通过`Director`或`AppDirector`来创建。
 
 编写一个子系统类，继承`MonoSystem`：
 
@@ -232,17 +282,127 @@ public class Player : MonoEntity
 
 > `MonoSystem`继承自`MonoEntity`
 
+如果一个子系统需要在整个游戏层面全局存在，可以将它放到`AppDirector`中创建。
+
+### MonoEntity
+`MonoEntity`是组成游戏世界的实体，Director和子系统之外的职责都可以交给`MonoEntity`实现。
+
+`MonoEntity`需要被包含在一个`Region`即“区域”内，关于`Region`下面会有详细介绍，这里只需要了解`Director`中会包含一个默认的`Region`，每个`MonoEntity`初始化时需要指定`Region`，初始化时传入的`Region`参数将会赋值给成员变量。
+
+```C#
+public class MonsterSpawner : MonoEntity
+{
+    [SerializeField]
+    private GameObject _monsterPrefab;
+
+    public void SpawnMonster()
+    {
+        // 实例化Monster预制体
+        var monster = Instantiate(_monsterPrefab, Trans).GetComponent<Monster>();
+        // 初始化
+        monster.Setup(Region);
+    }
+}
+```
+
+当在Inspector中勾选`Auto Setup`后，`MonoEntity`将会自动初始化：
+
+![](./docs/images/framework_autosetup_1.png)
+
+也可以在代码中覆写（优先使用此值）：
+
+```C#
+public class Player : MonoEntity
+{
+    protected override bool AutoSetupOverride => true;
+}
+```
+
+自动初始化将会寻找场景中第一个`Director`，调用它的相应函数来初始化自身，需要注意自动初始化将会让事件函数的执行回归无序，考虑到目前的使用场景，该选项默认不勾选（为false），可以在Project Settings -> Player -> Other Settings -> Scripting Define Symbols中添加`PAMISUKIT_ENTITY_AUTOSETUP_DEFAULT_ON`将其改为默认true。
+
+![](./docs/images/framework_autosetup_macro.png)
 
 ### 事件总线集成
 
-### 自动Setup
+通用工具中包含了一个[事件总线实现](./src/PamisuKit/Runtime/Common/EventBus.cs)，可以单独使用，下面是独立于Gameplay框架的用法：
 
-编写某个功能模块的逻辑层时，可以使用子系统
+```C#
+// 定义一个事件
+public struct GreetingEvent
+{
+    public string Message;
+}
+
+public class A : MonoBehaviour
+{
+    public void Foo()
+    {
+        // 发送事件
+        EventBus.Emit(new GreetingEvent { Message = "Hello!"});
+    }
+}
+
+public class B : MonoBehaviour
+{
+    private void Start()
+    {
+        // 订阅事件
+        EventBus.OnRaw<GreetingEvent>(OnGreeting);
+    }
+
+    private void OnDestroy()
+    {
+        // 取消订阅
+        EventBus.Off<GreetingEvent>(OnGreeting);
+    }
+
+    private void OnGreeting(GreetingEvent e)
+    {
+        Debug.Log($"Message: {e.Message}");
+    }
+}
+```
+
+事件总线在解耦合时非常有用，但需要记得取消订阅，否则容易出问题。Gameplay框架在`MonoEntity`中做了事件总线的集成，事件订阅会被自动管理，下面是基于Gameplay框架的用法：
+
+```C#
+// 定义一个事件
+public struct GreetingEvent
+{
+    public string Message;
+}
+
+public class A : MonoEntity
+{
+    public void Foo()
+    {
+        // 发送事件
+        Emit(new GreetingEvent { Message = "Hello!"});
+    }
+}
+
+public class B : MonoEntity
+{
+    protected override void OnCreate()
+    {
+        base.OnCreate();
+        // 订阅事件，无需手动取消订阅
+        On<GreetingEvent>(OnGreeting);
+    }
+
+    private void OnGreeting(GreetingEvent e)
+    {
+        Debug.Log($"Message: {e.Message}");
+    }
+}
+```
+
+当B销毁时，将会自动取消所有事件订阅，这个封装仅会在订阅事件时产生一个订阅对象的内存占用，大小可以忽略不计。
 
 ### 服务定位器
 上面通过了解`GetDirector`和`GetSystem`的使用可以发现，框架使用服务定位器模式替代了传统单例模式，与传统单例模式相比更加灵活和方便管理。
 
-如果游戏中存在无法划分到Director和子系统职责的类，但又需要有单例功能，此时可以将其注册成服务：
+如果游戏中存在无法划分到Director和子系统职责的类，但又需要有单例功能，可以将其注册成服务：
 
 ```C#
 using PamisuKit.Framework;
@@ -278,6 +438,9 @@ public class Player : MonoEntity
 }
 ```
 
+### 区域暂停与倍速
+
+
 ### 自管理的事件函数
 Unity原生的事件函数（Awake、Start、Update、FixedUpdate等）有一个痛点，它们默认是无序执行的，如果需要调整执行顺序，需要在Script Execution Order里手动设置。
 
@@ -310,7 +473,7 @@ public class CombatDirector : Director
         base.OnCreate();
         // 初始化战斗相关系统...
         // ...
-        // 生成玩家
+        // 实例化玩家
         var player = Region.NewMonoEntity<Player>();
     }
 }
@@ -332,7 +495,3 @@ public class Player : MonoEntity, IUpdatable
     }
 }
 ```
-
-### 框架结构
-
-// TODO
