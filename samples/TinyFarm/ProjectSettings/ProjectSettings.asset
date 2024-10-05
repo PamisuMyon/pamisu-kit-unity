@@ -47,7 +47,7 @@ PlayerSettings:
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
-  m_ActiveColorSpace: 1
+  m_ActiveColorSpace: 0
   unsupportedMSAAFallback: 0
   m_SpriteBatchVertexThreshold: 300
   m_MTRendering: 1
@@ -565,7 +565,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: LITMOTION_SUPPORT_UNITASK;PAMISUKIT_ENTITY_AUTOSETUP_DEFAULT_OFF
+    Standalone: LITMOTION_SUPPORT_UNITASK
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
