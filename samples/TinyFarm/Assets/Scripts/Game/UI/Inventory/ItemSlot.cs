@@ -1,4 +1,4 @@
-﻿using Game.Inventory;
+﻿using Game.Inventory.Models;
 using PamisuKit.Framework;
 using TMPro;
 using UnityEngine;
@@ -17,10 +17,15 @@ namespace Game.UI.Inventory
         public ItemContainer Container { get; internal set; }
         public int Index { get; internal set; }
 
-        public void SetItem(Item item)
+        public Item Item { get; internal set; }
+
+        public void UseItem()
         {
             
         }
-        
+
+        public void Refresh()
+        {
+        }
     }
 }
