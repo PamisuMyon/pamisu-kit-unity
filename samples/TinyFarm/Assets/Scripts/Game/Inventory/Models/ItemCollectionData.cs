@@ -15,6 +15,11 @@ namespace Game.Inventory.Models
         public void PostDeserialize()
         {
             Items ??= new List<Item>();
+
+            for (int i = 0; i < Items.Count; i++)
+            {
+                Items[i].PostDeserialize();
+            }
         }
     }
     

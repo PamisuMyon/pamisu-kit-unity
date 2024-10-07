@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using Game.Configs;
 using Game.Inventory.Models;
 using PamisuKit.Framework;

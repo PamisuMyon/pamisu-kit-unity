@@ -1,8 +1,18 @@
-﻿using PamisuKit.Framework;
+﻿using Game.Configs;
+using Game.Save;
+using PamisuKit.Framework;
 
 namespace Game
 {
     public class App : AppDirector<App>
     {
+        protected override void OnCreate()
+        {
+            CreateMonoSystem<ConfigSystem>();
+            CreateMonoSystem<SaveSystem>();
+            
+            base.OnCreate();
+        }
+        
     }
 }

@@ -1,14 +1,21 @@
 ﻿using System;
 using Game.Configs;
 using Game.Framework;
+using OdinSerializer;
+using UnityEngine;
 
 namespace Game.Inventory.Models
 {
     [Serializable]
     public class Item : ISerializee
     {
+        [OdinSerialize]
         public string Id { get; private set; }
+
+        [OdinSerialize]
+        private string _configId;
         public ItemConfig Config { get; private set; }
+        [OdinSerialize]
         public float Amount { get; private set; }
 
         public event Action<Item> Changed;
@@ -19,6 +26,7 @@ namespace Game.Inventory.Models
             var item = new Item
             {
                 Id = Guid.NewGuid().ToString(),
+                _configId = config.Id,
                 Config = config,
                 Amount = amount,
             };
@@ -31,6 +39,9 @@ namespace Game.Inventory.Models
 
         public void PostDeserialize()
         {
+            Config = App.Instance.GetSystem<ConfigSystem>().GetItemConfig(_configId);
+            if (Config == null)
+                Debug.LogError($"ItemConfig of Id {_configId} not found");
         }
         
     }

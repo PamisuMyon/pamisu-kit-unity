@@ -14,6 +14,8 @@ namespace Game.Save
 
         public void PostDeserialize()
         {
+            Inventory ??= new InventoryData();
+            
             Inventory.PostDeserialize();
         }
     }
