@@ -37,15 +37,5 @@ namespace PamisuKit.Framework
             return Director as TDirector;
         }
         
-        public TSystem GetSystem<TSystem>() where TSystem : class, ISystem
-        {
-            return Director.GetSystem<TSystem>();
-        }
-        
-        public ISystem GetSystem(Type type)
-        {
-            return Director.GetSystem(type);
-        }
-        
     }
 }

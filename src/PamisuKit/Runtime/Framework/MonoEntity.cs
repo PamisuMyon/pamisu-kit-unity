@@ -116,12 +116,32 @@ namespace PamisuKit.Framework
 
         public TSystem GetSystem<TSystem>() where TSystem : class, ISystem
         {
-            return Region.GetSystem<TSystem>();
+            return Region.Director.GetSystem<TSystem>();
         }
         
         public ISystem GetSystem(Type type)
         {
-            return Region.GetSystem(type);
+            return Region.Director.GetSystem(type);
+        }
+        
+        public void RegisterService<TService>(TService service) where TService : class
+        {
+            Region.Director.RegisterService(service);
+        }
+
+        public TService GetService<TService>() where TService : class
+        {
+            return Region.Director.GetService<TService>();
+        }
+
+        public bool RemoveService<TService>()
+        {
+            return Region.Director.RemoveService<TService>();
+        }
+
+        public bool RemoveService(object service)
+        {
+            return Region.Director.RemoveService(service);
         }
 
     }

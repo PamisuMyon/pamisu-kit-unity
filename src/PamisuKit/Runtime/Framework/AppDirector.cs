@@ -132,9 +132,9 @@ namespace PamisuKit.Framework
             return ServiceDict.Remove(typeof(TService));
         }
 
-        public bool RemoveService(object serivce)
+        public bool RemoveService(object service)
         {
-            return ServiceDict.Remove(serivce.GetType());
+            return ServiceDict.Remove(service.GetType());
         }
         
     }

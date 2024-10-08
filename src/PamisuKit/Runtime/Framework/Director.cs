@@ -62,6 +62,26 @@ namespace PamisuKit.Framework
             AppDirector.DestroySystem(system);
             Systems.Remove(system);
         }
+        
+        public void RegisterService<TService>(TService service) where TService : class
+        {
+            AppDirector.RegisterService(service);
+        }
+
+        public TService GetService<TService>() where TService : class
+        {
+            return AppDirector.GetService<TService>();
+        }
+
+        public bool RemoveService<TService>()
+        {
+            return AppDirector.RemoveService<TService>();
+        }
+
+        public bool RemoveService(object service)
+        {
+            return AppDirector.RemoveService(service);
+        }
 
         protected void OnDestroy()
         {
