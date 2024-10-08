@@ -13,6 +13,7 @@ namespace Game
         
         private Ticker _uiTicker;
         public Region UIRegion { get; private set; }
+        public GameUI GameUI => _gameUI;
         
         protected override void OnCreate()
         {

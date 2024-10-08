@@ -43,7 +43,8 @@ namespace Game.Inventory
 
         public void RemoveItem(Item item)
         {
-            
+            item.NotifyRemoving();
+            Items.Remove(item);
         }
 
     }

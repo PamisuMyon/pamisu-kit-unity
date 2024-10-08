@@ -72,6 +72,29 @@ namespace Game.UI.Inventory
                 };
             }
         }
+
+        public void RemoveItem(int index)
+        {
+            var slot = Slots[index];
+            _collection.RemoveItem(slot.Item);
+        }
+
+        public void StackOrSwap(ItemSlot from, ItemSlot to)
+        {
+            if (from == to)
+                return;
+            
+            if (from.Item.Config == to.Item.Config)
+            {
+                // TODO the max stack amount has not yet been considered
+                to.Item.ChangeAmount(from.Item.Amount);
+                RemoveItem(from.Index);
+            }
+            else
+            {
+                (to.Item, from.Item) = (from.Item, to.Item);
+            }
+        }
         
     }
 }

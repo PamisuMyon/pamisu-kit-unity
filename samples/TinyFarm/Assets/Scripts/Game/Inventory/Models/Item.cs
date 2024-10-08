@@ -43,6 +43,19 @@ namespace Game.Inventory.Models
             if (Config == null)
                 Debug.LogError($"ItemConfig of Id {_configId} not found");
         }
+
+        public void ChangeAmount(int delta)
+        {
+            Amount = Mathf.Max(0, delta);
+            Changed?.Invoke(this);
+        }
+
+        public void NotifyRemoving()
+        {
+            Changed = null;
+            Removing?.Invoke(this);
+            Removing = null;
+        }
         
     }
 }
