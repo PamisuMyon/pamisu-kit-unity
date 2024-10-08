@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 29959940278183077}
+  - component: {fileID: 4294526256973673254}
   m_Layer: 5
-  m_Name: ItemView
+  m_Name: ItemSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,6 +39,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 88, y: 88}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4294526256973673254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37236776313921399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b940df9aeb4e5bb67618e19e59e8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoSetup: 0
+  FrameImage: {fileID: 5978498582795605635}
+  FrameEmptySprite: {fileID: 633783998, guid: bc40a5981f986a14faffafa12717647d, type: 3}
+  FrameNormalSprite: {fileID: -284980224, guid: bc40a5981f986a14faffafa12717647d, type: 3}
+  IconImage: {fileID: 296606834828475344}
+  AmountBadge: {fileID: 8772375959429738601}
+  AmountLabel: {fileID: 2461546708170910591}
 --- !u!1 &145410109816128272
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,14 +116,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1419157251, guid: c7ed4b6ba27776c47bed3277b9292707, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -10,6 +10,12 @@ namespace Game.Configs
         [Header("Seed")]
         public GrowthPhase[] Phases;
         public int RegrowthTimes;
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            Type = ItemType.Seed;
+        }
     }
 
     [Serializable]

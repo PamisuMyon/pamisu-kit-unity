@@ -1,4 +1,5 @@
 ﻿using Game.Farm;
+using Game.Inventory;
 using Game.UI;
 using PamisuKit.Framework;
 using UnityEngine;
@@ -22,7 +23,8 @@ namespace Game
             _uiTicker = uiRegionGo.AddComponent<Ticker>();
             UIRegion = uiRegionGo.AddComponent<Region>();
             UIRegion.Init(_uiTicker, this);
-            
+
+            CreateMonoSystem<InventorySystem>();
             CreateMonoSystem<PatchSystem>();
             
             if (_gameUI != null)

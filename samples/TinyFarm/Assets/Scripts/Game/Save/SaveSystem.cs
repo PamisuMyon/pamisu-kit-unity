@@ -4,7 +4,6 @@ namespace Game.Save
 {
     public class SaveSystem : MonoSystem
     {
-        private const string SaveDirPath = "Save";
         
         public SaveData SaveData { get; private set; }
 

@@ -29,21 +29,22 @@ namespace Game.UI.Inventory
 
             for (int i = 0; i < _slots.Length; i++)
             {
+                _slots[i].Setup(Region);
                 _slots[i].Index = i;
                 _slots[i].Container = this;
             }
             Slots.AddRange(_slots);
 
             var items = _collection.Items;
-            var itemCount = items.Count;
-            if (itemCount > Slots.Count)
+            if (items.Count > Slots.Count)
+                Debug.LogError($"Not enough slots, expected {items.Count}, currently {Slots.Count}", Go);
+            
+            for (int i = 0; i < Slots.Count; i++)
             {
-                Debug.LogError($"Not enough slots, expected {itemCount}, currently {Slots.Count}", Go);
-                itemCount = Slots.Count;
-            }
-            for (int i = 0; i < itemCount; i++)
-            {
-                Slots[i].Item = items[i];
+                if (i < items.Count)
+                {
+                    Slots[i].Item = items[i];
+                }
                 Slots[i].Refresh();
             }
 

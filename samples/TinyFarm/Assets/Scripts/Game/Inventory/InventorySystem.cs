@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Game.Configs;
 using Game.Inventory.Models;
 using Game.Save;
 using PamisuKit.Framework;
@@ -20,6 +19,8 @@ namespace Game.Inventory
             base.OnCreate();
             _saveSystem = GetSystem<SaveSystem>();
 
+            if (_collections.Length == 0)
+                _collections = GetComponentsInChildren<ItemCollection>();
             for (int i = 0; i < _collections.Length; i++)
             {
                 _collections[i].Setup(Region);

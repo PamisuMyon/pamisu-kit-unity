@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4933eeea6e164096a3f2b32d23b19968, type: 3}
+  m_Name: Seed_Cauliflower
+  m_EditorClassIdentifier: 
+  Id: Seed_Cauliflower
+  Type: 1
+  Name: Cauliflower
+  Description: 
+  IconRef:
+    m_AssetGUID: 644999b4025051848987870b616e9b5b
+    m_SubObjectName: cauliflower_0
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 1
+  BuyPrice: 6
+  SellPrice: 3
+  Phases:
+  - SpriteRef:
+      m_AssetGUID: 644999b4025051848987870b616e9b5b
+      m_SubObjectName: cauliflower_1
+      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_EditorAssetChanged: 0
+    Duration: 2
+  - SpriteRef:
+      m_AssetGUID: 644999b4025051848987870b616e9b5b
+      m_SubObjectName: cauliflower_2
+      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_EditorAssetChanged: 0
+    Duration: 2
+  - SpriteRef:
+      m_AssetGUID: 644999b4025051848987870b616e9b5b
+      m_SubObjectName: cauliflower_3
+      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_EditorAssetChanged: 0
+    Duration: 2
+  - SpriteRef:
+      m_AssetGUID: 644999b4025051848987870b616e9b5b
+      m_SubObjectName: cauliflower_4
+      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_EditorAssetChanged: 0
+    Duration: 2
+  - SpriteRef:
+      m_AssetGUID: 644999b4025051848987870b616e9b5b
+      m_SubObjectName: cauliflower_6
+      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      m_EditorAssetChanged: 0
+    Duration: 2
+  RegrowthTimes: 3

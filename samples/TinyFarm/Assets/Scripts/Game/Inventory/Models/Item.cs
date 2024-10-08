@@ -16,7 +16,7 @@ namespace Game.Inventory.Models
         private string _configId;
         public ItemConfig Config { get; private set; }
         [OdinSerialize]
-        public float Amount { get; private set; }
+        public int Amount { get; private set; }
 
         public event Action<Item> Changed;
         public event Action<Item> Removing;

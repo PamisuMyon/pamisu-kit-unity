@@ -14,7 +14,7 @@ namespace Game.Configs
         public float BuyPrice;
         public float SellPrice;
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             if (string.IsNullOrEmpty(Id))
                 Id = name;
