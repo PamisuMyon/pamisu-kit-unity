@@ -52,12 +52,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoSetup: 0
+  Draggable: 1
   FrameImage: {fileID: 5978498582795605635}
   FrameEmptySprite: {fileID: 633783998, guid: bc40a5981f986a14faffafa12717647d, type: 3}
   FrameNormalSprite: {fileID: -284980224, guid: bc40a5981f986a14faffafa12717647d, type: 3}
   IconImage: {fileID: 296606834828475344}
   AmountBadge: {fileID: 8772375959429738601}
   AmountLabel: {fileID: 2461546708170910591}
+  DragDummyPrefab: {fileID: 3849008402381529771, guid: 658f4522a9eafd444b8853526a368ca4, type: 3}
 --- !u!1 &145410109816128272
 GameObject:
   m_ObjectHideFlags: 0

@@ -1872,6 +1872,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483272341}
   m_CullTransparentMesh: 1
+--- !u!1 &490735676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 490735677}
+  - component: {fileID: 490735678}
+  m_Layer: 5
+  m_Name: ClickDragHelper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &490735677
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490735676}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1588243917}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &490735678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490735676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a42aec2797547a3ac38ff424efc1879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoSetup: 0
+  _cursorOffset: {x: 0, y: 0}
+  _uiCam: {fileID: 519420031}
+  _rootRectTrans: {fileID: 490735677}
 --- !u!1 &505496746
 GameObject:
   m_ObjectHideFlags: 0
@@ -5147,6 +5199,7 @@ RectTransform:
   m_Children:
   - {fileID: 1935299289}
   - {fileID: 1737772698}
+  - {fileID: 490735677}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5170,7 +5223,8 @@ MonoBehaviour:
   _windowsPanel: {fileID: 1737772698}
   _containers:
   - {fileID: 329463286}
-  _dragHelper: {fileID: 0}
+  _dragHelper: {fileID: 490735678}
+  UICam: {fileID: 0}
 --- !u!1 &1596614006
 GameObject:
   m_ObjectHideFlags: 0

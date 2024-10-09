@@ -84,7 +84,8 @@ namespace Game.UI.Inventory
             if (from == to)
                 return;
             
-            if (from.Item.Config == to.Item.Config)
+            if (from.Item != null && to.Item != null
+                && from.Item.Config == to.Item.Config)
             {
                 // TODO the max stack amount has not yet been considered
                 to.Item.ChangeAmount(from.Item.Amount);
@@ -93,6 +94,8 @@ namespace Game.UI.Inventory
             else
             {
                 (to.Item, from.Item) = (from.Item, to.Item);
+                from.Refresh();
+                to.Refresh();
             }
         }
         

@@ -10,8 +10,7 @@ using UnityEngine.UI;
 
 namespace Game.UI.Inventory
 {
-    public class ItemSlot : MonoEntity,
-        IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+    public class ItemSlot : MonoEntity, IPointerDownHandler
     {
         [SerializeField]
         protected bool Draggable = true;
@@ -105,52 +104,36 @@ namespace Game.UI.Inventory
 
         #region Drag and drop
 
-        public bool CanDrag()
+        public void OnPointerDown(PointerEventData eventData)
         {
-            return Draggable && Item != null;
-        }
-        
-        public void OnBeginDrag(PointerEventData eventData)
-        {
-            if (!CanDrag())
+            if (!Draggable)
                 return;
             
-            var gameUI = GetService<GameUI>();
-            var dummy = gameUI.Pooler.Spawn<ItemDragDummy>(DragDummyPrefab);
-            dummy.Setup(Region);
-            dummy.SetData(gameUI.Pooler, this);
-            
-            // Offset
-            var cursorPos = GetSystem<InputSystem>().Actions.Game.CursorPosition.ReadValue<Vector2>();
-            var cursorWorldPos = gameUI.UICam.ScreenToWorldPoint(cursorPos);
-            var offset = _rectTrans.position - cursorWorldPos;
-            offset.z = 0f;
-
-            var dragHelper = GetService<DragHelper>();
-            dragHelper.BeginDrag(dummy, offset);
-        }
-
-        public void OnDrag(PointerEventData eventData)
-        {
-        }
-
-        public void OnEndDrag(PointerEventData eventData)
-        {
-            // TODO Drag to world
-            
-        }
-        
-        public void OnDrop(PointerEventData eventData)
-        {
-            var dragHelper = GetService<DragHelper>();
-            if (!CanDrag()
-                || dragHelper.DragDummy is not ItemDragDummy dummy
-                || dummy.Slot == this)
+            var dragHelper = GetService<ClickDragHelper>();
+            if (dragHelper.IsDragging)
             {
+                if (dragHelper.DragDummy is ItemDragDummy dummy 
+                    && dummy.Slot != this)
+                {
+                    Container.StackOrSwap(dummy.Slot, this);
+                }
                 dragHelper.EndDrag();
-                return;
             }
+            else if (Item != null)
+            {
+                var gameUI = GetService<GameUI>();
+                var dummy = gameUI.Pooler.Spawn<ItemDragDummy>(DragDummyPrefab);
+                dummy.Setup(Region);
+                dummy.SetData(gameUI.Pooler, this);
             
+                // Offset
+                // var cursorPos = GetSystem<InputSystem>().Actions.Game.CursorPosition.ReadValue<Vector2>();
+                // var cursorWorldPos = gameUI.UICam.ScreenToWorldPoint(cursorPos);
+                // var offset = _rectTrans.position - cursorWorldPos;
+                // offset.z = 0f;
+
+                dragHelper.BeginDrag(dummy);
+            }
         }
 
         #endregion

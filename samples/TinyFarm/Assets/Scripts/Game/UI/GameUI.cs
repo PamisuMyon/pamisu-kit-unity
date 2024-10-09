@@ -14,7 +14,7 @@ namespace Game.UI
         private ItemContainer[] _containers;
 
         [SerializeField]
-        private DragHelper _dragHelper;
+        private ClickDragHelper _dragHelper;
 
         private Canvas _canvas;
         
@@ -26,8 +26,9 @@ namespace Game.UI
             base.OnCreate();
             _canvas = GetComponent<Canvas>();
             UICam = _canvas.worldCamera;
-
             Pooler = new MonoPooler(Trans);
+
+            RegisterService(this);
             
             _dragHelper.Setup(Region);
             
@@ -36,6 +37,12 @@ namespace Game.UI
             {
                 _containers[i].Setup(Region);
             }
+        }
+
+        protected override void OnSelfDestroy()
+        {
+            base.OnSelfDestroy();
+            RemoveService(this);
         }
         
     }

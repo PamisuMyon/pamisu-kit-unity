@@ -37,6 +37,24 @@ namespace Game.Inputs
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CursorConfirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""84fc90de-f56e-4795-aaa6-a8bf2fdaca28"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CursorCancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""53c72e68-2310-4d99-b1dc-f38583412b04"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -50,6 +68,28 @@ namespace Game.Inputs
                     ""action"": ""CursorPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e52601e-7969-4a5d-9145-2117c7e273c6"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CursorConfirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f08709f-f32e-4d13-a20b-01d5a359a79f"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CursorCancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -59,6 +99,8 @@ namespace Game.Inputs
             // Game
             m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
             m_Game_CursorPosition = m_Game.FindAction("CursorPosition", throwIfNotFound: true);
+            m_Game_CursorConfirm = m_Game.FindAction("CursorConfirm", throwIfNotFound: true);
+            m_Game_CursorCancel = m_Game.FindAction("CursorCancel", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -121,11 +163,15 @@ namespace Game.Inputs
         private readonly InputActionMap m_Game;
         private List<IGameActions> m_GameActionsCallbackInterfaces = new List<IGameActions>();
         private readonly InputAction m_Game_CursorPosition;
+        private readonly InputAction m_Game_CursorConfirm;
+        private readonly InputAction m_Game_CursorCancel;
         public struct GameActions
         {
             private @DefaultInputActions m_Wrapper;
             public GameActions(@DefaultInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @CursorPosition => m_Wrapper.m_Game_CursorPosition;
+            public InputAction @CursorConfirm => m_Wrapper.m_Game_CursorConfirm;
+            public InputAction @CursorCancel => m_Wrapper.m_Game_CursorCancel;
             public InputActionMap Get() { return m_Wrapper.m_Game; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -138,6 +184,12 @@ namespace Game.Inputs
                 @CursorPosition.started += instance.OnCursorPosition;
                 @CursorPosition.performed += instance.OnCursorPosition;
                 @CursorPosition.canceled += instance.OnCursorPosition;
+                @CursorConfirm.started += instance.OnCursorConfirm;
+                @CursorConfirm.performed += instance.OnCursorConfirm;
+                @CursorConfirm.canceled += instance.OnCursorConfirm;
+                @CursorCancel.started += instance.OnCursorCancel;
+                @CursorCancel.performed += instance.OnCursorCancel;
+                @CursorCancel.canceled += instance.OnCursorCancel;
             }
 
             private void UnregisterCallbacks(IGameActions instance)
@@ -145,6 +197,12 @@ namespace Game.Inputs
                 @CursorPosition.started -= instance.OnCursorPosition;
                 @CursorPosition.performed -= instance.OnCursorPosition;
                 @CursorPosition.canceled -= instance.OnCursorPosition;
+                @CursorConfirm.started -= instance.OnCursorConfirm;
+                @CursorConfirm.performed -= instance.OnCursorConfirm;
+                @CursorConfirm.canceled -= instance.OnCursorConfirm;
+                @CursorCancel.started -= instance.OnCursorCancel;
+                @CursorCancel.performed -= instance.OnCursorCancel;
+                @CursorCancel.canceled -= instance.OnCursorCancel;
             }
 
             public void RemoveCallbacks(IGameActions instance)
@@ -165,6 +223,8 @@ namespace Game.Inputs
         public interface IGameActions
         {
             void OnCursorPosition(InputAction.CallbackContext context);
+            void OnCursorConfirm(InputAction.CallbackContext context);
+            void OnCursorCancel(InputAction.CallbackContext context);
         }
     }
 }
