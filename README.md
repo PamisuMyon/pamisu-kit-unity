@@ -48,6 +48,8 @@
 [🔗](./samples/LubanExample/) [配置工具Luban](https://luban.doc.code-philosophy.com/)使用示例。
 ![](./docs/images/luban_example.png)
 
+\_\_tables\_\_.xlsx 一键更新工具: [luban-helper](https://github.com/PamisuMyon/luban-helper)
+
 ## Benchmark - 基准测试
 [🔗](./samples/Benchmark/)一些针对套件的基准测试。
 
@@ -411,30 +413,30 @@ using PamisuKit.Framework;
 
 public class SomeService : MonoEntity
 {
-    // 创建时注册
     protected override void OnCreate()
     {
         base.OnCreate();
-        GetDirector<Director>().AppDirector.RegisterService(this);
+        // 创建时注册
+        RegisterService(this);
     }
-
-    // 销毁时移除
+    
     protected override void OnSelfDestroy()
     {
         base.OnSelfDestroy();
-        GetDirector<Director>().AppDirector.RemoveService(this);
+        // 销毁时移除
+        RemoveService(this);
     }
 }
 ```
 
-在`MonoEntity`中，使用AppDirector的`GetService`来获取指定服务：
+在`MonoEntity`中，使用`GetService`来获取指定服务：
 
 ```C#
 public class Player : MonoEntity
 {
     public void Bar()
     {
-        var service = GetDirector<Director>().AppDirector.GetService<SomeService>();
+        var service = GetService<SomeService>();
         // ...
     }
 }
