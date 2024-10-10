@@ -42,6 +42,8 @@ namespace Game.Framework
 
             On<ReqPlayerControlStateReset>(OnReqPlayerControlStateReset);
             On<ReqPlayerControlEnterPlantState>(ReqPlayerControlEnterPlantState);
+
+            State = PlayerControlState.Normal;
         }
 
         protected override void OnSelfDestroy()
@@ -120,6 +122,7 @@ namespace Game.Framework
 
     public enum PlayerControlState
     {
+        Disabled,
         Normal,
         Plant,
         Shovel,

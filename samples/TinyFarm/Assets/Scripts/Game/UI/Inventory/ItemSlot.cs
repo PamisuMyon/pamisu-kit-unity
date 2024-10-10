@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using Game.Inventory.Models;
 using PamisuKit.Common.Util;
 using PamisuKit.Framework;
@@ -58,8 +59,11 @@ namespace Game.UI.Inventory
                     _item.Changed += OnItemChanged;
                     _item.Removing += OnItemRemoving;
                 }
+                Changed?.Invoke(this);
             }
         }
+
+        public event Action<ItemSlot> Changed; 
 
         protected override void OnCreate()
         {
@@ -75,6 +79,7 @@ namespace Game.UI.Inventory
         private void OnItemRemoving(Item item)
         {
             _item = null;
+            Changed?.Invoke(this);
             Refresh();
         }
 

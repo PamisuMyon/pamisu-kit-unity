@@ -75,6 +75,7 @@ namespace Game.UI
         {
             DragDummy = dragDummy;
             DragDummy.Trans.SetParent(Trans);
+            DragDummy.OnBeginDrag();
             IsDragging = true;
         }
 

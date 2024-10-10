@@ -1,5 +1,7 @@
-﻿using Game.Framework;
+﻿using Game.Configs;
+using Game.Framework;
 using Game.Inventory.Models;
+using UnityEngine;
 
 namespace Game.Farm
 {
@@ -15,7 +17,13 @@ namespace Game.Farm
 
         public void Plant(Item plantItem)
         {
+            if (plantItem.Config is not SeedConfig seedConfig)
+            {
+                Debug.LogError($"Plot plant item SeedConfig expected, got {plantItem.Config.GetType()}", Go);
+                return;
+            }
             
+            plantItem.ChangeAmount(-1);
         }
         
     }

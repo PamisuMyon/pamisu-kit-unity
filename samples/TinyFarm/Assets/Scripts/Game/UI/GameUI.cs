@@ -29,7 +29,8 @@ namespace Game.UI
         {
             base.OnCreate();
             _canvas = GetComponent<Canvas>();
-            UICam = _canvas.worldCamera;
+            if (UICam == null)
+                UICam = _canvas.worldCamera;
             Pooler = new MonoPooler(Trans);
 
             RegisterService(this);

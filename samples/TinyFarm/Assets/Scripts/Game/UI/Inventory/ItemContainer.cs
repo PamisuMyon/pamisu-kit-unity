@@ -3,17 +3,14 @@ using Game.Inventory;
 using Game.Inventory.Models;
 using PamisuKit.Framework;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.UI.Inventory
 {
     public class ItemContainer : MonoEntity
     {
-        [FormerlySerializedAs("_slots")]
         [SerializeField]
         protected ItemSlot[] InitSlots;
 
-        [FormerlySerializedAs("_collection")]
         [SerializeField]
         protected ItemCollection Collection;
 
@@ -38,26 +35,54 @@ namespace Game.UI.Inventory
             }
             Slots.AddRange(InitSlots);
 
-            var items = Collection.Items;
-            if (items.Count > Slots.Count)
-                Debug.LogError($"Not enough slots, expected {items.Count}, currently {Slots.Count}", Go);
-            
-            for (int i = 0; i < Slots.Count; i++)
-            {
-                if (i < items.Count)
-                {
-                    Slots[i].Item = items[i];
-                }
-                Slots[i].Refresh();
-            }
-
             Inventory = GetSystem<InventorySystem>();
             var data = Inventory.GetContainerData(Id);
             if (data == null)
             {
                 Inventory.CreateContainerData(Id);
+                var items = Collection.Items;
+                if (items.Count > Slots.Count)
+                    Debug.LogError($"Not enough slots, expected {items.Count}, currently {Slots.Count}", Go);
+                // TODO auto generate slots
+            
+                for (int i = 0; i < Slots.Count; i++)
+                {
+                    if (i < items.Count)
+                    {
+                        Slots[i].Item = items[i];
+                    }
+                    Slots[i].Refresh();
+                }
+                UpdateContainerData();
             }
-            UpdateContainerData();
+            else
+            {
+                // TODO from save
+            }
+            
+            for (int i = 0; i < Slots.Count; i++)
+            {
+                Slots[i].Changed += OnSlotChanged;
+            }
+        }
+
+        private void OnSlotChanged(ItemSlot slot)
+        {
+            var data = Data;
+            if (slot.Item == null)
+            {
+                if (data.SlotDataDict.ContainsKey(slot.Index))
+                    data.SlotDataDict.Remove(slot.Index);
+            }
+            else
+            {
+                if (!data.SlotDataDict.TryGetValue(slot.Index, out var slotData))
+                {
+                    data.SlotDataDict[slot.Index] = slotData = new ItemSlotData();
+                }
+                slotData.Index = slot.Index;
+                slotData.ItemId = slot.Item.Id;
+            }
         }
 
         private void UpdateContainerData()

@@ -11,13 +11,13 @@ namespace Game.Inventory.Models
     {
         [OdinSerialize]
         public string Id { get; private set; }
-
         [OdinSerialize]
         private string _configId;
         public ItemConfig Config { get; private set; }
         [OdinSerialize]
         public int Amount { get; private set; }
-
+        public ItemCollection Collection { get; internal set; }
+        
         public event Action<Item> Changed;
         public event Action<Item> Removing;
 
@@ -46,7 +46,12 @@ namespace Game.Inventory.Models
 
         public void ChangeAmount(int delta)
         {
-            Amount = Mathf.Max(0, delta);
+            Amount = Mathf.Max(0, Amount + delta);
+            if (Amount == 0)
+            {
+                Collection.RemoveItem(this);
+                return;
+            }
             Changed?.Invoke(this);
         }
 

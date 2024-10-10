@@ -18,7 +18,7 @@ namespace Game.UI.Inventory
 
         public ItemSlot Slot { get; private set; }
         
-        public void SetData(MonoPooler pooler, ItemSlot slot)
+        public virtual void SetData(MonoPooler pooler, ItemSlot slot)
         {
             Pooler = pooler;
             Slot = slot;
