@@ -27,7 +27,7 @@ namespace Game.UI
         {
             base.OnCreate();
             _inputSystem = GetSystem<InputSystem>();
-            _inputSystem.Actions.Game.CursorConfirm.performed += OnCursorConfirmPerformed;
+            // _inputSystem.Actions.Game.CursorConfirm.performed += OnCursorConfirmPerformed;
             _inputSystem.Actions.Game.CursorCancel.performed += OnCursorCancelPerformed;
             
             RegisterService(this);
@@ -40,7 +40,7 @@ namespace Game.UI
 
             if (_inputSystem != null)
             {
-                _inputSystem.Actions.Game.CursorConfirm.performed -= OnCursorConfirmPerformed;
+                // _inputSystem.Actions.Game.CursorConfirm.performed -= OnCursorConfirmPerformed;
                 _inputSystem.Actions.Game.CursorCancel.performed -= OnCursorCancelPerformed;
             }
         }
@@ -58,10 +58,11 @@ namespace Game.UI
             DragDummy.Trans.position = cursorWorldPos + _dragOffset;
         }
         
-        private void OnCursorConfirmPerformed(InputAction.CallbackContext c)
-        {
-            
-        }
+        // private void OnCursorConfirmPerformed(InputAction.CallbackContext c)
+        // {
+        //     if (!EventSystem.current.IsPointerOverGameObject())
+        //         return;
+        // }
         
         private void OnCursorCancelPerformed(InputAction.CallbackContext c)
         {

@@ -3,39 +3,42 @@ using Game.Inventory;
 using Game.Inventory.Models;
 using PamisuKit.Framework;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.UI.Inventory
 {
     public class ItemContainer : MonoEntity
     {
+        [FormerlySerializedAs("_slots")]
         [SerializeField]
-        private ItemSlot[] _slots;
+        protected ItemSlot[] InitSlots;
 
+        [FormerlySerializedAs("_collection")]
         [SerializeField]
-        private ItemCollection _collection;
+        protected ItemCollection Collection;
 
-        private InventorySystem _inventorySystem;
+        protected InventorySystem Inventory;
         
         public string Id { get; private set; }
         public List<ItemSlot> Slots { get; } = new();
-        public ItemContainerData Data => _inventorySystem.GetContainerData(Id);
+        public ItemContainerData Data => Inventory.GetContainerData(Id);
 
         protected override void OnCreate()
         {
             base.OnCreate();
-            Debug.Assert(_collection, "ItemCollection can't be null.");
+            Debug.Assert(Collection, "ItemCollection can't be null.");
 
             Id = Go.name;
 
-            for (int i = 0; i < _slots.Length; i++)
+            for (int i = 0; i < InitSlots.Length; i++)
             {
-                _slots[i].Setup(Region);
-                _slots[i].Index = i;
-                _slots[i].Container = this;
+                InitSlots[i].Setup(Region);
+                InitSlots[i].Index = i;
+                InitSlots[i].Container = this;
             }
-            Slots.AddRange(_slots);
+            Slots.AddRange(InitSlots);
 
-            var items = _collection.Items;
+            var items = Collection.Items;
             if (items.Count > Slots.Count)
                 Debug.LogError($"Not enough slots, expected {items.Count}, currently {Slots.Count}", Go);
             
@@ -48,11 +51,11 @@ namespace Game.UI.Inventory
                 Slots[i].Refresh();
             }
 
-            _inventorySystem = GetSystem<InventorySystem>();
-            var data = _inventorySystem.GetContainerData(Id);
+            Inventory = GetSystem<InventorySystem>();
+            var data = Inventory.GetContainerData(Id);
             if (data == null)
             {
-                _inventorySystem.CreateContainerData(Id);
+                Inventory.CreateContainerData(Id);
             }
             UpdateContainerData();
         }
@@ -76,7 +79,7 @@ namespace Game.UI.Inventory
         public void RemoveItem(int index)
         {
             var slot = Slots[index];
-            _collection.RemoveItem(slot.Item);
+            Collection.RemoveItem(slot.Item);
         }
 
         public void StackOrSwap(ItemSlot from, ItemSlot to)

@@ -1,4 +1,5 @@
-﻿using Game.UI.Inventory;
+﻿using Game.UI.Hud;
+using Game.UI.Inventory;
 using PamisuKit.Common.Pool;
 using PamisuKit.Framework;
 using UnityEngine;
@@ -7,6 +8,9 @@ namespace Game.UI
 {
     public class GameUI : MonoEntity
     {
+        [SerializeField]
+        private HudView _hud;
+        
         [SerializeField]
         private RectTransform _windowsPanel;
 
@@ -30,8 +34,8 @@ namespace Game.UI
 
             RegisterService(this);
             
+            _hud.Setup(Region);
             _dragHelper.Setup(Region);
-            
             // TODO TEMP
             for (int i = 0; i < _containers.Length; i++)
             {

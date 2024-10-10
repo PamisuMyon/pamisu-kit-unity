@@ -40,6 +40,8 @@ namespace Game.Framework
 
         public void Attach(Unit unit)
         {
+            if (AttachedUnit == unit)
+                return;
             FitToUnit(unit);
             IsAttached = true;
             AttachedUnit = unit;

@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using Game.Inputs;
 using Game.Inventory.Models;
 using PamisuKit.Common.Util;
 using PamisuKit.Framework;

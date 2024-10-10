@@ -46,8 +46,9 @@ namespace Game.Farm
             var centerPos = new Vector3((maxPos.x - minPos.x) / 2f, (maxPos.y - minPos.y) / 2f, 0f);
             Trans.position = centerPos;
 
-            _collider = Go.AddComponent<BoxCollider2D>();
-            _collider.size = VisualSize;
+            // _collider = Go.AddComponent<BoxCollider2D>();
+            // _collider.size = VisualSize;
+            // Go.layer = LayerMask.NameToLayer("Unit");
         }
         
     }

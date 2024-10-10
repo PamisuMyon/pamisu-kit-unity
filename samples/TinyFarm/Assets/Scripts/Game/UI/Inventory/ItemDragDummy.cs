@@ -3,29 +3,35 @@ using PamisuKit.Common.Pool;
 using PamisuKit.Common.Util;
 using PamisuKit.Framework;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Game.UI.Inventory
 {
     public class ItemDragDummy : MonoEntity, IDragDummy, IPoolElement
     {
+        [FormerlySerializedAs("_iconImage")]
         [SerializeField]
-        private Image _iconImage;
+        protected Image IconImage;
         
-        private MonoPooler _pooler;
+        protected MonoPooler Pooler;
 
         public ItemSlot Slot { get; private set; }
         
         public void SetData(MonoPooler pooler, ItemSlot slot)
         {
-            _pooler = pooler;
+            Pooler = pooler;
             Slot = slot;
-            _iconImage.LoadSprite(slot.Item.Config.IconRef).Forget();
+            IconImage.LoadSprite(slot.Item.Config.IconRef).Forget();
         }
-        
-        public void OnEndDrag()
+
+        public virtual void OnBeginDrag()
         {
-            _pooler.Release(this);
+        }
+
+        public virtual void OnEndDrag()
+        {
+            Pooler.Release(this);
         }
 
         public void OnSpawnFromPool()

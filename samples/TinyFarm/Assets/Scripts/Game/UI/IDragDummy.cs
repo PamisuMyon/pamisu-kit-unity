@@ -6,6 +6,8 @@ namespace Game.UI
     {
         Transform Trans { get; }
 
+        void OnBeginDrag();
+        
         void OnEndDrag();
     }
 }
