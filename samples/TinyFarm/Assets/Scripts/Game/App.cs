@@ -1,4 +1,5 @@
-﻿using Game.Configs;
+﻿using Cysharp.Threading.Tasks;
+using Game.Configs;
 using Game.Inputs;
 using Game.Save;
 using PamisuKit.Framework;
@@ -12,6 +13,13 @@ namespace Game
             CreateMonoSystem<InputSystem>();
             CreateMonoSystem<ConfigSystem>();
             CreateMonoSystem<SaveSystem>();
+            
+            Init().Forget();
+        }
+
+        private async UniTaskVoid Init()
+        {
+            await GetSystem<SaveSystem>().Init();
             
             base.OnCreate();
         }

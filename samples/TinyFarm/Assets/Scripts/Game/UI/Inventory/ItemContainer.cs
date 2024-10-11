@@ -35,69 +35,82 @@ namespace Game.UI.Inventory
             }
             Slots.AddRange(InitSlots);
 
+            var items = Collection.Items;
+            if (items.Count > Slots.Count)
+                Debug.LogError($"Not enough slots, expected {items.Count}, currently {Slots.Count}", Go);
+            // TODO auto generate slots
+            
             Inventory = GetSystem<InventorySystem>();
             var data = Inventory.GetContainerData(Id);
             if (data == null)
             {
-                Inventory.CreateContainerData(Id);
-                var items = Collection.Items;
-                if (items.Count > Slots.Count)
-                    Debug.LogError($"Not enough slots, expected {items.Count}, currently {Slots.Count}", Go);
-                // TODO auto generate slots
-            
+                data = Inventory.CreateContainerData(Id);
                 for (int i = 0; i < Slots.Count; i++)
                 {
                     if (i < items.Count)
                     {
                         Slots[i].Item = items[i];
                     }
-                    Slots[i].Refresh();
                 }
-                UpdateContainerData();
             }
             else
             {
-                // TODO from save
+                for (int i = 0, j = 0; i < items.Count; i++)
+                {
+                    // Put item in the corresponding slot if it's recorded in the dict
+                    if (data.ItemSlotDict.TryGetValue(items[i].Id, out int index)
+                        && index < Slots.Count)
+                    {
+                        Slots[index].Item = items[i];
+                    }
+                    else
+                    {
+                        // otherwise put it in a spare slot
+                        Debug.Log($"Item {items[i]} slot index not recorded, finding a spare slot...", Go);
+                        for (; j < Slots.Count && data.ItemSlotDict.ContainsValue(j); j++)
+                        {
+                        }
+                        if (j >= Slots.Count)
+                        {
+                            Debug.LogError($"No spare slot found for item {items[i]}", Go);
+                            break;
+                        }
+                        Slots[j].Item = items[i];
+                        j++;
+                    }
+                }
             }
+            UpdateContainerData();
             
             for (int i = 0; i < Slots.Count; i++)
             {
+                Slots[i].Refresh();
                 Slots[i].Changed += OnSlotChanged;
             }
         }
 
-        private void OnSlotChanged(ItemSlot slot)
+        private void OnSlotChanged(ItemSlot slot, Item oldItem, Item newItem)
         {
             var data = Data;
-            if (slot.Item == null)
+            if (oldItem != null)
             {
-                if (data.SlotDataDict.ContainsKey(slot.Index))
-                    data.SlotDataDict.Remove(slot.Index);
+                data.ItemSlotDict.Remove(oldItem.Id);
             }
-            else
+            if (newItem != null)
             {
-                if (!data.SlotDataDict.TryGetValue(slot.Index, out var slotData))
-                {
-                    data.SlotDataDict[slot.Index] = slotData = new ItemSlotData();
-                }
-                slotData.Index = slot.Index;
-                slotData.ItemId = slot.Item.Id;
+                data.ItemSlotDict[newItem.Id] = slot.Index;
             }
         }
 
         private void UpdateContainerData()
         {
             var data = Data;
-            data.SlotDataDict.Clear();
+            data.ItemSlotDict.Clear();
             for (int i = 0; i < Slots.Count; i++)
             {
                 if (Slots[i].Item == null)
                     continue;
-                data.SlotDataDict[i] = new ItemSlotData
-                {
-                    Index = i,
-                    ItemId = Slots[i].Item.Id
-                };
+                data.ItemSlotDict[Slots[i].Item.Id] = i;
             }
         }
 

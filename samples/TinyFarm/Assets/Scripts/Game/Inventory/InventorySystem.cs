@@ -53,7 +53,7 @@ namespace Game.Inventory
             var data = new ItemContainerData
             {
                 Id = id,
-                SlotDataDict = new Dictionary<int, ItemSlotData>(),
+                ItemSlotDict = new Dictionary<string, int>()
             };
             _saveSystem.SaveData.Inventory.ContainerDataDict[id] = data;
             return data;

@@ -6,7 +6,7 @@ namespace Game.Inventory.Models
     public class ItemContainerData : ISerializee
     {
         public string Id;
-        public Dictionary<int, ItemSlotData> SlotDataDict;
+        public Dictionary<string, int> ItemSlotDict;
         
         public void PreSerialize()
         {
@@ -14,7 +14,7 @@ namespace Game.Inventory.Models
 
         public void PostDeserialize()
         {
-            SlotDataDict ??= new Dictionary<int, ItemSlotData>();
+            ItemSlotDict ??= new Dictionary<string, int>();
         }
         
     }

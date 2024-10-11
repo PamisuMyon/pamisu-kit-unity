@@ -34,10 +34,6 @@ namespace Game.Inventory
                     data.Items.Add(item);
                 }
             }
-            else
-            {
-                // TODO From save
-            }
 
             for (int i = 0; i < data.Items.Count; i++)
             {
@@ -47,7 +43,7 @@ namespace Game.Inventory
 
         public void AddItem(Item item)
         {
-            
+            // TODO
         }
 
         public void RemoveItem(Item item)

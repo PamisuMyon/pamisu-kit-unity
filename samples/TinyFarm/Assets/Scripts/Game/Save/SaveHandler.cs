@@ -8,9 +8,10 @@ namespace Game.Save
 {
     public class SaveHandler
     {
-        // private const DataFormat SerializeFormat = DataFormat.JSON;
-        private const DataFormat SerializeFormat = DataFormat.Binary;
-        private const string FileExtension = ".awesometinyfarmdat";
+        private const DataFormat SerializeFormat = DataFormat.JSON; // debug only
+        // private const DataFormat SerializeFormat = DataFormat.Binary;
+        private const string FileExtension = ".json";
+        // private const string FileExtension = ".awesometinyfarmdat";
         
         public string RootPath { get; private set; }
 
@@ -29,7 +30,7 @@ namespace Game.Save
             return sb;
         }
         
-        public async UniTaskVoid Save<T>(T data)
+        public async UniTask Save<T>(T data)
         {
             var bytes = SerializationUtility.SerializeValue(data, SerializeFormat);
             var name = typeof(T).Name;

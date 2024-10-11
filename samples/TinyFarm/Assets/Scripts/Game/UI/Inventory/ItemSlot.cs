@@ -48,6 +48,7 @@ namespace Game.UI.Inventory
             get => _item;
             set
             {
+                var oldItem = _item;
                 if (_item != null)
                 {
                     _item.Changed -= OnItemChanged;
@@ -59,11 +60,11 @@ namespace Game.UI.Inventory
                     _item.Changed += OnItemChanged;
                     _item.Removing += OnItemRemoving;
                 }
-                Changed?.Invoke(this);
+                Changed?.Invoke(this, oldItem, _item);
             }
         }
 
-        public event Action<ItemSlot> Changed; 
+        public event Action<ItemSlot, Item, Item> Changed; 
 
         protected override void OnCreate()
         {
@@ -78,8 +79,9 @@ namespace Game.UI.Inventory
         
         private void OnItemRemoving(Item item)
         {
+            var oldItem = _item;
             _item = null;
-            Changed?.Invoke(this);
+            Changed?.Invoke(this, oldItem, null);
             Refresh();
         }
 
