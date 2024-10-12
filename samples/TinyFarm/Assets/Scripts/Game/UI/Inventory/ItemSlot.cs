@@ -12,8 +12,6 @@ namespace Game.UI.Inventory
 {
     public class ItemSlot : MonoEntity, IPointerDownHandler
     {
-        [SerializeField]
-        protected bool Draggable = true;
         
         [Space]
         [SerializeField]
@@ -112,21 +110,24 @@ namespace Game.UI.Inventory
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (!Draggable)
-                return;
-            
             var dragHelper = GetService<ClickDragHelper>();
             if (dragHelper.IsDragging)
             {
-                if (dragHelper.DragDummy is ItemDragDummy dummy 
-                    && dummy.Slot != this)
+                // Drop
+                if (!Container.IsDroppable)
+                    return;
+                if (dragHelper.DragDummy is not ItemDragDummy dummy)
+                    return;
+
+                if (dummy.Slot != this)
                 {
                     Container.StackOrSwap(dummy.Slot, this);
                 }
                 dragHelper.EndDrag();
             }
-            else if (Item != null)
+            else if (Item != null && Container.IsDraggable)
             {
+                // Drag
                 var gameUI = GetService<GameUI>();
                 var dummy = gameUI.Pooler.Spawn<ItemDragDummy>(DragDummyPrefab);
                 dummy.Setup(Region);

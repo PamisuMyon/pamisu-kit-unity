@@ -8,17 +8,26 @@ namespace Game.UI.Inventory
 {
     public class ItemContainer : MonoEntity
     {
+        [Header("ItemContainer")]
+        [SerializeField]
+        protected bool EnableDrag = true;
+        
+        [SerializeField]
+        protected bool EnableDrop = true;
+        
+        [SerializeField]
+        protected ItemCollection Collection;
+        
         [SerializeField]
         protected ItemSlot[] InitSlots;
 
-        [SerializeField]
-        protected ItemCollection Collection;
-
         protected InventorySystem Inventory;
-        
+
         public string Id { get; private set; }
         public List<ItemSlot> Slots { get; } = new();
         public ItemContainerData Data => Inventory.GetContainerData(Id);
+        public bool IsDraggable => EnableDrag;
+        public bool IsDroppable => EnableDrop;
 
         protected override void OnCreate()
         {
