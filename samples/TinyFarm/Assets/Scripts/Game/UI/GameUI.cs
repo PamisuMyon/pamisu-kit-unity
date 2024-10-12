@@ -1,5 +1,6 @@
 ﻿using Game.UI.Hud;
 using Game.UI.Inventory;
+using Game.UI.Shop;
 using PamisuKit.Common.Pool;
 using PamisuKit.Framework;
 using UnityEngine;
@@ -9,16 +10,16 @@ namespace Game.UI
     public class GameUI : MonoEntity
     {
         [SerializeField]
+        private ClickDragHelper _dragHelper;
+        
+        [SerializeField]
         private HudView _hud;
         
         [SerializeField]
-        private RectTransform _windowsPanel;
+        private ShopView _shopView;
 
         [SerializeField]
-        private ItemContainer[] _containers;
-
-        [SerializeField]
-        private ClickDragHelper _dragHelper;
+        private InventoryView _inventoryView;
 
         private Canvas _canvas;
         
@@ -35,13 +36,11 @@ namespace Game.UI
 
             RegisterService(this);
             
-            _hud.Setup(Region);
             _dragHelper.Setup(Region);
-            // TODO TEMP
-            for (int i = 0; i < _containers.Length; i++)
-            {
-                _containers[i].Setup(Region);
-            }
+            _hud.Setup(Region);
+            
+            _inventoryView.Setup(Region);
+            _shopView.Setup(Region);
         }
 
         protected override void OnSelfDestroy()

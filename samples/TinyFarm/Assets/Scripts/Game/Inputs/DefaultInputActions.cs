@@ -55,6 +55,15 @@ namespace Game.Inputs
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""f1e6b543-51a8-4ad1-82cf-652095082aec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -90,6 +99,17 @@ namespace Game.Inputs
                     ""action"": ""CursorCancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6fe2ec7f-6315-4b5a-9b27-28e0b1d96415"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +121,7 @@ namespace Game.Inputs
             m_Game_CursorPosition = m_Game.FindAction("CursorPosition", throwIfNotFound: true);
             m_Game_CursorConfirm = m_Game.FindAction("CursorConfirm", throwIfNotFound: true);
             m_Game_CursorCancel = m_Game.FindAction("CursorCancel", throwIfNotFound: true);
+            m_Game_ToggleInventory = m_Game.FindAction("ToggleInventory", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -165,6 +186,7 @@ namespace Game.Inputs
         private readonly InputAction m_Game_CursorPosition;
         private readonly InputAction m_Game_CursorConfirm;
         private readonly InputAction m_Game_CursorCancel;
+        private readonly InputAction m_Game_ToggleInventory;
         public struct GameActions
         {
             private @DefaultInputActions m_Wrapper;
@@ -172,6 +194,7 @@ namespace Game.Inputs
             public InputAction @CursorPosition => m_Wrapper.m_Game_CursorPosition;
             public InputAction @CursorConfirm => m_Wrapper.m_Game_CursorConfirm;
             public InputAction @CursorCancel => m_Wrapper.m_Game_CursorCancel;
+            public InputAction @ToggleInventory => m_Wrapper.m_Game_ToggleInventory;
             public InputActionMap Get() { return m_Wrapper.m_Game; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -190,6 +213,9 @@ namespace Game.Inputs
                 @CursorCancel.started += instance.OnCursorCancel;
                 @CursorCancel.performed += instance.OnCursorCancel;
                 @CursorCancel.canceled += instance.OnCursorCancel;
+                @ToggleInventory.started += instance.OnToggleInventory;
+                @ToggleInventory.performed += instance.OnToggleInventory;
+                @ToggleInventory.canceled += instance.OnToggleInventory;
             }
 
             private void UnregisterCallbacks(IGameActions instance)
@@ -203,6 +229,9 @@ namespace Game.Inputs
                 @CursorCancel.started -= instance.OnCursorCancel;
                 @CursorCancel.performed -= instance.OnCursorCancel;
                 @CursorCancel.canceled -= instance.OnCursorCancel;
+                @ToggleInventory.started -= instance.OnToggleInventory;
+                @ToggleInventory.performed -= instance.OnToggleInventory;
+                @ToggleInventory.canceled -= instance.OnToggleInventory;
             }
 
             public void RemoveCallbacks(IGameActions instance)
@@ -225,6 +254,7 @@ namespace Game.Inputs
             void OnCursorPosition(InputAction.CallbackContext context);
             void OnCursorConfirm(InputAction.CallbackContext context);
             void OnCursorCancel(InputAction.CallbackContext context);
+            void OnToggleInventory(InputAction.CallbackContext context);
         }
     }
 }

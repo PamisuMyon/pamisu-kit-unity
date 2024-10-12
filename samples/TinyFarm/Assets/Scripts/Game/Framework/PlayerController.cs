@@ -39,6 +39,7 @@ namespace Game.Framework
             _inputSystem = GetSystem<InputSystem>();
             _inputSystem.Actions.Game.CursorPosition.performed += OnCursorPositionPerformed;
             _inputSystem.Actions.Game.CursorConfirm.performed += OnCursorConfirmPerformed;
+            _inputSystem.Actions.Game.ToggleInventory.performed += OnToggleInventoryPerformed;
 
             On<ReqPlayerControlStateReset>(OnReqPlayerControlStateReset);
             On<ReqPlayerControlEnterPlantState>(ReqPlayerControlEnterPlantState);
@@ -53,6 +54,7 @@ namespace Game.Framework
             {
                 _inputSystem.Actions.Game.CursorPosition.performed -= OnCursorPositionPerformed;
                 _inputSystem.Actions.Game.CursorConfirm.performed -= OnCursorConfirmPerformed;
+                _inputSystem.Actions.Game.ToggleInventory.performed -= OnToggleInventoryPerformed;
             }
         }
 
@@ -81,6 +83,11 @@ namespace Game.Framework
             {
                 _selectionIndicator.Detach();
             }
+        }
+        
+        private void OnToggleInventoryPerformed(InputAction.CallbackContext c)
+        {
+            Emit(new ReqToggleInventoryView());
         }
         
         private void OnReqPlayerControlStateReset(ReqPlayerControlStateReset e)
