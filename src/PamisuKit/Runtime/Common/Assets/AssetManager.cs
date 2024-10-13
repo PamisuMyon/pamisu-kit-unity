@@ -23,6 +23,7 @@ namespace PamisuKit.Common.Assets
             return LoadAssetMultipleRefCount<T>(key, cancellationToken);
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private static async UniTask<T> LoadAssetSingleRefCount<T>(object key, CancellationToken cancellationToken)
         {
             object dictKey = key is IKeyEvaluator? (key as IKeyEvaluator).RuntimeKey : key;
@@ -34,7 +35,6 @@ namespace PamisuKit.Common.Assets
                 Debug.LogError($"AssetManager LoadAsset expected instance of {typeof(T)}, but got {obj.GetType()}");
                 return default;
             }
-
 
             var asset = await Addressables.LoadAssetAsync<T>(key).ToUniTask(null, PlayerLoopTiming.Update,cancellationToken);
             if (_assets.TryGetValue(dictKey, out var obj1) && obj1 is T assetT1)

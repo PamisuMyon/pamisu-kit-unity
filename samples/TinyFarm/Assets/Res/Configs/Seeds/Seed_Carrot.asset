@@ -27,37 +27,30 @@ MonoBehaviour:
   Phases:
   - SpriteRef:
       m_AssetGUID: c7ed4b6ba27776c47bed3277b9292707
-      m_SubObjectName: carrot_1
-      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      m_EditorAssetChanged: 0
-    Duration: 5
-  - SpriteRef:
-      m_AssetGUID: c7ed4b6ba27776c47bed3277b9292707
       m_SubObjectName: carrot_2
       m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       m_EditorAssetChanged: 0
-    Duration: 5
+    Duration: 20
   - SpriteRef:
       m_AssetGUID: c7ed4b6ba27776c47bed3277b9292707
       m_SubObjectName: carrot_3
       m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       m_EditorAssetChanged: 0
-    Duration: 5
+    Duration: 20
   - SpriteRef:
       m_AssetGUID: c7ed4b6ba27776c47bed3277b9292707
       m_SubObjectName: carrot_5
       m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       m_EditorAssetChanged: 0
-    Duration: 5
+    Duration: 20
   - SpriteRef:
       m_AssetGUID: c7ed4b6ba27776c47bed3277b9292707
       m_SubObjectName: carrot_7
       m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       m_EditorAssetChanged: 0
-    Duration: 5
+    Duration: 20
   RegrowthTimes: 2

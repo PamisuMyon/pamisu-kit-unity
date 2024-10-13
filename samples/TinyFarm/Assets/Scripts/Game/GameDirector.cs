@@ -2,6 +2,7 @@
 using Game.Framework;
 using Game.Inventory;
 using Game.UI;
+using PamisuKit.Common.Pool;
 using PamisuKit.Framework;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ namespace Game
         private Ticker _uiTicker;
         public Region UIRegion { get; private set; }
         public GameUI GameUI => _gameUI;
+        public MonoPooler Pooler { get; private set; }
         
         protected override void OnCreate()
         {
@@ -28,6 +30,8 @@ namespace Game
             _uiTicker = uiRegionGo.AddComponent<Ticker>();
             UIRegion = uiRegionGo.AddComponent<Region>();
             UIRegion.Init(_uiTicker, this);
+
+            Pooler = new MonoPooler(Trans);
 
             CreateMonoSystem<InventorySystem>();
             CreateMonoSystem<PatchSystem>();

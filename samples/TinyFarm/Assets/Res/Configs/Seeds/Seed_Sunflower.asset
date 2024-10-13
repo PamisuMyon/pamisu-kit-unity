@@ -26,37 +26,30 @@ MonoBehaviour:
   Phases:
   - SpriteRef:
       m_AssetGUID: eb934c94d63f4694793cee7d3da17e2a
-      m_SubObjectName: sunflower_1
-      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      m_EditorAssetChanged: 0
-    Duration: 2
-  - SpriteRef:
-      m_AssetGUID: eb934c94d63f4694793cee7d3da17e2a
       m_SubObjectName: sunflower_2
       m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       m_EditorAssetChanged: 0
-    Duration: 3
+    Duration: 30
   - SpriteRef:
       m_AssetGUID: eb934c94d63f4694793cee7d3da17e2a
       m_SubObjectName: sunflower_3
       m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       m_EditorAssetChanged: 0
-    Duration: 3
+    Duration: 30
   - SpriteRef:
       m_AssetGUID: eb934c94d63f4694793cee7d3da17e2a
       m_SubObjectName: sunflower_5
       m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       m_EditorAssetChanged: 0
-    Duration: 3
+    Duration: 30
   - SpriteRef:
       m_AssetGUID: eb934c94d63f4694793cee7d3da17e2a
       m_SubObjectName: sunflower_7
       m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       m_EditorAssetChanged: 0
-    Duration: 3
+    Duration: 30
   RegrowthTimes: 5

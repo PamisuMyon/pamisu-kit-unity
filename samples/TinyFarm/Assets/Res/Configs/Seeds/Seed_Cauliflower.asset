@@ -27,37 +27,30 @@ MonoBehaviour:
   Phases:
   - SpriteRef:
       m_AssetGUID: 644999b4025051848987870b616e9b5b
-      m_SubObjectName: cauliflower_1
-      m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      m_EditorAssetChanged: 0
-    Duration: 2
-  - SpriteRef:
-      m_AssetGUID: 644999b4025051848987870b616e9b5b
       m_SubObjectName: cauliflower_2
       m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       m_EditorAssetChanged: 0
-    Duration: 2
+    Duration: 20
   - SpriteRef:
       m_AssetGUID: 644999b4025051848987870b616e9b5b
       m_SubObjectName: cauliflower_3
       m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       m_EditorAssetChanged: 0
-    Duration: 2
+    Duration: 20
   - SpriteRef:
       m_AssetGUID: 644999b4025051848987870b616e9b5b
       m_SubObjectName: cauliflower_4
       m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       m_EditorAssetChanged: 0
-    Duration: 2
+    Duration: 20
   - SpriteRef:
       m_AssetGUID: 644999b4025051848987870b616e9b5b
       m_SubObjectName: cauliflower_6
       m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       m_EditorAssetChanged: 0
-    Duration: 2
+    Duration: 20
   RegrowthTimes: 3
