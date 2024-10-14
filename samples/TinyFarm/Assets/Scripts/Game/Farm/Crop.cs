@@ -1,12 +1,13 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Configs;
+using PamisuKit.Common.Pool;
 using PamisuKit.Common.Util;
 using PamisuKit.Framework;
 using UnityEngine;
 
 namespace Game.Farm
 {
-    public class Crop : MonoEntity
+    public class Crop : MonoEntity, IPoolElement
     {
 
         private SpriteRenderer _spriteRenderer;
@@ -54,6 +55,17 @@ namespace Game.Farm
             PhaseIndex++;
             Refresh();
         }
-        
+
+        public void OnSpawnFromPool()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public void OnReleaseToPool()
+        {
+            Config = null;
+            PhaseIndex = 0;
+            gameObject.SetActive(false);
+        }
     }
 }

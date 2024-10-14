@@ -1,12 +1,21 @@
-﻿using Game.Inventory.Models;
+﻿using Game.Framework;
+using Game.Inventory.Models;
 
 namespace Game.Events
 {
+
+    public struct PlayerControlStateChanged
+    {
+        public PlayerControlState OldState;
+        public PlayerControlState NewState;
+    }
+    
     public struct ReqPlayerControlStateReset { }
     
-    public struct ReqPlayerControlEnterPlantState
+    public struct ReqChangePlayerControlState
     {
-        public Item PlantItem;
+        public PlayerControlState NewState;
+        public Item Item;
     }
     
 }

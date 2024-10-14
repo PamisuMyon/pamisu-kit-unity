@@ -31,6 +31,11 @@ namespace Game.Farm
         {
             Tilemap.SetTile(pos, RuleTile);
         }
+
+        public void RegisterPlot(Plot plot)
+        {
+            Plots.Add(plot);
+        }
         
     }
     

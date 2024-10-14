@@ -36,7 +36,7 @@ namespace Game.Farm
                     plotPos += patchSystem.Tilemap.cellSize / 2f;
                     plot.Trans.position = plotPos;
                     _plots.Add(plot);
-                    patchSystem.Plots.Add(plot);
+                    patchSystem.RegisterPlot(plot);
                 }
             }
             

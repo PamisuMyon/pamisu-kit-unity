@@ -1,4 +1,5 @@
 ﻿using Game.Events;
+using Game.Framework;
 using Game.Inventory.Models;
 using Game.UI.Inventory;
 using PamisuKit.Common.Pool;
@@ -34,9 +35,10 @@ namespace Game.UI.Hud
         public override void OnBeginDrag()
         {
             base.OnBeginDrag();
-            Emit(new ReqPlayerControlEnterPlantState
+            Emit(new ReqChangePlayerControlState
             {
-                PlantItem = Slot.Item
+                NewState = PlayerControlState.Plant,
+                Item = Slot.Item
             });
         }
 

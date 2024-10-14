@@ -3,12 +3,13 @@ using Game.Farm;
 using Game.Inventory.Models;
 using PamisuKit.Framework;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using InputSystem = Game.Inputs.InputSystem;
 
 namespace Game.Framework
 {
-    public class PlayerController : MonoEntity
+    public class PlayerController : MonoEntity, IUpdatable
     {
         [SerializeField]
         private LayerMask _unitLayerMask;
@@ -23,7 +24,8 @@ namespace Game.Framework
         private Indicator _selectionIndicator;
 
         private InputSystem _inputSystem;
-        private Item _plantItem; 
+        private Item _plantItem;
+        private bool _isPointerOverUI;
         
         public PlayerControlState State { get; private set; }
 
@@ -42,9 +44,9 @@ namespace Game.Framework
             _inputSystem.Actions.Game.ToggleInventory.performed += OnToggleInventoryPerformed;
 
             On<ReqPlayerControlStateReset>(OnReqPlayerControlStateReset);
-            On<ReqPlayerControlEnterPlantState>(ReqPlayerControlEnterPlantState);
+            On<ReqChangePlayerControlState>(ReqPlayerControlEnterPlantState);
 
-            State = PlayerControlState.Normal;
+            ChangeState(PlayerControlState.Normal);
         }
 
         protected override void OnSelfDestroy()
@@ -56,6 +58,11 @@ namespace Game.Framework
                 _inputSystem.Actions.Game.CursorConfirm.performed -= OnCursorConfirmPerformed;
                 _inputSystem.Actions.Game.ToggleInventory.performed -= OnToggleInventoryPerformed;
             }
+        }
+        
+        public void OnUpdate(float deltaTime)
+        {
+            _isPointerOverUI = EventSystem.current.IsPointerOverGameObject();
         }
 
         private void OnCursorPositionPerformed(InputAction.CallbackContext c)
@@ -92,18 +99,31 @@ namespace Game.Framework
         
         private void OnReqPlayerControlStateReset(ReqPlayerControlStateReset e)
         {
-            State = PlayerControlState.Normal;
+            ChangeState(PlayerControlState.Normal);
             _plantItem = null;
         }
 
-        private void ReqPlayerControlEnterPlantState(ReqPlayerControlEnterPlantState e)
+        private void ReqPlayerControlEnterPlantState(ReqChangePlayerControlState e)
         {
-            State = PlayerControlState.Plant;
-            _plantItem = e.PlantItem;
+            ChangeState(PlayerControlState.Plant);
+            _plantItem = e.Item;
+        }
+
+        private void ChangeState(PlayerControlState newState)
+        {
+            var oldState = State;
+            State = newState;
+            Emit(new PlayerControlStateChanged { OldState = oldState, NewState = newState });
         }
 
         private bool GetUnitUnderCursor(out Unit unit)
         {
+            if (_isPointerOverUI)
+            {
+                unit = null;
+                return false;
+            }
+            
             var cursorPos = _inputSystem.Actions.Game.CursorPosition.ReadValue<Vector2>();
             var ray = _mainCam.ScreenPointToRay(cursorPos);
             var hit = Physics2D.GetRayIntersection(ray, 100f, _unitLayerMask);
@@ -121,6 +141,13 @@ namespace Game.Framework
                 if (unit is Plot plot && plot.CanPlant())
                 {
                     plot.Plant(_plantItem);
+                }
+            }
+            else if (State == PlayerControlState.Shovel)
+            {
+                if (unit is Plot plot)
+                {
+                    plot.RemoveCrop();
                 }
             }
         }

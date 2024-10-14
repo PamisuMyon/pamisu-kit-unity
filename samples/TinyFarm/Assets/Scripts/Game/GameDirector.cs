@@ -2,6 +2,7 @@
 using Game.Framework;
 using Game.Inventory;
 using Game.UI;
+using Game.Worker.Models;
 using PamisuKit.Common.Pool;
 using PamisuKit.Framework;
 using UnityEngine;
@@ -35,6 +36,7 @@ namespace Game
 
             CreateMonoSystem<InventorySystem>();
             CreateMonoSystem<PatchSystem>();
+            CreateMonoSystem<WorkerSystem>();
             
             if (_player != null)
                 SetupMonoEntity(_player);

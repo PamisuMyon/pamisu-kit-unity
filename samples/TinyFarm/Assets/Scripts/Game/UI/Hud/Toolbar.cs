@@ -1,5 +1,5 @@
-﻿using LitMotion;
-using LitMotion.Extensions;
+﻿using Game.Events;
+using Game.Framework;
 using PamisuKit.Common.Util;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +13,9 @@ namespace Game.UI.Hud
         private Button _shovelButton;
 
         [SerializeField]
+        private ShovelDragDummy _shovelDragDummy;
+
+        [SerializeField]
         private Button _plantButton;
 
         [SerializeField]
@@ -21,22 +24,35 @@ namespace Game.UI.Hud
         protected override void OnCreate()
         {
             base.OnCreate();
-            
             _plantBar.Setup(Region);
-            _plantBar.Toggleable.Toggling += b =>
-            {
-                if (b)
-                    Hide();
-                else
-                    Show();
-            };
-            
             _plantButton.SetOnClickListener(() =>
             {
                 _plantBar.Toggleable.Show();
             });
             
+            _shovelDragDummy.Setup(Region);
+            _shovelDragDummy.Go.SetActive(false);
+            _shovelButton.SetOnClickListener(TryEnableShovel);
+
+            On<PlayerControlStateChanged>(OnPlayerControlStateChanged);
+            
             Show(false);
+        }
+
+        private void OnPlayerControlStateChanged(PlayerControlStateChanged e)
+        {
+            if (e.NewState == PlayerControlState.Normal)
+            {
+                Show();
+            }
+        }
+
+        private void TryEnableShovel()
+        {
+            var dragHelper = GetService<ClickDragHelper>();
+            if (dragHelper.IsDragging)
+                return;
+            dragHelper.BeginDrag(_shovelDragDummy);
         }
         
     }

@@ -1,4 +1,6 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using PamisuKit.Common.Util;
 using PamisuKit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +12,7 @@ namespace Game.Save
     {
 
         private SaveHandler _saveHandler;
+        private List<ISavable> _savables;
         
         public bool IsSaving { get; private set; }
         public SaveData SaveData { get; private set; }
@@ -18,6 +21,7 @@ namespace Game.Save
         {
             base.OnCreate();
             _saveHandler = new SaveHandler(Application.persistentDataPath);
+            _savables = new List<ISavable>();
         }
 
         public async UniTask Init()
@@ -42,6 +46,16 @@ namespace Game.Save
                 Debug.Log("Debug saved");
             }
         }
+
+        public void RegisterSavable(ISavable savable)
+        {
+            _savables.AddUnique(savable);
+        }
+
+        public void RemoveSavable(ISavable savable)
+        {
+            _savables.Remove(savable);
+        }
         
         private void RequestSaveAll()
         {
@@ -53,6 +67,10 @@ namespace Game.Save
         private async UniTaskVoid SaveAll()
         {
             IsSaving = true;
+            for (int i = 0; i < _savables.Count; i++)
+            {
+                _savables[i].OnSave(SaveData);
+            }
             SaveData.PreSerialize();
             await _saveHandler.Save(SaveData);
             IsSaving = false;
