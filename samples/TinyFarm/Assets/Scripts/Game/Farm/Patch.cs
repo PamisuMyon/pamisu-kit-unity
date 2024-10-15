@@ -3,31 +3,32 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Configs;
 using Game.Framework;
+using Game.Save;
 using PamisuKit.Common.Assets;
 using UnityEngine;
 
 namespace Game.Farm
 {
-    public class Patch : Unit
+    public class Patch : Unit, ISavable
     {
 
         private BoxCollider2D _collider;
         private readonly List<Plot> _plots = new();
 
-        public async UniTaskVoid Init(PatchInfo info)
+        public async UniTaskVoid Init(PatchInitInfo initInfo)
         {
             var configSystem = GetSystem<ConfigSystem>();
             var patchSystem = GetSystem<PatchSystem>();
             
-            for (int x = info.Min.x; x <= info.Max.x; x++)
+            for (int x = initInfo.Min.x; x <= initInfo.Max.x; x++)
             {
-                for (int y = info.Min.y; y <= info.Max.y; y++)
+                for (int y = initInfo.Min.y; y <= initInfo.Max.y; y++)
                 {
                     var cellPos = new Vector3Int(x, y);
                     patchSystem.SetPatchTile(cellPos);
 
-                    if (x == info.Min.x || x == info.Max.x
-                        || y == info.Min.y || y == info.Max.y)
+                    if (x == initInfo.Min.x || x == initInfo.Max.x
+                        || y == initInfo.Min.y || y == initInfo.Max.y)
                         continue;
                     var plotGo = await AssetManager.Instantiate(configSystem.PlotPrefabRef);
                     var plot = plotGo.GetComponent<Plot>();
@@ -36,13 +37,13 @@ namespace Game.Farm
                     plotPos += patchSystem.Tilemap.cellSize / 2f;
                     plot.Trans.position = plotPos;
                     _plots.Add(plot);
-                    patchSystem.RegisterPlot(plot);
+                    // patchSystem.RegisterPlot(plot);
                 }
             }
             
-            VisualSize = info.Max - info.Min;
-            var minPos = patchSystem.Tilemap.CellToWorld((Vector3Int)info.Min);
-            var maxPos = patchSystem.Tilemap.CellToWorld((Vector3Int)info.Max);
+            VisualSize = initInfo.Max - initInfo.Min;
+            var minPos = patchSystem.Tilemap.CellToWorld((Vector3Int)initInfo.Min);
+            var maxPos = patchSystem.Tilemap.CellToWorld((Vector3Int)initInfo.Max);
             var centerPos = new Vector3((maxPos.x - minPos.x) / 2f, (maxPos.y - minPos.y) / 2f, 0f);
             Trans.position = centerPos;
 
@@ -50,11 +51,15 @@ namespace Game.Farm
             // _collider.size = VisualSize;
             // Go.layer = LayerMask.NameToLayer("Unit");
         }
-        
+
+        public void OnSave(SaveData saveData)
+        {
+            
+        }
     }
     
     [Serializable]
-    public class PatchInfo
+    public class PatchInitInfo
     {
         public Vector2Int Min;
         public Vector2Int Max;
