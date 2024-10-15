@@ -1,4 +1,5 @@
 ﻿using Game.Configs;
+using Game.Farm.Models;
 using Game.Framework;
 using Game.Inventory.Models;
 using PamisuKit.Framework;
@@ -18,29 +19,33 @@ namespace Game.Farm
         private Sprite _wateredSprite;
 
         private SpriteRenderer _spriteRenderer;
-        private bool _isWatered;
-        private bool _hasCrop;
         
+        public PlotData Data { get; private set; }
         public Crop Crop { get; private set; }
-        public override bool IsActive => !IsPendingDestroy && _hasCrop && _isWatered && Go.activeInHierarchy;
+        public override bool IsActive => !IsPendingDestroy && Data.HasCrop && Data.IsWatered && Go.activeInHierarchy;
 
         protected override void OnCreate()
         {
             base.OnCreate();
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
+        
+        public void Init(PlotData data)
+        {
+            Data = data;
+        }
 
         public void OnUpdate(float deltaTime)
         {
             if (Crop.AddGrowthTime(deltaTime))
             {
-                _isWatered = false;
+                Data.IsWatered = false;
             }
         }
         
         public bool CanPlant()
         {
-            return !_hasCrop;
+            return !Data.HasCrop;
         }
 
         public void Plant(Item plantItem)
@@ -52,17 +57,18 @@ namespace Game.Farm
             }
 
             plantItem.ChangeAmount(-1);
-            
+
+            Data.Crop = new CropData(seedConfig);
             Crop = GetDirector<GameDirector>().Pooler.Spawn<Crop>(_cropPrefab);
             Crop.Setup(Region);
             Crop.Trans.SetParent(Trans);
             Crop.Trans.localPosition = Vector3.zero;
-            Crop.SetData(seedConfig);
-            _hasCrop = true;
-            _isWatered = false;
+            Crop.SetData(Data.Crop);
+            Data.HasCrop = true;
+            Data.IsWatered = false;
             
             // TODO Temp
-            _isWatered = true;
+            Data.IsWatered = true;
         }
 
         private void Refresh()
@@ -80,14 +86,15 @@ namespace Game.Farm
 
         public bool RemoveCrop()
         {
-            if (_hasCrop)
+            if (Data.HasCrop)
             {
                 GetDirector<GameDirector>().Pooler.Release(Crop);
                 Crop = null;
-                _hasCrop = false;
+                Data.HasCrop = false;
+                Data.Crop = null;
             }
             return false;
         }
-
+        
     }
 }

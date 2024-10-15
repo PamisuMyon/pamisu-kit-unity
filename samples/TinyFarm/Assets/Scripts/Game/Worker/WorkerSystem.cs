@@ -66,7 +66,7 @@ namespace Game.Worker.Models
         {
             for (int i = 0; i < Workers.Count; i++)
             {
-                Workers[i].UpdateData();
+                Workers[i].OnSave(saveData);
             }
         }
         

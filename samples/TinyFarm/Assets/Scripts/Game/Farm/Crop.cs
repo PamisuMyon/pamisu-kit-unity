@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Configs;
+using Game.Farm.Models;
 using PamisuKit.Common.Pool;
 using PamisuKit.Common.Util;
 using PamisuKit.Framework;
@@ -13,10 +14,10 @@ namespace Game.Farm
         private SpriteRenderer _spriteRenderer;
         private float _growthCounter;
         
-        public SeedConfig Config { get; private set; } 
-        public int PhaseIndex { get; private set; }
-        public GrowthPhase Phase => Config.Phases[PhaseIndex];
-        public bool IsMaxPhase => PhaseIndex >= Config.Phases.Length - 1;
+        public CropData Data { get; private set; }
+        public SeedConfig Config => Data.Config;
+        public GrowthPhase Phase => Config.Phases[Data.PhaseIndex];
+        public bool IsMaxPhase => Data.PhaseIndex >= Config.Phases.Length - 1;
         
         protected override void OnCreate()
         {
@@ -24,10 +25,9 @@ namespace Game.Farm
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        public void SetData(SeedConfig config)
+        public void SetData(CropData data)
         {
-            Config = config;
-            PhaseIndex = 0;
+            Data = data;
             Refresh();
         }
 
@@ -52,7 +52,7 @@ namespace Game.Farm
         {
             if (IsMaxPhase)
                 return;
-            PhaseIndex++;
+            Data.PhaseIndex++;
             Refresh();
         }
 
@@ -63,8 +63,7 @@ namespace Game.Farm
 
         public void OnReleaseToPool()
         {
-            Config = null;
-            PhaseIndex = 0;
+            Data = null;
             gameObject.SetActive(false);
         }
     }

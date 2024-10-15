@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Game.Configs;
 using Game.Framework;
 using UnityEngine;
 
@@ -15,6 +17,11 @@ namespace Game.Farm.Models
         public void PostDeserialize()
         {
             Patches ??= new List<PatchData>();
+            
+            for (int i = 0; i < Patches.Count; i++)
+            {
+                Patches[i].PostDeserialize();
+            }
         }
     }
 
@@ -44,7 +51,16 @@ namespace Game.Farm.Models
     public class CropData
     {
         public string SeedId;
+        [NonSerialized]
+        public SeedConfig Config;
         public int PhaseIndex;
+
+        public CropData(SeedConfig config, int phaseIndex = 0)
+        {
+            Config = config;
+            SeedId = config.Id;
+            PhaseIndex = phaseIndex;
+        }
     }
     
 }

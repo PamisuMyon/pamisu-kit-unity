@@ -1,8 +1,9 @@
 ﻿using Game.Framework;
+using Game.Save;
 
 namespace Game.Worker.Models
 {
-    public class WorkerController : Unit
+    public class WorkerController : Unit, ISavable
     {
         public WorkerData Data { get; private set; }
         
@@ -15,10 +16,9 @@ namespace Game.Worker.Models
             Id = Data.Id;
         }
 
-        public void UpdateData()
+        public void OnSave(SaveData _)
         {
             Data.Position = Trans.position;
         }
-        
     }
 }
