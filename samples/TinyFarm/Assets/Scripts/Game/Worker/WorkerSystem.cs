@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Events;
 using Game.Save;
 using PamisuKit.Framework;
 using UnityEngine;
@@ -44,6 +45,8 @@ namespace Game.Worker.Models
             {
                 Workers.Add(SpawnWorker(WorkerDataList[i]));
             }
+
+            On<ReqAddWorkerTask>(OnReqAddWorkerTask);
         }
 
         protected override void OnSelfDestroy()
@@ -51,6 +54,22 @@ namespace Game.Worker.Models
             base.OnSelfDestroy();
             if (_saveSystem != null)
                 _saveSystem.RemoveSavable(this);
+        }
+        
+        public void OnSave(SaveData saveData)
+        {
+            for (int i = 0; i < Workers.Count; i++)
+            {
+                Workers[i].OnSave(saveData);
+            }
+        }
+        
+        private void OnReqAddWorkerTask(ReqAddWorkerTask e)
+        {
+            var task = new WorkerTask(e.Target, e.Type);
+            if (!TaskQueueDict.ContainsKey(e.Type))
+                TaskQueueDict[e.Type] = new Queue<WorkerTask>();
+            TaskQueueDict[e.Type].Enqueue(task);
         }
 
         private WorkerController SpawnWorker(WorkerData workerData)
@@ -60,14 +79,6 @@ namespace Game.Worker.Models
             worker.Setup(Region);
             worker.Init(workerData);
             return worker;
-        }
-
-        public void OnSave(SaveData saveData)
-        {
-            for (int i = 0; i < Workers.Count; i++)
-            {
-                Workers[i].OnSave(saveData);
-            }
         }
         
     }

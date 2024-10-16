@@ -1,5 +1,6 @@
 ﻿using Game.Framework;
 using Game.Inventory.Models;
+using Game.Worker.Models;
 
 namespace Game.Events
 {
@@ -16,6 +17,12 @@ namespace Game.Events
     {
         public PlayerControlState NewState;
         public Item Item;
+    }
+
+    public struct ReqAddWorkerTask
+    {
+        public WorkerTaskType Type;
+        public Unit Target;
     }
     
 }

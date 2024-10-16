@@ -52,6 +52,17 @@ namespace Game.Farm
         {
             Tilemap.SetTile(pos, RuleTile);
         }
+        
+        public Plot GetPlotById(string id)
+        {
+            for (int i = 0; i < _patches.Count; i++)
+            {
+                var plot = _patches[i].GetPlotById(id);
+                if (plot != null)
+                    return plot;
+            }
+            return null;
+        }
 
     }
     

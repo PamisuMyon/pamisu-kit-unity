@@ -13,13 +13,14 @@ namespace Game.Farm
     {
 
         private BoxCollider2D _collider;
-        private readonly List<Plot> _plots = new();
+        private Dictionary<string, Plot> _plotDict;
         
         public PatchData Data { get; private set; }
 
         public async UniTaskVoid Init(PatchData data)
         {
             Data = data;
+            _plotDict = new Dictionary<string, Plot>();
             var configSystem = GetSystem<ConfigSystem>();
             var patchSystem = GetSystem<PatchSystem>();
             
@@ -46,9 +47,8 @@ namespace Game.Farm
                     plotPos += patchSystem.Tilemap.cellSize / 2f;
                     plot.Trans.position = plotPos;
                     plot.Init(data.Plots[i]);
-                    _plots.Add(plot);
+                    _plotDict[plot.Id] = plot;
                     i++;
-                    // patchSystem.RegisterPlot(plot);
                 }
             }
             
@@ -61,6 +61,11 @@ namespace Game.Farm
             // _collider = Go.AddComponent<BoxCollider2D>();
             // _collider.size = VisualSize;
             // Go.layer = LayerMask.NameToLayer("Unit");
+        }
+
+        public Plot GetPlotById(string id)
+        {
+            return _plotDict.GetValueOrDefault(id);
         }
     }
     

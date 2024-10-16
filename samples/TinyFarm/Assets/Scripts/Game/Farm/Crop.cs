@@ -17,7 +17,6 @@ namespace Game.Farm
         public CropData Data { get; private set; }
         public SeedConfig Config => Data.Config;
         public GrowthPhase Phase => Config.Phases[Data.PhaseIndex];
-        public bool IsMaxPhase => Data.PhaseIndex >= Config.Phases.Length - 1;
         
         protected override void OnCreate()
         {
@@ -50,9 +49,11 @@ namespace Game.Farm
 
         public void AddPhase()
         {
-            if (IsMaxPhase)
+            if (Data.IsRipe)
                 return;
             Data.PhaseIndex++;
+            if (Data.PhaseIndex >= Config.Phases.Length - 1)
+                Data.IsRipe = true;
             Refresh();
         }
 

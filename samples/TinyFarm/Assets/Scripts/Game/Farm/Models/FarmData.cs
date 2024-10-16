@@ -43,9 +43,10 @@ namespace Game.Farm.Models
 
     public class PlotData
     {
+        public string Id;
         public bool IsWatered;
-        public bool HasCrop;
         public CropData Crop;
+        public bool HasCrop => Crop == null;
     }
 
     public class CropData
@@ -54,6 +55,7 @@ namespace Game.Farm.Models
         [NonSerialized]
         public SeedConfig Config;
         public int PhaseIndex;
+        public bool IsRipe;
 
         public CropData(SeedConfig config, int phaseIndex = 0)
         {

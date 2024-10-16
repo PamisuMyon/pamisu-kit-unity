@@ -53,7 +53,10 @@ namespace Game.Worker.Models
             if (Type == WorkerTaskType.Watering || Type == WorkerTaskType.Harvesting)
             {
                 var patchSystem = entity.GetSystem<PatchSystem>();
-                // TODO
+                var plot = patchSystem.GetPlotById(TargetId);
+                Debug.Assert(plot != null, $"Plot with Id {TargetId} not found.");
+                _target = plot;
+                return _target;
             }
             return _target;
         }

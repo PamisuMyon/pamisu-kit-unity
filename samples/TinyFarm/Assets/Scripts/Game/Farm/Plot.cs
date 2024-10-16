@@ -1,7 +1,9 @@
 ﻿using Game.Configs;
+using Game.Events;
 using Game.Farm.Models;
 using Game.Framework;
 using Game.Inventory.Models;
+using Game.Worker.Models;
 using PamisuKit.Framework;
 using UnityEngine;
 
@@ -22,7 +24,11 @@ namespace Game.Farm
         
         public PlotData Data { get; private set; }
         public Crop Crop { get; private set; }
-        public override bool IsActive => !IsPendingDestroy && Data.HasCrop && Data.IsWatered && Go.activeInHierarchy;
+        public override bool IsActive => !IsPendingDestroy 
+                                         && Data.HasCrop 
+                                         && !Data.Crop.IsRipe
+                                         && Data.IsWatered
+                                         && Go.activeInHierarchy;
 
         protected override void OnCreate()
         {
@@ -33,6 +39,9 @@ namespace Game.Farm
         public void Init(PlotData data)
         {
             Data = data;
+            if (string.IsNullOrEmpty(Data.Id))
+                Data.Id = GenerateId();
+            Id = Data.Id;
         }
 
         public void OnUpdate(float deltaTime)
@@ -40,6 +49,22 @@ namespace Game.Farm
             if (Crop.AddGrowthTime(deltaTime))
             {
                 Data.IsWatered = false;
+                if (Crop.Data.IsRipe)
+                {
+                    Emit(new ReqAddWorkerTask
+                    {
+                        Target = this,
+                        Type = WorkerTaskType.Harvesting
+                    });
+                }
+                else
+                {
+                    Emit(new ReqAddWorkerTask
+                    {
+                        Target = this,
+                        Type = WorkerTaskType.Watering
+                    });
+                }
             }
         }
         
@@ -58,17 +83,18 @@ namespace Game.Farm
 
             plantItem.ChangeAmount(-1);
 
-            Data.Crop = new CropData(seedConfig);
             Crop = GetDirector<GameDirector>().Pooler.Spawn<Crop>(_cropPrefab);
             Crop.Setup(Region);
             Crop.Trans.SetParent(Trans);
             Crop.Trans.localPosition = Vector3.zero;
-            Crop.SetData(Data.Crop);
-            Data.HasCrop = true;
+            Crop.SetData(Data.Crop = new CropData(seedConfig));
             Data.IsWatered = false;
             
-            // TODO Temp
-            Data.IsWatered = true;
+            Emit(new ReqAddWorkerTask
+            {
+                Target = this,
+                Type = WorkerTaskType.Watering
+            });
         }
 
         private void Refresh()
@@ -90,7 +116,6 @@ namespace Game.Farm
             {
                 GetDirector<GameDirector>().Pooler.Release(Crop);
                 Crop = null;
-                Data.HasCrop = false;
                 Data.Crop = null;
             }
             return false;
