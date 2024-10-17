@@ -31,6 +31,8 @@ namespace Game.UI
             base.OnCreate();
             if (ToggleRectTrans == null)
                 ToggleRectTrans = Trans as RectTransform;
+            Debug.Assert(ToggleRectTrans != null, "ToggleRectTrans cannot be null", Go);
+            ToggleRectTrans.gameObject.SetActive(true);
         }
 
         public virtual void Show(bool isAnim = true, bool force = false)

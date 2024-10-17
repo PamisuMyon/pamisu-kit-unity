@@ -324,7 +324,7 @@ public class Player : MonoEntity
 
 ![](./docs/images/framework_autosetup_macro.png)
 
-如果`Director`的初始化为耗时操作，需要等待`Director`初始化完毕后才开始`MonoEntity`的自动初始化，可以在`Director`中自定义这个过程，详见[Luban Example](#luban-example---luban示例)中的[GameDirector.cs](samples\LubanExample\LubanExampleUnity\Assets\Scripts\Game\GameDirector.cs)。
+如果`Director`的初始化为耗时操作，需要等待`Director`初始化完毕后才开始`MonoEntity`的自动初始化，可以在`Director`中自定义这个过程，详见[Luban Example](#luban-example---luban示例)中的[GameDirector.cs](samples/LubanExample/LubanExampleUnity/Assets/Scripts/Game/GameDirector.cs)。
 
 ### 事件总线集成
 

@@ -24,7 +24,8 @@ namespace Game.Farm
         
         public PlotData Data { get; private set; }
         public Crop Crop { get; private set; }
-        public override bool IsActive => !IsPendingDestroy 
+        public override bool IsActive => !IsPendingDestroy
+                                         && Data != null
                                          && Data.HasCrop 
                                          && !Data.Crop.IsRipe
                                          && Data.IsWatered

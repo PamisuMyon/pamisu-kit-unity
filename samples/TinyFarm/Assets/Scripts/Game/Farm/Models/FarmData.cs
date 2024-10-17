@@ -46,7 +46,7 @@ namespace Game.Farm.Models
         public string Id;
         public bool IsWatered;
         public CropData Crop;
-        public bool HasCrop => Crop == null;
+        public bool HasCrop => Crop != null;
     }
 
     public class CropData

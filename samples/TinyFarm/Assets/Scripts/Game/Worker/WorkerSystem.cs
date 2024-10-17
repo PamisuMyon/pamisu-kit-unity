@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Game.Events;
 using Game.Save;
+using PamisuKit.Common.Util;
 using PamisuKit.Framework;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ namespace Game.Worker.Models
         public WorkerSystemData Data => _saveSystem.SaveData.Worker;
         public Dictionary<WorkerTaskType, Queue<WorkerTask>> TaskQueueDict => Data.TaskQueueDict;
         public List<WorkerData> WorkerDataList => Data.Workers;
-        public List<WorkerController> Workers;
+        public List<WorkerController> Workers { get; private set; }
 
         protected override void OnCreate()
         {
@@ -30,17 +31,21 @@ namespace Game.Worker.Models
             _saveSystem = GetSystem<SaveSystem>();
             _saveSystem.RegisterSavable(this);
 
-            if (WorkerDataList.Count != 0)
+            if (WorkerDataList.Count == 0)
             {
                 for (int i = 0; i < _initWorkerNum; i++)
                 {
+                    RandomUtil.RandomPositionOnNavMesh(Trans.position, _workerSpawnRadius, out var pos);
+                    pos.z = 0f;
                     var data = new WorkerData
                     {
-                        Position = Random.insideUnitCircle * _workerSpawnRadius,
+                        Position = pos,
                     };
                     WorkerDataList.Add(data);
                 }
             }
+
+            Workers = new List<WorkerController>();
             for (int i = 0; i < WorkerDataList.Count; i++)
             {
                 Workers.Add(SpawnWorker(WorkerDataList[i]));
@@ -70,7 +75,7 @@ namespace Game.Worker.Models
             if (!TaskQueueDict.ContainsKey(e.Type))
                 TaskQueueDict[e.Type] = new Queue<WorkerTask>();
             TaskQueueDict[e.Type].Enqueue(task);
-            Debug.LogError($"WorkerTask added {e.Type}", e.Target);
+            Debug.Log($"WorkerTask added {e.Type}", e.Target);
         }
 
         private WorkerController SpawnWorker(WorkerData workerData)
@@ -92,6 +97,13 @@ namespace Game.Worker.Models
             }
             return null;
         }
+        
+#if UNITY_EDITOR
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireSphere(transform.position, _workerSpawnRadius);
+        }
+#endif
         
     }
 }
