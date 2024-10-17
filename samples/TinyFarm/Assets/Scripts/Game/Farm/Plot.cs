@@ -96,19 +96,24 @@ namespace Game.Farm
                 Target = this,
                 Type = WorkerTaskType.Watering
             });
+            Refresh();
         }
 
         private void Refresh()
         {
-            
+            _spriteRenderer.sprite = Data.IsWatered ? _wateredSprite : _normalSprite;
         }
 
         public void Water()
         {
+            Data.IsWatered = true;
+            Refresh();
         }
 
         public void Harvest()
         {
+            
+            Data.IsWatered = false;
         }
 
         public bool RemoveCrop()

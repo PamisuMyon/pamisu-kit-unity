@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe4e0424a424eaca700e76ad383e5a8, type: 3}
+  m_Name: Produce_Carrot
+  m_EditorClassIdentifier: 
+  Id: Produce_Carrot
+  Type: 2
+  Name: Carrot
+  Description: 
+  IconRef:
+    m_AssetGUID: c7ed4b6ba27776c47bed3277b9292707
+    m_SubObjectName: carrot_0
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 0
+  WorldSpriteRef:
+    m_AssetGUID: c7ed4b6ba27776c47bed3277b9292707
+    m_SubObjectName: carrot_7
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 0
+  BuyPrice: 0
+  SellPrice: 10

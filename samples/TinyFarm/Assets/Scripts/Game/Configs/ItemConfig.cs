@@ -11,6 +11,7 @@ namespace Game.Configs
         public string Name;
         public string Description;
         public AssetReferenceSprite IconRef;
+        public AssetReferenceSprite WorldSpriteRef;
         public float BuyPrice;
         public float SellPrice;
 
@@ -25,7 +26,7 @@ namespace Game.Configs
     {
         None,
         Seed,
-        Fruit,
+        Produce,
     }
 
 }

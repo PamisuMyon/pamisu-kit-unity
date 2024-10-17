@@ -12,6 +12,7 @@ namespace Game.Configs
         
         [Space]
         public AssetReferenceGameObject PlotPrefabRef;
+        public AssetReferenceGameObject ProducePrefabRef;
         
         private readonly Dictionary<string, ItemConfig> _allItemConfigDict = new();
 

@@ -10,6 +10,7 @@ namespace Game.Configs
         [Header("Seed")]
         public GrowthPhase[] Phases;
         public int RegrowthTimes;
+        public ItemConfig ProduceConfig;
 
         protected override void OnEnable()
         {

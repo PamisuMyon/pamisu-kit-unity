@@ -20515,6 +20515,11 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  ProducePrefabRef:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!114 &2068087876 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4294526256973673254, guid: f2b192a462fe51f46bf86923a718c94b, type: 3}

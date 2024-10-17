@@ -22,6 +22,11 @@ MonoBehaviour:
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 1
+  WorldSpriteRef:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   BuyPrice: 5
   SellPrice: 3
   Phases:
@@ -54,3 +59,4 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     Duration: 20
   RegrowthTimes: 2
+  ProduceConfig: {fileID: 11400000, guid: dde8f6f7e03898d4ca65cd8ca30a310b, type: 2}
