@@ -70,6 +70,7 @@ namespace Game.Worker.Models
             if (!TaskQueueDict.ContainsKey(e.Type))
                 TaskQueueDict[e.Type] = new Queue<WorkerTask>();
             TaskQueueDict[e.Type].Enqueue(task);
+            Debug.LogError($"WorkerTask added {e.Type}", e.Target);
         }
 
         private WorkerController SpawnWorker(WorkerData workerData)
@@ -79,6 +80,17 @@ namespace Game.Worker.Models
             worker.Setup(Region);
             worker.Init(workerData);
             return worker;
+        }
+
+        public WorkerTask GetPendingTask(WorkerTaskType type)
+        {
+            if (TaskQueueDict.TryGetValue(type, out var queue) && queue.Count > 0)
+            {
+                var task = queue.Dequeue();
+                task.State = WorkerTaskState.InProgress;
+                return task;
+            }
+            return null;
         }
         
     }
