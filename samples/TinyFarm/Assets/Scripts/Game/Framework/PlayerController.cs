@@ -88,7 +88,9 @@ namespace Game.Framework
             }
             else
             {
-                _selectionIndicator.Detach();
+                var detachedUnit = _selectionIndicator.Detach();
+                if (detachedUnit != null)
+                    detachedUnit.OnDeselected();
             }
         }
         
@@ -149,6 +151,10 @@ namespace Game.Framework
                 {
                     plot.RemoveCrop();
                 }
+            }
+            else if (State == PlayerControlState.Normal)
+            {
+                unit.OnSelected();
             }
         }
         

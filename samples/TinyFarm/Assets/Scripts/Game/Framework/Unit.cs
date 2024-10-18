@@ -15,5 +15,14 @@ namespace Game.Framework
         {
             return Guid.NewGuid().ToString();
         }
+
+        public virtual void OnSelected()
+        {
+        }
+
+        public virtual void OnDeselected()
+        {
+        }
+        
     }
 }

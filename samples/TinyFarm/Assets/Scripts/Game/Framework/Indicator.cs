@@ -47,13 +47,15 @@ namespace Game.Framework
             AttachedUnit = unit;
         }
         
-        public void Detach()
+        public Unit Detach()
         {
             if (!IsAttached)
-                return;
+                return null;
+            var unit = AttachedUnit;
             IsAttached = false;
             AttachedUnit = null;
             Go.SetActive(false);
+            return unit;
         }
         
     }

@@ -71,6 +71,7 @@ namespace Game.Worker.Models
         
         private void OnReqAddWorkerTask(ReqAddWorkerTask e)
         {
+            // TODO Optimize
             var task = new WorkerTask(e.Target, e.Type);
             if (!TaskQueueDict.ContainsKey(e.Type))
                 TaskQueueDict[e.Type] = new Queue<WorkerTask>();

@@ -33,31 +33,22 @@ namespace Game.Worker.Models
         [SerializeField]
         private Transform _carrySlot;
 
-        private SpriteRenderer _spriteRenderer;
+        private WorkerCosmetic _cosmetic;
         private NavMeshAgent _navAgent;
         private Blackboard _blackboard;
         private Root _behaviourTree;
         private WorkerSystem _workerSystem;
         private List<WorkerTaskType> _taskPriorities;
-        private int _faceDirection;
         private Produce _carryingProduce;
-
-        public int FaceDirection
-        {
-            get => _faceDirection;
-            set
-            {
-                _faceDirection = value;
-                _spriteRenderer.flipX = _faceDirection == -1;
-            }
-        }
-
+        
         public WorkerData Data { get; private set; }
 
         protected override void OnCreate()
         {
             base.OnCreate();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _cosmetic = GetComponent<WorkerCosmetic>();
+            _cosmetic.Setup(Region);
+            
             _navAgent = GetComponent<NavMeshAgent>();
             _navAgent.updateRotation = false;
             _navAgent.updateUpAxis = false;
@@ -173,7 +164,7 @@ namespace Game.Worker.Models
         private void LookAtTarget()
         {
             var target = _blackboard[KeyTargetTrans] as Transform;
-            FaceDirection = (int)Mathf.Sign(target.position.x - Trans.position.x);
+            _cosmetic.FaceDirection = (int)Mathf.Sign(target.position.x - Trans.position.x);
         }
 
         public void CarryProduce(Produce produce)
@@ -215,6 +206,7 @@ namespace Game.Worker.Models
 
         private void PickWarehouseAsTarget()
         {
+            // TODO TEMP
             var buildingSystem = GetSystem<BuildingSystem>();
             _blackboard[KeyTargetTrans] = buildingSystem.Warehouse;
             _blackboard[KeyTargetUnit] = null;
@@ -222,6 +214,10 @@ namespace Game.Worker.Models
 
         private void PickWellAsTarget()
         {
+            // TODO TEMP
+            var buildingSystem = GetSystem<BuildingSystem>();
+            _blackboard[KeyTargetTrans] = buildingSystem.Well;
+            _blackboard[KeyTargetUnit] = null;
         }
 
         private void PickWanderPos()

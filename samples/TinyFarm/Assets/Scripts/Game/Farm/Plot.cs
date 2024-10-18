@@ -137,7 +137,7 @@ namespace Game.Farm
                     Emit(new ReqAddWorkerTask
                     {
                         Target = this,
-                        Type = WorkerTaskType.Harvesting
+                        Type = WorkerTaskType.Watering
                     });
                 }
                 else

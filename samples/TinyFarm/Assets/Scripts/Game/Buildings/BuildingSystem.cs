@@ -1,4 +1,5 @@
-﻿using PamisuKit.Framework;
+﻿using Game.Framework;
+using PamisuKit.Framework;
 using UnityEngine;
 
 namespace Game.Buildings
@@ -7,9 +8,13 @@ namespace Game.Buildings
     {
         // TODO TEMP
         [SerializeField]
-        private GameObject _warehouse;
+        private Unit _warehouse;
 
-        public GameObject Warehouse => _warehouse;
+        [SerializeField]
+        private Unit _well;
+        
+        public Unit Warehouse => _warehouse;
+        public Unit Well => _well;
 
     }
 }
