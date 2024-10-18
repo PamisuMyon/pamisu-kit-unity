@@ -12,7 +12,6 @@ namespace Game.Farm
     {
 
         private SpriteRenderer _spriteRenderer;
-        private float _growthCounter;
         
         public CropData Data { get; private set; }
         public SeedConfig Config => Data.Config;
@@ -29,34 +28,7 @@ namespace Game.Farm
             Data = data;
             Refresh();
         }
-
-        private void Refresh()
-        {
-            _spriteRenderer.LoadSprite(Phase.SpriteRef).Forget();
-        }
-
-        public bool AddGrowthTime(float delta)
-        {
-            _growthCounter += delta;
-            if (_growthCounter >= Phase.Duration)
-            {
-                AddPhase();
-                _growthCounter = 0;
-                return true;
-            }
-            return false;
-        }
-
-        public void AddPhase()
-        {
-            if (Data.IsRipe)
-                return;
-            Data.PhaseIndex++;
-            if (Data.PhaseIndex >= Config.Phases.Length - 1)
-                Data.IsRipe = true;
-            Refresh();
-        }
-
+        
         public void OnSpawnFromPool()
         {
             gameObject.SetActive(true);
@@ -67,5 +39,41 @@ namespace Game.Farm
             Data = null;
             gameObject.SetActive(false);
         }
+
+        private void Refresh()
+        {
+            _spriteRenderer.LoadSprite(Phase.SpriteRef).Forget();
+        }
+
+        public bool AddGrowthTime(float delta)
+        {
+            Data.GrowthTimeCounter += delta;
+            if (Data.GrowthTimeCounter >= Phase.Duration)
+            {
+                AddPhase();
+                Data.GrowthTimeCounter = 0;
+                return true;
+            }
+            return false;
+        }
+
+        public void AddPhase()
+        {
+            if (Data.IsRipe)
+                return;
+            Data.PhaseIndex++;
+            Refresh();
+        }
+
+        public bool CanRegrowth() => Data.RegrowthTimes < Data.Config.RegrowthTimes;
+
+        public void Regrowth()
+        {
+            Data.RegrowthTimes++;
+            Data.GrowthTimeCounter = 0;
+            Data.PhaseIndex = 0;
+            Refresh();
+        }
+
     }
 }

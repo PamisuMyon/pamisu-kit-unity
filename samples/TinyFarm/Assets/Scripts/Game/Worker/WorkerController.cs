@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Game.AI;
 using Game.AI.Actions;
+using Game.Buildings;
 using Game.Farm;
 using Game.Framework;
 using Game.Save;
@@ -16,6 +17,7 @@ namespace Game.Worker.Models
         private const string KeyCurrentTaskType = "KeyCurrentTaskType";
         private const string KeyTargetPos = "KeyTargetPos";
         private const string KeyTargetTrans = "KeyTargetTrans";
+        private const string KeyTargetUnit = "KeyTargetUnit";
 
         [Header("Worker")]
         [SerializeField]
@@ -23,10 +25,13 @@ namespace Game.Worker.Models
 
         [Header("Idle")]
         [SerializeField]
-        private Vector2 _idleDurationRange = new(1, 6);
+        private Vector2 _idleDurationRange = new(0, 6);
 
         [SerializeField]
         private Vector2 _wanderDistanceRange = new(2, 8);
+
+        [SerializeField]
+        private Transform _carrySlot;
 
         private SpriteRenderer _spriteRenderer;
         private NavMeshAgent _navAgent;
@@ -34,8 +39,8 @@ namespace Game.Worker.Models
         private Root _behaviourTree;
         private WorkerSystem _workerSystem;
         private List<WorkerTaskType> _taskPriorities;
-
         private int _faceDirection;
+        private Produce _carryingProduce;
 
         public int FaceDirection
         {
@@ -52,6 +57,7 @@ namespace Game.Worker.Models
         protected override void OnCreate()
         {
             base.OnCreate();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
             _navAgent = GetComponent<NavMeshAgent>();
             _navAgent.updateRotation = false;
             _navAgent.updateUpAxis = false;
@@ -93,8 +99,38 @@ namespace Game.Worker.Models
         {
             return new Root(blackboard, clock,
                 new Selector(
+                    Harvest(),
                     Water(),
                     Idle()
+                )
+            );
+        }
+
+        private Node Harvest()
+        {
+            return new BlackboardCondition(
+                KeyCurrentTaskType, Operator.IS_EQUAL, WorkerTaskType.Harvesting,
+                Stops.LOWER_PRIORITY_IMMEDIATE_RESTART,
+                new Sequence(
+                    new NavMoveToTarget(_navAgent, KeyTargetTrans),
+                    new Action(StopNavAgent),
+                    new Action(LookAtTarget),
+                    new HarvestPlot(this, KeyTargetUnit),
+                    new Selector(
+                        new Condition(() => _carryingProduce != null,
+                            new Sequence(
+                                new Action(PickWarehouseAsTarget),
+                                new NavMoveToTarget(_navAgent, KeyTargetTrans),
+                                new Action(StoreProduce),
+                                new Action(CompleteCurrentTask),
+                                new Action(UpdateWorkerTask)
+                            )
+                        ),
+                        new Sequence(
+                            new Action(CompleteCurrentTask),
+                            new Action(UpdateWorkerTask)
+                        )
+                    )
                 )
             );
         }
@@ -129,13 +165,29 @@ namespace Game.Worker.Models
         private void CompleteCurrentTask()
         {
             Data.CurrentTask = null;
+            _blackboard[KeyCurrentTaskType] = WorkerTaskType.None;
             _blackboard[KeyTargetTrans] = null;
+            _blackboard[KeyTargetUnit] = null;
         }
 
         private void LookAtTarget()
         {
             var target = _blackboard[KeyTargetTrans] as Transform;
             FaceDirection = (int)Mathf.Sign(target.position.x - Trans.position.x);
+        }
+
+        public void CarryProduce(Produce produce)
+        {
+            _carryingProduce = produce;
+            produce.Trans.SetParent(_carrySlot);
+            produce.Trans.localPosition = Vector3.zero;
+        }
+
+        public void StoreProduce()
+        {
+            Debug.Assert(_carryingProduce != null, "_carryingProduce != null", Go);
+            // TODO TEMP
+            GetDirector<GameDirector>().Pooler.Release(_carryingProduce);
         }
 
         private void WaterTarget()
@@ -155,9 +207,21 @@ namespace Game.Worker.Models
                     Data.CurrentTask = task;
                     _blackboard[KeyCurrentTaskType] = task.Type;
                     _blackboard[KeyTargetTrans] = task.GetTarget(this).Trans;
+                    _blackboard[KeyTargetUnit] = task.GetTarget(this);
                     break;
                 }
             }
+        }
+
+        private void PickWarehouseAsTarget()
+        {
+            var buildingSystem = GetSystem<BuildingSystem>();
+            _blackboard[KeyTargetTrans] = buildingSystem.Warehouse;
+            _blackboard[KeyTargetUnit] = null;
+        }
+
+        private void PickWellAsTarget()
+        {
         }
 
         private void PickWanderPos()

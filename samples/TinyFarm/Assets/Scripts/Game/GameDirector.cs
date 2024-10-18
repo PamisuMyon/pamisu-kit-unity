@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Buildings;
 using Game.Farm;
 using Game.Framework;
 using Game.Inventory;
@@ -45,6 +46,7 @@ namespace Game
 
             CreateMonoSystem<InventorySystem>();
             CreateMonoSystem<PatchSystem>();
+            CreateMonoSystem<BuildingSystem>();
             CreateMonoSystem<WorkerSystem>();
             
             if (_player != null)

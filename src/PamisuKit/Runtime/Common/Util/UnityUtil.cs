@@ -213,14 +213,14 @@ namespace PamisuKit.Common.Util
             position.y /= scale.y;
         }
         
-        public static async UniTask LoadSprite(this SpriteRenderer sr, string spriteRes, bool setNullWhenLoading = true, AssetRefCountMode mode = AssetRefCountMode.Single)
+        public static async UniTask LoadSprite(this SpriteRenderer sr, string spriteRes, bool setNullWhenLoading = false, AssetRefCountMode mode = AssetRefCountMode.Single)
         {
             if (setNullWhenLoading)
                 sr.sprite = null;
             sr.sprite = await AssetManager.LoadAsset<Sprite>(spriteRes, mode);
         }
         
-        public static async UniTask LoadSprite(this SpriteRenderer sr, AssetReference refer, bool setNullWhenLoading = true,AssetRefCountMode mode = AssetRefCountMode.Single)
+        public static async UniTask LoadSprite(this SpriteRenderer sr, AssetReference refer, bool setNullWhenLoading = false, AssetRefCountMode mode = AssetRefCountMode.Single)
         {
             if (setNullWhenLoading)
                 sr.sprite = null;

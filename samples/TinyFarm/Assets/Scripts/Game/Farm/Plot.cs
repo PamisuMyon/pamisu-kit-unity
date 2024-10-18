@@ -1,4 +1,5 @@
-﻿using Game.Configs;
+﻿using Cysharp.Threading.Tasks;
+using Game.Configs;
 using Game.Events;
 using Game.Farm.Models;
 using Game.Framework;
@@ -50,6 +51,7 @@ namespace Game.Farm
             if (Crop.AddGrowthTime(deltaTime))
             {
                 Data.IsWatered = false;
+                Refresh();
                 if (Crop.Data.IsRipe)
                 {
                     Emit(new ReqAddWorkerTask
@@ -106,14 +108,44 @@ namespace Game.Farm
 
         public void Water()
         {
+            if (Data.IsWatered)
+                return;
             Data.IsWatered = true;
             Refresh();
         }
 
-        public void Harvest()
+        public bool CanHarvest()
         {
-            
-            Data.IsWatered = false;
+            return Data.HasCrop && Crop.Data.IsRipe;
+        }
+        
+        public async UniTask<Produce> Harvest()
+        {
+            if (Crop.Data.IsRipe)
+            {
+                Data.IsWatered = false;
+                // Produce
+                var prefab = GetSystem<ConfigSystem>().ProducePrefabRef;
+                var produce = await GetDirector<GameDirector>().Pooler.Spawn<Produce>(prefab);
+                produce.Setup(Region);
+                produce.SetData(Crop.Config.ProduceConfig);
+                
+                // Regrowth
+                if (Crop.CanRegrowth())
+                {
+                    Crop.Regrowth();
+                    Emit(new ReqAddWorkerTask
+                    {
+                        Target = this,
+                        Type = WorkerTaskType.Harvesting
+                    });
+                }
+                else
+                    RemoveCrop();
+                
+                return produce;
+            }
+            return null;
         }
 
         public bool RemoveCrop()

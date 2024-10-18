@@ -1,18 +1,36 @@
-﻿using PamisuKit.Framework;
+﻿using Cysharp.Threading.Tasks;
+using Game.Configs;
+using PamisuKit.Common.Pool;
+using PamisuKit.Common.Util;
+using PamisuKit.Framework;
 using UnityEngine;
 
 namespace Game.Farm
 {
-    [RequireComponent(typeof(SpriteRenderer))]
-    public class Produce : MonoEntity
+    public class Produce : MonoEntity, IPoolElement
     {
-
-        private SpriteRenderer _spriteRenderer;
         
-        protected override void OnCreate()
+        [SerializeField]
+        private SpriteRenderer _itemSpriteRenderer;
+        
+        public ItemConfig Config { get; private set; }
+        
+        public void SetData(ItemConfig config)
         {
-            base.OnCreate();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            Config = config;
+            _itemSpriteRenderer.LoadSprite(Config.WorldSpriteRef).Forget();
+        }
+
+        public void OnSpawnFromPool()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public void OnReleaseToPool()
+        {
+            Config = null;
+            _itemSpriteRenderer.sprite = null;
+            gameObject.SetActive(false);
         }
     }
 }
