@@ -18,6 +18,7 @@ namespace Game.Framework
 
         private Dictionary<string, SpriteAnimationClip> _clipDict; 
         private SpriteAnimationClip _currentClip;
+        private LoopMode _loopMode;
         private float _frameDuration;
         private float _frameTimeCounter;
         private int _currentFrame;
@@ -25,6 +26,8 @@ namespace Game.Framework
         public bool IsPlaying { get; private set; }
         public bool IsActive => gameObject.activeInHierarchy;
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
+        public event Action PlaybackComplete;
+        public event Action LoopEnd; 
 
         private void Awake()
         {
@@ -53,19 +56,24 @@ namespace Game.Framework
                 _frameTimeCounter += _frameDuration;
                 if (_currentFrame >= _currentClip.Length)
                 {
-                    if (_currentClip.IsLoop)
-                        _currentFrame %= _currentClip.Length;
-                    else
+                    if (_loopMode == LoopMode.OneShot
+                        || (_loopMode == LoopMode.Default && !_currentClip.IsLoop))
                     {
                         Stop();
+                        PlaybackComplete?.Invoke();
                         return;
+                    }
+                    else
+                    {
+                        _currentFrame %= _currentClip.Length;
+                        LoopEnd?.Invoke();
                     }
                 }
                 _spriteRenderer.sprite = _currentClip[_currentFrame];
             }
         }
 
-        public void Play(string clipName)
+        public void Play(string clipName, LoopMode loopMode = LoopMode.Default)
         {
             IsPlaying = true;
             if (_currentClip != null && _currentClip.Name == clipName && _currentClip.IsLoop)
@@ -81,6 +89,12 @@ namespace Game.Framework
         {
             IsPlaying = false;
             _currentFrame = 0;
+        }
+        
+        public enum LoopMode
+        {
+            Default,
+            OneShot,
         }
         
     }

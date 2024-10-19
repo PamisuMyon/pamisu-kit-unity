@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 912732180708706426}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0.062, y: 0.688, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0012bc6652a44c48addf9abe156520b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AutoSetup: 0
   _bodyAnimator: {fileID: 2783672714032090366}
   _hairAnimator: {fileID: 5890149044946961870}
   _toolsAnimator: {fileID: 8931178801913522220}
@@ -114,13 +115,13 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 30
+  m_Speed: 3
+  m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 2
@@ -239,6 +240,39 @@ MonoBehaviour:
     - {fileID: -579643244, guid: 555eec86b6f933b43aa853519ececb43, type: 3}
     - {fileID: 1750168518, guid: 555eec86b6f933b43aa853519ececb43, type: 3}
     - {fileID: 1095971293, guid: 555eec86b6f933b43aa853519ececb43, type: 3}
+  - Name: Walking
+    IsLoop: 1
+    SampleRate: 12
+    Frames:
+    - {fileID: 878051861, guid: d3792886aeaad864385f063559271d59, type: 3}
+    - {fileID: 1344912711, guid: d3792886aeaad864385f063559271d59, type: 3}
+    - {fileID: 560218202, guid: d3792886aeaad864385f063559271d59, type: 3}
+    - {fileID: 1983400088, guid: d3792886aeaad864385f063559271d59, type: 3}
+    - {fileID: 970392997, guid: d3792886aeaad864385f063559271d59, type: 3}
+    - {fileID: 1401477690, guid: d3792886aeaad864385f063559271d59, type: 3}
+    - {fileID: 1159273230, guid: d3792886aeaad864385f063559271d59, type: 3}
+    - {fileID: -2002464802, guid: d3792886aeaad864385f063559271d59, type: 3}
+  - Name: Watering
+    IsLoop: 0
+    SampleRate: 12
+    Frames:
+    - {fileID: 1508004604, guid: 4a05ed0cbb330a54cbf718f548705871, type: 3}
+    - {fileID: -584656033, guid: 4a05ed0cbb330a54cbf718f548705871, type: 3}
+    - {fileID: -253986028, guid: 4a05ed0cbb330a54cbf718f548705871, type: 3}
+    - {fileID: 1499994886, guid: 4a05ed0cbb330a54cbf718f548705871, type: 3}
+    - {fileID: -748797995, guid: 4a05ed0cbb330a54cbf718f548705871, type: 3}
+  - Name: Carry
+    IsLoop: 1
+    SampleRate: 12
+    Frames:
+    - {fileID: 1444818656, guid: 94c3009806954694898002457031d836, type: 3}
+    - {fileID: -1768675079, guid: 94c3009806954694898002457031d836, type: 3}
+    - {fileID: -1685697678, guid: 94c3009806954694898002457031d836, type: 3}
+    - {fileID: -132450570, guid: 94c3009806954694898002457031d836, type: 3}
+    - {fileID: -445803025, guid: 94c3009806954694898002457031d836, type: 3}
+    - {fileID: -153692850, guid: 94c3009806954694898002457031d836, type: 3}
+    - {fileID: -1345968319, guid: 94c3009806954694898002457031d836, type: 3}
+    - {fileID: 199214721, guid: 94c3009806954694898002457031d836, type: 3}
 --- !u!1 &2002081676171113106
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +284,7 @@ GameObject:
   - component: {fileID: 3280856602034271898}
   - component: {fileID: 3631744121184096243}
   - component: {fileID: 2783672714032090366}
+  - component: {fileID: 2557107518390484335}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -352,6 +387,60 @@ MonoBehaviour:
     - {fileID: -251246310, guid: 3f86fe9ca53a8ec459a83c5e3b4ef30a, type: 3}
     - {fileID: -338657984, guid: 3f86fe9ca53a8ec459a83c5e3b4ef30a, type: 3}
     - {fileID: 340043816, guid: 3f86fe9ca53a8ec459a83c5e3b4ef30a, type: 3}
+  - Name: Walking
+    IsLoop: 1
+    SampleRate: 12
+    Frames:
+    - {fileID: -1557757531, guid: fa34aed815584264e90d20ab77a53ee2, type: 3}
+    - {fileID: -108901499, guid: fa34aed815584264e90d20ab77a53ee2, type: 3}
+    - {fileID: 248872779, guid: fa34aed815584264e90d20ab77a53ee2, type: 3}
+    - {fileID: -1508534127, guid: fa34aed815584264e90d20ab77a53ee2, type: 3}
+    - {fileID: -1639173925, guid: fa34aed815584264e90d20ab77a53ee2, type: 3}
+    - {fileID: -1186240024, guid: fa34aed815584264e90d20ab77a53ee2, type: 3}
+    - {fileID: 1817570646, guid: fa34aed815584264e90d20ab77a53ee2, type: 3}
+    - {fileID: 60512613, guid: fa34aed815584264e90d20ab77a53ee2, type: 3}
+  - Name: Watering
+    IsLoop: 0
+    SampleRate: 12
+    Frames:
+    - {fileID: -1373895426, guid: eec0b523b355ae544ab9f516d22d617f, type: 3}
+    - {fileID: -2756590, guid: eec0b523b355ae544ab9f516d22d617f, type: 3}
+    - {fileID: -96333220, guid: eec0b523b355ae544ab9f516d22d617f, type: 3}
+    - {fileID: -1216752000, guid: eec0b523b355ae544ab9f516d22d617f, type: 3}
+    - {fileID: -1986423028, guid: eec0b523b355ae544ab9f516d22d617f, type: 3}
+  - Name: Carry
+    IsLoop: 1
+    SampleRate: 12
+    Frames:
+    - {fileID: -134598663, guid: 79ef7271266938643906277ab973a5ff, type: 3}
+    - {fileID: -1652576277, guid: 79ef7271266938643906277ab973a5ff, type: 3}
+    - {fileID: -1834754724, guid: 79ef7271266938643906277ab973a5ff, type: 3}
+    - {fileID: 129923766, guid: 79ef7271266938643906277ab973a5ff, type: 3}
+    - {fileID: -1077065529, guid: 79ef7271266938643906277ab973a5ff, type: 3}
+    - {fileID: -891256514, guid: 79ef7271266938643906277ab973a5ff, type: 3}
+    - {fileID: 864355262, guid: 79ef7271266938643906277ab973a5ff, type: 3}
+    - {fileID: 680076507, guid: 79ef7271266938643906277ab973a5ff, type: 3}
+--- !u!95 &2557107518390484335
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002081676171113106}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c4ea085fc7ec3414480c3180b2749409, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6845682447937255830
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +514,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 77770558, guid: 61d1fcafe59f92843816f384c412ee1a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -465,3 +554,36 @@ MonoBehaviour:
     - {fileID: -121326085, guid: 61d1fcafe59f92843816f384c412ee1a, type: 3}
     - {fileID: -76559122, guid: 61d1fcafe59f92843816f384c412ee1a, type: 3}
     - {fileID: 1636458737, guid: 61d1fcafe59f92843816f384c412ee1a, type: 3}
+  - Name: Walking
+    IsLoop: 1
+    SampleRate: 12
+    Frames:
+    - {fileID: 1068735871, guid: fb67ccab4ca830d49a9a6383d7d8b805, type: 3}
+    - {fileID: -1523911754, guid: fb67ccab4ca830d49a9a6383d7d8b805, type: 3}
+    - {fileID: -1047837495, guid: fb67ccab4ca830d49a9a6383d7d8b805, type: 3}
+    - {fileID: 1675176137, guid: fb67ccab4ca830d49a9a6383d7d8b805, type: 3}
+    - {fileID: 1881002461, guid: fb67ccab4ca830d49a9a6383d7d8b805, type: 3}
+    - {fileID: -1907812185, guid: fb67ccab4ca830d49a9a6383d7d8b805, type: 3}
+    - {fileID: -863919669, guid: fb67ccab4ca830d49a9a6383d7d8b805, type: 3}
+    - {fileID: 1310377034, guid: fb67ccab4ca830d49a9a6383d7d8b805, type: 3}
+  - Name: Watering
+    IsLoop: 0
+    SampleRate: 12
+    Frames:
+    - {fileID: -1866077309, guid: 0f8c762a1a355a649be04e66fc621d34, type: 3}
+    - {fileID: -331314056, guid: 0f8c762a1a355a649be04e66fc621d34, type: 3}
+    - {fileID: -177151752, guid: 0f8c762a1a355a649be04e66fc621d34, type: 3}
+    - {fileID: 1634581911, guid: 0f8c762a1a355a649be04e66fc621d34, type: 3}
+    - {fileID: 976287561, guid: 0f8c762a1a355a649be04e66fc621d34, type: 3}
+  - Name: Carry
+    IsLoop: 1
+    SampleRate: 12
+    Frames:
+    - {fileID: -534332821, guid: 09e495be9e9967a47847c4e28d3284df, type: 3}
+    - {fileID: -296892256, guid: 09e495be9e9967a47847c4e28d3284df, type: 3}
+    - {fileID: 509601927, guid: 09e495be9e9967a47847c4e28d3284df, type: 3}
+    - {fileID: 766793503, guid: 09e495be9e9967a47847c4e28d3284df, type: 3}
+    - {fileID: -1755756085, guid: 09e495be9e9967a47847c4e28d3284df, type: 3}
+    - {fileID: -40218423, guid: 09e495be9e9967a47847c4e28d3284df, type: 3}
+    - {fileID: 995140009, guid: 09e495be9e9967a47847c4e28d3284df, type: 3}
+    - {fileID: 5254711, guid: 09e495be9e9967a47847c4e28d3284df, type: 3}

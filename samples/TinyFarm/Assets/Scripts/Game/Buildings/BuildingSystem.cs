@@ -16,5 +16,11 @@ namespace Game.Buildings
         public Unit Warehouse => _warehouse;
         public Unit Well => _well;
 
+        protected override void OnCreate()
+        {
+            base.OnCreate();
+            _warehouse.Setup(Region);
+            // _well.Setup(Region);
+        }
     }
 }

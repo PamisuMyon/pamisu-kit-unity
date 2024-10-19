@@ -59,6 +59,7 @@ namespace Game
             {
                 _entitySetupQueue.Dequeue().Setup(Region);
             }
+            IsReady = true;
         }
         
         public override void SetupMonoEntity(MonoEntity entity)

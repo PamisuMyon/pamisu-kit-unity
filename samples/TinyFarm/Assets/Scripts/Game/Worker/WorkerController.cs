@@ -34,13 +34,13 @@ namespace Game.Worker.Models
         private Transform _carrySlot;
 
         private WorkerCosmetic _cosmetic;
-        private NavMeshAgent _navAgent;
         private Blackboard _blackboard;
         private Root _behaviourTree;
         private WorkerSystem _workerSystem;
         private List<WorkerTaskType> _taskPriorities;
         private Produce _carryingProduce;
-        
+
+        public NavMeshAgent NavAgent { get; private set; }
         public WorkerData Data { get; private set; }
 
         protected override void OnCreate()
@@ -48,11 +48,12 @@ namespace Game.Worker.Models
             base.OnCreate();
             _cosmetic = GetComponent<WorkerCosmetic>();
             _cosmetic.Setup(Region);
-            
-            _navAgent = GetComponent<NavMeshAgent>();
-            _navAgent.updateRotation = false;
-            _navAgent.updateUpAxis = false;
-            _navAgent.enabled = true;
+            _cosmetic.Controller = this;
+
+            NavAgent = GetComponent<NavMeshAgent>();
+            NavAgent.updateRotation = false;
+            NavAgent.updateUpAxis = false;
+            NavAgent.enabled = true;
 
             _workerSystem = GetSystem<WorkerSystem>();
             _taskPriorities = new List<WorkerTaskType>()
@@ -66,6 +67,11 @@ namespace Game.Worker.Models
             _blackboard = new Blackboard(clock);
             _behaviourTree = CreateBehaviourTree(_blackboard, clock);
             _blackboard[KeyCurrentTaskType] = WorkerTaskType.None;
+            
+#if UNITY_EDITOR
+            var debugger = Go.AddComponent<Debugger>();
+            debugger.BehaviorTree = _behaviourTree;
+#endif
         }
 
         public void Init(WorkerData data)
@@ -103,15 +109,14 @@ namespace Game.Worker.Models
                 KeyCurrentTaskType, Operator.IS_EQUAL, WorkerTaskType.Harvesting,
                 Stops.LOWER_PRIORITY_IMMEDIATE_RESTART,
                 new Sequence(
-                    new NavMoveToTarget(_navAgent, KeyTargetTrans),
-                    new Action(StopNavAgent),
+                    NavMoveToTargetWithAnim(KeyTargetPos),
                     new Action(LookAtTarget),
                     new HarvestPlot(this, KeyTargetUnit),
                     new Selector(
                         new Condition(() => _carryingProduce != null,
                             new Sequence(
                                 new Action(PickWarehouseAsTarget),
-                                new NavMoveToTarget(_navAgent, KeyTargetTrans),
+                                NavMoveToTargetWithAnim(KeyTargetTrans, true),
                                 new Action(StoreProduce),
                                 new Action(CompleteCurrentTask),
                                 new Action(UpdateWorkerTask)
@@ -132,9 +137,9 @@ namespace Game.Worker.Models
                 KeyCurrentTaskType, Operator.IS_EQUAL, WorkerTaskType.Watering,
                 Stops.LOWER_PRIORITY_IMMEDIATE_RESTART,
                 new Sequence(
-                    new NavMoveToTarget(_navAgent, KeyTargetTrans),
-                    new Action(StopNavAgent),
+                    NavMoveToTargetWithAnim(KeyTargetPos),
                     new Action(LookAtTarget),
+                    new Action(_cosmetic.PlayWateringAnim),
                     new Action(WaterTarget),
                     new Action(CompleteCurrentTask)
                 )
@@ -146,9 +151,10 @@ namespace Game.Worker.Models
             return new Service(0.5f, UpdateWorkerTask,
                 new Sequence(
                     new Action(StopNavAgent),
+                    new Action(_cosmetic.PlayIdleAnim),
                     new Wait(Random.Range(_idleDurationRange.x, _idleDurationRange.y)),
                     new Action(PickWanderPos),
-                    new NavMoveToTarget(_navAgent, KeyTargetPos)
+                    NavMoveToTargetWithAnim(KeyTargetPos)
                 )
             );
         }
@@ -163,8 +169,12 @@ namespace Game.Worker.Models
 
         private void LookAtTarget()
         {
-            var target = _blackboard[KeyTargetTrans] as Transform;
-            _cosmetic.FaceDirection = (int)Mathf.Sign(target.position.x - Trans.position.x);
+            if (_blackboard[KeyTargetUnit] is Unit unit)
+            {
+                _cosmetic.FaceDirection = (int)Mathf.Sign(unit.Trans.position.x - Trans.position.x);
+            }
+            else
+                Debug.LogError("LookAtTarget KeyTargetUnit is not unit", Go);
         }
 
         public void CarryProduce(Produce produce)
@@ -196,9 +206,20 @@ namespace Game.Worker.Models
                 if (task != null)
                 {
                     Data.CurrentTask = task;
+                    var target = task.GetTarget(this);
                     _blackboard[KeyCurrentTaskType] = task.Type;
-                    _blackboard[KeyTargetTrans] = task.GetTarget(this).Trans;
-                    _blackboard[KeyTargetUnit] = task.GetTarget(this);
+                    _blackboard[KeyTargetUnit] = target;
+                    if (target is Plot)
+                    {
+                        var pos = target.Trans.position;
+                        var dir = pos - Trans.position;
+                        _blackboard[KeyTargetPos] = pos - Vector3.right * (Mathf.Sign(dir.x) * target.VisualSize.x);
+                    }
+                    else
+                    {
+                        _blackboard[KeyTargetTrans] = target.Trans;
+                    }
+
                     break;
                 }
             }
@@ -208,16 +229,16 @@ namespace Game.Worker.Models
         {
             // TODO TEMP
             var buildingSystem = GetSystem<BuildingSystem>();
-            _blackboard[KeyTargetTrans] = buildingSystem.Warehouse;
-            _blackboard[KeyTargetUnit] = null;
+            _blackboard[KeyTargetUnit] = buildingSystem.Warehouse;
+            _blackboard[KeyTargetTrans] = buildingSystem.Warehouse.Trans;
         }
 
         private void PickWellAsTarget()
         {
             // TODO TEMP
             var buildingSystem = GetSystem<BuildingSystem>();
-            _blackboard[KeyTargetTrans] = buildingSystem.Well;
-            _blackboard[KeyTargetUnit] = null;
+            _blackboard[KeyTargetUnit] = buildingSystem.Well;
+            _blackboard[KeyTargetTrans] = buildingSystem.Well.Trans;
         }
 
         private void PickWanderPos()
@@ -227,10 +248,22 @@ namespace Game.Worker.Models
 
         private void StopNavAgent()
         {
-            if (_navAgent.enabled)
+            if (NavAgent.enabled)
             {
-                _navAgent.isStopped = true;
+                NavAgent.isStopped = true;
             }
+        }
+
+        private Node NavMoveToTargetWithAnim(string key, bool isCarrying = false)
+        {
+            return new Sequence(
+                new Action(isCarrying? _cosmetic.PlayCarryAnim : _cosmetic.PlayWalkingAnim),
+                new Parallel(Parallel.Policy.ONE, Parallel.Policy.ONE,
+                    new NavMoveToTarget(NavAgent, key, 0.2f),
+                    new Action(_cosmetic.UpdateFaceDirection)
+                ),
+                new Action(_cosmetic.PlayIdleAnim)
+            );
         }
 
         #endregion
