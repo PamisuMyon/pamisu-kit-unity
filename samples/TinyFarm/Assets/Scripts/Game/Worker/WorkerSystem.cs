@@ -76,7 +76,7 @@ namespace Game.Worker.Models
             if (!TaskQueueDict.ContainsKey(e.Type))
                 TaskQueueDict[e.Type] = new Queue<WorkerTask>();
             TaskQueueDict[e.Type].Enqueue(task);
-            Debug.Log($"WorkerTask added {e.Type}", e.Target);
+            Debug.Log($"WorkerSystem task added {e.Type}", e.Target);
         }
 
         private WorkerController SpawnWorker(WorkerData workerData)

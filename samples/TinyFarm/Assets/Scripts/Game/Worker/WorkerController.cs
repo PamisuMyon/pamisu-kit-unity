@@ -6,6 +6,7 @@ using Game.Farm;
 using Game.Framework;
 using Game.Save;
 using NPBehave;
+using PamisuKit.Common.Util;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -142,6 +143,7 @@ namespace Game.Worker.Models
                     new Action(_cosmetic.PlayWateringAnim),
                     new Action(WaterTarget),
                     new Action(CompleteCurrentTask)
+                    // new Action(UpdateWorkerTask)
                 )
             );
         }
@@ -207,13 +209,21 @@ namespace Game.Worker.Models
                 {
                     Data.CurrentTask = task;
                     var target = task.GetTarget(this);
+                    Debug.Log($"Worker get task {task.Type} {target.name}", Go);
                     _blackboard[KeyCurrentTaskType] = task.Type;
                     _blackboard[KeyTargetUnit] = target;
+                    _blackboard[KeyTargetTrans] = target.Trans;
                     if (target is Plot)
                     {
                         var pos = target.Trans.position;
                         var dir = pos - Trans.position;
-                        _blackboard[KeyTargetPos] = pos - Vector3.right * (Mathf.Sign(dir.x) * target.VisualSize.x);
+                        var targetPos = pos - Vector3.right * (Mathf.Sign(dir.x) * target.VisualSize.x);
+                        // When the target's X coordinate is close to the current position, the speed of NavMeshAgent will become very slow. This is a hack to solve the problem
+                        if (targetPos.x.Approximately(Trans.position.x))
+                        {
+                            targetPos.x += RandomUtil.RandomSigned(0.05f, 0.1f);
+                        }
+                        _blackboard[KeyTargetPos] = targetPos;
                     }
                     else
                     {

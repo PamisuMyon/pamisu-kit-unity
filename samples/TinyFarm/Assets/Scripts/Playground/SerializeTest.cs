@@ -6,7 +6,7 @@ using Game.Worker.Models;
 using UnityEngine;
 using OdinSerializer;
 
-namespace Game
+namespace Playground
 {
     public class SerializeTest : MonoBehaviour
     {
