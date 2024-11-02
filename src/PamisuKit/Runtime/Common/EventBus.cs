@@ -82,11 +82,18 @@ namespace PamisuKit.Common
                 }
                 finally
                 {
-                    if (entry.Options[i].HasFlag(SubscribeOptions.Once))
+                    try
                     {
-                        entry.Handlers.RemoveAt(i);
-                        entry.Options.RemoveAt(i);
-                        i--;
+                        if (entry.Options[i].HasFlag(SubscribeOptions.Once))
+                        {
+                            entry.Handlers.RemoveAt(i);
+                            entry.Options.RemoveAt(i);
+                            i--;
+                        }
+                    }
+                    catch
+                    {
+                        // ignored
                     }
                 }
             }
