@@ -16,6 +16,8 @@ public partial class Tables
     public Examples.TbAdavancedConfig TbAdavancedConfig {get; }
     public Examples.TbGlobalConfig TbGlobalConfig {get; }
     public Examples.TbListConfig TbListConfig {get; }
+    public TbLocalizationConfig TbLocalizationConfig {get; }
+    public TbEquipmentConfig TbEquipmentConfig {get; }
 
     public Tables(System.Func<string, ByteBuf> loader)
     {
@@ -23,6 +25,8 @@ public partial class Tables
         TbAdavancedConfig = new Examples.TbAdavancedConfig(loader("examples_tbadavancedconfig"));
         TbGlobalConfig = new Examples.TbGlobalConfig(loader("examples_tbglobalconfig"));
         TbListConfig = new Examples.TbListConfig(loader("examples_tblistconfig"));
+        TbLocalizationConfig = new TbLocalizationConfig(loader("tblocalizationconfig"));
+        TbEquipmentConfig = new TbEquipmentConfig(loader("tbequipmentconfig"));
         ResolveRef();
     }
     
@@ -32,6 +36,8 @@ public partial class Tables
         TbAdavancedConfig.ResolveRef(this);
         TbGlobalConfig.ResolveRef(this);
         TbListConfig.ResolveRef(this);
+        TbLocalizationConfig.ResolveRef(this);
+        TbEquipmentConfig.ResolveRef(this);
     }
 }
 
